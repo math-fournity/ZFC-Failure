@@ -26,6 +26,9 @@
 | `audit/literature/LIT-CLASSICS-001/mineru-supplement/` | 补充 3 个内容组 | `python3 -B scripts/audit/import_lit_classics_mineru_supplement.py --verify-only` |
 | `audit/literature/LIT-CLASSICS-001/mineru-rosser-primary/` | Rosser 1936 原文 | `python3 -B scripts/audit/import_lit_classics_rosser_primary.py --verify-only` |
 | `docs/罗素解决考古/搜索原始响应-20261017/mineru_md/` | 9 份罗素考古 PDF 的 MinerU Markdown | `python3 -B scripts/check_mineru_md.py` |
+| `docs/罗素解决考古/搜索原始响应-20261017/wholebook/` | enderton1977（289 页）与 kunen1980（325 页）的**整册** MinerU Markdown（页范围分片、未拆源文件）；旧 `_split/` + `mineru_md/*_part0*.md` 分卷路径标为历史产物 | `wholebook/整册重跑比对-20261018.md` 第 2/3 节 + 5 份 `*.run.json` receipt |
+| `docs/罗素解决考古/搜索原始响应-20261017/q2-solved-溯源/mineru_md/` | kanamori-cantor-cohen / linsky / arxiv 三份的第二管线 Markdown | `q2-solved-溯源/mineru_md/双管线比对-20261018.md` |
+| `docs/芝诺解决考古/搜索原始响应-20261017/zeno-溯源/candidates/mineru_md/` | 柯西 1821 S2 定向页（Introduction + 印刷页 123 定义句页） | `candidates/sha256.txt` + `来源/Z01-柯西1821-原文措辞核验-ZQ1-20261018.md` §3 |
 | `scripts/check_mineru_md.py` | MinerU 输出完整性自检脚本 | — |
 | `scripts/audit/import_lit_classics_mineru*.py` | MinerU 导入脚本 | — |
 
