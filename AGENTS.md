@@ -257,17 +257,11 @@ proof_index: HoTT/CLAIM_EVIDENCE_MATRIX.md
   决定暂停，见本文件该节的历史保留说明；
 - `sources/` 快照只读；`private-audit/` 只读；不恢复研究发起人移走的目录。
 
-## MinerU PDF→Markdown 自动化工具（2026-10-17 建立）
+## 文档解析路由（MinerU）
 
-MinerU CLI 是与 MinerU App 同引擎、同云端端点的命令行文档解析工具，用于把 PDF/Word/PPT 等转成 Markdown。四客户端（Codex、Claude Code、ZCode、CodeArts）通过共享 skill `~/.agents/skills/mineru/` 接入，真源只有一份。完整配置文档见 `docs/operations/mineru-pdf-conversion-setup.md`。
-
-关键事实：
-- `mineru` 可执行文件在 `/Volumes/D/toolchain-cache/mineru-venv/bin/mineru`，不在 PATH 上
-- 所有命令（含 `--remote`）依赖本地 doclib server；launchd 保活已安装（`ai.mineru.doclib.keepalive`）
-- 官方 API Key 已配置在 `~/.mineru/doclib.db`（权限 600），但不放宽 200 页/文件上限
-- 大 PDF（>200 页）必须用 `~/.agents/skills/mineru/scripts/parse_large.py` 分片处理
-- `--limit` 默认 ~28872 字符会静默截断；`parse_large.py` 已内置 `--limit 100000000` 修复
-- 普通非敏感文档默认走 `--remote` 云端解析（用户 2026-10-17 授权）；敏感文档先确认
+本 repo 的任何 PDF/扫描件/Office 文档读取或转 Markdown 一律走 `mineru` skill；**大 PDF（>200 页）必须用
+`~/.agents/skills/mineru/scripts/parse_large.py` 按页范围分片请求，禁止物理拆分 PDF 文件**。
+本机权威配置见 `~/README.md` 0066；本 repo 只保留 MinerU 产物清单与指针（`docs/operations/mineru-pdf-conversion-setup.md`）。
 
 ## 模式 P 动态 DAG 的任务限定授权（用户 2026-10-02）
 
