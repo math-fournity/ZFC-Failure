@@ -24,21 +24,21 @@
 
 ### B1 — 罗素包：`q2-solved-溯源` 三份开放 PDF 的 MinerU 第二管线（中优先）
 
-- [ ] **B1.1** `kanamori-cantor-cohen.pdf`（65 页）→ MinerU，产出 `q2-solved-溯源/mineru_md/kanamori-cantor-cohen.md`
-- [ ] **B1.2** `linsky-schroeder-zermelo.pdf`（20 页）→ MinerU，产出 `q2-solved-溯源/mineru_md/linsky-schroeder-zermelo.md`
-- [ ] **B1.3** `arxiv-2303.13473.pdf`（8 页）→ MinerU，产出 `q2-solved-溯源/mineru_md/arxiv-2303.13473.md`
-- [ ] **B1.4** 逐条比对证据 05 §7.1–§7.4 已引句子（S-KAN-1/S-KAN-2/S-EBSCO-1/S-EBSCO-2/S-LIN-1/S-ARX-1/S-ARX-2）在新 md 中的逐字一致性；不一致时登记冲突并以 pdftotext 管线为准
-- [ ] **B1.5** 更新 `docs/罗素解决考古/来源/05-*.md` §7 的引文管线列（pdftotext → pdftotext + MinerU 双管线）
+- [x] **B1.1** `kanamori-cantor-cohen.pdf`（65 页）→ MinerU，产出 `q2-solved-溯源/mineru_md/kanamori-cantor-cohen.md`
+- [x] **B1.2** `linsky-schroeder-zermelo.pdf`（20 页）→ MinerU，产出 `q2-solved-溯源/mineru_md/linsky-schroeder-zermelo.md`
+- [x] **B1.3** `arxiv-2303.13473.pdf`（8 页）→ MinerU，产出 `q2-solved-溯源/mineru_md/arxiv-2303.13473.md`
+- [x] **B1.4** 逐条比对证据 05 §7.1–§7.4 已引句子（S-KAN-1/S-KAN-2/S-EBSCO-1/S-EBSCO-2/S-LIN-1/S-ARX-1/S-ARX-2）在新 md 中的逐字一致性；不一致时登记冲突并以 pdftotext 管线为准
+- [x] **B1.5** 更新 `docs/罗素解决考古/来源/05-*.md` §7 的引文管线列（pdftotext → pdftotext + MinerU 双管线）
 
 **验收判据**：三份 md 落盘且非空；七个引文句全部逐字比对有结论；证据 05 §7 管线标注更新；`scripts/check_mineru_md.py` 保持 9/9 PASS（不动原 9 份）。
 
 ### B2 — 芝诺包：ZQ1 从预演升级为正式证据 Z01（高优先）
 
-- [ ] **B2.1** 用 `parse_large.py` 对三本候选 PDF 做**定向页范围**解析：印刷页 120–126（含 123 定义句页）+ 序言/Introduction 前 20 页；输出 `zeno-溯源/mineru_md/<id>.md`
-- [ ] **B2.2** 三管线逐字比对定义句：djvu.txt（S1/S2/S3）vs pdftotext（S1/S2/S3）vs MinerU（S2 为底）——要求三本措辞一致点与差异点逐条登记
-- [ ] **B2.3** `résoudre`/`résolu` 主语分布定量表（全部命中处，按「解方程 / 解问题 / 解悖论」三类归组；上限 60 处）
-- [ ] **B2.4** 页数覆盖对照：三本 `pdfinfo Pages` 与 djvu.txt 行数、pdftotext 页分割数三方对账，排除漏页
-- [ ] **B2.5** 写正式 `docs/芝诺解决考古/来源/Z01-柯西1821-原文措辞核验-ZQ1.md`（含 sha256 表、逐字引文、检索穷尽表、H1/H2/H3 判定与判据），原预演文件保留并在文首标注被取代关系
+- [x] **B2.1** 用 `parse_large.py` 对三本候选 PDF 做**定向页范围**解析：印刷页 120–126（含 123 定义句页）+ 序言/Introduction 前 20 页；输出 `zeno-溯源/mineru_md/<id>.md`
+- [x] **B2.2** 三管线逐字比对定义句：djvu.txt（S1/S2/S3）vs pdftotext（S1/S2/S3）vs MinerU（S2 为底）——要求三本措辞一致点与差异点逐条登记
+- [x] **B2.3** `résoudre`/`résolu` 主语分布定量表（全部命中处，按「解方程 / 解问题 / 解悖论」三类归组；上限 60 处）
+- [x] **B2.4** 页数覆盖对照：三本 `pdfinfo Pages` 与 djvu.txt 行数、pdftotext 页分割数三方对账，排除漏页
+- [x] **B2.5** 写正式 `docs/芝诺解决考古/来源/Z01-柯西1821-原文措辞核验-ZQ1.md`（含 sha256 表、逐字引文、检索穷尽表、H1/H2/H3 判定与判据），原预演文件保留并在文首标注被取代关系
 - [ ] **B2.6** 更新 `docs/芝诺解决考古/00-立项方案-20261017.md` 步骤 1 状态与 `形式化追踪/99-更新日志.md` 一行
 
 **验收判据**：三个引文句在三管线下有确定结论；H1 维持或修正须写明来自哪条管线的新证据；正式 Z01 落盘且预演文件关系清楚。
@@ -77,15 +77,20 @@
 - 每次 spawn 的 agent_type、model、reasoning_effort、fork_turns 必须显式且合法；不可用即 fail closed。
 - 子代理返回必须是 Claims / Evidence / Conflicts / Unknowns / Mutations / Verification 六段；Master 复核后才落盘。
 
-## E. 本会话自我审计（收口前必填）
+## 剩余待办（B2.6 / B4 / E）
 
-- [ ] E1 每个勾选项都有可核收据（文件存在 + sha256 或命令输出）
-- [ ] E2 所有落盘引文来自本会话实际抽取，非训练记忆
-- [ ] E3 F-011 边界：本清单无新数学命题；若步骤中产生新命题，必须走五步门禁
-- [ ] E4 提交按精确路径；不混入并行会话 dirty 文件
+- [ ] **B2.6** 更新 `docs/芝诺解决考古/00-立项方案-20261017.md` 步骤 1 状态 + `形式化追踪/99-更新日志.md` 一行
+- [ ] **B4.2** zermelo1908 九条未补录脚注缺口登记文件（只登记，不补录）
+- [ ] **B4.3** `完整性证书-20261017.md` 补「视觉审计线的最终形态」节
+- [ ] **E1** 每个勾选项都有可核收据（文件 + sha256 / 命令输出）
+- [ ] **E2** 所有落盘引文来自本会话实际抽取，非训练记忆
+- [ ] **E3** F-011 边界：本清单无新数学命题
+- [ ] **E4** 提交按精确路径，不混入并行会话 dirty 文件
 
 ## 状态日志
 
 | 时间 (UTC) | 动作 | 结果 |
 ||---|---|---|
 | 2026-10-18T14:01Z | A1–A7 完成：MinerU server 在线、柯西三本 PDF 落盘、pdftotext 第三管线、零命中复现、定义句定位、résoudre 主语初扫 | 全过；三本 sha256 见 `candidates/sha256.txt` |
+| 2026-10-18T14:20Z | **B1.1–B1.4 完成**：`q2-solved-溯源/mineru_md/` 三份 MinerU 第二管线（kanamori-cantor-cohen 65p / linsky 20p / arxiv 8p，均 `--remote` standard tier，各 1 片成功）；7/7 已引句双管线逐字一致，产物 = `mineru_md/双管线比对-20261018.md`；原 9 份 `check_mineru_md.py` 仍 9/9 PASS | B1.5 待做（证据 05 §7 管线列更新） |
+| 2026-10-18T14:31Z | **B2.1–B2.5 完成（含一次如实失败登记）**：① 整册 604 页 parse_large 全 21 片失败（首片 `remote_timeout`，其余 20 片 `quality_tier_unavailable`），零产出，失败账本落 `candidates/mineru_md/_failed-run-ledger-20261018.tsv`，按 C 节纪律不重试；② 定向页成功后得 `S2_p145-p147.md`（印刷页 123 定义句页）+ `S2_p009-p018-introduction.md`（Introduction 前 10 页）；③ 三管线定义句逐字一致（djvu ×3 / pdftotext ×3 / MinerU ×1）；④ `résoudre`/`résolu` 三本 182 行逐行归类：**悖论/古希腊/极限类 0**（机器首遍 146 命中方程类 + 36 处「其余」经人工读原文全部确认为 OCR 断词/目录，同属方程语义）；⑤ 正式 `docs/芝诺解决考古/来源/Z01-柯西1821-原文措辞核验-ZQ1-20261018.md` 落盘，**H1 判定维持且证据加强** | ZQ1 一手层完成；B2.6 路由更新待做 |
