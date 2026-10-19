@@ -1,14 +1,14 @@
 {
-  "latest_session": "S-GOV-20261015-CLAUDE-CG010-MAIN-RELEASE",
-  "revision": 315,
+  "latest_session": "S-GOV-20261019-CFC-PLAN",
+  "revision": 316,
   "schema_version": "cognition-head/v1",
   "tracked": {
     ".codex/research/hott/FRONTIER.md": "87912a6c510d25279cba474a06268d32aceeef29b9c6e3943255a8b670e28a77",
     ".codex/research/hott/LESSONS.md": "8411d6509c76e9171d1e4ba156d5af676d180de4b12e02b42c7e692d8921402d",
-    ".codex/research/hott/RESUME.md": "a657f0807aa489c58d102ddb42914d35ee3a1dd54437ef10d207afcc20cacba3",
-    ".codex/research/hott/STATE.json": "19235ac0e17d59abd79bfeea55f5f5cc34986b9d6b7d5453632a91bc2bed09a9",
+    ".codex/research/hott/RESUME.md": "36fd99a47b4a61f8b77c705a7b7d868d50f2b2cfd91dc22d4f1de455d0a8849d",
+    ".codex/research/hott/STATE.json": "6445d755fba820c30d61b61f3e8197c35fdd3940086541439903ebe91d3522fc",
     "MEMORY.md": "74e339799bb777eb444e398c59cc48df2cc9cc881fb4f37b7e85c4cc7e2ace77",
-    "MEMORY/001 - 当前执行队列.md": "f5aeddd32a2edfc721b67f1951a31bf9a34a295d457aa31dc764a84d8abdc397",
+    "MEMORY/001 - 当前执行队列.md": "b3bf8eb7beb7f47a0de145ae1ac09b019b4aa771e37eb5714acd2ff79aab898c",
     "MEMORY/002 - 当前证据上限与恢复入口.md": "097f897f67e71b393c899368743ba1cd8a7e06a71cda23721227c35f72f5231c",
     "MEMORY/003 - 当前验证状态与顺序日志.md": "6b5d266abe346a5f3f871caf83d5d28d81e1f73c7543e82f752ba813e471186b",
     "全景视野.md": "8d13ae42d94e3df5b92158b1c411249fe8e8c8bd107c2a7d7a33bc98c40d0752",
@@ -41,5 +41,5 @@
     "方向追踪/004 - 证据与覆盖方向及 STATE 覆盖表.md": "b96f4a4ff776d73a1de48126ef97f7e8d48142168d1896de093754876ff25912",
     "方向追踪/005 - 交叉审视、优先级与更新规则.md": "77e8db844d2102d8a36455c0479c30e5a0e0e1c160a4009fbb3189ace54a57ac"
   },
-  "updated_at_utc": "2026-10-16T02:15:53.347900+00:00"
+  "updated_at_utc": "2026-10-19T20:08:28.464198+00:00"
 }

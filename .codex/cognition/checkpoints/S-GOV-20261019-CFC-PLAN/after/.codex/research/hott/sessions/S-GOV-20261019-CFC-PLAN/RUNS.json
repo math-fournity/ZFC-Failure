@@ -1,0 +1,71 @@
+{
+  "base_snapshot": "9afd590b1e351e2bb5f189500858973e807703b112b7149ccbec6f08c7a22995",
+  "checkpoint_result": ".codex/cognition/checkpoints/S-GOV-20261019-CFC-PLAN/result.json",
+  "formal_runs": [],
+  "governance_runs": [
+    {
+      "command": "(no arguments)",
+      "note": "first run FAILED 8 issues in the new shard set (YAML frontmatter instead of governance-shard:v2, append_target set in topical mode, shard 002 filename not matching the index link title, H1 mismatch); all fixed and re-run to PASS",
+      "status": "PASS (228 canonical indexes)",
+      "tool": "scripts/audit/verify_governance_shards.py"
+    },
+    {
+      "command": "(no arguments)",
+      "note": "existing MinerU artefacts re-validated; no new parse this unit",
+      "status": "PASS 9/9",
+      "tool": "scripts/check_mineru_md.py"
+    },
+    {
+      "command": "godel-q-zfc-z0-full: every module of the dependency chain, in order",
+      "note": "no sorry; axioms only propext, Classical.choice, Quot.sound. This overturns the root AGENTS.md record that these two were uncompiled",
+      "status": "exit 0 for all, including NegInvolution.lean (neg_neg_code) and ShCraigElimNegLaw.lean (iT_neg)",
+      "tool": ".claude/goals/CG-007-formalization-completion/tools/devbuild_ns.py"
+    },
+    {
+      "command": "godel-q-zfc-z0-sigma1: every module of the dependency chain, in order",
+      "note": "Negative/BallMergeOffByOne.lean exits 1 as intended (a deliberately off-by-one negative control), which is a passing control",
+      "status": "exit 0 for all, including Z0D3.lean (zfcTr_D3, zfc_z0_unconditional)",
+      "tool": ".claude/goals/CG-007-formalization-completion/tools/devbuild_ns.py"
+    },
+    {
+      "command": "13 quotations from Russell 1914 normalised and matched against russell1914-gutenberg-37090.txt",
+      "note": "R12 first drafted from mid-sentence and MISSed; changed to the full sentence R12a and HIT",
+      "status": "13/13 HIT",
+      "tool": "python3 letter-stream verification (inline, per Z03 §3)"
+    },
+    {
+      "command": "every locator in Z03 recomputed with an exact character-to-line map",
+      "note": "first draft was eyeballed from grep output and was off by tens of lines",
+      "status": "15 locators recomputed and corrected",
+      "tool": "python3 line-locator verification (inline)"
+    },
+    {
+      "command": "CFC search across the repo and the three local session stores plus the global state file",
+      "note": "only 4 OCR misreads in a Cauchy scan and UUID hex fragments; nothing was guessed in its place",
+      "status": "zero definitions",
+      "tool": "rg"
+    },
+    {
+      "command": "commit --only -m ... -- <exact paths>",
+      "note": "10 exact paths; parallel session dirty files untouched",
+      "status": "4b545e139",
+      "tool": "git"
+    },
+    {
+      "command": "--output <payload>",
+      "status": "PREPARED",
+      "tool": "scripts/audit/prepare_codex_cfc_plan_20261019_checkpoint.py"
+    },
+    {
+      "command": "checkpoint --snapshot <base_snapshot> --payload <payload> --apply",
+      "status": "CHECKPOINT_COMMITTED expected; only the canonical result.json proves it",
+      "tool": ".codex/tools/cognition_runtime.py"
+    }
+  ],
+  "math_status_change": "NONE",
+  "new_math_claims": [],
+  "push_policy": "not pushed; the goal mentions pushing to the remote but no explicit one-sentence authorization was given",
+  "schema_version": "hott-session-runs/v2",
+  "session_id": "S-GOV-20261019-CFC-PLAN",
+  "session_kind": "GOVERNANCE_PLAN_AND_EVIDENCE"
+}
