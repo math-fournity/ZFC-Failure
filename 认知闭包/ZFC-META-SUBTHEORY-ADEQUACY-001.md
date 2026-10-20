@@ -4,7 +4,7 @@
 >
 > **稳定方案：** [ZFC-META-SUBTHEORY-ADEQUACY-SOP](../dev-docs/ZFC元理论子理论充分性最终闭环SOP.md)。
 >
-> **当前状态：** `CORE_TARGET_ACTIVE / C0_UNIVERSE_FROZEN / C1A_C1D_C5A_C5F_SCOPED_PROGRESS / PHYSICAL_BRIDGE_REQUIREMENT_SOURCE_FOUND / Q_NORM_EXTENSION_MACHINE_PROVED_WITH_SCOPE / C0R8_REPRESENTATION_CONTROLS / C0R11_SHARED_SIMULATION_TASK_CANDIDATE / BARE_ZFC_LINK_UNPAID / NO_ACTUAL_FULL_CONTRACT / FINAL_CORE_VERDICT_NOT_PROVED`。
+> **当前状态：** `CORE_TARGET_ACTIVE / C0_UNIVERSE_FROZEN / C1A_C1D_C5A_C5F_SCOPED_PROGRESS / PHYSICAL_BRIDGE_REQUIREMENT_SOURCE_FOUND / Q_NORM_EXTENSION_MACHINE_PROVED_WITH_SCOPE / C0R8_REPRESENTATION_CONTROLS / C0R11_SHARED_SIMULATION_TASK_CANDIDATE / C0R12_SEP_DISCRIMINATION_ABSENCE_SOURCE / BARE_ZFC_LINK_UNPAID / NO_ACTUAL_FULL_CONTRACT / FINAL_CORE_VERDICT_NOT_PROVED`。
 
 ## TaskDescriptor
 
@@ -13,7 +13,7 @@
 | 父结果 | 判断 bare ZFC 或明确 ZFC-founded foundation context 对连续统／极限子理论的原过程完成提升，是否具有足够的 bridge 审查责任。 |
 | 用户成功标准 | 没有最终、版本闭合的 core machine-proof verdict 前不停止；方案可由 `/goal` 调用；跨 Session／压缩后连续恢复和写回。 |
 | 核心合同 | `M / S / Q / FormalDone / OriginDone / P / Bridge / Adequacy`，缺任何项不允许产生 core verdict。 |
-| 当前已知 | C1A–C1D冻结了 IEP/Norton application、Mizar geometric component、Isabelle/ZF real/metric/uniform infrastructure及其未耦合边界；C5A–C5E找到 mathematical foundation、applied-model与constructive-role的过程责任分层；C5F证明有独立 formal-model tradition把 Zeno transition accumulation 诊断为模型不完整并要求 post-Zeno data；C0R3/SEP又明确纯数学解答不足以完成 physical Zeno answer。`MP-ZFC-NORMATIVE-PROCESS-AUDIT-001`（C-370–C-374）已将用户外加的 `Q_norm` 审计接口机器化。C0R8在MSS/thermodynamics sources中区分 domain carrier、parameter order与operational consumer：C-375/C-376、C-377/C-378给出相应表示控制。C0R9/C0R10再显示 ZFC extension可给hybrid operational time，而ZFC itself可定义non-standard extension structures，故不能说ZFC无法表征。C0R11的Bliudze--Furic source在同一bouncing-ball language task中明确标准实数时间的Zeno semantic boundary与non-standard repair，但未给bare-ZFC foundation policy或用户SameQ。仍没有同一 actual `M/S/Q/P/Adequacy` contract；所有这些均为控制或候选，不是 C6。 |
+| 当前已知 | C1A–C1D冻结了 IEP/Norton application、Mizar geometric component、Isabelle/ZF real/metric/uniform infrastructure及其未耦合边界；C5A–C5E找到 mathematical foundation、applied-model与constructive-role的过程责任分层；C5F证明有独立 formal-model tradition把 Zeno transition accumulation 诊断为模型不完整并要求 post-Zeno data；C0R3/SEP又明确纯数学解答不足以完成 physical Zeno answer。`MP-ZFC-NORMATIVE-PROCESS-AUDIT-001`（C-370–C-374）已将用户外加的 `Q_norm` 审计接口机器化。C0R8在MSS/thermodynamics sources中区分 domain carrier、parameter order与operational consumer：C-375/C-376、C-377/C-378给出相应表示控制。C0R9/C0R10再显示 ZFC extension可给hybrid operational time，而ZFC itself可定义non-standard extension structures，故不能说ZFC无法表征。C0R11的Bliudze--Furic source在同一bouncing-ball language task中明确标准实数时间的Zeno semantic boundary与non-standard repair，但未给bare-ZFC foundation policy或用户SameQ。C0R12 是**不占编号的来源补充卡**（2026-10-20）：SEP *Zeno's Paradoxes* 亲手写下 L1452「either system is equally successful」与 L1459「either space has infinitesimal parts or it doesn't」——**两套数学同样成功、二择未决，判别力不在数学内部**；文本凭据为 `docs/芝诺解决考古/来源/Z06-*.md`（19 句逐字引文、12 个关键跨在两个独立 snapshot 上双源命中、校验器可重跑）。它不改变任何 family 的 remainder，也不与 C-112 (d) 互为证明（来源层 vs 机器层）。仍没有同一 actual `M/S/Q/P/Adequacy` contract；所有这些均为控制或候选，不是 C6。 |
 | 当前最大风险 | 又把可重放的 proof checker、toy formalization、generic Gödel、来源沉默，或“time eliminable / not operational / finite representation control”当成 M 对 S/Q 的 actual core interface。 |
 | profile | `RESEARCH_PROFILE_GOVERNED`；C0–C6 是一个连续执行图，不是多个可以各自结束的工作包。 |
 
