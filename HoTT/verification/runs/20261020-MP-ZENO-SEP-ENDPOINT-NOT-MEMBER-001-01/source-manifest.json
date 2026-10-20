@@ -1,0 +1,46 @@
+{
+  "external_dependencies": [
+    {
+      "bytes": 49968,
+      "label": "lean-4.34.0-binary",
+      "local_path": "/Users/aurolafly/.elan/toolchains/leanprover--lean4---v4.34.0/bin/lean",
+      "sha256": "1b370cfcbf44e80d1b004ab1b1ab9a4c73951f9f7c242140bcff9bc577576554"
+    }
+  ],
+  "files": [
+    {
+      "bytes": 3574,
+      "path": "HoTT/formal/zeno-sep-endpoint-not-member/EndPointNotMember.lean",
+      "sha256": "bee910186165c3f2d4a7c44298c81253e4faafb4109ed7612af4150d57400f0d"
+    },
+    {
+      "bytes": 3260,
+      "path": "HoTT/formal/zeno-sep-endpoint-not-member/CLAIM.md",
+      "sha256": "c2406933b41ba551c5e876956bef6ade33d7a9fd89b0d8184cc2f4e20aaa3c34"
+    },
+    {
+      "bytes": 1802,
+      "path": "HoTT/formal/zeno-sep-endpoint-not-member/README.md",
+      "sha256": "e5ee7df2e43a8de9e2ea591f6598b5f2f799a1e03e111c1e37110627a0c36de5"
+    },
+    {
+      "bytes": 1445,
+      "path": "audit/astra-real-geometry-20260919/environment-qualification/LEAN_PATH.txt",
+      "sha256": "df65c161bafcf8837facf0c1076edbf1d5bd455fbfdf37b83a5f3b88a2f37170"
+    },
+    {
+      "bytes": 11530,
+      "path": "docs/芝诺解决考古/来源/Z06-SEP芝诺条目通读-终点不在序列内与必须被添加-20261020.md",
+      "sha256": "cb955a298a3fc40c1f128d070a2ed6bccfe4fffbb37b7fcaaa5769c2ab6a9070"
+    },
+    {
+      "bytes": 6366,
+      "path": "HoTT/formal/zeno-sep-endpoint-not-member/capture_endpoint_run.py",
+      "sha256": "c05497644ae85662905cbfaf81ddeb1df6151ff8c3c1c8330df09146ee9db966"
+    }
+  ],
+  "policy": "Pinned Mathlib real-analysis control for the SEP Achilles endpoint statement; classical/Mathlib dependencies remain in Lean stdout and are not described as no-axiom proof.",
+  "proof_id": "MP-ZENO-SEP-ENDPOINT-NOT-MEMBER-001",
+  "run_id": "20261020-MP-ZENO-SEP-ENDPOINT-NOT-MEMBER-001-01",
+  "schema_version": "formal-proof-source-manifest/v1"
+}

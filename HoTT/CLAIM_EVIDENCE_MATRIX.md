@@ -2509,3 +2509,22 @@ Claim 表：
 | CG001-C-433 | 分离层：分离式成员刻画 `∀ z, z ∈ R ↔ (z ∈ A ∧ z ∉ z)` ⇒ `R ∉ A`——定理而非矛盾（准入层拒绝）；𝗭 实例化 `{x ∈ A ; x ∉ x} ∉ A`；负控制把 C-432 的对角结尾照搬过来被 Lean 拒绝，机器化展示「1908 年层面的『解决』≠ 在新系统内证明矛盾」 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | 同上；负控制 `-NEG-01` | 历史归因（1908 Aussonderung、lösen 措辞）待步骤 2 核实 |
 | CG001-C-434 | 正则层：正则公理（每个非空集合有 ∈-极小元）+ 单元素集存在 ⇒ `∀ x : V, x ∉ x`——准入禁止（1930 年代第二道门） | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | 同上 | 正则时间线（von Neumann 1925 / Zermelo 1930）待核；Foundation 库 𝗭 含正则（Schindler 口径），不是 1908 历史系统 |
 | CG001-C-435 | 负控制核：无界概括（命题形态 hypothesis `∀ P : V → Prop, ∃ S, ∀ z, z ∈ S ↔ P z`）⇒ `False`——爆炸的充分条件是被删除的无界概括，不是对角论证；交接文档方案 B | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | 同上 | 不推出任何 ZFC 一致性主张 |
+
+## Codex：SEP 芝诺 Achilles 段「终点不是有限阶段、但确是值域上确界」的最小形式核验（2026-10-20）
+
+> 本机会话 Codex（恢复后），repo 主检出 `/Volumes/D/HoTT_AI_HANDOFF_20260911`，分支 `dev`。
+> 读法：机器证明，四条定理仅依赖 `propext`、`Classical.choice`、`Quot.sound`（Mathlib/经典依赖如实
+> 保留，**不**描述为无公理证明），无 `sorryAx`。文本侧凭据是
+> `docs/芝诺解决考古/来源/Z06-SEP芝诺条目通读-终点不在序列内与必须被添加-20261020.md`
+> （19 句逐字引文字母流回源 19/19 HIT、归属自检 7/7）。
+> **本包不占命题编号**：`endpoint_not_in_sequence` 与 C-361 的
+> `¬ LimitPromotesStrictSequentialDone` 是同一事实的两种措辞；`sup_range_eq_one` 是标准实分析。
+> 若研究发起人裁定立项，编号须从实测矩阵最大值之后起，并补齐 F-011 五步门禁（含负控制）。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-ZENO-SEP-ENDPOINT-NOT-MEMBER-001` | **无（不占编号；等研究发起人裁定）** | `formal/zeno-sep-endpoint-not-member/EndPointNotMember.lean`（`endpoint_not_in_sequence`、`limit_is_one`、`sup_range_eq_one`、`endpoint_not_member_but_is_sup`） | `verification/runs/20261020-MP-ZENO-SEP-ENDPOINT-NOT-MEMBER-001-01/`；exit 0，stderr 0 B；四条 `#print axioms` 均为 `[propext, Classical.choice, Quot.sound]`；本机独立重放 `stdout`/`stderr` 逐字节一致（6 源文件 + lean 二进制哈希匹配） | `KERNEL_ACCEPTED_WITH_SCOPE` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| （不占编号） | 对 `s n = 1 - (1/2)^n`：`1 ∉ Set.range s` ∧ `sSup (Set.range s) = 1`——终点不是任何有限阶段的值，同时是值域的确切上确界 | `KERNEL_ACCEPTED_WITH_SCOPE / DECLARED_CLASSICAL_AXIOMS` | run `20261020-MP-ZENO-SEP-ENDPOINT-NOT-MEMBER-001-01` | 不宣称 SEP、Huggett、Standard Solution 或任何作者有错；不证明物理运动不能到达或芝诺不可解；不形式化 Standard Solution 的闭连续时间模型；不给芝诺—HoTT 同一 Q 映射；不主张数学内容原创 |
