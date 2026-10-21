@@ -2598,3 +2598,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-441 | 对流 `ℕ → Bool`：(1) α ≡ β ⟺ `askQ (differ α β) 0 ≡ never`；(2) 第 k 位不同则 k 步燃料内有答案；(3) `runFor n (askQ (differ α α) 0) ≡ nothing` 对每个 n，且对每个 n 有 β 前 n+1 问都答 false 而 α ≢ β；(4) 流的相等可判定 ⟺ WLPO，LEM ⟹ WLPO；(5) `askQ (FromJudge.answers (Type ℓ-zero) judge) 1 ≡ never`（HoTT 宇宙的逐层追问）与 `askQ (differ α α) 0 ≡ never` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-SAMENESS-NEVER-CONFIRMED-01`；负控制 `-NEG-01`、`-NEG-02` | 只证流，不证实数；常识部分不主张原创；“深度轴”“ZFC 用 A 一次答完”是读法；“是不是同一个永远确认不完”是《最高指示-Claude版》的概括，不是研究发起人原话；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：同一个理论里的两种命运，两层类型论（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe --cubical --two-level`，什么都不假定）。方案 `dev-docs/元层特征方案-20261021.md` §6 的归因检验：同一个理论里两种相同，同一个 A 的代价只出现在有结构的那一层。**身份**：外层 UIP、内层数据不能消去到外层是 2LTT 的设计；增量是两种命运的并列与归因读法。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-TWO-FATES-2LTT-001` | `CG001-C-442` | `formal/claude-cg001/two-fates-2ltt/TwoFatesOneTheory.agda`（`_≡ˢ_`、`ℕˢ`、`uipˢ`、`everyOuterTypeIsSet`、`outerUniverseIsSet`、`outerStagesFlat`、`innerUniverseNever`、`EMStages`、`emUnivalent`、`emAllHeights`、`emExposed`、`emNever`、`stageFinite`、`innerOf`、`innerOfIsStage`、`toℕSuc`、`TwoFates`、`qual-C442`；导入 `exposure-criterion`、`a-univalence-b` 及其依赖） | `verification/runs/20261021-CG001-TWO-FATES-2LTT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与九个被导入的包源文件）；exit 0，90 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-TWO-FATES-2LTT-NEG-001` | `CG001-C-442`（负控制） | 同目录 `WrongInnerFlat.agda` | `verification/runs/20261021-CG001-TWO-FATES-2LTT-NEG-01/`；exit 42，外层 UIP 搬不到内层路径 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-TWO-FATES-2LTT-NEG-002` | `CG001-C-442`（负控制） | 同目录 `WrongInnerToOuter.agda` | `verification/runs/20261021-CG001-TWO-FATES-2LTT-NEG-02/`；exit 42，`SortOfSplitVarError` | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-442 | 两层类型论（`--two-level`）：(1) 外层严格相等满足 UIP，每个外层类型、外层宇宙 `SSet ℓ-zero`、外层自然数 `ℕˢ` 的相同都是事实；(2) 内层宇宙 `question (Type ℓ-zero) judge ≡ never`；(3) EM 阶段的内层汇集 `Σ X, ∥ Σ n, X ≡ K n ∥` 单价、所有高度都在、暴露、追问永不停，每个 K n 在 3+n 层落定，外层编号 n 给出内层成员 K (toℕ n) | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-TWO-FATES-2LTT-01`；负控制 `-NEG-01`、`-NEG-02` | 外层 UIP 与“内层不能消去到外层”是 2LTT 的设计；归因读法只削弱“代价来自理论或呈现”的竞争归因，不证 A 是唯一原因；半单纯类型与外层不单价没做；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

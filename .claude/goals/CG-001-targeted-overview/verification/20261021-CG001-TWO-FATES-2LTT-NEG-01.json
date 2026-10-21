@@ -1,0 +1,44 @@
+{
+  "status": "NEGATIVE_CONTROL_REJECTED_AS_EXPECTED",
+  "verifier": "CG-001 goal-local (reuses canonical verify_formal_proof_run.py checks; index check replaced)",
+  "canonical_verifier_sha256": "e0fc47aa2d3d9d8bfa370a02c5fa3abbec4a77ddc78f74e283b2b30ad359e5a3",
+  "run_id": "20261021-CG001-TWO-FATES-2LTT-NEG-01",
+  "proof_id": "MP-CG001-TWO-FATES-2LTT-NEG-001",
+  "claim_ids": [
+    "CG001-C-442"
+  ],
+  "kernel_status": "KERNEL_REJECTED",
+  "exit_code": 42,
+  "source_paths": [
+    "HoTT/formal/claude-cg001/two-fates-2ltt/WrongInnerFlat.agda",
+    "HoTT/formal/dedekind-omega-missile/TOOLCHAIN.json",
+    "HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "HoTT/formal/claude-cg001/two-fates-2ltt/CLAIM.md",
+    "HoTT/formal/claude-cg001/exposure-criterion/ExposureCriterion.agda",
+    "HoTT/formal/claude-cg001/completion-cost/CompletionCost.agda",
+    "HoTT/formal/claude-cg001/a-univalence-b/AUnivalenceB.agda",
+    "HoTT/formal/claude-cg001/questioning-delay/QuestioningDelay.agda",
+    "HoTT/formal/claude-cg001/pedometer-semantics/PedometerSemantics.agda",
+    "HoTT/formal/claude-cg001/pedometer-semantics/DelayMonad.agda",
+    "HoTT/formal/claude-cg001/universe-questioning/UniverseHasNoLevel.agda",
+    "HoTT/formal/claude-cg001/truncation-questioning/TruncationQuestioning.agda",
+    "HoTT/formal/claude-cg001/product-questioning/ProductQuestioning.agda",
+    "HoTT/formal/claude-cg001/two-fates-2ltt/TwoFatesOneTheory.agda"
+  ],
+  "external_dependencies": [
+    "agda-release-asset",
+    "agda-binary",
+    "cubical-release-asset",
+    "cubical-library-file",
+    "cubical-extracted-tree"
+  ],
+  "index": "GOAL_LOCAL_INDEX_ONLY",
+  "goal_index_row_sha256": {
+    "MP-CG001-TWO-FATES-2LTT-NEG-001": "b757d3a07de67361a4751cb3621b779a4532ca1afe72933e6a4ce52b8147d09e",
+    "20261021-CG001-TWO-FATES-2LTT-NEG-01": "7ab14b79bf8770aad17c3974f2568f1eb1881bd4338d4b355e258b3ff8ce1267",
+    "CG001-C-442": "3477cb042137ed95ceab8f130a33b0140159ea8f8e054e23f4f5c16cbe70b740"
+  },
+  "shared_matrix_index": "NOT_INDEXED_RELAY_DRAFT_ONLY",
+  "replay": "EXACT_EXIT_STDOUT_STDERR_MATCH",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED"
+}
