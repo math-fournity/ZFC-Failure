@@ -3,16 +3,16 @@
   "id": "CG-011",
   "title": "H 深化后续全部完成：研究发起人 10-21 认可 H 深化内容后，把 §6–§8、元层特征方案 §7 与第 1 问综合 §5 的后续工作全部做完",
   "status": "ACTIVE",
-  "phase": "P3",
-  "next_action": "G8：两层类型论里用外层自然数定义内层半单纯类型（先查 C-442 的 --two-level 写法与外层 ℕ 的消去方向；做成或照实写明阻塞）",
+  "phase": "P4",
+  "next_action": "G10：Rzk 与单价 1-范畴的可行性结论（探针：Rzk 无内建 Nat、有 #data；查 HIT 与单价性是否内建；cubical 有 CategoryPath、isGroupoid-ob，无范畴的结构同一原理）；然后 G9 README §4 候选与请示；完成门审计；推送 claude/012-opus-w8",
   "bound_sessions": [
     "91beaf35-237d-4c5d-887c-cb72c58ccca2",
     "a15f4b3b-2441-458d-b911-556a515294e3"
   ],
   "created": "2026-10-21T09:23:56-04:00",
-  "updated": "2026-10-21T14:56:18-04:00",
-  "last_checkpoint": "2026-10-21T14:56:18-04:00",
-  "checkpoints": 6,
+  "updated": "2026-10-21T15:12:45-04:00",
+  "last_checkpoint": "2026-10-21T15:12:45-04:00",
+  "checkpoints": 7,
   "compactions": 1,
   "last_compaction": "2026-10-21T09:51:04-04:00",
   "home": "/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups"

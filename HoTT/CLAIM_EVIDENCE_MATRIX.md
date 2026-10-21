@@ -2682,3 +2682,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-447 | `val s = ∑' n, digit s n`（`digit s n = if s n then (1/2)^(n+1) else 0`）：(1) `val s = 0 ↔ ∀ n, s n = false`；(2) `∀ n, ∃ s, (∀ k < n, s k = false) ∧ ∑_{k<n} digit s k = 0 ∧ val s ≠ 0`，`¬ ∃ N, ∀ s, (∀ k < N, s k = false) → val s = 0`；(3) `(∀ s, val s = 0 ∨ val s ≠ 0) ↔ WLPO`（流形式）；(4) `∃ s t, s ≠ t ∧ val s = val t`（`val (onlyAt 0) = 1/2 = val tailOnes`） | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-REAL-DEPTH-01`；负控制 `-NEG-01`、`-NEG-02` | Mathlib 的 ℝ 是经典的，(3) 是等价不是可构造；构造性一面是 C-441；`val` 只覆盖 [0, 1]；“深度轴落到实数”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：两层里的无穷相干（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G8。读法：机器证明（Cubical Agda，`--safe --two-level`）。外层编号按层给出内层类型的严格半单纯结构，相干的相干是事实；内层同样的相干是数据。**阻塞**：可纤的一版（每个 n 的截断半单纯类型全体作为内层类型）要 Reedy 可纤性机制，本包没建。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-STRICT-SEMISIMPLICIAL-001` | `CG001-C-448` | `formal/claude-cg001/strict-semisimplicial/StrictSemisimplicial.agda`（`_≡ᵉ_`、`uipᵉ`、`Th`、`idᵗ`、`_∘ᵗ_`、`∘ᵗ-idˡ`、`∘ᵗ-idʳ`、`∘ᵗ-assoc`、`SSTˢ`、`Tuple`、`select`、`vertices`、`faceKernel`、`simplicialIdentities`、`coherenceFlat`、`thinningLawsFlat`、`innerCoherenceStructured`、`qual-C448`） | `verification/runs/20261021-CG001-STRICT-SEMISIMPLICIAL-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十个被导入的包源文件）；exit 0，88 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-STRICT-SEMISIMPLICIAL-NEG-001` | `CG001-C-448`（负控制） | 同目录 `WrongInnerCoherenceFlat.agda` | `verification/runs/20261021-CG001-STRICT-SEMISIMPLICIAL-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-STRICT-SEMISIMPLICIAL-NEG-002` | `CG001-C-448`（负控制） | 同目录 `WrongFaceIdentity.agda` | `verification/runs/20261021-CG001-STRICT-SEMISIMPLICIAL-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-448 | (1) `Th` 在 `_≡ˢ_` 下严格成范畴（左右单位、结合）；(2) `SSTˢ`：`X : ℕˢ → Type`，`act : Th m n → X n → X m`，`actId`、`actComp` 为 `_≡ᵉ_`；(3) `vertices A`（`Tuple A`、`select`）是 `SSTˢ`；`select δᵢ (a , b , c , tt)` 按 `reflᵉ` 删去第 i 个分量；δ₁∘ε₀ = δ₀∘ε₀、δ₂∘ε₀ = δ₀∘ε₁、δ₂∘ε₁ = δ₁∘ε₁ 按 `reflˢ`；(4) 任意两条 `actComp` 证明 `≡ˢ`；(5) `¬ (Path ((x : S¹) → x ≡ x) (λ _ → refl) rotLoop)` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-STRICT-SEMISIMPLICIAL-01`；负控制 `-NEG-01`、`-NEG-02` | `SSTˢ` 是外层类型，不是 HoTT 里的类型；可纤一版阻塞；不要求 Reedy 纤维性；“无穷相干是 A 的一种形态”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
