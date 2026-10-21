@@ -2654,3 +2654,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-445 | (1) `N = Interval`：`isContr N`；`seg : end₀ ≡ end₁`；N 的每个回路 `≡ refl`，任何 `f : N → X` 都把它们送到 `refl`；(2) `Glued`（`pt : N → Glued`，构造子 `declared : pt end₀ ≡ pt end₁`）：`Glued ≃ S¹`、`Glued ≡ S¹`；(3) `¬ (declared ≡ cong pt seg)`；`gluedLoop = declared ∙ sym own` 不是 refl，`cong toS¹ gluedLoop ≡ loop`，`winding (cong toS¹ gluedLoop) ≡ pos 1`（refl）；(4) 没有 `p : end₀ ≡ end₀` 使 `cong pt p ≡ gluedLoop`；`collapse`（`declared ↦ seg`）下 `cong collapse gluedLoop ≡ refl`；(5) `KeepingCompletionAt 0 N`；`Glued` 不可缩、不是命题、不是集合、是群胚，`¬ KeepingCompletionAt 0/1/2`、`KeepingCompletionAt 3`；(6) `¬ (Σ y, ¬ (pt end₀ ≡ y))` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-CIRCLE-GLUING-01`；负控制 `-NEG-01`、`-NEG-02` | 数学是标准事实，不主张原创；“粘回两端就是宣布完成”“原文 ① 的两处表现”“只是价格看得见”是读法；极限一侧是 C-424、C-437，本包不重证；不证“抽象必然导致矛盾”；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：没有一个有限层够用（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G6。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。同调代数的全高度版本（元层特征方案 §7 第 5 条）：K(ℤ, n) 第 n+1 层与单点分不开、第 n+2 层分开，价格恰是 n+2；没有一个有限层够用。C-440 是它的第 1 层。**身份**：EM 空间的连通性、截断性与环路空间来自 cubical 库；新写的是不在第 n+1 层、不是单点、价格恰是 n+2 与“没有一个有限层够用”的两个形式。史学假说的原文未取得，仍是假说。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-FULL-HEIGHT-001` | `CG001-C-446` | `formal/claude-cg001/full-height/FullHeight.agda`（`K`、`unitTruncContr`、`pointAt`、`sameAsPointAt`、`pointAtLevel`、`ℤnotContr`、`kNotPoint`、`kNotBelow`、`differAt`、`kPrice`、`unboundedPrice`、`noFiniteLevelDetectsPoints`、`noFiniteLevelSeparates`、`qual-C446`） | `verification/runs/20261021-CG001-FULL-HEIGHT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，86 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-FULL-HEIGHT-NEG-001` | `CG001-C-446`（负控制） | 同目录 `WrongPointOneLevelUp.agda` | `verification/runs/20261021-CG001-FULL-HEIGHT-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-FULL-HEIGHT-NEG-002` | `CG001-C-446`（负控制） | 同目录 `WrongKIsPoint.agda` | `verification/runs/20261021-CG001-FULL-HEIGHT-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-446 | `K n = EM ℤAbGroup n`：(1) `∥ K n ∥ (suc n) ≃ ∥ Unit ∥ (suc n)`，`isContr (∥ K n ∥ n)`；(2) `¬ (∥ K n ∥ (2 + n) ≃ ∥ Unit ∥ (2 + n))`；`KeepingCompletionAt (2 + n) (K n)`、`¬ KeepingCompletionAt (suc n) (K n)`（`¬ isOfHLevel (suc n) (K n)`）；对每个 m 有 A 使 `¬ KeepingCompletionAt m A`；(3) `¬ isContr (K n)`；(4) `¬ Σ m, ∀ A, isContr (∥ A ∥ m) → isContr A`；`¬ Σ m, ∀ A B, ∥ A ∥ m ≃ ∥ B ∥ m → A ≃ B` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-FULL-HEIGHT-01`；负控制 `-NEG-01`、`-NEG-02` | 数学是标准事实，不主张原创；“同调代数的高阶运算”“全高度就是 A”是读法；Massey 积、三角范畴、增强没有形式化；史学假说原文未取得；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

@@ -1,0 +1,93 @@
+{
+  "agda_error_tag": null,
+  "audit_notes": [
+    "Captured by Claude Code desktop session a15f4b3b, which took over session 91beaf35 (015-Opus) at the research sponsor's request, worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-21, goal CG-011 gate G6; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md and the eight imported package sources."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-446"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/full-height",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning",
+    "HoTT/formal/claude-cg001/full-height/FullHeight.agda"
+  ],
+  "completed_at_utc": "2026-10-21T18:37:48.016489+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 85.496347,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 0,
+  "expected_outcome": "ACCEPT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": null,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/full-height",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Reading K(Z, n) as the object behind higher cohomology operations (Massey products, Toda brackets), the triangulated category as the level-1 completion, and the gap between 'every object has a finite level' and 'no finite level serves all objects' as A, are interpretations, not theorems; Massey products, triangulated categories and enhancements are not formalized here.",
+    "The historical hypothesis of the meta-level plan (Verdier's TR3, Bondal-Kapranov's enhancements, Lurie's stable infinity-categories) is not checked: the originals are not in the repository, so it stays a hypothesis.",
+    "The mathematics is standard (connectivity, truncation level and loop spaces of EM spaces); no originality is claimed. Nothing here yields ZFC |- falsum or ZFC-1 => B."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-FULL-HEIGHT-001",
+  "rejection_stage": null,
+  "run_id": "20261021-CG001-FULL-HEIGHT-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Cubical Agda, --safe, nothing assumed. C-446, no finite level suffices (the all-heights version for homological algebra): for K n the Eilenberg-MacLane space K(Z, n), (1) its completion at level n+1 is contractible, equivalent to that of the point, and so at level n; (2) at level n+2 it differs from the point; a completion at level n+2 keeps K n and one at level n+1 does not (K n is not of h-level n+1), so its price is exactly n+2 and prices are unbounded; (3) K n is not contractible (down the loop space iso to Z); (4) there is no m such that contractibility after the level-m completion implies contractibility for every type, and no m such that equivalence after the level-m completion implies equivalence for every type.",
+  "source_manifest": {
+    "bytes": 4278,
+    "path": "source-manifest.json",
+    "sha256": "5647e7565c64e0493535e52210f31ef1b4939c37155a4603566bcc356d95e778"
+  },
+  "started_at_utc": "2026-10-21T18:36:22.520142+00:00",
+  "status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 29587,
+    "path": "stdout.txt",
+    "sha256": "bd52a1ab92b17c1b3ab3830c110bc4523d1b7a11b8ee8691db85c345f61d8ed2"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}

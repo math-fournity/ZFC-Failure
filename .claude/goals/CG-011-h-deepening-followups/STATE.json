@@ -3,16 +3,16 @@
   "id": "CG-011",
   "title": "H 深化后续全部完成：研究发起人 10-21 认可 H 深化内容后，把 §6–§8、元层特征方案 §7 与第 1 问综合 §5 的后续工作全部做完",
   "status": "ACTIVE",
-  "phase": "P2",
-  "next_action": "G6：同调代数的全高度版本（K(ℤ,m) 在第 m 层完成后与单点分不开、本身却不是单点；没有一个有限层够用；史学原文 Verdier/Bondal–Kapranov/Lurie 不在仓库，取不得就写明缺口，下载要研究发起人同意）",
+  "phase": "P3",
+  "next_action": "G7：实数的深度轴（Lean + Mathlib；桥接引理 val s = 0 ⟺ s 处处为 0；有限阶段确认不了；判定 ⟺ WLPO 的流形式；一般相等不是数字流相等）",
   "bound_sessions": [
     "91beaf35-237d-4c5d-887c-cb72c58ccca2",
     "a15f4b3b-2441-458d-b911-556a515294e3"
   ],
   "created": "2026-10-21T09:23:56-04:00",
-  "updated": "2026-10-21T14:31:18-04:00",
-  "last_checkpoint": "2026-10-21T14:31:18-04:00",
-  "checkpoints": 4,
+  "updated": "2026-10-21T14:46:30-04:00",
+  "last_checkpoint": "2026-10-21T14:46:30-04:00",
+  "checkpoints": 5,
   "compactions": 1,
   "last_compaction": "2026-10-21T09:51:04-04:00",
   "home": "/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups"
