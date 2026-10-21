@@ -50,3 +50,16 @@ Atria的工作目录/.evidence/
 # CodeArts IDE local workspace settings (e.g. .arts/settings.json claw-mode
 # flag). Machine-local tool state; never part of the research tree.
 .arts/
+
+# Per-page rasterised images and other intermediates of the visual-audit pipeline
+# (docs/罗素解决考古/**/_visualcheck/, _audit-binary/, _split/, _upload/, mineru_md/
+# sub-dirs).  These are process artifacts: the sentence that an audit actually relies
+# on lives as text in the Z*/01–04 evidence files with a page locator, so committing
+# hundreds of multi-MB PNGs adds no evidential value and makes the tree look dirty for
+# weeks afterwards.  The already-tracked files (zermelo 1908, the 21 pages fully audited
+# for Z01/Q1, committed in 18c0227cd) STAY tracked — this rule does not untrack them,
+# and gitignore cannot change tracked files' content anyway.
+docs/罗素解决考古/**/_visualcheck/
+docs/罗素解决考古/**/_audit-binary/
+docs/罗素解决考古/**/_split/
+docs/罗素解决考古/**/_upload/
