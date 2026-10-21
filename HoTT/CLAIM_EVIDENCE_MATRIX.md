@@ -2584,3 +2584,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-440 | 方块 A = Bool、B = S¹、f 常值 base、两边恒等：(1) 交换方式 H（一族回路）决定锥（余纤维）上的带点映射 `coneMap• H`；(2) H₀ = 处处 refl、H₁ = 在 true 处 `loop`：两个诱导映射在锥的回路上绕数分别为 0 与 1（`refl`），故不相等；(3) 不存在 `F : ∥ Commutes ∥₁ → PointedSelfMap` 对每个 H 满足 `F ∣ H ∣₁ ≡ coneMap• H`；(4) 交换方式的类型是集合、不是命题 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-CONE-NON-FUNCTORIAL-01`；负控制 `-NEG-01`、`-NEG-02` | 一个具体方块，不是三角范畴的一般定理；带点映射；只到有限层（H），A∞、Massey 积那一层没做；“三角范畴里交换是命题”“忘掉方式是 H”“数学家在同调代数里看见了代价”是读法或待考假说；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：深度轴，已完成的无穷对象“是不是同一个”也问不完（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。方案 `dev-docs/元层特征方案-20261021.md` §5 的“深度”轴：一层的“是不是同一个”要无穷多步才答完。与 C-438 的“高度”轴并列，并证明两条轴跑同一个程序（C-112 的 `askQ`）。**身份**：流的相等是 Π⁰₁、相等可判定 ⟺ WLPO、排中律 ⟹ WLPO 是常识；增量是放进与 B 同一个程序。“ZFC 用 A 把两条轴一次答完”是读法。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SAMENESS-NEVER-CONFIRMED-001` | `CG001-C-441` | `formal/claude-cg001/sameness-never-confirmed/SamenessNeverConfirmed.agda`（`differ`、`sameToNever`、`neverToSame`、`differenceConfirmed`、`selfNeverAnswers`、`flipAt`、`noFiniteConfirmation`、`decEqToWLPO`、`wlpoToDecEq`、`lemGivesWLPO`、`heightNever`、`depthNever`、`qual-C441`；导入 `same-q-univalent`、`a-univalence-b` 及其依赖） | `verification/runs/20261021-CG001-SAMENESS-NEVER-CONFIRMED-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，86 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SAMENESS-NEVER-CONFIRMED-NEG-001` | `CG001-C-441`（负控制） | 同目录 `WrongConfirmAtStage.agda` | `verification/runs/20261021-CG001-SAMENESS-NEVER-CONFIRMED-NEG-01/`；exit 42，`nothing != just 0` | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SAMENESS-NEVER-CONFIRMED-NEG-002` | `CG001-C-441`（负控制） | 同目录 `WrongFlipSame.agda` | `verification/runs/20261021-CG001-SAMENESS-NEVER-CONFIRMED-NEG-02/`；exit 42，翻转后的流不是原流 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-441 | 对流 `ℕ → Bool`：(1) α ≡ β ⟺ `askQ (differ α β) 0 ≡ never`；(2) 第 k 位不同则 k 步燃料内有答案；(3) `runFor n (askQ (differ α α) 0) ≡ nothing` 对每个 n，且对每个 n 有 β 前 n+1 问都答 false 而 α ≢ β；(4) 流的相等可判定 ⟺ WLPO，LEM ⟹ WLPO；(5) `askQ (FromJudge.answers (Type ℓ-zero) judge) 1 ≡ never`（HoTT 宇宙的逐层追问）与 `askQ (differ α α) 0 ≡ never` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-SAMENESS-NEVER-CONFIRMED-01`；负控制 `-NEG-01`、`-NEG-02` | 只证流，不证实数；常识部分不主张原创；“深度轴”“ZFC 用 A 一次答完”是读法；“是不是同一个永远确认不完”是《最高指示-Claude版》的概括，不是研究发起人原话；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
