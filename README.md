@@ -471,7 +471,7 @@ python3 tools/replay.py --agda /path/to/agda --cubical-lib /path/to/cubical/cubi
 
 ## 10. 关于本分支
 
-- `main`（本分支）只放支撑结论的内容：结论文档、精确命题、证明源码、运行记录与重放方法。它由 `dev` 的提交 [`99865e92`](https://github.com/math-fournity/HoTT-Paradoxy/commit/99865e9284bfc861b9611c79d7e7851f8cc2e605) 按清单生成（`dev` 上的 `scripts/release/build_main_release.py` 与 `scripts/release/main-release-spec.json`），不在本分支上直接修改。要更新，就在 `dev` 上改清单或结论文档，再重新生成。
+- `main`（本分支）只放支撑结论的内容：结论文档、精确命题、证明源码、运行记录与重放方法。它由 `dev` 的提交 [`5ca3a26b`](https://github.com/math-fournity/HoTT-Paradoxy/commit/5ca3a26b2c837468e8277587a434328d16ee225f) 按清单生成（`dev` 上的 `scripts/release/build_main_release.py` 与 `scripts/release/main-release-spec.json`），不在本分支上直接修改。要更新，就在 `dev` 上改清单或结论文档，再重新生成。
 - `dev`：全部研究过程，所有工作都在那里进行。
 - 本说明另有俄、德、法、英文版本；译本由 AI 翻译，以中文为准（2026-10-16 的增补暂见于中文版，其他语言待同步）。社区审计稿与 `CLAIMS.md` 也有这四种语言的译本。《ZFC-1 的问题：原话逐句对照与机器证明》只有中文版。
 
