@@ -1,0 +1,34 @@
+{
+  "status": "NEGATIVE_CONTROL_REJECTED_AS_EXPECTED",
+  "verifier": "CG-001 goal-local (reuses canonical verify_formal_proof_run.py checks; index check replaced)",
+  "canonical_verifier_sha256": "e0fc47aa2d3d9d8bfa370a02c5fa3abbec4a77ddc78f74e283b2b30ad359e5a3",
+  "run_id": "20261021-CG001-COMPLETION-COST-NEG-02",
+  "proof_id": "MP-CG001-COMPLETION-COST-NEG-002",
+  "claim_ids": [
+    "CG001-C-436"
+  ],
+  "kernel_status": "KERNEL_REJECTED",
+  "exit_code": 42,
+  "source_paths": [
+    "HoTT/formal/claude-cg001/completion-cost/WrongFlatChanges.agda",
+    "HoTT/formal/dedekind-omega-missile/TOOLCHAIN.json",
+    "HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "HoTT/formal/claude-cg001/completion-cost/CompletionCost.agda"
+  ],
+  "external_dependencies": [
+    "agda-release-asset",
+    "agda-binary",
+    "cubical-release-asset",
+    "cubical-library-file",
+    "cubical-extracted-tree"
+  ],
+  "index": "GOAL_LOCAL_INDEX_ONLY",
+  "goal_index_row_sha256": {
+    "MP-CG001-COMPLETION-COST-NEG-002": "e9823be77cfb39cdf065f95f136017757eaeb5500b0950b584aaea556f13f98d",
+    "20261021-CG001-COMPLETION-COST-NEG-02": "ff2d38401e1c68834ae421757bb4ca419de43ab8ce8df73db147ba3b07bbabf3",
+    "CG001-C-436": "050cafb55cb222d5516927d24e39ebf83b933e1063899e65dc868be7d8e15ed6"
+  },
+  "shared_matrix_index": "NOT_INDEXED_RELAY_DRAFT_ONLY",
+  "replay": "EXACT_EXIT_STDOUT_STDERR_MATCH",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED"
+}
