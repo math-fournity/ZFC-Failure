@@ -40,6 +40,7 @@ SOURCES = {
     "圆环原文": ROOT / "HoTT/sources/user-originals/Z铁律-抽象-圆环-时间维度-用户原始论述-20260901.md",
     "元层特征方案": ROOT / "dev-docs/元层特征方案-20261021.md",
     "CG-011目标": ROOT / ".claude/goals/CG-011-h-deepening-followups/GOAL.md",
+    "GUI转录": ROOT / "docs/会话GUI转录-20261016至17-罗素考古芝诺立项与H深化.md",
     "接手转录": TRANSCRIPT_015_TAKEOVER,
 }
 QUOTES = [
@@ -91,6 +92,8 @@ QUOTES = [
     # G10 (C-449 and the Rzk decision): the gate and the plan's AI-written prediction
     ("G10 Rzk 与单价 1-范畴：可行性结论写明，做或不做都要有理由。", "CG-011目标"),
     ("预测第 3 问停。这验证判据的“有上限则藏”一面在集合以外也对。", "元层特征方案"),
+    # G9 (README §4 candidate): the sponsor's endorsement, from the GUI session export
+    ("你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。", "GUI转录"),
 ]
 
 

@@ -234,6 +234,19 @@ The same question, the same program; change only what "the same" means and wheth
 
 The table matches the two cases point by point; it does not claim they are mathematically the same.
 
+Beneath the correspondence there is something that can be said more precisely. The initiator endorsed a condensed formulation (2026-10-17, original words):
+
+> 你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。
+
+> **Translation.** "You put that very well: 'one side only needs to ask about the end, the other side is forced to ask about the process.'"
+
+On 2026-10-21 each half of that sentence got a computer-checked counterpart:
+
+- **One side only needs to ask about the end.** In ZFC, once something has been proved to exist, giving it a name adds no new theorem; once it has also been proved unique, the name picks out exactly that one thing in every model. Declaring a process "finished" costs nothing there.
+- **The other side is forced to ask about the process.** In HoTT, declaring an object "finished" at some level leaves the object unchanged exactly when the object already settles at that level. For a whole that hands over all its heights at once, such as the universe, declaring it finished at any level changes the object; if the object is kept, the questioning never stops.
+
+Both sides perform the same act: treating a result that takes infinitely many steps to reach as if it were already there (Section 6 shows that this is what the initiator calls A). "The same act" is our reading, offered for the reader's scrutiny. These proofs were completed on 2026-10-21 and are on the `dev` branch ([analysis and comparison]({{REPO}}/blob/dev/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md), in Chinese); they have not yet been included in this branch.
+
 ### The textbook's answer, and why it does not make the problem go away
 
 For Zeno, the textbook says: use limits, 1/2 + 1/4 + … equals exactly 1. Here, the textbook would say: ask the "set truncation" instead. This is a standard construction that squeezes "in which ways they are the same" into a one-word "same or not"; there the program stops at question 1.

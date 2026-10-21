@@ -234,6 +234,19 @@ Dieselbe Frage, dasselbe Programm; ändere nur, was „dasselbe“ bedeutet und 
 
 Die Tabelle stellt die beiden Fälle Punkt für Punkt nebeneinander; sie behauptet nicht, dass sie mathematisch dasselbe sind.
 
+Unter der Gegenüberstellung liegt etwas, das sich genauer sagen lässt. Die initiierende Person hat eine verdichtete Formulierung gutgeheißen (2026-10-17, Originalwortlaut):
+
+> 你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。
+
+> **Übersetzung.** „Das hast du sehr gut gesagt: ‚Die eine Seite muss nur nach dem Ende fragen, die andere Seite ist gezwungen, nach dem Prozess zu fragen.‘“
+
+Am 2026-10-21 bekam jede Hälfte dieses Satzes ein vom Computer geprüftes Gegenstück:
+
+- **Die eine Seite muss nur nach dem Ende fragen.** Ist in ZFC bewiesen, dass etwas existiert, so fügt ein Name dafür keinen neuen Satz hinzu; ist zusätzlich bewiesen, dass es eindeutig ist, so bezeichnet der Name in jedem Modell genau dieses eine Ding. Einen Prozess dort für „abgeschlossen“ zu erklären, kostet nichts.
+- **Die andere Seite ist gezwungen, nach dem Prozess zu fragen.** In der HoTT lässt eine Erklärung „abgeschlossen“ auf einer Stufe das Objekt genau dann unverändert, wenn das Objekt auf dieser Stufe schon zur Ruhe kommt. Bei einem Ganzen, das alle seine Höhen auf einmal übergibt, etwa dem Universum, verändert die Erklärung auf jeder Stufe das Objekt; behält man das Objekt, hört das Nachfragen nie auf.
+
+Beide Seiten vollziehen dieselbe Handlung: Ein Ergebnis, das erst nach unendlich vielen Schritten erreicht wird, wird behandelt, als läge es schon vor (Abschnitt 6 zeigt, dass dies das ist, was die initiierende Person A nennt). „Dieselbe Handlung“ ist unsere Lesart und wird der Prüfung durch die Leserinnen und Leser übergeben. Diese Beweise wurden am 2026-10-21 fertiggestellt und liegen auf dem Zweig `dev` ([Analyse und Gegenüberstellung]({{REPO}}/blob/dev/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md), auf Chinesisch); in diesen Zweig sind sie noch nicht aufgenommen.
+
 ### Die Antwort des Lehrbuchs, und warum sie das Problem nicht beseitigt
 
 Für Zenon sagt das Lehrbuch: Nimm Grenzwerte, 1/2 + 1/4 + … ist genau 1. Hier würde das Lehrbuch sagen: Frag stattdessen nach der „Mengentrunkierung“. Das ist eine Standardkonstruktion, die „auf welche Weisen sie dasselbe sind“ zu einem einzigen „dasselbe oder nicht“ zusammenpresst; dort hält das Programm bei Frage 1 an.

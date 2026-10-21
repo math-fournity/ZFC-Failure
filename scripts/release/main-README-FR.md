@@ -234,6 +234,19 @@ La même question, le même programme ; ne changez que le sens de « la même ch
 
 Le tableau met les deux cas en regard point par point ; il ne prétend pas qu'ils soient mathématiquement identiques.
 
+Sous cette correspondance, il y a quelque chose qui peut se dire plus précisément. La personne à l'origine du projet a approuvé une formulation condensée (2026-10-17, propos originaux) :
+
+> 你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。
+
+> **Traduction.** « Tu l'as très bien dit : "d'un côté, il suffit de demander l'issue ; de l'autre, on est forcé de demander le processus." »
+
+Le 2026-10-21, chacune des deux moitiés de cette phrase a reçu un pendant vérifié par ordinateur :
+
+- **D'un côté, il suffit de demander l'issue.** Dans ZFC, dès qu'on a prouvé qu'une chose existe, lui donner un nom n'ajoute aucun nouveau théorème ; dès qu'on a aussi prouvé qu'elle est unique, le nom désigne exactement cette chose-là dans chaque modèle. Y déclarer un processus « achevé » ne coûte rien.
+- **De l'autre, on est forcé de demander le processus.** Dans la HoTT, déclarer un objet « achevé » à un certain niveau le laisse inchangé exactement lorsque l'objet se fixe déjà à ce niveau. Pour un tout qui livre toutes ses hauteurs d'un coup, comme l'univers, le déclarer achevé à n'importe quel niveau change l'objet ; si l'on garde l'objet, l'interrogation ne s'arrête jamais.
+
+Les deux côtés accomplissent le même geste : traiter un résultat qu'on n'atteint qu'après une infinité de pas comme s'il était déjà là (la section 6 montre que c'est ce que la personne à l'origine du projet appelle A). « Le même geste » est notre lecture, soumise à l'examen des lectrices et des lecteurs. Ces preuves ont été achevées le 2026-10-21 et se trouvent sur la branche `dev` ([analyse et comparaison]({{REPO}}/blob/dev/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md), en chinois) ; elles n'ont pas encore été intégrées à cette branche.
+
 ### La réponse des manuels, et pourquoi elle ne fait pas disparaître le problème
 
 Pour Zénon, le manuel dit : utilise les limites, 1/2 + 1/4 + … vaut exactement 1. Ici, le manuel dirait : interroge plutôt la « troncature ensembliste ». C'est une construction standard qui comprime « de quelles manières elles sont la même chose » en un simple « la même ou non » ; là, le programme s'arrête à la question 1.
