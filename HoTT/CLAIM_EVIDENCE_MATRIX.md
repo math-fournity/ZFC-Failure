@@ -2570,3 +2570,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-438 | (1) 对任意类型 X 与任意判定器：追问 `question X judge ≡ never` ⟺ X 在任何有限层都不落定 ⟺ 对每个 n 都没有在 n 层保住 X 的完成；追问停 ⟺ X 在某一层落定，且该层的规范完成是等价并保住 X；(2) 对任意单价且所有高度一次交出的收集 C：每个有限阶段（所指成员在 1+n 层落定者）单价且追问停，整体追问永不停、任何有限层的完成都保不住；编码相同是事实的收集第 1 问就停、第 2 层完成免费；(3) 累积层级 `V` 是集合，`V` 与 ω 的成员第 1 问就停、第 2 层完成免费，ω 收齐每个 `# n`；(4) `hSet` 在第 3 层落定，追问停；(5) 有限层类型的全体单价、所有高度都在、暴露、永不停（内核 1000 步得 `nothing`）、任何有限层的完成都保不住，而每个成员有限、是各有限阶段之并、每个有限阶段都停；(6) 两种命运并列：同一个“把所有有限阶段一次收齐”在 `V` 里得 ω 免费，在 HoTT 里永不停 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-EXPOSURE-CRITERION-01`；负控制 `-NEG-01`、`-NEG-02` | 只覆盖“高度”轴（深度轴：实数相等要无穷步核对；大小轴：罗素，都不承接）；呈现是否忠实要逐个论证；`V` 是 HoTT 里 ZF 的模型（无选择公理），不是一阶 ZFC（一阶一侧见 C-437）；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；大部分是已证结果的重组，h-层事实是 HoTT 标准事实；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：锥不函子化，就是宣布完成的代价（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe`，什么都不假定，只用 cubical 库）。研究发起人 2026-10-21“在其他理论里也找出来”的第一个主流数学实例：C-438 的判据预言“相同有结构处，在有限层宣布完成会丢东西”，三角范畴里锥不函子化（TR3 只给存在）正是这个形状。**身份**：锥不函子化是常识，本包给最小内核形式并接到 C-436/C-438；“三角范畴里交换是命题”“忘掉交换方式就是 H”是读法；只到有限层（H），A 的全高度版本没做。编号跳过 C-439（“读法分离”候选占用）。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-CONE-NON-FUNCTORIAL-001` | `CG001-C-440` | `formal/claude-cg001/cone-non-functorial/ConeNonFunctorial.agda`（`coneMap`、`coneMap•`、`collapse`、`cycle`、`windingOf`、`winding₀`、`winding₁`、`coneMapsDiffer`、`notFunctorial`、`commutesNotProp`、`commutesIsSet`、`qual-C440`） | `verification/runs/20261021-CG001-CONE-NON-FUNCTORIAL-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md`）；exit 0，34 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-CONE-NON-FUNCTORIAL-NEG-001` | `CG001-C-440`（负控制） | 同目录 `WrongConeUnique.agda` | `verification/runs/20261021-CG001-CONE-NON-FUNCTORIAL-NEG-01/`；exit 42，`base != H₁ b i` | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-CONE-NON-FUNCTORIAL-NEG-002` | `CG001-C-440`（负控制） | 同目录 `WrongWindingZero.agda` | `verification/runs/20261021-CG001-CONE-NON-FUNCTORIAL-NEG-02/`；exit 42，`1 != 0` | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-440 | 方块 A = Bool、B = S¹、f 常值 base、两边恒等：(1) 交换方式 H（一族回路）决定锥（余纤维）上的带点映射 `coneMap• H`；(2) H₀ = 处处 refl、H₁ = 在 true 处 `loop`：两个诱导映射在锥的回路上绕数分别为 0 与 1（`refl`），故不相等；(3) 不存在 `F : ∥ Commutes ∥₁ → PointedSelfMap` 对每个 H 满足 `F ∣ H ∣₁ ≡ coneMap• H`；(4) 交换方式的类型是集合、不是命题 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-CONE-NON-FUNCTORIAL-01`；负控制 `-NEG-01`、`-NEG-02` | 一个具体方块，不是三角范畴的一般定理；带点映射；只到有限层（H），A∞、Massey 积那一层没做；“三角范畴里交换是命题”“忘掉方式是 H”“数学家在同调代数里看见了代价”是读法或待考假说；只在 macOS 捕获与重放 |

@@ -1,0 +1,72 @@
+{
+  "agda_error_tag": null,
+  "audit_notes": [
+    "Captured by Claude Code desktop session 91beaf35 (012-Opus), worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-21; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-440"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/cone-non-functorial",
+    "HoTT/formal/claude-cg001/cone-non-functorial/ConeNonFunctorial.agda"
+  ],
+  "completed_at_utc": "2026-10-21T12:33:26.357174+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 34.193909,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 0,
+  "expected_outcome": "ACCEPT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": null,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/cone-non-functorial"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "One concrete square and two ways of commuting; no general theorem about triangulated categories.",
+    "Reading the truncated fact as commutativity in the homotopy (triangulated) category, the induced map as the TR3 morphism of cones, and the forgetting as H (declaring completion without paying its construction) are interpretations, not theorems.",
+    "Finite level only (H, not A); the all-heights version (A-infinity structure, Massey products, Toda brackets) is not formalized."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-CONE-NON-FUNCTORIAL-001",
+  "rejection_stage": null,
+  "run_id": "20261021-CG001-CONE-NON-FUNCTORIAL-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Cubical Agda, --safe, nothing assumed. C-440: for the square with A = Bool, B = S1, f constantly base and identities on both sides, a way the square commutes is a family H of loops; the induced pointed map on the cofiber (pushout) depends on H; the two ways H0 (all refl) and H1 (loop at true) give maps whose windings on the cofiber's cycle are 0 and 1 (kernel computation), so they differ; hence no function from the mere fact that the square commutes (propositional truncation) to pointed cone maps agrees with the construction; the type of ways is a set and not a proposition.",
+  "source_manifest": {
+    "bytes": 2712,
+    "path": "source-manifest.json",
+    "sha256": "2eaed59b52b9a802b11df4627c155e47f7558eba6a68ff7db088cab86a1072c3"
+  },
+  "started_at_utc": "2026-10-21T12:32:52.163265+00:00",
+  "status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 17413,
+    "path": "stdout.txt",
+    "sha256": "061377b2a45ceab2ddff10b298921698d96dcf00cb38c3724f8c8ac957c720c3"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}

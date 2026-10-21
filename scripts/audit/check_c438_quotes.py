@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Re-runnable check: every passage quoted in the C-438 documents (HoTT/formal/claude-cg001/exposure-criterion/CLAIM.md,
 dev-docs/元层特征方案-20261021.md, the C-438 sections of the evidence index and the shared matrix, CFC plan ledger round 34,
-formalization tracking chapter 11) occurs verbatim, whitespace aside, in its source.
+formalization tracking chapter 11) occurs verbatim, whitespace aside, in its source.  The C-440 documents
+(HoTT/formal/claude-cg001/cone-non-functorial/CLAIM.md, CFC plan ledger round 35) quote the third paragraph of the same
+2026-10-21 message and nothing else of the sponsor's, so this check covers them too.
 
 Sources: the session transcript for the sponsor's 2026-10-21 message (outside the repository; reported as SKIP when absent),
 核心认知.md (KC-000077, the definition of A), docs/H深化-…-20261017.md (the sponsor's 2026-10-17 words) and dev-docs/CFC分析推进方案-20261019/001
