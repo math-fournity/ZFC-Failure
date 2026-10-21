@@ -1,0 +1,18 @@
+{
+  "schema": "goal-x-state/v1",
+  "id": "CG-011",
+  "title": "H 深化后续全部完成：研究发起人 10-21 认可 H 深化内容后，把 §6–§8、元层特征方案 §7 与第 1 问综合 §5 的后续工作全部做完",
+  "status": "ACTIVE",
+  "phase": "P1",
+  "next_action": "G1：H 深化升 v1.4（认可原话、身份改写、§8 第 2–5 项落实）",
+  "bound_sessions": [
+    "91beaf35-237d-4c5d-887c-cb72c58ccca2"
+  ],
+  "created": "2026-10-21T09:23:56-04:00",
+  "updated": "2026-10-21T09:27:22-04:00",
+  "last_checkpoint": "2026-10-21T09:27:22-04:00",
+  "checkpoints": 1,
+  "compactions": 0,
+  "last_compaction": null,
+  "home": "/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups"
+}
