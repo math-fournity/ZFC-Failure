@@ -15,6 +15,8 @@ C-440 只做了第 1 层：只记“方块交换了”，锥就定不下来。�
 
 史学假说（数学家在同调代数里看见过这个代价并修补）没有核：Verdier、Bondal–Kapranov、Lurie 的原文不在仓库，下载要研究发起人同意。见 `CLAIM.md`。
 
+**2026-10-21 同日更新**：只读公开网页核了能取得的部分（`CLAIM.md` 已哈希，不改）：Lurie 一文已核，代价与补救两句有一手说法；Bondal–Kapranov 只核了英译本摘要，所写动机与假说有出入；Verdier 未取得。记录见 `.claude/goals/CG-011-h-deepening-followups/G6-史学考古.md`。
+
 ## 文件
 
 | 文件 | 内容 |
