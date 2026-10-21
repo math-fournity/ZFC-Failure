@@ -1,7 +1,7 @@
 # CG-011：H 深化后续全部完成
 
 <!-- goal-x:essentials-begin -->
-> goal-x 目标包；HUMAN_EDITED；v1.0；2026-10-21；目录 `.claude/goals/CG-011-h-deepening-followups`。Claude 会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。本文件是本 goal 的单体开工与恢复闭包。
+> goal-x 目标包；HUMAN_EDITED；v1.1；2026-10-21；目录 `.claude/goals/CG-011-h-deepening-followups`。Claude 会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。本文件是本 goal 的单体开工与恢复闭包。
 
 ## 1. 目标与完成门
 
@@ -52,7 +52,7 @@
 ## 2. 角色、权限与写入边界
 
 - **角色**：研究生成，兼机械维护（登记）。
-- **获准写入**：本 worktree 的 `HoTT/formal/claude-cg001/` 新包、`HoTT/verification/runs/`、`.claude/goals/CG-001-targeted-overview/`（证据索引、校验输出）、`HoTT/CLAIM_EVIDENCE_MATRIX.md`、`形式化追踪/`、`dev-docs/CFC分析推进方案-20261019/005`、`dev-docs/元层特征方案-20261021.md`、`docs/H深化-…`、`docs/为什么没有发现-…`、`.claude/总索引/`、`scripts/audit/check_*`、本目标包、发布模板 `scripts/release/main-README*.md`（只在本分支）。
+- **获准写入**：本 worktree 的 `HoTT/formal/claude-cg001/` 新包、`HoTT/verification/runs/`、`.claude/goals/CG-001-targeted-overview/`（证据索引、校验输出）、`HoTT/CLAIM_EVIDENCE_MATRIX.md`、`形式化追踪/`、`dev-docs/CFC分析推进方案-20261019/005`、`dev-docs/元层特征方案-20261021.md`、`docs/H深化-…`、`docs/为什么没有发现-…`、`.claude/总索引/`、`scripts/audit/check_*`、本目标包、发布模板 `scripts/release/main-README*.md`（只在本分支）；`docs/第三框架检验-已有证据评估-20261019.md`（v1.1 补：它是第三框架检验状态的 owner，G4 只在其中加日期补记）。
 - **禁止**：
   - 未授权推送、发布、合并 `dev`；
   - 删除（只进废纸篓）；改他人未提交文件；
@@ -104,3 +104,4 @@ docs/为什么没有发现-一手层综合-20261019.md | 第 1 问综合；G2 �
 ## 8. 版本记录
 
 - v1.0 2026-10-21 创建并填写（Claude 会话 91beaf35）。
+- v1.1 2026-10-21 写入范围补 `docs/第三框架检验-已有证据评估-20261019.md`：G4 的结果要回写到第三框架检验状态的唯一 owner，否则它停在“对抗实例仍缺”，与 C-444 成为两份真值。
