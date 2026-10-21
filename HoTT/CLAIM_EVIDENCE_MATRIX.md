@@ -2528,3 +2528,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | （不占编号） | 对 `s n = 1 - (1/2)^n`：`1 ∉ Set.range s` ∧ `sSup (Set.range s) = 1`——终点不是任何有限阶段的值，同时是值域的确切上确界 | `KERNEL_ACCEPTED_WITH_SCOPE / DECLARED_CLASSICAL_AXIOMS` | run `20261020-MP-ZENO-SEP-ENDPOINT-NOT-MEMBER-001-01` | 不宣称 SEP、Huggett、Standard Solution 或任何作者有错；不证明物理运动不能到达或芝诺不可解；不形式化 Standard Solution 的闭连续时间模型；不给芝诺—HoTT 同一 Q 映射；不主张数学内容原创 |
+
+## Claude（012-Opus）：宣布完成的代价，对象不变的完成当且仅当对象本来就在有限层封顶（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。承接研究发起人 2026-10-19 目标的第 2 问与 2026-10-17 的 H（“数学家认为，引入H不会发生问题”）；把 `docs/H深化-…-20261017.md` §2、§3 与第 1 问一手层综合 §2 (a)(b) 的〔我们的分析〕写成定理，推广 H 深化 §6 (b)、§8.1 的候选 C-436。**身份**：两条核心引理是 HoTT 标准事实（HoTT Book 第 7 章），不主张原创；增量是放到 C-430 与 H 的分析上，以及 (3) 对任意落到有限层对象的完成映射的推广。“ZFC 的相等平坦”是标准读法，不是本包的定理。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-COMPLETION-COST-001` | `CG001-C-436` | `formal/claude-cg001/completion-cost/CompletionCost.agda`（`keptIsFinite`、`finiteIsKept`、`freeIsFlat`、`completeDecodesLevel`、`levelCompleteDecodes`、`BothCauses.twoFates`、`BothCauses.noKeepingCompletion`、`BothCauses.completionChangesCodes`、`flatCompletionFree`、`numberedCompletionFree`、`gatheringCompletionFree`、`universeNoKeeping`、`universeCompletionChanges`、`noDecodingAgain`、`flatRoundTrip`、`swapActs`、`qual-C436`；导入 `a-univalence-b`、`questioning-delay`、`pedometer-semantics`、`universe-questioning`、`truncation-questioning`、`product-questioning`） | `verification/runs/20261021-CG001-COMPLETION-COST-01/`（macOS 工具链记录 `formal/dedekind-omega-missile/TOOLCHAIN.json`）；exit 0，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-COMPLETION-COST-NEG-001` | `CG001-C-436`（负控制） | 同目录 `WrongFlatLoses.agda` | `verification/runs/20261021-CG001-COMPLETION-COST-NEG-01/`；exit 42，`3 != 4` | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-COMPLETION-COST-NEG-002` | `CG001-C-436`（负控制） | 同目录 `WrongFlatChanges.agda` | `verification/runs/20261021-CG001-COMPLETION-COST-NEG-02/`；exit 42，恒等等价不是单价性要的映射 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-436 | (1) 类型 A 有一个落到 h-层 n 的对象、又能解码回去的映射，当且仅当 A 在 h-层 n；(2) 规范的完成 `∣_∣ₕ : A → ∥ A ∥ n` 是等价 ≃ A 在 h-层 n（两个命题等价），有解码 ⟺ A 在 h-层 n；(3) 对任意单价且所有高度一次交出的收集：追问对每个判定器 `≡ never`，且对一切 n、一切 h-层 n 的 B、一切 `f : Code → B`，f 没有解码，`∣_∣ₕ` 在任何层都不是等价；(4) 编码成集合时第 2 层的完成是等价、第 1 问停；编号收集（成员同宇宙、所有高度都在、编码 ℕ）编码的完成免费；1+n 层落定者的汇集在 2+n 层免费完成并停机；(5) 宇宙永不停、任何有限层的完成都留不住它，C-83 (d) `noDecoding` 作为集合截断特例重得；(6) 内核实跑：ℕ 上 3 在第 2 层完成再解码得 3，Bool 的对调把 true 送到 false | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-COMPLETION-COST-01`；负控制 `-NEG-01`、`-NEG-02` | 只管“落到有限层的对象、靠解码保住对象”这一类完成，不对一切可设想的完成下断言；不证 ZFC 的相等平坦（标准读法），不证数学家当年假定了 H；不形式化极限侧“命名是保守扩张”（另一候选）；“终局读法与过程读法”仍是 C-112 (d)，本包不承接；标准 HoTT 事实不主张原创；只在 macOS 捕获与重放 |
