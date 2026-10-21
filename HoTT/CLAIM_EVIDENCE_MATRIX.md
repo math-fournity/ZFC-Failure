@@ -2668,3 +2668,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-446 | `K n = EM ℤAbGroup n`：(1) `∥ K n ∥ (suc n) ≃ ∥ Unit ∥ (suc n)`，`isContr (∥ K n ∥ n)`；(2) `¬ (∥ K n ∥ (2 + n) ≃ ∥ Unit ∥ (2 + n))`；`KeepingCompletionAt (2 + n) (K n)`、`¬ KeepingCompletionAt (suc n) (K n)`（`¬ isOfHLevel (suc n) (K n)`）；对每个 m 有 A 使 `¬ KeepingCompletionAt m A`；(3) `¬ isContr (K n)`；(4) `¬ Σ m, ∀ A, isContr (∥ A ∥ m) → isContr A`；`¬ Σ m, ∀ A B, ∥ A ∥ m ≃ ∥ B ∥ m → A ≃ B` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-FULL-HEIGHT-01`；负控制 `-NEG-01`、`-NEG-02` | 数学是标准事实，不主张原创；“同调代数的高阶运算”“全高度就是 A”是读法；Massey 积、三角范畴、增强没有形式化；史学假说原文未取得；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：实数的深度轴（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G7。读法：机器证明（Lean 4 + Mathlib，经典，三条标准公理）。C-441 的深度轴经桥接引理落到实数：数字流表示的实数是 0 ⟺ 流处处为 0；有限阶段确认不了；一次判定 ⟺ WLPO 的流形式；一般相等不是数字流相等。**身份**：非负级数与几何级数来自 Mathlib；新写的是桥与它的三个推论。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-REAL-DEPTH-001` | `CG001-C-447` | `formal/claude-cg001/real-depth/GodelQ/Real/RealDepth.lean`（`digit`、`val`、`summable_digit`、`val_eq_zero_iff`、`onlyAt`、`noFiniteStageConfirms`、`noStageSuffices`、`WLPO`、`zeroTest_iff_WLPO`、`tailOnes`、`val_onlyAt_zero`、`val_tailOnes`、`notInjective`）、`QualificationRealDepth.lean`（`qual_C447`） | `verification/runs/20261021-CG001-REAL-DEPTH-01/`（Lean v4.34.0 + Mathlib `5ed29652`；固定记录与 1681 个模块的导入闭包）；exit 0，12 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-REAL-DEPTH-NEG-001` | `CG001-C-447`（负控制） | 同目录 `GodelQ/Negative/WrongFirstDigit.lean` | `verification/runs/20261021-CG001-REAL-DEPTH-NEG-01/`；exit 1 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-REAL-DEPTH-NEG-002` | `CG001-C-447`（负控制） | 同目录 `GodelQ/Negative/WrongStreamEquality.lean` | `verification/runs/20261021-CG001-REAL-DEPTH-NEG-02/`；exit 1 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-447 | `val s = ∑' n, digit s n`（`digit s n = if s n then (1/2)^(n+1) else 0`）：(1) `val s = 0 ↔ ∀ n, s n = false`；(2) `∀ n, ∃ s, (∀ k < n, s k = false) ∧ ∑_{k<n} digit s k = 0 ∧ val s ≠ 0`，`¬ ∃ N, ∀ s, (∀ k < N, s k = false) → val s = 0`；(3) `(∀ s, val s = 0 ∨ val s ≠ 0) ↔ WLPO`（流形式）；(4) `∃ s t, s ≠ t ∧ val s = val t`（`val (onlyAt 0) = 1/2 = val tailOnes`） | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-REAL-DEPTH-01`；负控制 `-NEG-01`、`-NEG-02` | Mathlib 的 ℝ 是经典的，(3) 是等价不是可构造；构造性一面是 C-441；`val` 只覆盖 [0, 1]；“深度轴落到实数”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

@@ -1,0 +1,58 @@
+{
+  "audit_notes": [],
+  "audit_session": "Claude CG-011 line, Claude Code desktop session a15f4b3b (taking over 91beaf35 at the research sponsor's request), worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-21",
+  "claim_ids": [
+    "CG001-C-447"
+  ],
+  "command_argv": [
+    "/opt/homebrew/opt/python@3.15/bin/python3.15",
+    "-B",
+    ".claude/goals/CG-006-zfc-complete-formalization/tools/zfc_lean_check.py",
+    "--package",
+    "HoTT/formal/claude-cg001/real-depth",
+    "GodelQ/Real/RealDepth.lean",
+    "GodelQ/Negative/WrongFirstDigit.lean"
+  ],
+  "completed_at_utc": "2026-10-21T18:51:59.866850+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 4.658629,
+  "environment": {
+    "bytes": 984,
+    "path": "environment.txt",
+    "sha256": "96d862dafacda2f3ddcc6525f509ffeabe19dee267bd21b057d2e76d23860abe"
+  },
+  "exit_code": 1,
+  "expected_outcome": "REJECT",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows this attempt fails; noStageSuffices in the main package proves that no finite stage suffices."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Lean 4",
+  "proof_assistant_version": "Lean (version 4.34.0, arm64-apple-darwin24.6.0, commit 293d5d0c0c3f3dded4688b3ccd6a33939ac5102b, Release)",
+  "proof_id": "MP-CG001-REAL-DEPTH-NEG-001",
+  "rejection_stage": "ELABORATION_ERROR_IN_TARGET",
+  "run_id": "20261021-CG001-REAL-DEPTH-NEG-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-447 (2): the claim that a zero first digit makes the real zero, proved digit by digit along the bridge lemma; expected rejection (digit k being false does not give digit k+1 false).",
+  "source_manifest": {
+    "bytes": 200540,
+    "path": "source-manifest.json",
+    "sha256": "7014024cda767146a5d340919cd5a5fdbc177724a84e3ccbf1d0352442cd6774"
+  },
+  "started_at_utc": "2026-10-21T18:51:55.207881+00:00",
+  "status": "KERNEL_REJECTED",
+  "status_vocabulary_note": "KERNEL_REJECTED is the repository-wide status word for 'the proof checker rejected the target'. rejection_stage says which Lean stage refused it.",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 222,
+    "path": "stdout.txt",
+    "sha256": "91226abcdae11ba67d12d694d8ee55764f246bcd19e7a5854d687e29ce4c8262"
+  },
+  "theory_variant": "Lean 4 kernel with Mathlib (classical); the real numbers of Mathlib and binary digit streams; never HoTT paths"
+}

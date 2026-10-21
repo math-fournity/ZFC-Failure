@@ -1,0 +1,8 @@
+## lean GodelQ/Real/RealDepth.lean
+## lean GodelQ/Negative/WrongFirstDigit.lean
+GodelQ/Negative/WrongFirstDigit.lean:18:17: error: Type mismatch
+  ih
+has type
+  s k = false
+but is expected to have type
+  s (k + 1) = false
