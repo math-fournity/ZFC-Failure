@@ -1,0 +1,10 @@
+#lang rzk-1
+
+-- G10 probe 4 (session a15f4b3b, 2026-10-21): univalence is not built in; a theory that wants it
+-- has to state it as a postulate.  Here a stand-in "every type has a non-trivial self-path" is
+-- postulated, only to show that #postulate is the route.
+-- Expected: accepted (postulates are allowed; nothing built in supplies such a path).
+
+#postulate self-path
+  ( A : U)
+  : A = A

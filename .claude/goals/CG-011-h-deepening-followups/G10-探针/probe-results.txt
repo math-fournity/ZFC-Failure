@@ -1,0 +1,45 @@
+rzk version: 0.11.3
+== p1-no-builtin-nat.rzk
+
+/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p1-no-builtin-nat.rzk (line 8, column 6):
+  Error occurred when checking
+    #define probe-nat
+
+undefined variable: Nat
+exit=1
+== p2-data-point-constructors.rzk
+Loading file /Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p2-data-point-constructors.rzk
+Checking module from /Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p2-data-point-constructors.rzk
+[ 1 out of 2 ] Checking #data ℕ
+[ 2 out of 2 ] Checking #define two
+Everything is ok!
+exit=0
+== p3a-path-constructor-short-form.rzk
+
+/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p3a-path-constructor-short-form.rzk (line 8, column 1):
+  Error occurred when checking
+    #data S1
+
+the return type of path constructor loop must spell out the carrier of the identification, like l =_{S1} r
+exit=1
+== p3b-circle-as-hit.rzk
+Loading file /Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p3b-circle-as-hit.rzk
+Checking module from /Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p3b-circle-as-hit.rzk
+[ 1 out of 2 ] Checking #data S1
+[ 2 out of 2 ] Checking #define the-loop
+Everything is ok!
+exit=0
+== p4-postulate-needed.rzk
+Loading file /Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p4-postulate-needed.rzk
+Checking module from /Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p4-postulate-needed.rzk
+[ 1 out of 1 ] Checking #postulate self-path
+Everything is ok!
+exit=0
+== p5-no-builtin-ua.rzk
+
+/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups/G10-探针/p5-no-builtin-ua.rzk (line 9, column 6):
+  Error occurred when checking
+    #define probe-ua
+
+undefined variable: ua
+exit=1

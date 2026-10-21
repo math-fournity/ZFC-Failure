@@ -1,0 +1,9 @@
+#lang rzk-1
+
+-- G10 probe 5 (session a15f4b3b, 2026-10-21): no built-in univalence under the usual name.
+-- Expected: rejected with "undefined variable: ua".  This shows only that nothing of that name is
+-- built in; together with probe 4 it says univalence has to be postulated to be used.
+
+#define probe-ua
+  : U
+  := ua

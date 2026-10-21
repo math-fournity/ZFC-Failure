@@ -4,15 +4,15 @@
   "title": "H 深化后续全部完成：研究发起人 10-21 认可 H 深化内容后，把 §6–§8、元层特征方案 §7 与第 1 问综合 §5 的后续工作全部做完",
   "status": "ACTIVE",
   "phase": "P4",
-  "next_action": "G10：Rzk 与单价 1-范畴的可行性结论（探针：Rzk 无内建 Nat、有 #data；查 HIT 与单价性是否内建；cubical 有 CategoryPath、isGroupoid-ob，无范畴的结构同一原理）；然后 G9 README §4 候选与请示；完成门审计；推送 claude/012-opus-w8",
+  "next_action": "G9：README §4 升级候选（五种语言，在“对位不是等同”之后补“一侧问终局就够、一侧被迫问过程”的机器对应），试生成（build_main_release.py --source HEAD --out scratchpad），请示合并 dev 与发布 main；然后完成门审计、推送 claude/012-opus-w8",
   "bound_sessions": [
     "91beaf35-237d-4c5d-887c-cb72c58ccca2",
     "a15f4b3b-2441-458d-b911-556a515294e3"
   ],
   "created": "2026-10-21T09:23:56-04:00",
-  "updated": "2026-10-21T15:12:45-04:00",
-  "last_checkpoint": "2026-10-21T15:12:45-04:00",
-  "checkpoints": 7,
+  "updated": "2026-10-21T18:30:16-04:00",
+  "last_checkpoint": "2026-10-21T18:30:16-04:00",
+  "checkpoints": 8,
   "compactions": 1,
   "last_compaction": "2026-10-21T09:51:04-04:00",
   "home": "/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-011-h-deepening-followups"

@@ -88,6 +88,9 @@ QUOTES = [
     # G8 (C-448): the gate and the plan's AI-written sentence on 2LTT
     ("G8 2LTT 的无穷相干：用外层自然数按层定义内层的半单纯结构，或照实写明阻塞。", "CG-011目标"),
     ("这是 2LTT 的经典应用，是 A 在“无穷相干”上的形态，与 A7 那条线相接。", "元层特征方案"),
+    # G10 (C-449 and the Rzk decision): the gate and the plan's AI-written prediction
+    ("G10 Rzk 与单价 1-范畴：可行性结论写明，做或不做都要有理由。", "CG-011目标"),
+    ("预测第 3 问停。这验证判据的“有上限则藏”一面在集合以外也对。", "元层特征方案"),
 ]
 
 

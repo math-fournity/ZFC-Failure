@@ -1,0 +1,8 @@
+#lang rzk-1
+
+-- G10 probe 3a (session a15f4b3b, 2026-10-21): first attempt at the circle as a higher inductive
+-- type, writing the path constructor as `loop : base = base`.
+-- Observed: rejected, but the message says path constructors ARE supported and must spell out the
+-- carrier, like `l =_{S1} r`.  This overturned the working assumption "Rzk has no HITs"; see 3b.
+
+#data S1 := base | loop : base = base

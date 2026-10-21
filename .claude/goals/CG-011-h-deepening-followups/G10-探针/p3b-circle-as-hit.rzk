@@ -1,0 +1,10 @@
+#lang rzk-1
+
+-- G10 probe 3b (session a15f4b3b, 2026-10-21): the circle with the carrier spelled out.
+-- Expected: accepted, i.e. Rzk 0.11.3 does have path constructors in #data.
+
+#data S1 := base | loop : base =_{S1} base
+
+#define the-loop
+  : base =_{S1} base
+  := loop

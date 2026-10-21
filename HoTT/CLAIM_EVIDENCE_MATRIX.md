@@ -2696,3 +2696,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-448 | (1) `Th` 在 `_≡ˢ_` 下严格成范畴（左右单位、结合）；(2) `SSTˢ`：`X : ℕˢ → Type`，`act : Th m n → X n → X m`，`actId`、`actComp` 为 `_≡ᵉ_`；(3) `vertices A`（`Tuple A`、`select`）是 `SSTˢ`；`select δᵢ (a , b , c , tt)` 按 `reflᵉ` 删去第 i 个分量；δ₁∘ε₀ = δ₀∘ε₀、δ₂∘ε₀ = δ₀∘ε₁、δ₂∘ε₁ = δ₁∘ε₁ 按 `reflˢ`；(4) 任意两条 `actComp` 证明 `≡ˢ`；(5) `¬ (Path ((x : S¹) → x ≡ x) (λ _ → refl) rotLoop)` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-STRICT-SEMISIMPLICIAL-01`；负控制 `-NEG-01`、`-NEG-02` | `SSTˢ` 是外层类型，不是 HoTT 里的类型；可纤一版阻塞；不要求 Reedy 纤维性；“无穷相干是 A 的一种形态”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：单价范畴的全体会停（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G10 的“单价 1-范畴”一半。读法：机器证明（Cubical Agda，`--safe`）。单价范畴的全体落在第 4 层（库的 `is2GroupoidUnivalentCategory`），C-77 的追问程序最迟第 3 问停，第 4 层付得清。Rzk 一半这一轮不做，理由见 `.claude/goals/CG-011-h-deepening-followups/G10-结论.md`。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-UNIVALENT-CATEGORIES-001` | `CG001-C-449` | `formal/claude-cg001/univalent-categories/UnivalentCategoriesStop.agda`（`UnivCat`、`setsMember`、`groupsMember`、`univCatBounded`、`univCatHalts`、`univCatAnswerSound`、`univCatPricePaid`、`universeContrast`、`qual-C449`） | `verification/runs/20261021-CG001-UNIVALENT-CATEGORIES-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，97 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-UNIVALENT-CATEGORIES-NEG-001` | `CG001-C-449`（负控制） | 同目录 `WrongUnivCatNever.agda` | `verification/runs/20261021-CG001-UNIVALENT-CATEGORIES-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-UNIVALENT-CATEGORIES-NEG-002` | `CG001-C-449`（负控制） | 同目录 `WrongUnivCatUnpayable.agda` | `verification/runs/20261021-CG001-UNIVALENT-CATEGORIES-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-449 | `UnivCat = Σ (Category (ℓ-suc ℓ-zero) ℓ-zero) isUnivalent`（成员 `SET ℓ-zero`、`GroupCategory`）：(1) `isOfHLevel 4 UnivCat`；(2) 任何 `judge` 有 j 使 `runFor 2 (question UnivCat judge) ≡ just j`，且 `isOfHLevel (suc j) UnivCat`；(3) `KeepingCompletionAt 4 UnivCat`；(4) 宇宙 `question ≡ never`、任何 n `¬ KeepingCompletionAt n` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-UNIVALENT-CATEGORIES-01`；负控制 `-NEG-01`、`-NEG-02` | 只证最迟第 3 问停；负控制的直接拒因是宇宙层级；“有上限则藏”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
