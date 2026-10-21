@@ -2542,3 +2542,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-436 | (1) 类型 A 有一个落到 h-层 n 的对象、又能解码回去的映射，当且仅当 A 在 h-层 n；(2) 规范的完成 `∣_∣ₕ : A → ∥ A ∥ n` 是等价 ≃ A 在 h-层 n（两个命题等价），有解码 ⟺ A 在 h-层 n；(3) 对任意单价且所有高度一次交出的收集：追问对每个判定器 `≡ never`，且对一切 n、一切 h-层 n 的 B、一切 `f : Code → B`，f 没有解码，`∣_∣ₕ` 在任何层都不是等价；(4) 编码成集合时第 2 层的完成是等价、第 1 问停；编号收集（成员同宇宙、所有高度都在、编码 ℕ）编码的完成免费；1+n 层落定者的汇集在 2+n 层免费完成并停机；(5) 宇宙永不停、任何有限层的完成都留不住它，C-83 (d) `noDecoding` 作为集合截断特例重得；(6) 内核实跑：ℕ 上 3 在第 2 层完成再解码得 3，Bool 的对调把 true 送到 false | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-COMPLETION-COST-01`；负控制 `-NEG-01`、`-NEG-02` | 只管“落到有限层的对象、靠解码保住对象”这一类完成，不对一切可设想的完成下断言；不证 ZFC 的相等平坦（标准读法），不证数学家当年假定了 H；不形式化极限侧“命名是保守扩张”（另一候选）；“终局读法与过程读法”仍是 C-112 (d)，本包不承接；标准 HoTT 事实不主张原创；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：给“已经完成的东西”起名，在一阶集合论里一分钱不花（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Lean 4 + Mathlib + Foundation 的真实 𝗭𝗙𝗖，内核公理只有三条标准公理）。研究发起人 2026-10-21 要求把 C-436 报告点名的下一步做完；承接 `docs/H深化-…-20261017.md` §6 (a) 的候选 C-437（极限侧“命名是保守扩张”）与第 1 问一手层综合 §2 (a)“一条定义就够”，与 C-436 合成第 2 问的两侧：C-436 是 HoTT 一侧，本包是 ZFC 一侧。**身份**：“给可证存在（且唯一）的对象添常元是保守的定义性扩张”是一阶逻辑教科书事实，不主张原创；增量是在 Foundation 的 𝗭𝗙𝗖 上机器核对并接到 H、A 上。“起名就是宣布完成”“ω 的存在前提是 A 的一个实例”是读法。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-NAMING-CONSERVATIVE-001` | `CG001-C-437` | `formal/claude-cg001/naming-conservative/GodelQ/Naming/NamingConservative.lean`（`naming_conservative`、`naming_unique_expansion`、`unitStr_eq`、`expand_keeps_object`、`expand_models_named`、`zfc_exists_omega`、`zfc_atMostOne_omega`、`omega_naming_conservative`、`omega_unique_expansion`、`omega_expansion_iff`、`universe_omega_unique`、`named_never_proves_bot`、`zfc_unprovable_bot`、`never_not_conservative`、`any_naming_conservative`、`any_not_unique`、`universe_any_not_unique`）、`QualificationNaming.lean`（`qual_C437`） | `verification/runs/20261021-CG001-NAMING-CONSERVATIVE-01/`；exit 0，13.8 秒，stderr 0 B，19 条公理报告都在三条标准公理之内；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-NAMING-CONSERVATIVE-NEG-001` | `CG001-C-437`（负控制） | 同包 `GodelQ/Negative/WrongNamingWithoutExistence.lean` | `verification/runs/20261021-CG001-NAMING-CONSERVATIVE-NEG-01/`；exit 1，ω 的存在顶替不了“x ≠ x”的存在 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-NAMING-CONSERVATIVE-NEG-002` | `CG001-C-437`（负控制） | 同包 `GodelQ/Negative/WrongNamingWithoutUniqueness.lean` | `verification/runs/20261021-CG001-NAMING-CONSERVATIVE-NEG-02/`；exit 1，ω 的唯一性顶替不了“x = x”的唯一性 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-437 | (1) 对任意含等词公理的集合论 T 与一元 ℒₛₑₜ 公式 φ：T ⊢ ∃x φ(x) 时，ℒₛₑₜ 加新常元 ⋆、理论取等词公理 ∪ T ∪ {φ(⋆)}，则每个 ℒₛₑₜ 句子 σ 的像可证当且仅当 T ⊢ σ；(2) T 还证明满足 φ 的至多一个时，T 的每个模型（等号为真相等）恰有一个 a 使“⋆ 指 a”的扩张是命名理论的模型；只含 ⋆ 的语言上的每个结构都是“⋆ 指某个元素”；扩张去掉 ⋆ 就是原结构；(3) 𝗭𝗙𝗖 证明 `isω` 的存在与至多一个，给 ω 起名保守，每个 𝗭𝗙𝗖 模型里命名理论的扩张恰是“⋆ 指 ω”，Lean 元层 `Universe` 模型里也恰有一个；(4) 给“x ≠ x”起名的理论证出 ⊥，𝗭𝗙𝗖 不证 ⊥（`zfc_consistent`），故不保守；(5) 给“x = x”起名仍保守，但 𝗭𝗙𝗖 的每个模型（含 `Universe`）里扩张都不唯一（∅ 与 ω 都行） | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-NAMING-CONSERVATIVE-01`；负控制 `-NEG-01`、`-NEG-02` | 不推出 ZFC ⊢ ⊥（(4) 的一致性来自 Lean 元层模型）；只管添常元，不管添函数、谓词的定义性扩张；“相等平坦”体现在模型取法（`SetStructure`），不是本包证明的；“起名 = 宣布完成”“存在前提是 A 的实例”“ZFC 内部看不出 H”是读法；教科书事实不主张原创；只在 macOS 捕获与重放 |
