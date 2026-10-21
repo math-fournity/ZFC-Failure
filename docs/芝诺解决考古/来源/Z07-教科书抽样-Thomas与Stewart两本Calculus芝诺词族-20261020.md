@@ -9,10 +9,13 @@
 ## 0. 本证据能支持什么、不能支持什么
 
 - **能**：给出 **Thomas' Calculus（第 12 版，1179 页）全册**在有效文本管线上的芝诺词族命中表
-  与正向控制计数；给出一个**可分别归因的对照**，说明另一本为何不能作为证据。
+  与正向控制计数；给出一个**可分别归因的对照**，说明另一本为何不能作为证据；
+  给出**教科书层亲手写下"无尽挑战序列"并用量词支付它**的 4 页实质证据（MinerU + 视觉审计双关）。
 - **不能**：证明"教科书故意不提芝诺"（反面解释仍是篇幅取舍，本文未排除）；
   不能把一本推广为"全部门类教科书都不提"（样本 = 1 本有效）；
-  不能据此签发"无人更早说过"这类负结论（证书 verdict = PARTIAL 仍然有效）。
+  不能据此签发"无人更早说过"这类负结论（证书 verdict = PARTIAL 仍然有效）；
+  **不能**说"教科书错了"或"极限理论不成立"——ε-δ 是自洽的标准做法，本文只记录
+  **一件事在哪里被付掉**，不评判该不该这样付（见 §4.3）。
 - **不能**：说 Stewart 那本证实了教科书不提芝诺——它的有效覆盖**尚未进入教科书正文**，见 §3。
 
 ## 1. 来源与凭据
@@ -100,23 +103,95 @@ S1 是同一台机器、同一天、同一 pdftotext 版本下扫描的。三条
 `die Paradoxien des Unendlichen`。**它们都不是芝诺悖论的叙述**，
 且分布在教科书正文之前的历史扫描件里。词边界口径下这 4 处全部归零。
 
-## 4. MinerU 管线的实际结果与两个障碍（如实登记）
+## 4. 第一管线（MinerU）：先定位、再只处理目标页
 
-按本 repo 纪律，零命中结论须由第一管线 MinerU 出。本次结果：
+T1 有 370,659,577 B，**超过 MinerU 远程文件大小上限**（`file_too_large`，与页数无关的物理障碍）。
+按纪律不物理拆分源文件、不重试整册，改为**三步定向法**：
 
-- **S1**：664 页 / 4 片，**1 片成功**（页码 1–150，256,929 字符，sha256
-  `46d2531…` 短 id 与源文件一致）、**3 片失败**（`quality_tier_unavailable`：
-  远程服务端无可用引擎）。成功那一片已用于 §3 的诊断。
-- **T1**：370,659,577 B **超过远程文件大小上限**，`mineru parse` 直接返回
-  `file_too_large`（与页数无关，是物理障碍）。整册 MinerU 不可得。
+1. **用第三管线做页级证书，把目标页定位出来**（这一步不送 MinerU）；
+2. **只用 `gs` 抽取目标页成一个只含 4 页的小 PDF**（源文件 `thomas12.pdf` 原样不动、不被拆分）；
+3. **小 PDF 送 MinerU**（`status: done`，公式完整解析），再**视觉审计这 4 页**。
 
-**纪律执行**：不物理拆分源文件、不重试整册（失败账本已在
-`docs/芝诺解决考古/搜索原始响应-20261017/zeno-溯源/candidates/mineru_md/_failed-run-ledger-20261018.tsv`）。
-因此 **T1 的第一管线判定仍是一个显式缺口**：本文的 T1 零命中目前只有第三管线支撑，
-证据强度按 §0 记，不得升格为"MinerU 已核"。
+> **规矩**：整本书不需要全部处理。全册只服务于一个否定性命题（"芝诺词族零命中"），
+> 第三管线的页级证书已足够；实质证据只在个别页上，按页定位后只让 MinerU 看那几页。
+> **MinerU 负责"读过"，视觉审计负责"这一句作数"**，两者都只对目标页生效。
 
-**若要闭合这个缺口**：需一条不受 370 MB 上限约束的通道（例如本地 `mineru-openai-server`，
-或只含目标页的子集 PDF——后者等价于按页范围定向请求，源文件不动）。
+### 4.1 页级覆盖证书（第三管线，支撑零命中）
+
+`thomas_full.txt` 按 `\f` 分页得 1179 页，逐页字符数：
+
+| 统计量 | 值 |
+|---|---|
+| 页数 | 1179 |
+| 零字符页 | **2**（PDF 页 1036、1148） |
+| 字符数 min / median / max | 0 / 2307 / 6158 |
+
+（此前记录的"3 个近空页"用的是 50 字符阈值；收紧到 200 字符后真实洞口是 2 个。
+两个洞口都在全书末尾区域，且**都不在 Chapter 2**，不影响本节结论。）
+
+芝诺词族按**页**统计（而非按次）：`Zeno`/`Achilles`/`tortoise` 命中 **0 页**。
+这比"0 次"更强：不存在某一页提到而被字符统计漏掉的情况。
+
+### 4.2 目标页定位与 MinerU 结果
+
+`limit` 命中 489 页，其中最密集处是 **Chapter 2: Limits and Continuity = PDF 页 56–118**
+（书本页 42–86，共 63 页）。该章 4 个 `DEFINITION` 页：74、90、102、118。
+
+**实质证据集中在 PDF 页 74–77（书本页 58–61）**，即 §2.3 "The Precise Definition of a Limit"。
+
+做法：
+
+~~~bash
+# 只抽目标页；源文件不动、不拆分
+gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dFirstPage=74 -dLastPage=77 \
+   -sOutputFile=thomas12_p74-77.pdf thomas12.pdf      # → 4 页 / 1,595,835 B
+
+# 小文件送 MinerU（不再触发 file_too_large）
+mineru parse thomas12_p74-77.pdf --pages 1-4 --wait 540 --limit 100000000 --json --remote
+# → status: done；content sha256 ff506e1780585eb1…
+
+# 视觉审计
+gs -q -dNOPAUSE -dBATCH -sDEVICE=png16m -r150 -dFirstPage=1 -dLastPage=4 \
+   -sOutputFile=_audit/p%d.png thomas12_p74-77.pdf
+~~~
+
+MinerU 成功解析，**数学公式完整**（ε-δ 定义、`δ = ε/5`、Example 3–5 的推导链全部正确），
+并拿到了 pdftotext 丢掉或错得厉害的句子。四页逐页视觉审计与 MinerU 输出一致。
+
+### 4.3 这一页就是证据：教科书亲手画出"没有最后一项的挑战序列"
+
+Thomas 在书本页 58（PDF 74）先用散文把极限讲成一场**没有尽头的交锋**：
+
+> 「We can be told that the error can be no more than 1/100 or 1/1000 or 1/100,000.
+> **Each time**, we find a new δ-interval … And **each time** the possibility exists
+> that f(x) **jitters away from L** at some stage.」
+> 「You can think of this as a **quarrel between a skeptic and a scholar**.」
+> 「**How do we stop this seemingly endless series of challenges and responses?**」
+
+紧接着书本页 59（PDF 75）用**七幅连续图示**把这场交锋逐轮展开：
+
+> `The challenge: ε = 1/10` → `Response: |x − x₀| < δ₁/₁₀ (a number)`
+> `New challenge: ε = 1/100` → `Response: |x − x₀| < δ₁/₁₀₀`
+> `New challenge: ε = 1/1000` → `Response: |x − x₀| < δ₁/₁₀₀₀`
+> `New challenge: ε = 1/100,000` → `Response: |x − x₀| < δ₁/₁₀₀,₀₀₀`
+> 最后一幅标签是 **`New challenge: ε = …`**（省略号）
+
+**即教科书亲手画出了一个没有最后一项的序列**，然后翻回上一页给出
+
+> `DEFINITION … if, for every number ε > 0, there exists a corresponding number δ > 0 …`
+
+用一个全称量词把那整个序列一次性收编。书本页 60（PDF 76）再补一句：
+
+> 「The definition does not ask for a "best" positive δ, just one that will work.」
+
+**判读**（〔我们的分析〕）：教科书**没有隐瞒过程**——它把逐项挑战、把"每次仍可能跑掉"、
+把"如何止住这无尽序列"全部写了出来；它只是**用一条全称语句支付了整个无限序列**。
+这正是 SEP L923/L927（终点不在序列内、必须被外部添加）的教科书形态，
+也精确对应 C-423 已在 𝗭𝗙𝗖 内机器证明的两句（极限意义到达 ∧ 任何有限步都到不了）。
+
+**这支撑什么、不支撑什么**：支撑"教科书层把挑战序列呈现为无尽、把完成交给量词"这一现象学描述。
+**不支撑**"教科书错了"或"极限理论不成立"——ε-δ 的定义是自洽的标准做法；
+本文只记录**一件事在哪里被付掉**，不评判该不该这样付。
 
 ## 5. 复现
 
@@ -147,8 +222,10 @@ python3 -B docs/芝诺解决考古/来源/_verify/verify_z07_textbooks.py --text
 
 ## 7. 一句话结论
 
-**Thomas' Calculus（第 12 版，1179 页）全册芝诺词族（含大小写两形态与 Achilles / tortoise /
-Dichotomy / Stade）零命中，而同口径控制词 limit 489、derivative 640、function 2030 正常——
-教科书只讲极限、入口不讲悖论，与 Z01 柯西零命中是同一现象的两侧。
-另一本 Stewart 因扫描件前 150 页全是无关历史文献、`derivative` = 0（正向控制失败）不能作为证据。
-T1 的第一管线（MinerU）因 370 MB 超远程上限尚未闭合，照实记为显式缺口。**
+**Thomas' Calculus（第 12 版，1179 页）全册芝诺词族 9 项在词边界与子串两个口径下均零命中
+（按页统计也是 0 页），控制词 limit 489 / derivative 640 / function 2030 正常——教科书入口不讲悖论，
+与 Z01 柯西零命中是同一现象的两侧。实质证据只在 4 页上：Thomas 亲手用七幅图画出
+"ε = 1/10 → 1/100 → 1/1000 → 1/100,000 → …"这条**没有最后一项的挑战序列**，
+再以"for every ε > 0"一条全称语句支付它，并自认"不问最好的 δ，只要一个管用的"。
+这四页已过 MinerU + 视觉审计双关。另一本 Stewart 因扫描件前 150 页全是无关历史文献、
+`derivative` = 0（正向控制失败）不能作为证据。**
