@@ -1,0 +1,91 @@
+{
+  "agda_error_tag": "UnequalTerms",
+  "audit_notes": [
+    "Captured by Claude Code desktop session 91beaf35 (012-Opus), worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-21, goal CG-011 gate G3; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md and the eight imported package sources."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-443"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/naming-is-completion",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning",
+    "HoTT/formal/claude-cg001/naming-is-completion/WrongSwapTrivial.agda"
+  ],
+  "completed_at_utc": "2026-10-21T13:39:31.510426+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 88.451049,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 42,
+  "expected_outcome": "REJECT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/naming-is-completion/WrongSwapTrivial.agda:18.15-19: error: [UnequalTerms]\nAgda.Builtin.Cubical.Glue.primGlue Agda.Builtin.Bool.Bool\n(λ .x →\n   (λ { (i = i0)\n          → Agda.Builtin.Bool.Bool ,\n            Cubical.Functions.Involution.involEquiv",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/naming-is-completion",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows refl fails; swapIsNotRefl in the main package proves transport along it sends true to false."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-NAMING-IS-COMPLETION-NEG-002",
+  "rejection_stage": "TYPE_CHECKING",
+  "run_id": "20261021-CG001-NAMING-IS-COMPLETION-NEG-02",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-443 (4): the claim that the swap self-sameness of the two-element set is refl; expected rejection (the two paths differ).",
+  "source_manifest": {
+    "bytes": 4531,
+    "path": "source-manifest.json",
+    "sha256": "1be9c6cee822b062925f096aade3a6fb0a013720a1772d4063c6fb50ea0b89fa"
+  },
+  "started_at_utc": "2026-10-21T13:38:03.059377+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 31835,
+    "path": "stdout.txt",
+    "sha256": "3015025c6c432edcfc91755db18012655495a19b1033f9dda6dc15bc1fdc58c1"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}

@@ -2612,3 +2612,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-442 | 两层类型论（`--two-level`）：(1) 外层严格相等满足 UIP，每个外层类型、外层宇宙 `SSet ℓ-zero`、外层自然数 `ℕˢ` 的相同都是事实；(2) 内层宇宙 `question (Type ℓ-zero) judge ≡ never`；(3) EM 阶段的内层汇集 `Σ X, ∥ Σ n, X ≡ K n ∥` 单价、所有高度都在、暴露、追问永不停，每个 K n 在 3+n 层落定，外层编号 n 给出内层成员 K (toℕ n) | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-TWO-FATES-2LTT-01`；负控制 `-NEG-01`、`-NEG-02` | 外层 UIP 与“内层不能消去到外层”是 2LTT 的设计；归因读法只削弱“代价来自理论或呈现”的竞争归因，不证 A 是唯一原因；半单纯类型与外层不单价没做；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：命名与截断是同一个完成算子（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G3。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。H 深化 §6 (c) 的统一陈述（研究发起人 2026-10-21 认可 H 深化后）：起名是第 0 层的完成，截断是同一个算子在更高的层；“起名要付多少”就是见证类型落定的层。**身份**：可缩即第 0 层、外延性、单价性、二元集合类型是连通的 1-型都是标准事实；增量是这张代价表与它接到 §6 (c)。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-NAMING-IS-COMPLETION-001` | `CG001-C-443` | `formal/claude-cg001/naming-is-completion/NamingIsCompletion.agda`（`completionKeeps`、`Witnesses`、`namingFreeIffUnique`、`emptySetUnique`、`emptySetNamingFree`、`emptyTypeUnique`、`emptyTypeNamingFree`、`TwoSets`、`twoMerelyUnique`、`swapLoop`、`swapIsNotRefl`、`twoNotContr`、`twoNotProp`、`twoNotSet`、`twoGroupoid`、`twoCost`、`universeCost`、`qual-C443`） | `verification/runs/20261021-CG001-NAMING-IS-COMPLETION-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，88 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-NAMING-IS-COMPLETION-NEG-001` | `CG001-C-443`（负控制） | 同目录 `WrongTwoUnique.agda` | `verification/runs/20261021-CG001-NAMING-IS-COMPLETION-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-NAMING-IS-COMPLETION-NEG-002` | `CG001-C-443`（负控制） | 同目录 `WrongSwapTrivial.agda` | `verification/runs/20261021-CG001-NAMING-IS-COMPLETION-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-443 | (1) 对任意 W、n：在 n 层保住 W 的完成 ⟺ W 在 n 层；起名保住见证类型 Σ x, φ x ⟺ 它可缩；(2) `V` 里“没有成员的集合”的见证类型可缩；(3) “空类型”的见证类型可缩；(4) 二元集合 Σ (X : hSet), ∥ X ≃ Bool ∥ 仅仅唯一，对调不是 refl，不可缩、不是命题、不是集合、是 1-型，第 0/1/2 层的完成保不住、第 3 层保得住；(5) 宇宙任何有限层的完成都保不住 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-NAMING-IS-COMPLETION-01`；负控制 `-NEG-01`、`-NEG-02` | 只管落到有限层、靠解码保住的完成；“落定的层就是 H-完成算子的不变量”是读法；`V` 不是一阶 ZFC；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
