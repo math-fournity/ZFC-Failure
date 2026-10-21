@@ -2640,3 +2640,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-444 | (1) 集合的全体 `Gathering 1`：`runFor 1 (question (Gathering 1) (gatheringJudge 1)) ≡ just 2`（refl），任何判定器都 `≡ just 2`；不是集合；`¬ KeepingCompletionAt 2`、`KeepingCompletionAt 3`；(2) 群的全体 `Group ℓ-zero`：同上（判定器 `groupsJudge` 实跑 refl），不是集合（取负 ≠ 恒等，经 `GroupPath`），是 1-型；(3) 宇宙：`runFor 1000 (question (Type ℓ-zero) judgeViaB) ≡ nothing`（refl），任何判定器 `≡ never`，任何 n `¬ KeepingCompletionAt n`；(4) `AgreeUpTo α β n` 每个 n 可判定（全 0 流 1000 个阶段实跑 refl），相同 ⟺ 每个阶段都一样，每个 n 都有流前 n 位一样却不同，`runFor n (askQ (differ α α) 0) ≡ nothing` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-PER-LAYER-ACCOUNTING-01`；负控制 `-NEG-01`、`-NEG-02` | “三处受同一个典范性义务约束”是元层事实；“价格看得见 / 付不清”“集合与群是另一个框架”是读法；不是“另一个演算”意义上的第三框架；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：粘回两端是一个宣布的构造（2026-10-21）
+
+> 本机会话 a15f4b3b，应研究发起人要求接手会话 91beaf35（015-Opus），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G5。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。圆环悖论的 HoTT 一面，补 H 深化 §1 修正记录的缺口：线段可缩、两端本来就相同；粘回两端是一条宣布的认同，造出圆的洞，线段造不出；代价从 0 变成 3。逐步合回的一面是 C-424（Lean + Mathlib）。**身份**：数学是标准事实（区间可缩、两端相粘得圆、绕数、连通性、群胚性）；新写的是“宣布的认同 vs 线段自己的路”与“代价 0 → 3”两张对照；(6) 与 `loopNontrivial` 是 C-22 的同一事实经同构搬来。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-CIRCLE-GLUING-001` | `CG001-C-445` | `formal/claude-cg001/circle-gluing/CircleGluing.agda`（`segmentContr`、`endsAlreadySame`、`segmentLoopsTrivial`、`mapsKillLoops`、`Glued`、`own`、`gluedLoop`、`toS¹`、`fromS¹`、`gluedIsCircle`、`gluedIsCirclePath`、`imageOfGluedLoop`、`gluedLoopWinding`、`gluedLoopNontrivial`、`declaredIsNotOwn`、`noLoopFromSegment`、`collapse`、`ownClosingKillsLoop`、`gluedGroupoid`、`segmentFree`、`circleCost`、`puncturedGluedEmpty`、`qual-C445`） | `verification/runs/20261021-CG001-CIRCLE-GLUING-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，86 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-CIRCLE-GLUING-NEG-001` | `CG001-C-445`（负控制） | 同目录 `WrongDeclaredIsOwn.agda` | `verification/runs/20261021-CG001-CIRCLE-GLUING-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-CIRCLE-GLUING-NEG-002` | `CG001-C-445`（负控制） | 同目录 `WrongLoopFromSegment.agda` | `verification/runs/20261021-CG001-CIRCLE-GLUING-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-445 | (1) `N = Interval`：`isContr N`；`seg : end₀ ≡ end₁`；N 的每个回路 `≡ refl`，任何 `f : N → X` 都把它们送到 `refl`；(2) `Glued`（`pt : N → Glued`，构造子 `declared : pt end₀ ≡ pt end₁`）：`Glued ≃ S¹`、`Glued ≡ S¹`；(3) `¬ (declared ≡ cong pt seg)`；`gluedLoop = declared ∙ sym own` 不是 refl，`cong toS¹ gluedLoop ≡ loop`，`winding (cong toS¹ gluedLoop) ≡ pos 1`（refl）；(4) 没有 `p : end₀ ≡ end₀` 使 `cong pt p ≡ gluedLoop`；`collapse`（`declared ↦ seg`）下 `cong collapse gluedLoop ≡ refl`；(5) `KeepingCompletionAt 0 N`；`Glued` 不可缩、不是命题、不是集合、是群胚，`¬ KeepingCompletionAt 0/1/2`、`KeepingCompletionAt 3`；(6) `¬ (Σ y, ¬ (pt end₀ ≡ y))` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-CIRCLE-GLUING-01`；负控制 `-NEG-01`、`-NEG-02` | 数学是标准事实，不主张原创；“粘回两端就是宣布完成”“原文 ① 的两处表现”“只是价格看得见”是读法；极限一侧是 C-424、C-437，本包不重证；不证“抽象必然导致矛盾”；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

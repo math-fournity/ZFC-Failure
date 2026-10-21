@@ -1,0 +1,91 @@
+{
+  "agda_error_tag": "UnequalTerms",
+  "audit_notes": [
+    "Captured by Claude Code desktop session a15f4b3b, which took over session 91beaf35 (015-Opus) at the research sponsor's request, worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-21, goal CG-011 gate G5; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md and the eight imported package sources."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-445"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/circle-gluing",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning",
+    "HoTT/formal/claude-cg001/circle-gluing/WrongLoopFromSegment.agda"
+  ],
+  "completed_at_utc": "2026-10-21T18:23:56.345613+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 86.608348,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 42,
+  "expected_outcome": "REJECT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/circle-gluing/WrongLoopFromSegment.agda:18.26-30: error: [UnequalTerms]\npt end₀ !=\nhcomp\n(doubleComp-faces (λ _ → pt end₀) (λ i → CircleGluing.own (~ i)) i)\n(Glued.declared i)\nof type Glued",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/circle-gluing",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows this attempt fails; noLoopFromSegment in the main package proves that no loop of N maps to the hole."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-CIRCLE-GLUING-NEG-002",
+  "rejection_stage": "TYPE_CHECKING",
+  "run_id": "20261021-CG001-CIRCLE-GLUING-NEG-02",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-445 (4): the claim that a loop of the segment N makes the hole, taking refl in N and proving by refl that it maps to gluedLoop; expected rejection (cong pt refl is refl, the hole is a composite).",
+  "source_manifest": {
+    "bytes": 4495,
+    "path": "source-manifest.json",
+    "sha256": "551f95b842de11e7272cfb4e721de62f6da0570faacc03b30c06d9a687f691a8"
+  },
+  "started_at_utc": "2026-10-21T18:22:29.737265+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 30564,
+    "path": "stdout.txt",
+    "sha256": "73dfa3c8ca875d738cca33b807a4ae292c562ea6bf52e19fb2f841c3b2dcac6b"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}
