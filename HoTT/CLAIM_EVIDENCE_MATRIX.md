@@ -2685,7 +2685,7 @@ Claim 表：
 
 ## Claude（接手 015-Opus）：两层里的无穷相干（2026-10-21）
 
-> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G8。读法：机器证明（Cubical Agda，`--safe --two-level`）。外层编号按层给出内层类型的严格半单纯结构，相干的相干是事实；内层同样的相干是数据。**阻塞**：可纤的一版（每个 n 的截断半单纯类型全体作为内层类型）要 Reedy 可纤性机制，本包没建。
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G8。读法：机器证明（Cubical Agda，`--safe --two-level`）。外层编号按层给出内层类型的严格半单纯结构，相干的相干是事实；内层同样的相干是数据。**阻塞**：可纤的一版（每个 n 的截断半单纯类型全体作为内层类型）要 Reedy 可纤性机制，本包没建。（2026-10-21 同日更新：可纤的一版已由 C-450 换一条路做成，见本文件“两层里的可纤半单纯类型”一节。）
 
 | Package ID | Claim IDs | 源码 | 证据 | 判词 |
 |---|---|---|---|---|
@@ -2710,3 +2710,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-449 | `UnivCat = Σ (Category (ℓ-suc ℓ-zero) ℓ-zero) isUnivalent`（成员 `SET ℓ-zero`、`GroupCategory`）：(1) `isOfHLevel 4 UnivCat`；(2) 任何 `judge` 有 j 使 `runFor 2 (question UnivCat judge) ≡ just j`，且 `isOfHLevel (suc j) UnivCat`；(3) `KeepingCompletionAt 4 UnivCat`；(4) 宇宙 `question ≡ never`、任何 n `¬ KeepingCompletionAt n` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-UNIVALENT-CATEGORIES-01`；负控制 `-NEG-01`、`-NEG-02` | 只证最迟第 3 问停；负控制的直接拒因是宇宙层级；“有上限则藏”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：两层里的可纤半单纯类型（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，CG-011 完成门 G8 的后续，做上节 C-448 阻塞的那一半。读法：机器证明（Cubical Agda，`--safe --two-level`；(7) 的桥是模块参数，不是公设）。对每个外层 n，前 n 层的半单纯类型全体是内层类型；全部层的塔只在外层，给一座从内层自然数到外层自然数的桥才是内层类型，桥写不出见 C-442 的 NEG-002。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-FIBRANT-001` | `CG001-C-450` | `formal/claude-cg001/sst-2ltt-fibrant/SemisimplicialTwoLevel.agda`（`ΠTh`、`SST`、`Sh`、`res`、`resComp`、`resId`、`points`、`edgeShell`、`edgeEnds`、`triangleShell`、`pointsAndEdges`、`pointsEdgesTriangles`、`resCompFlat`、`freeComp₂`、`freeComp₃`、`freeId₃`、`freeComp₄`、`SSTω`、`codiscreteω`、`Bridge.towerInner`、`Bridge.fromω`、`qual-C450`） | `verification/runs/20261021-CG001-SST-2LTT-FIBRANT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十一个被导入的包源文件）；exit 0，89 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-FIBRANT-NEG-001` | `CG001-C-450`（负控制） | 同目录 `WrongTowerInner.agda` | `verification/runs/20261021-CG001-SST-2LTT-FIBRANT-NEG-01/`；exit 42（`UnequalSorts`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-FIBRANT-NEG-002` | `CG001-C-450`（负控制） | 同目录 `WrongEdgeEnd.agda` | `verification/runs/20261021-CG001-SST-2LTT-FIBRANT-NEG-02/`；exit 42（`MismatchedProjectionsError`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-450 | (1) `SST : ℕˢ → Type₁`（`SST 0 = Unit*`，`SST (n+1) = Σ (X : SST n) (Sh n X (n+1) → Type)`），`Sh n X k : Type`；(2) `res : Th j k → Sh n X k → Sh n X j`；(3) 对一切 n，`resId : res n X (idᵗ k) s ≡ᵉ s`，`resComp : res n X (T ∘ᵗ S) s ≡ᵉ res n X S (res n X T s)`；(4) `points`、`edgeShell`、`edgeEnds`、`triangleShell` 按 `reflᵉ`，`pointsAndEdges : SST 2`，`pointsEdgesTriangles : SST 3`；(5) 任意两条 `resComp` 证明 `≡ˢ`；n = 2、3、4 的四个具体实例上 `resComp …`、`resId … ≡ˢ reflᵉ`；(6) `SSTω`（`stage`、`agrees`）是外层记录，`codiscreteω P : SSTω`；(7) 对任何 `toOuter : ℕ → ℕˢ` 与 `toOuter (suc n) ≡ˢ sucˢ (toOuter n)`，`towerInner : Type₁`，`fromω : SSTω → towerInner` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-SST-2LTT-FIBRANT-01`；负控制 `-NEG-01`、`-NEG-02`；桥写不出：`20261021-CG001-TWO-FATES-2LTT-NEG-02` | 不能说“HoTT 里定义出了半单纯类型”（统一的定义用了外层）；NEG-001 只否定直接写法；(7) 不断言桥存在；“相干就是 refl”只有四个实例；与 C-448 一版的对应、全空间的取面未做；“桥是 A 的位置”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

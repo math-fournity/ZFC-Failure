@@ -11,6 +11,7 @@ that only the original has, so the dated notes that repeat it cannot confirm the
 From gate G5 (C-445) on, also the circle paradox: the sponsor's original text three (HoTT/sources/user-originals),
 KC-000055/56/65, H-deepening §1 and its correction record, and the sponsor's 2026-10-21 instruction to take over session
 015 (the transcript of Claude Code session a15f4b3b, outside the repository; SKIP when absent).
+From the G8 follow-up (C-450) on, also the sentence of C-448's CLAIM.md (AI-written) that records the half left undone.
 Written 2026-10-21, Claude Code session 91beaf35 (012-Opus); G5 additions by session a15f4b3b.  Exit 0 iff every quote
 whose source is present is found.
 """
@@ -42,6 +43,7 @@ SOURCES = {
     "CG-011目标": ROOT / ".claude/goals/CG-011-h-deepening-followups/GOAL.md",
     "GUI转录": ROOT / "docs/会话GUI转录-20261016至17-罗素考古芝诺立项与H深化.md",
     "接手转录": TRANSCRIPT_015_TAKEOVER,
+    "C-448声明": ROOT / "HoTT/formal/claude-cg001/strict-semisimplicial/CLAIM.md",
 }
 QUOTES = [
     ("`/Volumes/D/HoTT-worktrees/012-opus-w8/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md`的内容可以，继续推进后续工作，直至全部完成。", "转录"),
@@ -94,6 +96,8 @@ QUOTES = [
     ("预测第 3 问停。这验证判据的“有上限则藏”一面在集合以外也对。", "元层特征方案"),
     # G9 (README §4 candidate): the sponsor's endorsement, from the GUI session export
     ("你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。", "GUI转录"),
+    # G8 follow-up (C-450): the half C-448's CLAIM (AI-written) recorded as not done
+    ("**没做到的**：对每个外层 n，把“n 维截断的半单纯类型全体”做成一个**内层**（可纤）类型，使它能回到 HoTT 里用。", "C-448声明"),
 ]
 
 

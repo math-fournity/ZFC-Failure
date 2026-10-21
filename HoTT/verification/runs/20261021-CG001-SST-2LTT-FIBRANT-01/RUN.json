@@ -1,0 +1,101 @@
+{
+  "agda_error_tag": null,
+  "audit_notes": [
+    "Captured by Claude Code desktop session a15f4b3b, which took over session 91beaf35 (015-Opus) at the research sponsor's request, worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-21, follow-up to goal CG-011 gate G8 under the sponsor's goal to complete all follow-ups; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md and the eleven imported package sources."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-450"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-fibrant",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/strict-semisimplicial",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/two-fates-2ltt",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/exposure-criterion",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning",
+    "HoTT/formal/claude-cg001/sst-2ltt-fibrant/SemisimplicialTwoLevel.agda"
+  ],
+  "completed_at_utc": "2026-10-21T23:21:53.498016+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 88.475392,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 0,
+  "expected_outcome": "ACCEPT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": null,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-fibrant",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/strict-semisimplicial",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/two-fates-2ltt",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/exposure-criterion",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "The direct inner version of the tower is rejected (NEG-001); the bridge itself is not definable by inner recursion (C-442 NEG-002), and (7) asserts nothing about its existence. Not done: the correspondence between this levelwise version and C-448's strict presheaf version, and face maps on the total spaces of simplices.",
+    "Reading the bridge as the place where A enters (treating the structured inner numbers as completed outer ones) is an interpretation, not a theorem; nothing here yields ZFC |- falsum or ZFC-1 => B."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-SST-2LTT-FIBRANT-001",
+  "rejection_stage": null,
+  "run_id": "20261021-CG001-SST-2LTT-FIBRANT-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Cubical Agda with --two-level, --safe, nothing assumed. C-450, the levelwise inner (fibrant) version left blocked by C-448: (1) for every outer n, SST n : Type1 is an inner type of n-level semisimplicial types, level m+1 being a type family over the boundary shell of the simplex with m+1 vertices; shells Sh n X k are inner types built by outer recursion, finite products over faces unfolded into inner tuples; (2) restriction res along thinnings by outer induction; (3) strict identity and composition laws resId and resComp as outer equalities for all n, transports made coherent by outer UIP; (4) kernel runs by refl: the shell of an edge is two points and the two faces pick them out, the shell of a triangle is three points and three edges with matching endpoints, examples with two and three levels; (5) any two proofs of resComp are equal, and at four concrete instances (n = 2, 3, 4, arbitrary X and shell) the coherence proofs reduce to refl; (6) the tower of all levels is an outer record SSTomega with an example; (7) given a bridge from inner to outer naturals compatible with successor, as a module parameter and not a postulate, the tower is an inner type and every outer tower maps to it.",
+  "source_manifest": {
+    "bytes": 4919,
+    "path": "source-manifest.json",
+    "sha256": "f9114fee991a7f171a5186efde435e16855cc017a9f79909432bfd40027f8e39"
+  },
+  "started_at_utc": "2026-10-21T23:20:25.022624+00:00",
+  "status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 31069,
+    "path": "stdout.txt",
+    "sha256": "f78609f723ff31c6121b272e8d7079fba6dea674b40bf2a17e127f544626321e"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}
