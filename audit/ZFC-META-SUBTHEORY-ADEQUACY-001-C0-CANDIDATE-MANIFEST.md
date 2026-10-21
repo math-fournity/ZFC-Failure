@@ -48,6 +48,13 @@ core_kernel_verdicts           = 0
 remainder                      = 4  # controls do not exhaust the other live families
 ```
 
+### C0R12 叶的状态与 successor scan（2026-10-20）
+
+- C0R12 是**不占编号的来源补充卡**：[C0R12 SEP 判别力缺失自陈](20261020-ZFC-META-SUBTHEORY-ADEQUACY-C0R12-SEP-INTERNAL-DISCRIMINATION-ABSENCE.md)。它给 F-A/F-B 补的是一层建制化来源：SEP *Zeno's Paradoxes* 亲手写下 L1452「either system is equally successful」与 L1459「either space has infinitesimal parts or it doesn't」——即**两套数学同样成功、二择未决，判别力不在数学内部**；以及 L1382「nothing guarantees a priori that space has the structure of the continuum」这条 bridge 地基自陈。文本凭据是 Z06（19 句逐字引文，12 个关键跨在两个独立 snapshot 上双源命中，校验器 `docs/芝诺解决考古/来源/_verify/verify_z06_quotes.py` exit 0）。
+- **它不改变任何 family 的 `remainder`**：没有新 source family、没有新 M/S/Q/P contract、没有 kernel verdict。它只让后续候选在提问时不能只问"M 能否编码时间变量"，而必须问"所问是终局还是过程"。
+- 与本 repo 机器证据的关系：C-112 (d) 给出判别力的精确落点（`arrivesOfNever` 无条件、`neverOfArrives` 需 `Monotone` 且不可去）；〔我们的分析〕两者是**来源层与机器层的对应，不是形式蕴含**。SEP 没有 HoTT 类型，C-112 没有 SEP 文本。
+- successor scan：C0R12 已消费 SEP 在"数学内部判别力"这一面上的全部可用句；剩余 successor 不变，仍是 [C0 reselection 011](20261005-ZFC-META-SUBTHEORY-ADEQUACY-C0-SUCCESSOR-RESELECTION-011-TASKCARD.md) 的主线（同一 standard-continuum task 与 operational-time repair 的 shared consumer/bridge，再问 bare ZFC responsibility）。
+
 ### C1A 叶的状态与 successor scan（2026-10-05）
 
 - 已检查的 actual / version-fixed source candidates：`F-A=3`（IEP/Norton standard application；SEP Zeno physical-applicability bridge source；Earman–Norton 1996 conditional Newtonian runner/supertask control）；`F-B=11`（Mizar FOTG `NUMPOLY1` witness；Mizar FOTG `SERIES_1` exact geometric-series component；IsarMathLib Isabelle/ZF exact complete-real-model theorem；同一 pinned tree 的 metric/uniform/topology/halving ingress；Antoszek 2026 set-theoretic CPM fidelity control；Suppes 2002 ZF physical-model coupling；Sant'Anna--Bueno 2014 ZFC MSS time-eliminability/domain-recovery control；da Costa--Sant'Anna 2001 MSS source；da Costa--Sant'Anna 2001 thermodynamics source；Benveniste et al. 2012 hybrid non-standard operational semantics; Kanovei--Lyubetskii 2007 ZFC non-standard universe construction）；`F-C=9 source units/controls`（Maddy、IEP Foundations、SEP Set Theory、SEP Scientific Representation、SEP Models in Science、constructive-foundation contrast、hybrid-Zeno formal-model control、Clarke‑Doane 2026 v4 set-theoretic-metatheory/physical-determinism candidate、Suppes 2002）；`F-E=1`（Norton/IEP explicit task-switch control）。

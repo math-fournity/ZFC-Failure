@@ -257,6 +257,12 @@ proof_index: HoTT/CLAIM_EVIDENCE_MATRIX.md
   决定暂停，见本文件该节的历史保留说明；
 - `sources/` 快照只读；`private-audit/` 只读；不恢复研究发起人移走的目录。
 
+## 文档解析路由（MinerU）
+
+本 repo 的任何 PDF/扫描件/Office 文档读取或转 Markdown 一律走 `mineru` skill；**大 PDF（>200 页）必须用
+`~/.agents/skills/mineru/scripts/parse_large.py` 按页范围分片请求，禁止物理拆分 PDF 文件**。
+本机权威配置见 `~/README.md` 0066；本 repo 只保留 MinerU 产物清单与指针（`docs/operations/mineru-pdf-conversion-setup.md`）。
+
 ## 模式 P 动态 DAG 的任务限定授权（用户 2026-10-02）
 
 2026-09-17 的 blanket Sub Agent 禁令保留为历史规则，并继续约束本项目的一般工作；用户 2026-10-02 对**模式 P 的 P1/P2/P3 共同锻造、ZFC 定位与 HoTT 盲重放**作出任务限定的后续授权：Master 可以按证据依赖建立动态 DAG，启动不同刀具、来源核对、控制和 Battle 节点，并逐节点决定是否允许联网、只读 `dev`／`main`／其它分支或保持无泄漏盲态。

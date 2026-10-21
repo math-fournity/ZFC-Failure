@@ -1,0 +1,5 @@
+e94c0093b1995b1e3489d15313e3419502d3fc0a63cfeef150b5e97ebc7d230c
+russell1914-gutenberg-37090.txt  (Russell 1914 Lowell lectures, Project Gutenberg #37090)
+openstax pages under 教科书层/ (see _zeno-keyword-scan.tsv)
+a181ecbae5f67ef74c4b36adcad003671600823d76d4489fc292b9bb80bcb534  openstax-calc-v1-1-1-review-of-functions.html
+41c1b8adb61b71e9a927d796f3553dbf945a4d73feebb211f70c358d14b411fd  openstax-calc-v1-ch1-introduction.html

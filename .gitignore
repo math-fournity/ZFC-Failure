@@ -50,3 +50,40 @@ Atria的工作目录/.evidence/
 # CodeArts IDE local workspace settings (e.g. .arts/settings.json claw-mode
 # flag). Machine-local tool state; never part of the research tree.
 .arts/
+
+# Per-page rasterised images and other intermediates of the visual-audit pipeline
+# (docs/罗素解决考古/**/_visualcheck/, _audit-binary/, _split/, _upload/, mineru_md/
+# sub-dirs).  These are process artifacts: the sentence that an audit actually relies
+# on lives as text in the Z*/01–04 evidence files with a page locator, so committing
+# hundreds of multi-MB PNGs adds no evidential value and makes the tree look dirty for
+# weeks afterwards.  The already-tracked files (zermelo 1908, the 21 pages fully audited
+# for Z01/Q1, committed in 18c0227cd) STAY tracked — this rule does not untrack them,
+# and gitignore cannot change tracked files' content anyway.
+docs/罗素解决考古/**/_visualcheck/
+docs/罗素解决考古/**/_audit-binary/
+docs/罗素解决考古/**/_split/
+docs/罗素解决考古/**/_upload/
+
+# --- 2026-10-21: Russell-line intermediates and one misfetch, individually named ---
+# These are the Russell-archaeology pipeline's own working-tree artifacts from its
+# 2026-10-19 120->150 dpi upgrade run (attribution ledger: .claude/工作树并行归属底账-20261021.md).
+# Individually named rather than directory-globbed so nothing of that line's tracked
+# evidence can be silently ignored later. Remove a line only when that line's owner
+# commits or drops the file.
+docs/罗素解决考古/搜索原始响应-20261017/clean-p261.jpg
+docs/罗素解决考古/搜索原始响应-20261017/mineru_md/images/
+docs/罗素解决考古/搜索原始响应-20261017/probe-clean.pdf
+docs/罗素解决考古/搜索原始响应-20261017/probe-mineru-small.jpg
+docs/罗素解决考古/搜索原始响应-20261017/probe-mineru-test.pdf
+docs/罗素解决考古/搜索原始响应-20261017/zermelo1908-pp261-281.pdf
+
+# Misfetch: Gutenberg #7369 is Masefield's "Jim Davis", not Russell 1914. Registered in
+# zeno-溯源/叙事源头/_misfetch-register-20261021.md; not evidence, do not resurrect.
+docs/芝诺解决考古/搜索原始响应-20261017/zeno-溯源/叙事源头/russell1914-gutenberg-7369.html
+
+# Fetches from the same 2026-10-19 batch (Garciadiego 1985 / Moore preview / free-probe
+# dissertation json and the Weibo export under output/).
+g1985.pdf
+garciadiego1985-hm.pdf
+q2-d01-exa-dissertation.json
+output/

@@ -1,0 +1,4 @@
+'ZenoSEPEndPoint.endpoint_not_in_sequence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ZenoSEPEndPoint.limit_is_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ZenoSEPEndPoint.sup_range_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ZenoSEPEndPoint.endpoint_not_member_but_is_sup' depends on axioms: [propext, Classical.choice, Quot.sound]

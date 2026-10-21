@@ -1,4 +1,8 @@
 # 接续指针
+### CFC 分析推进：方案落盘 + Z03 史学层 + 形式化实测纠偏（2026-10-19）
+
+方案唯一入口 `dev-docs/CFC分析推进方案-20261019.md`（6 分片索引）。**唯一硬阻塞：`CFC` 在 repo 与三个会话库零定义**（只有 4 处 OCR 误读与 UUID 碎片），澄清问法见方案 001 片 §3.3；`350 年` 的起算点同待澄清。已交付：Z03 一手史学层（Russell 1914 只点 Bolzano 一人、Weierstrass/Dedekind/Cauchy 零出现，且本人写下 counting 归因与对康德错误的诊断）；形式化实测推翻两处旧记录（`neg_neg_code`/`iT_neg` exit 0；D3 已由 C-417 在 `godel-q-zfc-z0-sigma1` 闭合，本机未出正式收据）。精确路径 commit `4b545e139`，**未 push**（等一句授权）。下一动作见方案 005 片「下一步」。
+
 ### CG-010：`main` 发布 ZFC-1 收敛（2026-10-15）
 
 `main` `615b7c4f`（由 `dev` `29741a5b` 生成，`main-20261015-zfc1-convergence`）：README 五种语言加第 6 节“回到页首：ZFC-1 的问题”，CLAIMS 加第 4 节（ZFC 一侧），20 个包、57 个运行，重放工具可重放 Mathlib／Foundation 运行。发布前自审见 `.claude/goals/CG-010-remaining-formalization-alignment/H5-发布自审-20261015.md`。仍等研究发起人一句话：10-15 收敛那段入不入核。
