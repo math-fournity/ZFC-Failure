@@ -1,0 +1,7 @@
+{
+ "GodelQ/Russell/Basic.lean": "48d9c25dc4d3ae61f5fc0e089de782d6e7e46f53e63fd6d75bfb59002e3c8312",
+ "GodelQ/Russell/Sep.lean": "942fd05752eb84b1597801b52d4562598f9d8b8227b78b1129317446c882275c",
+ "GodelQ/Russell/Foundation.lean": "73acb1b6f6c376f6ace68dfca47b82c807c7b6e9bbf4b8b0ed6bc99b9616a038",
+ "GodelQ/Russell/Unbounded.lean": "69865faeb287a919516fa9f9b51bc3351907e280e56bced4c8b7292366a2adcd",
+ "GodelQ/Russell/Qualification.lean": "487fb625a244fa55de74375fe0a16499c41470cead38cedf303b1cb52a125fb6"
+}
