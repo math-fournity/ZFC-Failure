@@ -1,0 +1,47 @@
+{
+  "parse": {
+    "sha256": "37df320c40ece8672450270a5c2670201115e96de4398612c6054f7f6c832c10",
+    "short_id": "37df320",
+    "tier": "standard",
+    "page_range": "145-147",
+    "status": "done",
+    "cache_hit": false,
+    "wait_parse_ids": [
+      64
+    ],
+    "created_parse_ids": [
+      64
+    ],
+    "reused_parse_ids": [],
+    "tip": null
+  },
+  "content": {
+    "sha256": "37df320c40ece8672450270a5c2670201115e96de4398612c6054f7f6c832c10",
+    "short_id": "37df320",
+    "tier": "standard",
+    "format": "markdown",
+    "content": "<!-- page 145 of 604 -->\n\n(7)\n\nDe plus, si dans la formule (1) on fait\n\n$$\n\\begin{array}{l} x = \\mu a, y = 0, \\\\ (x - + \\cdot) = x _ {2} \\phi \\end{array}\n$$\n\non en conclura\n\n$$\n\\Phi (- \\mu a) = [ 2 \\phi (0) - 1 ] \\Phi (\\mu a) = \\frac {1}{4} (r ^ {- \\mu} + r ^ {\\kappa}),\n$$\n\nL'équation (5) subsistera donc, lorsqu'on y remplacera $\\mu$ par $-\\mu$. En d'autres termes, on aura, pour des valeurs quelconques positives ou négatives de la variable $x$,\n\n$$\n\\Phi (a x) = \\left(r ^ {x} + r ^ {- x}\\right).\\tag{6}\n$$\n\nSi dans cette dernière formule on change x en  $\\frac{x}{a}$ , elle donnera\n\n$$\n\\phi (x) = \\frac {1}{2} \\left(r ^ {\\frac {x}{a}} + r ^ {- \\frac {x}{a}}\\right).\n$$\n\nLorsqu'on fait, dans l'équation (4), $\\pm\\frac{\\theta}{\\mu}=a$, et, dans l'équation (7), r ($\\overline{S}$=A, ces équations pren- nent respectivement les formes suivantes\n\n(8)\n\n$$\n\\begin{array}{l} \\Phi (x) = \\cos . a x, \\\\ \\Phi (x) = \\frac {1}{2} (\\dot {A} ^ {x} + A ^ {- x}). \\end{array}\\tag{9}\n$$\n\nSi donc l'on désigne par $a$ une quantité constante, et par $A$ un nombre constant, toute fonction $\\Phi'(x)$ qui, demeurant continue entre des limites quelconques de la variable, vérifiera l'équation (1), sera nécessairement comprise sous l'une des deux formes\n\nI. $^{RE}$  PARTIE CHAP. V.\n\n121\n\n<!-- page 146 of 604 -->\n\n$$\n\\text { COURS   D'ANALYSE. }\n$$\n\nqu'on vient de rapporter. Il est d'ailleurs facile de s'assurer que les valeurs de $\\Phi(x)$ fournies par les équations (8) et (9) résolvent la question proposée, quelles que soient les valeurs attribuées à la quantité $a$ et au nombre $A$. Ce nombre et cette quantité sont donc deux constantes arbitraires, dont l'une ne peut admettre que des valeurs positives.\n\nD'après ce qu'on vient de dire, les deux fonctions\n\n$$\n\\cos . a. x, \\quad \\frac {1}{2} (A ^ {x} + A ^ {- x}),\n$$\n\nont la propriété commune de satisfaire à l'équation (1), ce qui établit entre elles une analogie remarquable. L'une et l'autre de ces deux fonctions se réduisent encore à l'unité pour x=0. Mais une différence essentielle entre la première et la seconde c'est que la valeur numérique de la première est constamment au-dessous de la limite 1, lorsqu'elle n'atteint pas cette limite; tandis que, dans la même hypothèse, la valeur numérique de la seconde est constamment au-dessus.\n\n122\n\n<!-- page 147 of 604 -->\n\n# CHAPITRE VI.\n\nDes Séries convergentes et divergentes. Règles sur la convergence des Séries, Sommation de quelques Séries convergentes.\n\n## §. 1. $^{er}$  Considérations générales sur les Séries.\n\nOn appelle série une suite indéfinie de quantités\n\n$$\nu _ {o}, u _ {1}, u _ {2}, u _ {3}, \\& c. \\dots\n$$\n\nqui dérivent les unes des autres suivant une loi déterminée. Ces quantités elles-mêmes sont les différents termes de la série que l'on considère. Soit\n\n$$\ns _ {n} = u _ {0} + \\dot {u} _ {1} + u _ {2} + \\dots + u _ {n - 1}\n$$\n\nla somme des n premiers termes, n désignant un nombre entier quelconque. Si, pour des valeurs de n toujours croissantes, la somme  $s_{n}$  s'approche indéfiniment d'une certaine limite s, la série sera dite convergente, et la limite en question s'appellera la somme de la série. Au contraire, si, tandis que n croit indéfiniment, la somme  $s_{n}$  ne s'approche d'aucune limite fixe, la série sera divergente, et n'aura plus de somme. Dans l'un et l'autre cas, le terme qui correspond à l'indice n, savoir  $u_{n}$ , sera ce qu'on nomme le terme général. Il suffit que l'on donne ce\n\nI. $^{RE}$  PARTIE. CHAP. VI.\n\n123",
+    "request_scope": {
+      "page_range": "145-147",
+      "after": null,
+      "limit": 100000000,
+      "locator": null,
+      "context": 0,
+      "image_format": null
+    },
+    "content_ranges": [
+      {
+        "page_range": "145-147",
+        "start": "doc:37df320/tier:standard/page:145",
+        "end": "doc:37df320/tier:standard/page:147/block:10"
+      }
+    ],
+    "truncated": false,
+    "next_request": {
+      "page_range": "148-157",
+      "after": null,
+      "locator": null
+    },
+    "asset": null
+  }
+}
