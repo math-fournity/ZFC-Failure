@@ -2699,7 +2699,7 @@ Claim 表：
 
 ## Claude（接手 015-Opus）：单价范畴的全体会停（2026-10-21）
 
-> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G10 的“单价 1-范畴”一半。读法：机器证明（Cubical Agda，`--safe`）。单价范畴的全体落在第 4 层（库的 `is2GroupoidUnivalentCategory`），C-77 的追问程序最迟第 3 问停，第 4 层付得清。Rzk 一半这一轮不做，理由见 `.claude/goals/CG-011-h-deepening-followups/G10-结论.md`。
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G10 的“单价 1-范畴”一半。读法：机器证明（Cubical Agda，`--safe`）。单价范畴的全体落在第 4 层（库的 `is2GroupoidUnivalentCategory`），C-77 的追问程序最迟第 3 问停，第 4 层付得清。（2026-10-22 更新：恰在第 3 问停已由 C-451 证出，见本文件“单价范畴的全体恰在第 3 问停”一节。）Rzk 一半这一轮不做，理由见 `.claude/goals/CG-011-h-deepening-followups/G10-结论.md`。
 
 | Package ID | Claim IDs | 源码 | 证据 | 判词 |
 |---|---|---|---|---|
@@ -2724,3 +2724,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-450 | (1) `SST : ℕˢ → Type₁`（`SST 0 = Unit*`，`SST (n+1) = Σ (X : SST n) (Sh n X (n+1) → Type)`），`Sh n X k : Type`；(2) `res : Th j k → Sh n X k → Sh n X j`；(3) 对一切 n，`resId : res n X (idᵗ k) s ≡ᵉ s`，`resComp : res n X (T ∘ᵗ S) s ≡ᵉ res n X S (res n X T s)`；(4) `points`、`edgeShell`、`edgeEnds`、`triangleShell` 按 `reflᵉ`，`pointsAndEdges : SST 2`，`pointsEdgesTriangles : SST 3`；(5) 任意两条 `resComp` 证明 `≡ˢ`；n = 2、3、4 的四个具体实例上 `resComp …`、`resId … ≡ˢ reflᵉ`；(6) `SSTω`（`stage`、`agrees`）是外层记录，`codiscreteω P : SSTω`；(7) 对任何 `toOuter : ℕ → ℕˢ` 与 `toOuter (suc n) ≡ˢ sucˢ (toOuter n)`，`towerInner : Type₁`，`fromω : SSTω → towerInner` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-SST-2LTT-FIBRANT-01`；负控制 `-NEG-01`、`-NEG-02`；桥写不出：`20261021-CG001-TWO-FATES-2LTT-NEG-02` | 不能说“HoTT 里定义出了半单纯类型”（统一的定义用了外层）；NEG-001 只否定直接写法；(7) 不断言桥存在；“相干就是 refl”只有四个实例；与 C-448 一版的对应、全空间的取面未做；“桥是 A 的位置”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：单价范畴的全体恰在第 3 问停（2026-10-22）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，CG-011 完成门 G10 的后续，补 C-449 写明的缺口。读法：机器证明（Cubical Agda，`--safe`）。群胚的路径范畴是单价范畴；宇宙里圆到自身的认同不构成集合，且是圆的路径范畴自身认同的收缩；所以单价范畴的全体不是群胚，C-77 的追问恰在第 3 问停。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-UNIVALENT-CATEGORIES-EXACT-001` | `CG001-C-451` | `formal/claude-cg001/univalent-categories-exact/UnivalentCategoriesExact.agda`（`PathCat`、`isUnivalentPathCat`、`D`、`circleMember`、`notSetEquivS¹`、`notSetPathsS¹`、`liftPathBack`、`liftPathBackCong`、`toUC`、`fromUC`、`retractUC`、`notGroupoid`、`notSet`、`exactlyThird`、`qual-C451`） | `verification/runs/20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与九个被导入的包源文件）；exit 0，101 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-001` | `CG001-C-451`（负控制） | 同目录 `WrongTotalityGroupoid.agda` | `verification/runs/20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-002` | `CG001-C-451`（负控制） | 同目录 `WrongSecondQuestion.agda` | `verification/runs/20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-451 | (1) 对任何 `X : hGroupoid ℓ-zero`，`isUnivalent (PathCat X)`（对象 `Lift (fst X)`，态射 `lower a ≡ lower b`），`circleMember = D S¹G : UnivCat`；(2) `¬ isSet (S¹ ≡ S¹)`；(3) `fromUC (toUC q) ≡ q`，`¬ isGroupoid UnivCat`，`¬ isSet UnivCat`；(4) 对任何 `judge`，`runFor 1 (question UnivCat judge) ≡ nothing` 且 `runFor 2 (question UnivCat judge) ≡ just 3` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01`；负控制 `-NEG-01`、`-NEG-02` | 只证 C-449 的那个全体（对象 `Type₁`、态射 `Type₀`）；自然自同构是读法，没写出；“结构多一层，停点挪一问”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
