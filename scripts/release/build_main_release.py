@@ -199,6 +199,21 @@ def claims_body(commit: str, cs: dict) -> str:
             "|---|---|---|",
             *table_rows(zfc_one_text, zfc["claims"]),
         ]
+    h = cs.get("h")
+    if h:
+        index_text = blob(commit, h["index_file"]).decode("utf-8")
+        body += [
+            "",
+            "## 5. H 深化：宣布完成的代价、元层判据、两层类型论与无穷相干",
+            "",
+            f"> 研究发起人 2026-10-17 提出 H，2026-10-21 认可 H 深化的内容并要求把后续全部做完；分析与对照见 `dev` 上的 `{h['doc']}`。"
+            f"下表逐字取自 `dev` 上 `{h['index_file']}` 中各命题所在节的“一句话”行（含它的禁止外推）。"
+            "命题全文与禁止外推以各包的 `CLAIM.md` 为准。",
+            "",
+            "| ID | 一句话 | proof / run | 候选 | 禁止外推 |",
+            "|---|---|---|---|---|",
+            *table_rows(index_text, h["claims"]),
+        ]
     return "\n".join(body)
 
 
@@ -207,7 +222,7 @@ def main() -> int:
     ap.add_argument("--source", required=True, help="commit-ish on dev to build from")
     ap.add_argument("--out", help="empty output directory (required unless --claims-body-sha)")
     ap.add_argument("--claims-body-sha", action="store_true",
-                    help="print the SHA-256 of sections 1-3 of CLAIMS.md at --source (the value a CLAIMS translation records) and exit")
+                    help="print the SHA-256 of the CLAIMS.md sections before the run inventory at --source (the value a CLAIMS translation records) and exit")
     args = ap.parse_args()
 
     commit = git("rev-parse", "--verify", f"{args.source}^{{commit}}").decode().strip()
@@ -361,7 +376,9 @@ def main() -> int:
                 "",
                 f"> 本文件由 `dev` 上的 `scripts/release/build_main_release.py` 从提交 `{commit[:8]}` 生成，不在本分支修改。第 1、2 节逐字取自 `dev` 上共享证据矩阵 "
                 "`HoTT/CLAIM_EVIDENCE_MATRIX.md` 的两节（不含原标题行）；第 3 节逐字取自 `dev` 上的目标内索引草稿与 Claude 总索引；"
-                + ("第 4 节（ZFC 一侧）逐字取自共享证据矩阵中各包的行与 Claude 总索引；第 5 节由各运行的收据生成。" if "zfc" in spec["claims_sources"]
+                + ("第 4 节（ZFC 一侧）逐字取自共享证据矩阵中各包的行与 Claude 总索引；第 5 节（H 深化）逐字取自 CG-001 证据索引中各命题的一句话行；第 6 节由各运行的收据生成。"
+                   if "h" in spec["claims_sources"]
+                   else "第 4 节（ZFC 一侧）逐字取自共享证据矩阵中各包的行与 Claude 总索引；第 5 节由各运行的收据生成。" if "zfc" in spec["claims_sources"]
                    else "第 4 节由各运行的收据生成。")
                 + "文中 `formal/…`、`verification/runs/…` 指本分支 `HoTT/` 下的同名路径；其余过程文件的路径在 `dev` 上"
                 "（`RELEASE-MANIFEST.json` 的 `paths_mentioned_but_on_dev` 列出了正文提到的那些）。"
@@ -369,7 +386,7 @@ def main() -> int:
                 "",
                 body_text,
                 "",
-                "## 5. 运行清单" if "zfc" in spec["claims_sources"] else "## 4. 运行清单",
+                "## 6. 运行清单" if "h" in spec["claims_sources"] else "## 5. 运行清单" if "zfc" in spec["claims_sources"] else "## 4. 运行清单",
                 "",
                 run_table("zh"),
             ])
@@ -379,7 +396,7 @@ def main() -> int:
             if head.get("source") != "CLAIMS.md" or head.get("language") != lang:
                 raise SystemExit(f"CLAIMS_TRANSLATION_HEADER_INVALID:{t['template']}")
             if head.get("source_body_sha256") != body_sha:
-                raise SystemExit(f"CLAIMS_TRANSLATION_STALE:{t['template']}:records {head.get('source_body_sha256')} but sections 1-3 are {body_sha}")
+                raise SystemExit(f"CLAIMS_TRANSLATION_STALE:{t['template']}:records {head.get('source_body_sha256')} but the sections before the run inventory are {body_sha}")
             if expected_bar not in text.split("\n"):
                 raise SystemExit(f"CLAIMS_TRANSLATION_LANGUAGE_BAR_MISSING:{t['template']}")
             for key, value in {"REPO": repo, "SOURCE_COMMIT": commit, "SOURCE_SHORT": commit[:8], "RUN_TABLE": run_table(lang)}.items():
@@ -499,7 +516,7 @@ def main() -> int:
             "note": "AI translations; the Chinese originals are authoritative. Each translation records the SHA-256 of the "
                     "Chinese text it translates, and the build fails when that hash no longer matches.",
             "documents": translations,
-            "claims": {"source": "CLAIMS.md sections 1-3", "source_body_sha256": body_sha, "templates": claims_translations},
+            "claims": {"source": "CLAIMS.md sections before the run inventory", "source_body_sha256": body_sha, "templates": claims_translations},
         },
         "files": [{"path": p, "role": v["role"], "bytes": len(v["data"]), "sha256": sha(v["data"]), "source": "dev:" + commit[:8],
                    **({"dev_sha256": v["source_sha256"]} if "source_sha256" in v else {})}
