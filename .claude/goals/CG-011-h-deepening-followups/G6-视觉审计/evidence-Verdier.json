@@ -1,0 +1,23 @@
+{
+  "86": [],
+  "87": [
+    {"id": "E1", "hint": "以 «On notera que ce triangle ne dépend pas» 开头的那一句（到句号为止）"},
+    {"id": "E2", "hint": "含 «à homotopie près seulement» 的那一句"}
+  ],
+  "97": [
+    {"id": "E3", "hint": "«Proposition 3.3.4. (TRIII)» 的整个陈述（到陈述结束的句号为止，可能延续到下一页则写到本页末尾）"}
+  ],
+  "115": [
+    {"id": "E4", "hint": "以 «Le corollaire (1.2.4) montre» 开头、到 «(1.2.12).» 为止的那几句"}
+  ],
+  "121": [
+    {"id": "E5", "hint": "以 «1.2.12.» 开头的整段（到 «décomposable.» 为止）"},
+    {"id": "E6", "hint": "«Proposition 1.2.13.» 的第一句"}
+  ],
+  "122": [
+    {"id": "E7", "hint": "以 «Si les produits dénombrables» 开头的那一句"}
+  ],
+  "123": [
+    {"id": "E8", "hint": "«Remarque 1.2.14.» 那一段"}
+  ]
+}
