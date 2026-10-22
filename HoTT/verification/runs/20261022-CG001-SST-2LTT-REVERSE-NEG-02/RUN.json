@@ -1,0 +1,106 @@
+{
+  "agda_error_tag": "UnequalTerms",
+  "audit_notes": [
+    "Captured by Claude Code desktop session a15f4b3b, which took over session 91beaf35 (015-Opus) at the research sponsor's request, worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-22, the reverse direction left open by C-452 (goal CG-011 gate G8) under the sponsor's goal to complete all follow-ups; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md and the thirteen imported package sources."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-453"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-reverse",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-correspondence",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-fibrant",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/strict-semisimplicial",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/two-fates-2ltt",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/exposure-criterion",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning",
+    "HoTT/formal/claude-cg001/sst-2ltt-reverse/WrongAugmentationBack.agda"
+  ],
+  "completed_at_utc": "2026-10-22T05:32:04.077187+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 91.409809,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 42,
+  "expected_outcome": "REJECT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-reverse/WrongAugmentationBack.agda:22.22-27: error: [UnequalTerms]\nΣ\n(SemisimplicialTwoLevel.Sh zeroˢ (fst (Reverse.Lv S (sucˢ zeroˢ)))\n zeroˢ)\n(λ s →\n   SemisimplicialTwoLevel.ΠTh (sucˢ zeroˢ) zeroˢ",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-reverse",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-correspondence",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-fibrant",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/strict-semisimplicial",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/two-fates-2ltt",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/exposure-criterion",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows level 0 is not recovered by definition; roundTrip in the main package is stated for levels n+1."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-SST-2LTT-REVERSE-NEG-002",
+  "rejection_stage": "TYPE_CHECKING",
+  "run_id": "20261022-CG001-SST-2LTT-REVERSE-NEG-02",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-453 (3): the round trip also recovers level 0 (the augmentation), by refl; expected rejection (the levelwise version has no augmentation).",
+  "source_manifest": {
+    "bytes": 5548,
+    "path": "source-manifest.json",
+    "sha256": "42bd1e74dd263ad67b9c0d9bd096eb1e2324f73c124c1e913f465a9d06fa2f10"
+  },
+  "started_at_utc": "2026-10-22T05:30:32.667378+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 32029,
+    "path": "stdout.txt",
+    "sha256": "29704624fbf63356c574f306140c778c51bd75ce1b2dae6911ef5ad029c11faf"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}

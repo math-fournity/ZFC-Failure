@@ -2751,4 +2751,18 @@ Claim 表：
 
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
-| CG001-C-452 | (1) `toStrict : (n : ℕˢ) → SST n → SSTˢ`，`X = Sh n Y`，`act = res n Y`，`actId = resId n Y`，`actComp = resComp n Y`；(2) `edgesTotal`：`X (toStrict 2 (pointsAndEdges P E)) 2` 按 `reflᵉ` 是边连同两端；`edgeToEnd`：沿 ε₀ 取面按 `reflᵉ` 得端点；(3) `coskeletonTriangles`：第 3 层按 `reflᵉ` 是三角形的壳 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-SST-2LTT-CORRESPONDENCE-01`；负控制 `-NEG-01`、`-NEG-02` | 只一个方向，不说两版等价；反方向（经纤维）未做；实例只在两层的例子上；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| CG001-C-452 | (1) `toStrict : (n : ℕˢ) → SST n → SSTˢ`，`X = Sh n Y`，`act = res n Y`，`actId = resId n Y`，`actComp = resComp n Y`；(2) `edgesTotal`：`X (toStrict 2 (pointsAndEdges P E)) 2` 按 `reflᵉ` 是边连同两端；`edgeToEnd`：沿 ε₀ 取面按 `reflᵉ` 得端点；(3) `coskeletonTriangles`：第 3 层按 `reflᵉ` 是三角形的壳 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-SST-2LTT-CORRESPONDENCE-01`；负控制 `-NEG-01`、`-NEG-02` | 只一个方向，不说两版等价；反方向（经纤维）未做（同日由 C-453 做成，见下节）；实例只在两层的例子上；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：严格的一版经纤维回到按层的一版（2026-10-22）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，C-452 没做的反方向（CG-011 完成门 G8 的后续）。读法：机器证明（Cubical Agda，`--safe --two-level`）。每个严格的半单纯类型经纤维给出按层的一版，边界映射与取面严格可换；交回去第 n+1 层原样取回（内层等价）。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-REVERSE-001` | `CG001-C-453` | `formal/claude-cg001/sst-2ltt-reverse/SemisimplicialReverse.agda`（`substFiber`、`fiberExt`、`Reverse.Lv`、`Reverse.bd`、`Reverse.bdNat`、`Reverse.fibresTotal`、`isContrΠThNone`、`ΠThId`、`substEquivᵉ`、`RoundTrip.roundTrip`、`qual-C453`） | `verification/runs/20261022-CG001-SST-2LTT-REVERSE-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十三个被导入的包源文件）；exit 0，92 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-REVERSE-NEG-001` | `CG001-C-453`（负控制） | 同目录 `WrongNaturalityDefinitional.agda` | `verification/runs/20261022-CG001-SST-2LTT-REVERSE-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-REVERSE-NEG-002` | `CG001-C-453`（负控制） | 同目录 `WrongAugmentationBack.agda` | `verification/runs/20261022-CG001-SST-2LTT-REVERSE-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-453 | 对任何 `S : SSTˢ`：(1) `Lv : (n : ℕˢ) → SST n`，`Lv (n+1) = (Lv n , fiber (bd n))`，`bd n : X S k → Sh n (Lv n) k`；(2) `bdNat n T x : bd n (act S T x) ≡ᵉ res n (Lv n) T (bd n x)`，对一切 n；(3) `fibresTotal n : Σ (Sh n (Lv n) (n+1)) (fiber (bd n)) ≃ X S (n+1)`，`roundTrip n : X (toStrict (n+1) (Lv (n+1))) (n+1) ≃ X S (n+1)` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-SST-2LTT-REVERSE-01`；负控制 `-NEG-01`、`-NEG-02` | 不说两版作为类型等价；`roundTrip` 是内层等价；第 0 层不取回；“差别只剩那座桥”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

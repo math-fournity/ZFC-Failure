@@ -48,6 +48,7 @@ SOURCES = {
     "C-448声明": ROOT / "HoTT/formal/claude-cg001/strict-semisimplicial/CLAIM.md",
     "C-449声明": ROOT / "HoTT/formal/claude-cg001/univalent-categories/CLAIM.md",
     "C-450声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-fibrant/CLAIM.md",
+    "C-452声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-correspondence/CLAIM.md",
 }
 QUOTES = [
     ("`/Volumes/D/HoTT-worktrees/012-opus-w8/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md`的内容可以，继续推进后续工作，直至全部完成。", "转录"),
@@ -107,6 +108,8 @@ QUOTES = [
     # G8 follow-ups (C-452): the two items C-450's CLAIM (AI-written) recorded as not done
     ("**两版之间的关系**：本包的 `SST n`（类型族的一版）与 C-448 的 `SSTˢ`（严格预层的一版）之间的对应没有建。", "C-450声明"),
     ("**全空间的取面**：只给了壳上的取面；单纯形全空间上的面映射可由它得到，本包没写出。", "C-450声明"),
+    # C-453: the reverse direction C-452's CLAIM (AI-written) recorded as not done
+    ("**反方向**：从严格的一版得到按层的一版，要经纤维：第 m+1 层取“边界恰为给定壳”的那些单纯形。", "C-452声明"),
 ]
 
 
