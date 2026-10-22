@@ -2738,3 +2738,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-451 | (1) 对任何 `X : hGroupoid ℓ-zero`，`isUnivalent (PathCat X)`（对象 `Lift (fst X)`，态射 `lower a ≡ lower b`），`circleMember = D S¹G : UnivCat`；(2) `¬ isSet (S¹ ≡ S¹)`；(3) `fromUC (toUC q) ≡ q`，`¬ isGroupoid UnivCat`，`¬ isSet UnivCat`；(4) 对任何 `judge`，`runFor 1 (question UnivCat judge) ≡ nothing` 且 `runFor 2 (question UnivCat judge) ≡ just 3` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01`；负控制 `-NEG-01`、`-NEG-02` | 只证 C-449 的那个全体（对象 `Type₁`、态射 `Type₀`）；自然自同构是读法，没写出；“结构多一层，停点挪一问”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：两层里两版半单纯类型的对应（2026-10-22）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，C-450 的两条续作（CG-011 完成门 G8 的后续）。读法：机器证明（Cubical Agda，`--safe --two-level`）。每个按层的半单纯类型给出一个严格的半单纯类型（全空间与余骨架）；顺带更正 C-450 “全空间的取面没写出”一条（其实已在，见 `formal/claude-cg001/sst-2ltt-fibrant/REVISIONS.md`）。反方向没做。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-CORRESPONDENCE-001` | `CG001-C-452` | `formal/claude-cg001/sst-2ltt-correspondence/SemisimplicialCorrespondence.agda`（`toStrict`、`edgesTotal`、`edgeToEnd`、`coskeletonTriangles`、`qual-C452`） | `verification/runs/20261022-CG001-SST-2LTT-CORRESPONDENCE-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十二个被导入的包源文件）；exit 0，90 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-CORRESPONDENCE-NEG-001` | `CG001-C-452`（负控制） | 同目录 `WrongCoskeletonFiller.agda` | `verification/runs/20261022-CG001-SST-2LTT-CORRESPONDENCE-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-CORRESPONDENCE-NEG-002` | `CG001-C-452`（负控制） | 同目录 `WrongNaiveInverse.agda` | `verification/runs/20261022-CG001-SST-2LTT-CORRESPONDENCE-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-452 | (1) `toStrict : (n : ℕˢ) → SST n → SSTˢ`，`X = Sh n Y`，`act = res n Y`，`actId = resId n Y`，`actComp = resComp n Y`；(2) `edgesTotal`：`X (toStrict 2 (pointsAndEdges P E)) 2` 按 `reflᵉ` 是边连同两端；`edgeToEnd`：沿 ε₀ 取面按 `reflᵉ` 得端点；(3) `coskeletonTriangles`：第 3 层按 `reflᵉ` 是三角形的壳 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-SST-2LTT-CORRESPONDENCE-01`；负控制 `-NEG-01`、`-NEG-02` | 只一个方向，不说两版等价；反方向（经纤维）未做；实例只在两层的例子上；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
