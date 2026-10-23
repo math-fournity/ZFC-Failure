@@ -1,0 +1,5 @@
+BondalKapranov 1 ['FAIL', 'FAIL'] consistent
+BondalKapranov 2 ['PASS±', 'FAIL'] INCONSISTENT
+BondalKapranov 3 ['FAIL', 'FAIL'] consistent
+BondalKapranov 4 ['PASS±', 'FAIL'] INCONSISTENT
+BondalKapranov 5 ['PASS±', 'FAIL'] INCONSISTENT

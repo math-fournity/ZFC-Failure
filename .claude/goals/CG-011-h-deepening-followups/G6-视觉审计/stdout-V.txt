@@ -1,0 +1,7 @@
+Verdier 86 ['PASS±', 'PASS±'] consistent
+Verdier 87 ['PASS±', 'FAIL'] INCONSISTENT
+Verdier 97 ['PASS±', 'FAIL'] INCONSISTENT
+Verdier 115 ['PASS±', 'PASS±'] consistent
+Verdier 121 ['PASS±', 'PASS±'] INCONSISTENT
+Verdier 122 ['FAIL', 'PASS±'] INCONSISTENT
+Verdier 123 ['PASS±', 'PASS±'] INCONSISTENT

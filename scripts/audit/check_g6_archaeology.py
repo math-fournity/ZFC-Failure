@@ -11,13 +11,102 @@ the public web pages it relies on say what the record says they say.
 Pages are fetched live; a page that cannot be fetched is reported as SKIP, never as a hit. IOP serves scripted requests a
 bot-check page, which is not bypassed, so the Bondal-Kapranov check is normally a SKIP. Only short search keys are kept
 here, not the texts. Written 2026-10-21, Claude Code session a15f4b3b. Exit 0 iff every check on a fetched page passes.
+
+--pdf-dir DIR (added 2026-10-22, after the sponsor authorized the two downloads): DIR holds the two PDFs, found by
+SHA-256 wherever they sit below it (Verdier, Asterisque 239, from numdam.org; Bondal-Kapranov, Mat. Sb. 181:5, the
+Russian original). The pages the record cites are extracted with pdftotext and searched for short keys. The keys
+are the anchors of the sentences that the visual audit (G6-视觉审计/AUDIT-SUMMARY.md) transcribed twice from the page
+images. A missing PDF or a missing pdftotext is a SKIP.
 """
+import argparse
+import hashlib
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
+import unicodedata
 import urllib.request
+from pathlib import Path
 
 LURIE = "https://arxiv.org/html/math/0608228"
 BK = "https://iopscience.iop.org/article/10.1070/SM1991v070n01ABEH001253"
+
+# (sha256 prefix, name, {pdf page: [(check name, key, expected presence)]}); keys are short anchors, never full sentences.
+PDF_CHECKS = [
+    ("6214c252baceba55", "verdier", {
+        87: [("p.70: the triangle does not depend functorially", "ne dépend pas fonctoriellement", True),
+             ("p.70: first square commutes only up to homotopy", "à homotopie près seulement", True)],
+        97: [("p.80: Proposition 3.3.4 (TRIII) asserts existence", "existe un morphisme r", True)],  # the text layer reads "Il" as "/ /"
+        115: [("p.98: the isomorphism is not unique", "cet isomorphisme n'est pas unique", True)],
+        121: [("p.104: 1.2.12 asks for a functorial choice", "associant fonctoriellement", True),
+              ("p.104: answer: decomposable", "décomposable", True)],
+        122: [("p.105: countable products or sums", "dénombrables", True)],
+        123: [("p.106: Remarque 1.2.14 does not use TRIV", "intervenir l'axiome TRIV", True)],
+    }),
+    ("b53aae3cbf2b0642", "bondal-kapranov", {
+        1: [("p.669: triangulated categories not satisfactory in every respect", "не во всех отношениях является удовлетворительным", True),
+            ("p.669: keep the complexes themselves", "а и сами комплексы", True),
+            ("p.669: two ways to define higher Massey compositions", "высших композиций Масси", True),
+            ("p.669: pretriangulated = DG category with a functorial cone", "функториальным конусом", True)],
+        15: [("p.683: reference [18] is Gelfand-Manin", "Гельфанд С. И., Манин Ю. И.", True)],
+    }),
+]
+NOT_ANYWHERE = [("bondal-kapranov", "no page says the triangulated cone is non-functorial", r"нефункториальн|не функториальн")]
+
+
+def norm(s: str) -> str:
+    # Matching ignores all whitespace and accents: the Numdam text layer of Verdier puts stray spaces inside words
+    # ("pa s", "étan t") and drops accents ("decomposable" on p.104), and the Bondal-Kapranov scan hyphenates at line
+    # ends ("мор- физмов"). The page images, read twice by the vision model, have the accents.
+    s = "".join(c for c in unicodedata.normalize("NFKD", s) if not unicodedata.combining(c))
+    s = s.replace("’", "'").replace("­", "")
+    s = re.sub(r"(\w)-\s+(\w)", r"\1\2", s)
+    return re.sub(r"\s+", "", s)
+
+
+def sha256(p: Path) -> str:
+    h = hashlib.sha256()
+    with open(p, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def check_pdfs(pdf_dir: Path) -> tuple[int, int]:
+    fails = skips = 0
+    if shutil.which("pdftotext") is None:
+        print("SKIP pdf: pdftotext not found")
+        return 0, 1
+    found = {}
+    for p in pdf_dir.rglob("*.pdf"):
+        found.setdefault(sha256(p)[:16], p)
+    with tempfile.TemporaryDirectory() as tmp:
+        for prefix, name, pages in PDF_CHECKS:
+            pdf = found.get(prefix)
+            if pdf is None:
+                skips += 1
+                print(f"SKIP {name}: no PDF with SHA-256 {prefix}… below {pdf_dir}")
+                continue
+            texts = {}
+            for page in pages:
+                out = Path(tmp) / f"{name}-{page}.txt"
+                subprocess.run(["pdftotext", "-f", str(page), "-l", str(page), str(pdf), str(out)], check=True)
+                texts[page] = norm(out.read_text(encoding="utf-8", errors="replace"))
+            for page, checks in pages.items():
+                for label, key, want in checks:
+                    ok = (norm(key) in texts[page]) == want
+                    fails += not ok
+                    print("PASS" if ok else "FAIL", f"{name}: {label}")
+            for doc, label, pattern in NOT_ANYWHERE:
+                if doc != name:
+                    continue
+                whole = Path(tmp) / f"{name}-all.txt"
+                subprocess.run(["pdftotext", str(pdf), str(whole)], check=True)
+                ok = not re.search(pattern, norm(whole.read_text(encoding="utf-8", errors="replace")))
+                fails += not ok
+                print("PASS" if ok else "FAIL", f"{name}: {label}")
+    return fails, skips
 
 
 def fetch(url: str):
@@ -32,7 +121,14 @@ def fetch(url: str):
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pdf-dir", type=Path, help="directory holding the Verdier and Bondal-Kapranov PDFs (searched recursively)")
+    args = ap.parse_args()
     fails = skips = 0
+    if args.pdf_dir:
+        f, s = check_pdfs(args.pdf_dir)
+        fails += f
+        skips += s
     lurie, err = fetch(LURIE)
     if lurie is None:
         skips += 1
