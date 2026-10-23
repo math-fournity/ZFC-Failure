@@ -144,5 +144,67 @@
       }
     ],
     "incident": "first staging attempt: a mistyped hash left $OUT empty and `rsync -a $OUT/ main-release/` copied / into the worktree until /Volumes/D was full; nothing deleted or modified, debris moved to the Trash, staging redone under set -euo pipefail and verified identical; see README.md"
+  },
+  "second_followup_release": {
+    "release_id": "main-20261023-h-deepening-c455",
+    "why": "C-455 (general n) was finished after main 5a8d02c0f and overturns the n >= 3 analysis in C-454's row; same authorization",
+    "dev_source": "c3867d6bab7aae3b1f3a1359ef00929839366ba0",
+    "main": {
+      "previous": "5a8d02c0fd022094f2af3a07dfe0833022d135b2",
+      "commit": "56ed0cae3dc3bb2fdba5d31e0c114a41d9466aaf",
+      "pushed": "5a8d02c0f..56ed0cae3, fast-forward, no force"
+    },
+    "build": {
+      "status": "BUILT",
+      "files": 1741,
+      "runs": 221,
+      "accepted": 88,
+      "units": {
+        "UR": 84,
+        "A7": 45,
+        "ZFC1": 53,
+        "H": 57
+      }
+    },
+    "changes_vs_previous": {
+      "removed_paths": 0,
+      "added": [
+        "HoTT/formal/claude-cg001/sst-2ltt-identification-all/",
+        "3 receipt dirs 20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-*",
+        "HoTT/formal/claude-cg001/sst-2ltt-identification/REVISIONS.md"
+      ],
+      "changed": [
+        "CLAIMS (6 languages): C-455 row; dated correction on the C-454 row",
+        "README (6 languages): source stamps",
+        "HoTT/formal/claude-cg001/sst-2ltt-identification/README.md",
+        "HoTT/formal/claude-cg001/sst-2ltt-reverse/REVISIONS.md",
+        "RELEASE-MANIFEST.json"
+      ],
+      "changed_notes_hashed_by_receipts": 0
+    },
+    "checks": [
+      {
+        "check": "trial build",
+        "result": "BUILT from temporary commit 3b71c10e, whose tree is identical to c3867d6ba's; the final build differs only in the source-commit field of the manifest and the stamps in CLAIMS/README"
+      },
+      {
+        "check": "new runs replay",
+        "result": "3/3 PASS with tools/replay.py from the trial tree (105.3 s, 5.4 s, 103.6 s)",
+        "report": "REPLAY-C455-20261023.json"
+      },
+      {
+        "check": "other runs",
+        "result": "218 runs byte-identical to those replayed before (215 on 2026-10-22, 3 on 2026-10-23)"
+      },
+      {
+        "check": "staging",
+        "result": "the staged main-release tree is identical to the build (diff -qr, .git excluded); 15 changed and 5 new paths, committed by exact paths"
+      },
+      {
+        "check": "independent rebuild",
+        "result": "identical to 56ed0cae3 (1741 files, diff -qr against git archive)"
+      }
+    ],
+    "not_released": "C-456 (two-causes-rzk): tools/replay.py replays Agda and Lean only; no Rzk package is on main"
   }
 }

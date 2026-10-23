@@ -54,3 +54,16 @@ C-454 在上一次发布之后完成，`main` 少了 H 线的最后一个包。�
   - 同时复制出来的 5 个链接与 15 个空目录送进 `/Volumes/D` 的废纸篓，其中 `dev` 带着只读权限，先加写权限再移。
   - `/Volumes/D` 恢复到 23 GiB 可用；之后用 `set -euo pipefail` 与 `${VAR:?}` 守护的脚本重做，暂存树与生成结果逐字节相同，再提交。
 - **教训**：复制、移动、删除命令里的路径变量一律写成 `"${VAR:?}"`；提交号用 `rev-parse --verify` 取，不手打；守护条件与危险命令之间不用分号。
+
+## 第三次发布（2026-10-23，release `main-20261023-h-deepening-c455`）
+
+C-455 在第二次发布之后完成，而且推翻了 C-454 那一行里“n ≥ 3 的障碍”的分析，`main` 上的那一行若不改就仍按成立的口气写着。同一授权下补发。
+
+- **输入**：`dev` `c3867d6ba`。发布清单加 C-455 的包与 3 个运行；证据索引的 C-454 行（逐字进 CLAIMS 第 5 节）加一句带日期的更正，指向包内 `REVISIONS.md`（先例：C-446 行的日期注）；四种译文加 C-455 行与 C-454 的更正，由 Claude Opus 5.5 直接写，按各译文原有的引号写法。
+- **试生成**：从临时提交 `3b71c10e`（树与 `c3867d6ba` 相同）生成，`BUILT`。最终生成与它只差清单里的来源提交与 CLAIMS、README 里的来源戳。
+- **生成**：`BUILT`，1741 个文件、221 个运行（接受 88），单元 UR 84、A7 45、ZFC1 53、H 57。与上一版 `main`（`5a8d02c0f`）相比没有删除。新增 C-455 的包、它的 3 份收据与 `sst-2ltt-identification/REVISIONS.md`；改动是六种语言的 CLAIMS 与 README、`sst-2ltt-identification/README.md`、`sst-2ltt-reverse/REVISIONS.md` 与清单。改动的两份说明没有被任何收据的源清单哈希。
+- **重放**：新的 3 个运行用试生成树里的 `tools/replay.py` 重放，3/3 PASS（`REPLAY-C455-20261023.json`）。其余 218 个运行与此前重放过的逐字节相同。
+- **暂存**：守护过的脚本（`set -euo pipefail`、`"${VAR:?}"`、提交号用 `rev-parse --verify` 取）把生成结果同步进 main-release worktree；同步后的树与生成结果逐字节相同，15 个改动、5 个新增，按精确路径提交。
+- **独立重建**：从 `c3867d6ba` 再生成一次，与提交后的 `main` `56ed0cae3` 逐字节相同（1741 个文件）。
+- **推送**：`main` `5a8d02c0f..56ed0cae3`，快进，不强推。
+- **没发布的**：C-456（Rzk 重跑）。`tools/replay.py` 只认 Agda 与 Lean；此前也没有任何 Rzk 包进过 `main`。
