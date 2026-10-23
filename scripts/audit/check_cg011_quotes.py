@@ -22,11 +22,20 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-TRANSCRIPT = Path("/Users/aurolafly/.claude/projects/-Volumes-D-HoTT-AI-HANDOFF-20260911/"
-                  "91beaf35-237d-4c5d-887c-cb72c58ccca2.jsonl")
-TRANSCRIPT_015_TAKEOVER = Path("/Users/aurolafly/.claude/projects/"
-                               "-Volumes-D-HoTT-AI-HANDOFF-20260911--claude-worktrees-opus-015-flagging-issue-89e904/"
-                               "a15f4b3b-2441-458d-b911-556a515294e3.jsonl")
+PROJECTS = Path("/Users/aurolafly/.claude/projects")
+
+
+def transcript(session: str, usual: str) -> Path:
+    # The client files a session under the project directory of its current worktree and moves the JSONL when that
+    # worktree is recycled (2026-10-23: a15f4b3b went from ...opus-015-flagging-issue-89e904 to ...festive-turing-63229f),
+    # so look the session up by id and fall back to the usual place.
+    found = sorted(PROJECTS.glob(f"*/{session}.jsonl"), key=lambda p: p.stat().st_size, reverse=True)
+    return found[0] if found else PROJECTS / usual / f"{session}.jsonl"
+
+
+TRANSCRIPT = transcript("91beaf35-237d-4c5d-887c-cb72c58ccca2", "-Volumes-D-HoTT-AI-HANDOFF-20260911")
+TRANSCRIPT_015_TAKEOVER = transcript("a15f4b3b-2441-458d-b911-556a515294e3",
+                                     "-Volumes-D-HoTT-AI-HANDOFF-20260911--claude-worktrees-opus-015-flagging-issue-89e904")
 
 
 def norm(s: str) -> str:
