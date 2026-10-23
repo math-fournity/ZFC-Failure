@@ -2,7 +2,7 @@
 
 **中文** · [Русский](CLAIMS-RU.md) · [Deutsch](CLAIMS-DE.md) · [Français](CLAIMS-FR.md) · [English](CLAIMS-EN.md)
 
-> 本文件由 `dev` 上的 `scripts/release/build_main_release.py` 从提交 `a640c407` 生成，不在本分支修改。第 1、2 节逐字取自 `dev` 上共享证据矩阵 `HoTT/CLAIM_EVIDENCE_MATRIX.md` 的两节（不含原标题行）；第 3 节逐字取自 `dev` 上的目标内索引草稿与 Claude 总索引；第 4 节（ZFC 一侧）逐字取自共享证据矩阵中各包的行与 Claude 总索引；第 5 节（H 深化）逐字取自 CG-001 证据索引中各命题的一句话行；第 6 节由各运行的收据生成。文中 `formal/…`、`verification/runs/…` 指本分支 `HoTT/` 下的同名路径；其余过程文件的路径在 `dev` 上（`RELEASE-MANIFEST.json` 的 `paths_mentioned_but_on_dev` 列出了正文提到的那些）。另有俄、德、法、英文译本（AI 翻译，以本中文版为准）；`CLAIMS.md` 与 `CLAIMS-ZH.md` 相同。
+> 本文件由 `dev` 上的 `scripts/release/build_main_release.py` 从提交 `c3867d6b` 生成，不在本分支修改。第 1、2 节逐字取自 `dev` 上共享证据矩阵 `HoTT/CLAIM_EVIDENCE_MATRIX.md` 的两节（不含原标题行）；第 3 节逐字取自 `dev` 上的目标内索引草稿与 Claude 总索引；第 4 节（ZFC 一侧）逐字取自共享证据矩阵中各包的行与 Claude 总索引；第 5 节（H 深化）逐字取自 CG-001 证据索引中各命题的一句话行；第 6 节由各运行的收据生成。文中 `formal/…`、`verification/runs/…` 指本分支 `HoTT/` 下的同名路径；其余过程文件的路径在 `dev` 上（`RELEASE-MANIFEST.json` 的 `paths_mentioned_but_on_dev` 列出了正文提到的那些）。另有俄、德、法、英文译本（AI 翻译，以本中文版为准）；`CLAIMS.md` 与 `CLAIMS-ZH.md` 相同。
 
 ## 1. 罗素线与 UR：追问程序、邻近对照与截断对照
 
@@ -387,7 +387,8 @@
 | `CG001-C-451` | 群胚的路径范畴是单价范畴，圆的那一个是 `UnivCat` 的成员；宇宙里圆到自身的认同不构成集合（rotLoop ≠ refl），且是这个成员自身认同的收缩；所以单价范畴的全体不是群胚、不是集合；C-77 的追问对任何判定器走一步没有答案、走两步答出 3，恰在第 3 问停 | MP-CG001-UNIVALENT-CATEGORIES-EXACT-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | CG-011 G10 的后续；元层特征方案 §4、§7 第 2 条 | 只证 C-449 的那个全体（对象 `Type₁`、态射 `Type₀`）；自然自同构是读法，没写出；“结构多一层，停点挪一问”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
 | `CG001-C-452` | 每个按层的半单纯类型给出一个严格的半单纯类型（k 个顶点的单纯形取作 `Sh n Y k`，取面 `res`，相干 `resId`、`resComp`）；k ≤ n 时是全空间（两层例子里边连同两端，从边取面得端点），k > n 时是余骨架（三角形就是三角形的壳） | MP-CG001-SST-2LTT-CORRESPONDENCE-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-450 的续作；CG-011 G8 | 只一个方向，不说两版等价；实例只在两层的例子上；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
 | `CG001-C-453` | 每个严格的半单纯类型经纤维给出按层的一版（第 m+1 层取边界恰为给定壳的单纯形），边界映射与取面严格可换（对一切 n）；交回严格的一版，第 n+1 层与原来的第 n+1 层内层等价（对一切 n）；用在 `toStrict Y` 上即另一个来回 | MP-CG001-SST-2LTT-REVERSE-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-452 的续作；CG-011 G8 | 不说两版作为类型等价（类型族这一层没认同）；`roundTrip` 是内层等价；第 0 层不取回；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
-| `CG001-C-454` | 按层的半单纯类型交到严格的一版、再经纤维取回，在第 1 层与第 2 层得到的就是原物（`SST 1`、`SST 2` 里的内层路径，对一切点族与边族）；用的是单价性：一族类型沿路径相等，只要逐点等价；边界映射按定义是投到壳再逐点换成纤维元素，壳沿第 1 层的路径搬运逐点算成 `uaβ` | MP-CG001-SST-2LTT-IDENTIFICATION-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-453 的续作；CG-011 G8 | 只证 n = 1、2，不说对一切 n 两版作为类型相等；认同是内层路径，按定义不成立；严格的一版那一侧只到内层等价；n ≥ 3 的障碍（搬运壳要一条与取面相容的同伦，外层 UIP 管不到）是分析；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-454` | 按层的半单纯类型交到严格的一版、再经纤维取回，在第 1 层与第 2 层得到的就是原物（`SST 1`、`SST 2` 里的内层路径，对一切点族与边族）；用的是单价性：一族类型沿路径相等，只要逐点等价；边界映射按定义是投到壳再逐点换成纤维元素，壳沿第 1 层的路径搬运逐点算成 `uaβ` | MP-CG001-SST-2LTT-IDENTIFICATION-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-453 的续作；CG-011 G8 | 只证 n = 1、2，不说对一切 n 两版作为类型相等；认同是内层路径，按定义不成立；严格的一版那一侧只到内层等价；n ≥ 3 的障碍（搬运壳要一条与取面相容的同伦，外层 UIP 管不到）是分析（2026-10-23 更正：这条分析不成立，C-455 对一切 n 证出认同，见 `sst-2ltt-identification/REVISIONS.md`）；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-455` | 对一切外层 N 与一切 `Y : SST N`，按层的半单纯类型交到严格的一版、再经纤维取回，得到的就是 Y 本身（`SST N` 里的内层路径），沿它来回一趟的边界映射就是壳上的恒等；证明逐层建一条比较：第 n+1 层的类型族路径是一个 Glue（时刻 i 取比较映射的纤维，终点粘上目标族），比较路径的自然性写成区间每一点上的外层相等，由外层 UIP 收住；C-454 说的“外层 UIP 管不到”不成立 | MP-CG001-SST-2LTT-IDENTIFICATION-ALL-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-454 的续作；CG-011 G8 | 认同是内层路径，不是外层相等；严格的一版那一侧没有认同；全部层的塔仍要 C-450 的桥；“A 只落在桥上”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
 
 ## 6. 运行清单
 
@@ -611,3 +612,6 @@
 | `20261023-CG001-SST-2LTT-IDENTIFICATION-01` | `MP-CG001-SST-2LTT-IDENTIFICATION-001` | CG001-C-454 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
 | `20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-01` | `MP-CG001-SST-2LTT-IDENTIFICATION-NEG-001` | CG001-C-454 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
 | `20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-02` | `MP-CG001-SST-2LTT-IDENTIFICATION-NEG-002` | CG001-C-454 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-01` | `MP-CG001-SST-2LTT-IDENTIFICATION-ALL-001` | CG001-C-455 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-01` | `MP-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-001` | CG001-C-455 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-02` | `MP-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-002` | CG001-C-455 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
