@@ -1,0 +1,18 @@
+{
+  "schema": "goal-x-state/v1",
+  "id": "CG-012",
+  "title": "后面应该做的全部做完：可做的形式化做完，其余照实记下阻塞（研究发起人 2026-10-23）",
+  "status": "ACTIVE",
+  "phase": "P1-记录",
+  "next_action": "P2 F1：读形式化追踪第 07 章与 C-425 包（two-choices-rational），设计带模柯西列的实数（setoid，不用 Classical.choice），证有界单调实数列都收敛 ⟺ LPO",
+  "bound_sessions": [
+    "a15f4b3b-2441-458d-b911-556a515294e3"
+  ],
+  "created": "2026-10-23T13:54:43-04:00",
+  "updated": "2026-10-23T13:55:41-04:00",
+  "last_checkpoint": "2026-10-23T13:55:41-04:00",
+  "checkpoints": 1,
+  "compactions": 0,
+  "last_compaction": null,
+  "home": "/Volumes/D/HoTT-worktrees/012-opus-w8/.claude/goals/CG-012-remaining-followups-after-h"
+}
