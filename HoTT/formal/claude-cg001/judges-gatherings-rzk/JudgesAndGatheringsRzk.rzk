@@ -1,0 +1,253 @@
+#lang rzk-1
+
+-- The rest of C-78 and C-79 in Rzk, under univalence (Claude Code desktop session a15f4b3b,
+-- 2026-10-23; CG-011 gate G10, the Rzk half; worktree claude/012-opus-w8).  Checked after
+-- ../two-causes-rzk/TwoCausesUnderUnivalence.rzk in the same run (C-456), whose definitions it uses.
+--
+-- proof id : MP-CG001-JUDGES-GATHERINGS-RZK-001
+-- claims   : CG001-C-457 (full statement in CLAIM.md)
+--
+-- C-456 left three items of the Agda file of C-77/C-78/C-79 out: C-78 (b) (a judge is unique),
+-- C-78 (d) (the other question stops at once) and C-79 (b) for every n (the gathering of the
+-- (1+n)-types stops exactly at question 1+n; C-456 has n = 0 and n = 1).  This file adds them.
+--
+-- For C-79 (b) the lower bound needs, for every m, a type of h-level m+3 with a nontrivial section
+-- of its (m+1)-fold loops: in the Agda proof the Eilenberg-MacLane space K(Z, m+1), which Rzk 0.11.3
+-- cannot declare.  So these witnesses are an argument  W : BoundedHeights.  Forgetting the height
+-- bound turns W into A's witnesses K of C-456 (every-height-of-bounded), so one argument serves both.
+--
+-- Univalence is, as in C-456, an explicit argument; nothing is declared as an axiom.
+
+-- ==================================================================================================
+-- 1. C-78 (b): a judge is unique
+
+#define neg-is-prop
+  ( univ : Univalence)
+  ( A : U)
+  : is-prop (neg A)
+  := pi-prop univ A (\ _ → Empty) (\ _ → empty-is-prop)
+
+#define dec-is-prop
+  ( univ : Univalence)
+  ( A : U)
+  ( hA : is-prop A)
+  : is-prop (Dec A)
+  := \ d e → ind-Dec A (\ d' → d' = e)
+       (\ a → ind-Dec A (\ e' → yes A a = e')
+                (\ b → ap A (Dec A) (\ x → yes A x) a b (hA a b))
+                (\ nb → ex-falso (yes A a = no A nb) (nb a))
+                e)
+       (\ na → ind-Dec A (\ e' → no A na = e')
+                 (\ b → ex-falso (no A na = yes A b) (na b))
+                 (\ nb → ap (neg A) (Dec A) (\ f → no A f) na nb (neg-is-prop univ A na nb))
+                 e)
+       d
+
+#define judge-is-prop
+  ( univ : Univalence)
+  ( C : U)
+  : is-prop (Judge C)
+  := pi-prop univ ℕ (\ k → Dec (hlevel (succ k) C))
+       (\ k → dec-is-prop univ (hlevel (succ k) C) (is-prop-hlevel univ (succ k) C))
+
+-- every judge of the universe is the judge whose every "no" comes from clause (1) of C-456
+#define every-judge-is-judge-via-B
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( judge : Judge U)
+  : judge = judge-via-B univ K
+  := judge-is-prop univ U judge (judge-via-B univ K)
+
+-- ==================================================================================================
+-- 2. C-78 (d): the other question, "is C settled at some h-level at all?", stops at once
+
+#define whether-settled
+  ( C : U)
+  ( d : Dec (HasLevel C))
+  : ℕ → Maybe Bool
+  := \ _ → ind-Dec (HasLevel C) (\ _ → Maybe Bool) (\ _ → just Bool true) (\ _ → just Bool false) d
+
+-- on the universe it answers no at fuel 0, for every way of deciding that question
+#define universe-whether-answers-no
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( d : Dec (HasLevel U))
+  : whether-settled U d zero = just Bool false
+  := ind-Dec (HasLevel U) (\ d' → whether-settled U d' zero = just Bool false)
+       (\ w → ex-falso (whether-settled U (yes (HasLevel U) w) zero = just Bool false)
+                (universe-no-level univ K (first w) (second w)))
+       (\ _ → refl)
+       d
+
+#define decide-whether-universe
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  : Dec (HasLevel U)
+  := no (HasLevel U) (\ w → universe-no-level univ K (first w) (second w))
+
+-- the kernel runs it
+#define universe-whether-kernel-run
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  : whether-settled U (decide-whether-universe univ K) zero = just Bool false
+  := refl
+
+-- ==================================================================================================
+-- 3. C-79 (b) for every n: the gathering of the (1+n)-types stops exactly at question 1+n
+
+-- for every m a type of h-level m+3 with a nontrivial section of its (m+1)-fold loops
+-- (in the Agda proof: K(Z, m+1), an (m+1)-type)
+#define BoundedHeights
+  : U
+  := (m : ℕ) → Σ (X : U) , Σ (_ : hlevel (succ (succ (succ m))) X) ,
+       Σ (s : (x : X) → first (loops-iter (succ m) (X , x))) ,
+         neg (s =_{(x : X) → first (loops-iter (succ m) (X , x))} (\ x → trivial-loops X m x))
+
+-- forgetting the height bound gives A's witnesses of C-456
+#define every-height-of-bounded
+  ( W : BoundedHeights)
+  : EveryHeight
+  := \ m → (first (W m) , second (second (W m)))
+
+-- an inhabited type of h-level k+1 has contractible k-fold loops
+#define hlevel-loops-pred
+  : (k : ℕ) → (X : U) → hlevel (succ k) X → (x : X) → is-contr (first (loops-iter k (X , x)))
+  := ind-ℕ (\ k → (X : U) → hlevel (succ k) X → (x : X) → is-contr (first (loops-iter k (X , x))))
+       (\ X h x → (x , \ y → first (h x y)))
+       (\ k ih X h x → ih (x = x) (h x x) refl)
+
+-- the gathering of the (m+3)-types is not of h-level m+3: local-global on the gathering, at the
+-- member W m
+#define gathering-not-at-own-level
+  ( univ : Univalence)
+  ( W : BoundedHeights)
+  ( m : ℕ)
+  ( h : hlevel (succ (succ (succ m))) (Gathering (succ (succ m))))
+  : Empty
+  := second (second (second (W m)))
+       (contr-is-prop ((x : first (W m)) → first (loops-iter (succ m) (first (W m) , x)))
+          (transport Ptd (\ P → is-contr (first P))
+             (loops-iter (succ (succ m)) (Gathering (succ (succ m)) , (first (W m) , first (second (W m)))))
+             (pi-pt (first (W m)) (\ x → loops-iter (succ m) (first (W m) , x)))
+             (local-global univ (gathering (succ (succ m))) (gathering-univalent univ (succ (succ m))) m
+                (first (W m) , first (second (W m))))
+             (hlevel-loops-pred (succ (succ m)) (Gathering (succ (succ m))) h
+                (first (W m) , first (second (W m)))))
+          (first (second (second (W m))))
+          (\ x → trivial-loops (first (W m)) m x))
+
+-- below a level that fails, every level fails
+#define not-below
+  ( C : U)
+  ( j k : ℕ)
+  ( w : le j k)
+  ( nh : neg (hlevel k C))
+  : neg (hlevel j C)
+  := \ hj → nh (transport ℕ (\ l → hlevel l C) (add (first w) j) k (second w) (hlevel-plus (first w) j C hj))
+
+#define gathering-settles-above
+  ( univ : Univalence)
+  ( m : ℕ)
+  : hlevel (succ (succ (succ (succ m)))) (Gathering (succ (succ m)))
+  := bounded-settles univ (gathering (succ (succ m))) (gathering-univalent univ (succ (succ m)))
+       (succ (succ (succ m))) (gathering-bounded (succ (succ m)))
+
+-- for every judge: fuel m+2 returns m+3, every smaller fuel returns nothing
+#define gathering-stops-exactly
+  ( univ : Univalence)
+  ( W : BoundedHeights)
+  ( m : ℕ)
+  ( judge : Judge (Gathering (succ (succ m))))
+  : Σ (_ : run (Gathering (succ (succ m))) judge (succ (succ m)) (succ zero) = just ℕ (succ (succ (succ m)))) ,
+      ((i : ℕ) → lt i (succ (succ m)) → run (Gathering (succ (succ m))) judge i (succ zero) = nothing ℕ)
+  := ( exact-halt (Gathering (succ (succ m))) judge (succ (succ m)) (succ zero)
+         (\ i ilt → not-below (Gathering (succ (succ m))) (succ (succ i)) (succ (succ (succ m)))
+                      (le-succ-succ (succ i) (succ (succ m)) ilt)
+                      (gathering-not-at-own-level univ W m))
+         (gathering-settles-above univ m) ,
+       \ i ilt → silent-up-to (Gathering (succ (succ m))) judge i (succ zero)
+                   (\ j jle → not-below (Gathering (succ (succ m))) (succ (succ j)) (succ (succ i))
+                                (le-succ-succ (succ j) (succ i) (le-succ-succ j i jle))
+                                (not-below (Gathering (succ (succ m))) (succ (succ i)) (succ (succ (succ m)))
+                                   (le-succ-succ (succ i) (succ (succ m)) ilt)
+                                   (gathering-not-at-own-level univ W m))))
+
+-- a judge for the gathering exists: compare the stage with m+1
+#data Sum (A B : U) := inl (a : A) | inr (b : B)
+
+#define split-le
+  : (k n : ℕ) → Sum (le k n) (lt n k)
+  := ind-ℕ (\ k → (n : ℕ) → Sum (le k n) (lt n k))
+       (\ n → inl (le zero n) (lt n zero) (le-zero n))
+       (\ k ih → ind-ℕ (\ n → Sum (le (succ k) n) (lt n (succ k)))
+                   (inr (le (succ k) zero) (lt zero (succ k)) (lt-zero-succ k))
+                   (\ n _ → ind-Sum (le k n) (lt n k) (\ _ → Sum (le (succ k) (succ n)) (lt (succ n) (succ k)))
+                              (\ w → inl (le (succ k) (succ n)) (lt (succ n) (succ k)) (le-succ-succ k n w))
+                              (\ w → inr (le (succ k) (succ n)) (lt (succ n) (succ k)) (le-succ-succ (succ n) k w))
+                              (ih n)))
+
+-- climbing: a level that holds gives every level above it
+#define hlevel-up
+  ( C : U)
+  ( j k : ℕ)
+  ( w : le j k)
+  ( h : hlevel j C)
+  : hlevel k C
+  := transport ℕ (\ l → hlevel l C) (add (first w) j) k (second w) (hlevel-plus (first w) j C h)
+
+-- stage k asks for h-level k+1: the answer is no up to stage m+2 and yes from stage m+3 on
+#define judge-gathering
+  ( univ : Univalence)
+  ( W : BoundedHeights)
+  ( m : ℕ)
+  : Judge (Gathering (succ (succ m)))
+  := \ k → ind-Sum (le k (succ (succ m))) (lt (succ (succ m)) k)
+             (\ _ → Dec (hlevel (succ k) (Gathering (succ (succ m)))))
+             (\ w → no (hlevel (succ k) (Gathering (succ (succ m))))
+                      (not-below (Gathering (succ (succ m))) (succ k) (succ (succ (succ m)))
+                         (le-succ-succ k (succ (succ m)) w)
+                         (gathering-not-at-own-level univ W m)))
+             (\ w → yes (hlevel (succ k) (Gathering (succ (succ m))))
+                       (hlevel-up (Gathering (succ (succ m))) (succ (succ (succ (succ m)))) (succ k)
+                          (le-succ-succ (succ (succ (succ m))) k w)
+                          (gathering-settles-above univ m)))
+             (split-le k (succ (succ m)))
+
+-- the kernel runs it on the gathering of the 1-types (m = 0): fuel 2 returns 3
+#define gathering-kernel-run
+  ( univ : Univalence)
+  ( W : BoundedHeights)
+  : run (Gathering (succ (succ zero))) (judge-gathering univ W zero) (succ (succ zero)) (succ zero)
+      = just ℕ (succ (succ (succ zero)))
+  := refl
+
+-- ==================================================================================================
+-- 4. The claim in one type
+
+#define Rest
+  : U
+  := (univ : Univalence) → (W : BoundedHeights) →
+     -- C-78 (b)
+     Σ ( _ : (C : U) → is-prop (Judge C)) ,
+     Σ ( _ : (judge : Judge U) → judge = judge-via-B univ (every-height-of-bounded W)) ,
+     -- C-78 (d)
+     Σ ( _ : (d : Dec (HasLevel U)) → whether-settled U d zero = just Bool false) ,
+     -- C-79 (b), n = 0 and n = 1 (from C-456) and every n >= 2
+     Σ ( _ : (judge : Judge (Gathering zero)) →
+               (run (Gathering zero) judge zero (succ zero) = just ℕ (succ zero))) ,
+     Σ ( _ : (judge : Judge (Gathering (succ zero))) →
+               Σ (_ : run (Gathering (succ zero)) judge zero (succ zero) = nothing ℕ) ,
+                 (run (Gathering (succ zero)) judge (succ zero) (succ zero) = just ℕ (succ (succ zero)))) ,
+       ((m : ℕ) → (judge : Judge (Gathering (succ (succ m)))) →
+          Σ (_ : run (Gathering (succ (succ m))) judge (succ (succ m)) (succ zero) = just ℕ (succ (succ (succ m)))) ,
+            ((i : ℕ) → lt i (succ (succ m)) → run (Gathering (succ (succ m))) judge i (succ zero) = nothing ℕ))
+
+#define rest
+  : Rest
+  := \ univ W →
+     ( \ C → judge-is-prop univ C ,
+       ( \ judge → every-judge-is-judge-via-B univ (every-height-of-bounded W) judge ,
+         ( \ d → universe-whether-answers-no univ (every-height-of-bounded W) d ,
+           ( \ judge → props-stop-at-one univ judge ,
+             ( \ judge → sets-stop-at-two univ judge ,
+               \ m judge → gathering-stops-exactly univ W m judge)))))

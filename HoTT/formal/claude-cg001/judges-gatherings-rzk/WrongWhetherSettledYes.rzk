@@ -1,0 +1,14 @@
+#lang rzk-1
+
+-- Negative control MP-CG001-JUDGES-GATHERINGS-RZK-NEG-002 (CG001-C-457), checked after
+-- ../two-causes-rzk/TwoCausesUnderUnivalence.rzk and JudgesAndGatheringsRzk.rzk in the same run.
+--
+-- Claim to be refused: the other question, "is the universe settled at some h-level at all?",
+-- answers yes.  The kernel runs the program with the decision that comes from clause (1) of C-456.
+-- Expected: rejected, because the run computes to just false (C-78 (d)).
+
+#define wrong-whether-settled-yes
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  : whether-settled U (decide-whether-universe univ K) zero = just Bool true
+  := refl

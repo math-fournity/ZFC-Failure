@@ -1,0 +1,50 @@
+{
+  "claim_ids": [
+    "CG001-C-457"
+  ],
+  "command_argv": [
+    "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+    "typecheck",
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/JudgesAndGatheringsRzk.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/WrongGatheringStopsEarly.rzk"
+  ],
+  "completed_at_utc": "2026-10-23T17:37:29.627353+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 1.898922,
+  "environment": {
+    "bytes": 480,
+    "path": "environment.txt",
+    "sha256": "07e9df7474f7e76bc4f1119fa20fcb2cc3cf6e1c32f43f20f15657844c44305b"
+  },
+  "exit_code": 1,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows that the kernel computes the silence at stage 2 with the concrete judge; the main file proves the exact stop for every judge and every n."
+  ],
+  "proof_assistant": "Rzk",
+  "proof_assistant_version": "0.11.3",
+  "proof_id": "MP-CG001-JUDGES-GATHERINGS-RZK-NEG-001",
+  "run_id": "20261023-CG001-JUDGES-GATHERINGS-RZK-NEG-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-457 (C-79 (b)), checked after C-456's main file and this package's file: the gathering of the 1-types stops like the gathering of sets, so fuel 1 returns 2, by refl; expected rejection (stage 2 says no and the kernel computes the run to nothing).",
+  "source_manifest": {
+    "bytes": 2113,
+    "path": "source-manifest.json",
+    "sha256": "1bcfc5e7dbac0ae0c4da278f3299175c7b57eea11a94720a4b2b95611522ce23"
+  },
+  "started_at_utc": "2026-10-23T17:37:27.728186+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 12365,
+    "path": "stderr.txt",
+    "sha256": "ce3e2a0cdfb61c0d74a9ed45f7eb81fe2e2311ba341147792d4f68b40c45b52e"
+  },
+  "stdout": {
+    "bytes": 28218,
+    "path": "stdout.txt",
+    "sha256": "45bb54d63b6d4a94d71d6d93e4e9bd6856ff4c64d19b64fe2f82b3c6796ee5b6"
+  },
+  "theory_variant": "sHoTT (Riehl-Shulman simplicial type theory) as implemented by Rzk"
+}

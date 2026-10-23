@@ -1,0 +1,50 @@
+{
+  "claim_ids": [
+    "CG001-C-457"
+  ],
+  "command_argv": [
+    "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+    "typecheck",
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/JudgesAndGatheringsRzk.rzk"
+  ],
+  "completed_at_utc": "2026-10-23T17:37:27.409046+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 1.867987,
+  "environment": {
+    "bytes": 480,
+    "path": "environment.txt",
+    "sha256": "07e9df7474f7e76bc4f1119fa20fcb2cc3cf6e1c32f43f20f15657844c44305b"
+  },
+  "exit_code": 0,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Status: under univalence. Univalence is an explicit argument (univ), not built in and not declared as an axiom; for C-79 (b) for every n the bounded witnesses (the Eilenberg-MacLane spaces K(Z, m+1) in the Agda proof) are an explicit argument W : BoundedHeights, because Rzk 0.11.3 rejects higher path constructors.",
+    "Rzk has U : U; the run confirms the derivation in a second, independently implemented kernel, not the consistency of a second foundation; nothing here yields ZFC |- falsum or ZFC-1 => B; not indexed in HoTT/CLAIM_EVIDENCE_MATRIX.md by this receipt (goal-local index only)."
+  ],
+  "proof_assistant": "Rzk",
+  "proof_assistant_version": "0.11.3",
+  "proof_id": "MP-CG001-JUDGES-GATHERINGS-RZK-001",
+  "run_id": "20261023-CG001-JUDGES-GATHERINGS-RZK-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Rzk 0.11.3 (sHoTT), no declared axioms, no assumptions, no holes; checked after C-456's main file, whose definitions it uses. CG001-C-457 exactly as in CLAIM.md: C-78 (b): the decidability of a proposition is a proposition, so the type of judges of any type is a proposition and every judge of the universe equals judge-via-B; C-78 (d): the program asking whether the catalogue is settled at some h-level at all answers at once, and on the universe it answers no at fuel 0 for every decision (kernel run by refl); C-79 (b) for every n: an inhabited type of h-level k+1 has contractible k-fold loops; by C-456's local-global lemma the gathering of the (m+3)-types is not of h-level m+3, given a type of h-level m+3 with a nontrivial section of its (m+1)-fold loops; so for every judge the gathering of the (1+n)-types answers 1+n at fuel n and nothing before, for every n (n = 0 and n = 1 from C-456); a judge exists (comparison of naturals) and the kernel runs the gathering of the 1-types with fuel 2 to 3 by refl. Bundled as rest : Rest.",
+  "source_manifest": {
+    "bytes": 1896,
+    "path": "source-manifest.json",
+    "sha256": "a079bd20b37d1fe392ae867e301f9fe54b64fadca25d7eed095a231a3f6ff0f6"
+  },
+  "started_at_utc": "2026-10-23T17:37:25.540783+00:00",
+  "status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "stderr": {
+    "bytes": 12119,
+    "path": "stderr.txt",
+    "sha256": "c186d89255a78268e35242b49fbcf8ae5113e413fd0cba095916f865e7c31244"
+  },
+  "stdout": {
+    "bytes": 18,
+    "path": "stdout.txt",
+    "sha256": "a8556b63c8a266fd32519f6532b6139fb3537c45dc5de8f6e60c786426346002"
+  },
+  "theory_variant": "sHoTT (Riehl-Shulman simplicial type theory) as implemented by Rzk"
+}

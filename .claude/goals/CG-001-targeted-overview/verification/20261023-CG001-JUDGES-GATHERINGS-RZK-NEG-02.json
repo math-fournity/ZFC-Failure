@@ -1,0 +1,33 @@
+{
+  "status": "NEGATIVE_CONTROL_REJECTED_AS_EXPECTED",
+  "verifier": "CG-001 goal-local (reuses canonical verify_formal_proof_run.py checks; index check replaced)",
+  "canonical_verifier_sha256": "e0fc47aa2d3d9d8bfa370a02c5fa3abbec4a77ddc78f74e283b2b30ad359e5a3",
+  "run_id": "20261023-CG001-JUDGES-GATHERINGS-RZK-NEG-02",
+  "proof_id": "MP-CG001-JUDGES-GATHERINGS-RZK-NEG-002",
+  "claim_ids": [
+    "CG001-C-457"
+  ],
+  "kernel_status": "KERNEL_REJECTED",
+  "exit_code": 1,
+  "source_paths": [
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/JudgesAndGatheringsRzk.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/WrongWhetherSettledYes.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/CLAIM.md",
+    "HoTT/formal/claude-cg001/two-causes-rzk/CLAIM.md",
+    "HoTT/formal/claude-cg001/directed-native/RZK_TOOLCHAIN.json"
+  ],
+  "external_dependencies": [
+    "rzk-release-asset",
+    "rzk-binary"
+  ],
+  "index": "GOAL_LOCAL_INDEX_ONLY",
+  "goal_index_row_sha256": {
+    "MP-CG001-JUDGES-GATHERINGS-RZK-NEG-002": "684e053800e8261278ff84ec917ded6f301c236f717ceb2f129c6667e976dcb3",
+    "20261023-CG001-JUDGES-GATHERINGS-RZK-NEG-02": "a2e3a03b87660cfdf8dc5220e07c2158c63a85fe92eae642390811e4c81c21dd",
+    "CG001-C-457": "fc88692259d2ad6b0729fd4f57b2bce541d31571774d43ae031e84c9829bc9cd"
+  },
+  "shared_matrix_index": "NOT_INDEXED_RELAY_DRAFT_ONLY",
+  "replay": "EXACT_EXIT_STDOUT_STDERR_MATCH",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED"
+}

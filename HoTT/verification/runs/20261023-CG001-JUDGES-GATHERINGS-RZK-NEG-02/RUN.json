@@ -1,0 +1,50 @@
+{
+  "claim_ids": [
+    "CG001-C-457"
+  ],
+  "command_argv": [
+    "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+    "typecheck",
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/JudgesAndGatheringsRzk.rzk",
+    "HoTT/formal/claude-cg001/judges-gatherings-rzk/WrongWhetherSettledYes.rzk"
+  ],
+  "completed_at_utc": "2026-10-23T17:37:31.866537+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 1.939129,
+  "environment": {
+    "bytes": 480,
+    "path": "environment.txt",
+    "sha256": "07e9df7474f7e76bc4f1119fa20fcb2cc3cf6e1c32f43f20f15657844c44305b"
+  },
+  "exit_code": 1,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows that the kernel computes the answer no for the decision that comes from clause (1) of C-456; the main file proves it for every decision."
+  ],
+  "proof_assistant": "Rzk",
+  "proof_assistant_version": "0.11.3",
+  "proof_id": "MP-CG001-JUDGES-GATHERINGS-RZK-NEG-002",
+  "run_id": "20261023-CG001-JUDGES-GATHERINGS-RZK-NEG-02",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-457 (C-78 (d)), checked after C-456's main file and this package's file: asked whether the universe is settled at some h-level at all, the program answers yes, by refl; expected rejection (the kernel computes just false).",
+  "source_manifest": {
+    "bytes": 2111,
+    "path": "source-manifest.json",
+    "sha256": "09609e70589d2e50e9aabf56eef734caf805415e869485ebfa31c4c537709a93"
+  },
+  "started_at_utc": "2026-10-23T17:37:29.927145+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 12359,
+    "path": "stderr.txt",
+    "sha256": "260cea142f10076633c91136edfec2140b69089606f8c3fb808aa8645cd0968d"
+  },
+  "stdout": {
+    "bytes": 28047,
+    "path": "stdout.txt",
+    "sha256": "01c13238d29b45817cb7004af151a799fce3a6ddee87d25220536dc8334d3da3"
+  },
+  "theory_variant": "sHoTT (Riehl-Shulman simplicial type theory) as implemented by Rzk"
+}

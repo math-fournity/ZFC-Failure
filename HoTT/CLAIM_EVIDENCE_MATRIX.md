@@ -2814,3 +2814,17 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-456 | 以 `univ : Univalence`（`idtoeqv` 双侧可逆）为前提：`two-causes : TwoCauses`，即对任意收集 C，(1) `Univalent C → AllHeights C →` 编码没有有限层且对任意判定器 `Never`；(2) `Univalent C → HeightsBoundedBy k C →` 编码在 k+1 层落定且对任意判定器 `Halts`；(3) `SamenessIsFact C →` 对任意判定器燃料 0 交出 1（此条不带 `univ`）；(4) `Never` 推出高度无上限（单价时）与相同不是事实（此半不带 `univ`）；C-77 的程序事实 (a)–(e) 不带 `univ`；以 `univ` 与 `K : EveryHeight` 为前提：`witnesses : Witnesses`（宇宙、汇集、集合的汇集恰第 2 问停、编号收集、成对收集）；内核实跑：宇宙燃料 150 得 nothing，集合的汇集燃料 1 得 2，自然数燃料 0 得 1 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261023-CG001-TWO-CAUSES-RZK-01`；负控制 `-NEG-01` 至 `-NEG-04` | 身份是“在单价性公设下”；宇宙一条还要 A 的见证；Rzk 有 `U : U`，不说第二个基础相容；燃料 150 不是 1000；C-79 (b) 一般的 n 的下界与 C-78 (b)(d) 没做；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放，不进 main |
+
+## Claude（接手 015-Opus）：C-78 与 C-79 剩下的部分在 Rzk 里补齐（2026-10-23）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，C-456 的续作（CG-011 G10 的 Rzk 一半）。读法：机器证明（Rzk 0.11.3，没有声明的公理），在单价性公设下；每次运行先检查 C-456 的主文件。C-79 (b) 一般的 n 另以一族有上限的见证为参数。不进 main。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-JUDGES-GATHERINGS-RZK-001` | `CG001-C-457` | `formal/claude-cg001/judges-gatherings-rzk/JudgesAndGatheringsRzk.rzk`（`dec-is-prop`、`judge-is-prop`、`every-judge-is-judge-via-B`、`whether-settled`、`universe-whether-answers-no`、`universe-whether-kernel-run`、`BoundedHeights`、`every-height-of-bounded`、`hlevel-loops-pred`、`gathering-not-at-own-level`、`not-below`、`gathering-stops-exactly`、`split-le`、`hlevel-up`、`judge-gathering`、`gathering-kernel-run`、`rest`），接在 `two-causes-rzk/TwoCausesUnderUnivalence.rzk` 之后检查 | `verification/runs/20261023-CG001-JUDGES-GATHERINGS-RZK-01/`（源清单另哈希本包与 C-456 的 `CLAIM.md`）；exit 0，1.9 秒；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-JUDGES-GATHERINGS-RZK-NEG-001` | `CG001-C-457`（负控制） | 同目录 `WrongGatheringStopsEarly.rzk` | `verification/runs/20261023-CG001-JUDGES-GATHERINGS-RZK-NEG-01/`；exit 1（`cannot unify`：内核算出 nothing） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-JUDGES-GATHERINGS-RZK-NEG-002` | `CG001-C-457`（负控制） | 同目录 `WrongWhetherSettledYes.rzk` | `verification/runs/20261023-CG001-JUDGES-GATHERINGS-RZK-NEG-02/`；exit 1（`cannot unify`：内核算出 `just false`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-457 | 以 `univ : Univalence` 为前提：`judge-is-prop univ C : is-prop (Judge C)`，宇宙的任一判定器等于 `judge-via-B`；`universe-whether-answers-no`：对任何 `d : Dec (HasLevel U)`，`whether-settled U d zero = just false`；以 `univ` 与 `W : BoundedHeights` 为前提：`gathering-not-at-own-level`（(m+3) 层落定者的汇集不在第 m+3 层）与 `gathering-stops-exactly`（对任意判定器燃料 m+2 交出 m+3、更小的燃料没有答案），连同 C-456 的 n = 0、1，对一切 n 恰在第 1+n 问停；`rest : Rest`；内核实跑两次 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261023-CG001-JUDGES-GATHERINGS-RZK-01`；负控制 `-NEG-01`、`-NEG-02` | 身份是“在单价性公设下”，C-79 (b) 一般的 n 还要有上限的见证；Rzk 有 `U : U`，不说第二个基础相容；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放，不进 main |
