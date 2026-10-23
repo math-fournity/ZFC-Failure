@@ -1,6 +1,6 @@
 {
   "schema_version": "hott-paradoxy-main-release-spec/v1",
-  "release_id": "main-20261022-h-deepening",
+  "release_id": "main-20261023-h-deepening-c454",
   "repository": "https://github.com/math-fournity/HoTT-Paradoxy",
   "dev_branch": "dev",
   "purpose": "The main branch holds only the content that supports the conclusions: conclusion documents, precise claims, proof sources, run receipts and a portable replay. Everything else stays on dev.",
@@ -106,7 +106,8 @@
     "HoTT/formal/claude-cg001/sst-2ltt-fibrant",
     "HoTT/formal/claude-cg001/univalent-categories-exact",
     "HoTT/formal/claude-cg001/sst-2ltt-correspondence",
-    "HoTT/formal/claude-cg001/sst-2ltt-reverse"
+    "HoTT/formal/claude-cg001/sst-2ltt-reverse",
+    "HoTT/formal/claude-cg001/sst-2ltt-identification"
   ],
   "files": [
     "HoTT/formal/cloud-opus-glm-audit/TOOLCHAIN.linux-x86_64.json",
@@ -371,7 +372,10 @@
     "20261022-CG001-SST-2LTT-REVERSE-NEG-02",
     "20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01",
     "20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-01",
-    "20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-02"
+    "20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-02",
+    "20261023-CG001-SST-2LTT-IDENTIFICATION-01",
+    "20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-01",
+    "20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-02"
   ],
   "units": {
     "UR": {
@@ -462,7 +466,8 @@
         "CG001-C-450",
         "CG001-C-451",
         "CG001-C-452",
-        "CG001-C-453"
+        "CG001-C-453",
+        "CG001-C-454"
       ]
     }
   },
@@ -656,7 +661,8 @@
         "CG001-C-450",
         "CG001-C-451",
         "CG001-C-452",
-        "CG001-C-453"
+        "CG001-C-453",
+        "CG001-C-454"
       ]
     }
   },
