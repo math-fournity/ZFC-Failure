@@ -239,7 +239,7 @@ C-448 没做到的那一半：对每个外层 n，把“只有前 n 层的半单
 
 ## 下一步（CG-011 剩下的完成门，按对目标的贡献排）
 
-1. **G9 main README §4 的升级候选**：✅ 候选就绪（五个发布模板，提交 `39170cac2`，试生成 `BUILT`）；合并 `dev`、发布 `main`、是否收进 10-21 证明包，等研究发起人授权（`.claude/goals/CG-011-h-deepening-followups/G9-README候选与请示.md`）。
+1. **G9 main README §4 的升级候选**：✅ 候选就绪（五个发布模板，提交 `39170cac2`，试生成 `BUILT`）。研究发起人 2026-10-22 授权后已发布：本章 17 个包并入 `dev`（`8a41e1f8b`），`main` `9e21cd9ad` 带上 README 新段落与 CLAIMS 第 5 节；独立重建逐字节一致，全量重放 215/215（`.claude/goals/CG-011-h-deepening-followups/main-release/`）。
 2. **Rzk 一半**（G10 决定这一轮不做）：研究发起人要第二个内核确认时，在单价性公设下重跑 C-77 与 C-430。
 3. **G6 的史学考古**：✅ 2026-10-22 做完。两份 PDF 经研究发起人授权下载，MinerU 解析后对用到的页做视觉审计（Verdier 7 页，Bondal–Kapranov 全部 15 页），三份原文都已核：代价与补救有一手印证，因果只到同向。记录 `.claude/goals/CG-011-h-deepening-followups/G6-史学考古.md`，可重跑 `scripts/audit/check_g6_archaeology.py --pdf-dir <PDF 目录>`。
 4. **两版对应在类型族这一层的认同**：C-452 做了正方向、C-453 做了反方向，两个来回在单纯形这一层都回到原处；把它们认同为原物（作为 `SST n` 的元素相等）要内层单价性，没做。

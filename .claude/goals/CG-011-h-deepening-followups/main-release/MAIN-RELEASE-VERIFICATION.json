@@ -1,0 +1,43 @@
+{
+  "release_id": "main-20261022-h-deepening",
+  "verified_by": "Claude Code session a15f4b3b (Claude Opus 5.5)",
+  "authorization": "研究发起人 2026-10-22：“我授权了，你全部做完。”（目标：“所有的后续`GN`，全部完成并推送”）",
+  "dev": {
+    "previous": "5ca3a26b2c837468e8277587a434328d16ee225f",
+    "merge_commit": "8a41e1f8b587d1dcb437bbf17b6cbdc3c444c2e5",
+    "merged_branch_tip": "a8bdaab59b852fdc559e3552920bb615b35c6833",
+    "conflicts": [".claude/总索引/003 - 工作单元与证据登记.md", ".claude/总索引/005 - 工作日志.md"],
+    "conflict_resolution": "append-only files; both sides kept, dev's block first",
+    "pushed": "5ca3a26b2..8a41e1f8b, fast-forward, no force"
+  },
+  "main": {
+    "previous": "ad654c8aba4aa63cc1c8449819510a81a7873a3c",
+    "commit": "9e21cd9ad8988d64ccaa42a48f4204011d3cb110",
+    "pushed": "ad654c8ab..9e21cd9ad, fast-forward, no force",
+    "build": {"status": "BUILT", "source": "8a41e1f8b587d1dcb437bbf17b6cbdc3c444c2e5", "files": 1697, "runs": 215, "accepted": 86,
+              "units": {"UR": 84, "A7": 45, "ZFC1": 53, "H": 51}},
+    "changes_vs_previous": {"added_paths": 68, "removed_paths": 0, "changed_files": 13,
+                            "changed": ["CLAIMS.md", "CLAIMS-ZH.md", "CLAIMS-EN.md", "CLAIMS-DE.md", "CLAIMS-FR.md", "CLAIMS-RU.md",
+                                        "README.md", "README-ZH.md", "README-EN.md", "README-DE.md", "README-FR.md", "README-RU.md",
+                                        "RELEASE-MANIFEST.json"]}
+  },
+  "checks": [
+    {"check": "previous main reproducible", "how": "dev 5ca3a26b2's own builder, --source origin/dev, diff -qr against git archive origin/main",
+     "result": "identical (1334 files): the previous main had no hand edits"},
+    {"check": "independent rebuild of the new main", "how": "build_main_release.py --source 8a41e1f8b into an empty directory, diff -qr against git archive 9e21cd9ad",
+     "result": "identical (1697 files)"},
+    {"check": "full replay", "how": "scripts/release/replay_main_local.sh on the trial tree from 676c892d (tree of 54d0f5c45): tools/replay.py --jobs 4",
+     "result": "215/215 PASS (agda 151, lean-lib 47, lean 17); wall 49 min 18 s; per-run times add up to 3.27 h",
+     "report": "FULL-REPLAY-20261022.json"},
+    {"check": "replay covers the released tree", "how": "diff -qr between the replayed tree and the released tree; every run's source-manifest.json searched for the differing paths",
+     "result": "14 paths differ (the same 13 files plus HoTT/formal/claude-cg001/full-height/README.md); none occurs in any of the 215 source manifests, and tools/replay.py is identical"},
+    {"check": "quotes", "how": "scripts/audit/check_cg011_quotes.py on the merge commit", "result": "48/48 HIT, 0 SKIP"},
+    {"check": "G6 sources", "how": "scripts/audit/check_g6_archaeology.py --pdf-dir /Volumes/D/HoTT-sources-external/20261022-G6", "result": "19 PASS, 1 SKIP (IOP bot-check page, not bypassed)"},
+    {"check": "secrets and size before push", "how": "unpushed commits scanned for blobs over 2 MB and for key patterns",
+     "result": "none over 2 MB; the only key-like string is the fixed key of the local WorkBuddy proxy on 127.0.0.1"}
+  ],
+  "not_done_here": [
+    "the main checkout /Volumes/D/HoTT_AI_HANDOFF_20260911 (branch dev, clean, at 5ca3a26b2) was not touched; it fast-forwards with git merge --ff-only origin/dev",
+    "the temporary worktree /Volumes/D/HoTT-worktrees/dev-merge-20261023 (detached at 8a41e1f8b) is left in place"
+  ]
+}
