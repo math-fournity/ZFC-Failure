@@ -2,7 +2,7 @@
   "schema": "goal-x-state/v1",
   "id": "CG-007",
   "title": "形式化收官：两条路线（R-有、R-无）与综合的全部机器证明，并发布 main",
-  "status": "ACTIVE",
+  "status": "COMPLETE",
   "phase": "W8-layer2-branches PARTIAL (C-398 neg involution, C-399 iT_neg, C-400 four ShCraigElim branches: hAnd/hOr/hAxL/hCut; all with receipts, replayed exactly) / W8-remaining: hAll/hExs/hShift need iT commuting with free/setShift/substs1 (not yet proved — the translated quantifier shifts the level by one) + axm + derivable_translateSeq + keyE + bridge + zfcTr_D3_internalize / W9-release-pending-authorization",
   "next_action": "W8 第 2 层收尾：先证 iT 与 shift 的相容律（原子支 iTR 0 k R (termShiftVec k v) = shift (iTR 0 k R v)，需先摸清 qqAlls/shift 与 conjunct/subst 的交换；量词支层数错开一位），再写 hAll/hShift；hExs 需 iT 与 substs1 的相容；axm 支需 codeOfREPred 的一般 V 表示引理；然后 derivable_translateSeq 组装、keyE 两个方向、bridge、zfcTr_D3_internalize 替换 Z0Blocked.lean 的 sorry。每支卡住就照实写阻塞引理。C-120 影子形式不受影响",
   "bound_sessions": [
@@ -10,9 +10,10 @@
     "01a120e6-4f37-79c0-8651-49996aaf6d9b"
   ],
   "created": "2026-10-08T20:13:44-04:00",
-  "updated": "2026-10-12T17:22:30-04:00",
+  "updated": "2026-10-23T14:07:05-04:00",
   "last_checkpoint": "2026-10-12T17:22:30-04:00",
   "checkpoints": 12,
   "compactions": 2,
-  "last_compaction": "2026-10-09T08:48:39-04:00"
+  "last_compaction": "2026-10-09T08:48:39-04:00",
+  "close_reason": "研究发起人 2026-10-23 裁定“CG-007 关为已取代”（CG-012 F8）。七个完成门都已由此后的工作满足：门1 C-104/C-105/C-422、C-106–C-108；门2 Z0 完整形式 C-413–C-417（10-14，10-15 并入 dev）；门3 C-117、C-118；门4 C-112、C-113；门5 C-114–C-116（D1-1、D1-2 落定）；门6 形式化追踪与证据索引持续维护；门7 终局报告 §12.1、§12.2 与 main 发布（615b7c4f 起）。STATE 里的 W8 下一步早已过期，由 CG-008–CG-010 完成。"
 }

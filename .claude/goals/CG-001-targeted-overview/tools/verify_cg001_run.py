@@ -12,7 +12,11 @@ GOAL_LOCAL_INDEX_ONLY and never claim INDEXED_IN_CLAIM_EVIDENCE_MATRIX.
 
 Rzk (sHoTT) runs, captured by capture_rzk_proof_run.py (2026-09-25), are checked
 the same way; for .rzk sources it also requires the #lang rzk-1 pragma and
-rejects postulate/assume markers.
+rejects postulate/assume markers.  Since 2026-10-23 (approved by the research
+sponsor, CG-012 F8) the markers #postulate, #assume and `uses (` are looked for in
+the code only, after `--` line comments are removed, because ordinary prose in a
+comment ("two causes (C-430)") contains `uses (`; --allow-holes is still looked for
+in the whole text.
 
 Lean 4 runs, captured by capture_lean_proof_run.py (2026-09-25, set-level model
 statements only), are checked the same way; for .lean sources it rejects sorry,
@@ -45,6 +49,20 @@ def load_canonical():
     assert spec.loader is not None
     spec.loader.exec_module(module)
     return module
+
+
+def rzk_code(text: str) -> str:
+    """An Rzk source without its `--` line comments (Rzk has no string literals)."""
+    return "\n".join(line.split("--", 1)[0] for line in text.splitlines())
+
+
+def rzk_marker_hits(text: str) -> list[str]:
+    """Forbidden markers in an Rzk source: declarations in the code, the hole option anywhere."""
+    code = rzk_code(text)
+    hits = [m for m in ("#postulate", "#assume", "uses (") if m in code]
+    if "--allow-holes" in text:
+        hits.append("--allow-holes")
+    return hits
 
 
 def goal_index_rows(text: str, identity: str) -> list[str]:
@@ -107,9 +125,8 @@ def validate(run_relative: Path, rerun: bool, expect_rejected: bool) -> dict[str
             text = data.decode("utf-8")
             if not text.startswith("#lang rzk-1"):
                 raise Err(f"RZK_LANG_PRAGMA_REQUIRED:{relative}")
-            for marker in ("#postulate", "#assume", "uses (", "--allow-holes"):
-                if marker in text:
-                    raise Err(f"RZK_FORBIDDEN_MARKER:{relative}:{marker}")
+            for marker in rzk_marker_hits(text):
+                raise Err(f"RZK_FORBIDDEN_MARKER:{relative}:{marker}")
         if relative.suffix == ".lean":
             # Lean 4 sources, added 2026-09-25 with capture_lean_proof_run.py
             text = data.decode("utf-8")

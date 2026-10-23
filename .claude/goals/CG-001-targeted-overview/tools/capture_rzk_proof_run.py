@@ -32,7 +32,16 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[4]
 TOOLCHAIN = Path("HoTT/formal/claude-cg001/directed-native/RZK_TOOLCHAIN.json")
-FORBIDDEN = ("#postulate", "#assume", "uses (", "--allow-holes")
+# Since 2026-10-23 (research sponsor's approval, CG-012 F8) the declaration markers are looked for in the
+# code only, after `--` line comments are removed; --allow-holes is still looked for in the whole text.
+# Same rule as verify_cg001_run.rzk_marker_hits.
+FORBIDDEN_IN_CODE = ("#postulate", "#assume", "uses (")
+FORBIDDEN_ANYWHERE = ("--allow-holes",)
+
+
+def rzk_marker_hits(text: str) -> list[str]:
+    code = "\n".join(line.split("--", 1)[0] for line in text.splitlines())
+    return [m for m in FORBIDDEN_IN_CODE if m in code] + [m for m in FORBIDDEN_ANYWHERE if m in text]
 
 
 def sha(data: bytes) -> str:
@@ -92,9 +101,8 @@ def main() -> int:
         text = (ROOT / relative).read_text(encoding="utf-8")
         if not text.startswith("#lang rzk-1"):
             raise SystemExit(f"RZK_LANG_PRAGMA_REQUIRED:{relative}")
-        for marker in FORBIDDEN:
-            if marker in text:
-                raise SystemExit(f"RZK_FORBIDDEN_MARKER:{relative}:{marker}")
+        for marker in rzk_marker_hits(text):
+            raise SystemExit(f"RZK_FORBIDDEN_MARKER:{relative}:{marker}")
     extra = [safe_relative(s) for s in args.manifest_file] + [TOOLCHAIN]
 
     version = subprocess.run([str(binary), "version"], capture_output=True, check=True).stdout.decode().strip()
@@ -113,7 +121,7 @@ def main() -> int:
         f"python={platform.python_version()}",
         f"rzk_executable={binary}",
         f"rzk_version={version}",
-        "theory_variant=Riehl-Shulman simplicial type theory as implemented by Rzk; no #postulate, no #assume, no modalities in sources",
+        "theory_variant=Riehl-Shulman simplicial type theory as implemented by Rzk; no #postulate, no #assume, no modalities in the code (comments aside)",
         "dependency_policy=official release asset pinned by publisher SHA-256 plus extracted binary hash",
         "secret_policy=no credentials, signed redirects, cookies or full environment dump retained",
     ]) + "\n"
