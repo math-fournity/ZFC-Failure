@@ -2766,3 +2766,19 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-453 | 对任何 `S : SSTˢ`：(1) `Lv : (n : ℕˢ) → SST n`，`Lv (n+1) = (Lv n , fiber (bd n))`，`bd n : X S k → Sh n (Lv n) k`；(2) `bdNat n T x : bd n (act S T x) ≡ᵉ res n (Lv n) T (bd n x)`，对一切 n；(3) `fibresTotal n : Σ (Sh n (Lv n) (n+1)) (fiber (bd n)) ≃ X S (n+1)`，`roundTrip n : X (toStrict (n+1) (Lv (n+1))) (n+1) ≃ X S (n+1)` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-SST-2LTT-REVERSE-01`；负控制 `-NEG-01`、`-NEG-02` | 不说两版作为类型等价；`roundTrip` 是内层等价；第 0 层不取回；“差别只剩那座桥”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+> 2026-10-23 更新：“类型族这一层的认同”在 n = 1、2 做成，见下一节 C-454；本节“没做的”原写“要内层单价性”只说了一半，更正写在包内 `REVISIONS.md`。
+
+## Claude（接手 015-Opus）：两版在类型族这一层回到原物（2026-10-23）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，C-453 没做的一条（CG-011 完成门 G8 的后续）。读法：机器证明（Cubical Agda，`--safe --two-level`；单价性是定理）。按层的一版交到严格的一版再经纤维取回，在 n = 1、2 就是原物（`SST n` 里的内层路径）；一般的 n 没做，障碍是一条与取面相容的同伦。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-IDENTIFICATION-001` | `CG001-C-454` | `formal/claude-cg001/sst-2ltt-identification/SemisimplicialIdentification.agda`（`famPathP`、`fiberAfterEquiv`、`One.ident`、`Two.ιEquiv`、`Two.bdIs`、`Two.trPath`、`Two.fib₂`、`Two.ident`、`twoExample`、`qual-C454`） | `verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十四个被导入的包源文件）；exit 0，93 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-IDENTIFICATION-NEG-001` | `CG001-C-454`（负控制） | 同目录 `WrongIdentificationDefinitional.agda` | `verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-IDENTIFICATION-NEG-002` | `CG001-C-454`（负控制） | 同目录 `WrongStrictOuter.agda` | `verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-454 | (1) `famPathP p P Q e : PathP (λ i → p i → Type) P Q`，只要 `e : (a : A) → P a ≃ Q (transport p a)`；(2) `fiberAfterEquiv f c : fiber (λ z → f (fst z)) c ≃ B (invEq f c)`；(3) 对任意 `P : Unit → Type`，`Reverse.Lv (toStrict 1 (tt* , P)) 1 ≡ (tt* , P)`；(4) 对任意 P 与 `E : Sh 1 (tt* , P) 2 → Type`，`Reverse.Lv (toStrict 2 ((tt* , P) , E)) 2 ≡ ((tt* , P) , E)`；`pointsAndEdges P E` 是特例 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261023-CG001-SST-2LTT-IDENTIFICATION-01`；负控制 `-NEG-01`、`-NEG-02` | 只证 n = 1、2；认同是内层路径，不按定义成立；严格的一版那一侧只到内层等价；n ≥ 3 的障碍是分析；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

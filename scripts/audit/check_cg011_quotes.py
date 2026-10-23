@@ -13,7 +13,7 @@ KC-000055/56/65, H-deepening §1 and its correction record, and the sponsor's 20
 015 (the transcript of Claude Code session a15f4b3b, outside the repository; SKIP when absent).
 From the G8 follow-up (C-450) on, also the sentence of C-448's CLAIM.md (AI-written) that records the half left undone;
 from the G10 follow-up (C-451) on, likewise the sentence of C-449's CLAIM.md that records its gap; from C-452 on, the
-two not-done items of C-450's CLAIM.md.
+two not-done items of C-450's CLAIM.md; from C-454 on, the not-done item of C-453's CLAIM.md that C-454 takes up.
 Written 2026-10-21, Claude Code session 91beaf35 (012-Opus); G5 additions by session a15f4b3b.  Exit 0 iff every quote
 whose source is present is found.
 """
@@ -58,6 +58,7 @@ SOURCES = {
     "C-449声明": ROOT / "HoTT/formal/claude-cg001/univalent-categories/CLAIM.md",
     "C-450声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-fibrant/CLAIM.md",
     "C-452声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-correspondence/CLAIM.md",
+    "C-453声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-reverse/CLAIM.md",
 }
 QUOTES = [
     ("`/Volumes/D/HoTT-worktrees/012-opus-w8/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md`的内容可以，继续推进后续工作，直至全部完成。", "转录"),
@@ -119,6 +120,8 @@ QUOTES = [
     ("**全空间的取面**：只给了壳上的取面；单纯形全空间上的面映射可由它得到，本包没写出。", "C-450声明"),
     # C-453: the reverse direction C-452's CLAIM (AI-written) recorded as not done
     ("**反方向**：从严格的一版得到按层的一版，要经纤维：第 m+1 层取“边界恰为给定壳”的那些单纯形。", "C-452声明"),
+    # from C-454 on: the not-done item of C-453's CLAIM.md (AI-written) that C-454 takes up
+    ("**类型族这一层的认同**：两个来回在单纯形这一层都回到原处；在“类型族”这一层把 `Lv` 认同为原来的按层一版（作为 `SST n` 的元素相等），要用内层单价性把每层的等价变成路径，再沿它搬运壳。本包没做。", "C-453声明"),
 ]
 
 

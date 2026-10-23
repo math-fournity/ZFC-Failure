@@ -1,0 +1,48 @@
+{
+  "status": "PASS_WITH_SCOPE",
+  "verifier": "CG-001 goal-local (reuses canonical verify_formal_proof_run.py checks; index check replaced)",
+  "canonical_verifier_sha256": "e0fc47aa2d3d9d8bfa370a02c5fa3abbec4a77ddc78f74e283b2b30ad359e5a3",
+  "run_id": "20261023-CG001-SST-2LTT-IDENTIFICATION-01",
+  "proof_id": "MP-CG001-SST-2LTT-IDENTIFICATION-001",
+  "claim_ids": [
+    "CG001-C-454"
+  ],
+  "kernel_status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "exit_code": 0,
+  "source_paths": [
+    "HoTT/formal/claude-cg001/sst-2ltt-identification/SemisimplicialIdentification.agda",
+    "HoTT/formal/dedekind-omega-missile/TOOLCHAIN.json",
+    "HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "HoTT/formal/claude-cg001/sst-2ltt-identification/CLAIM.md",
+    "HoTT/formal/claude-cg001/sst-2ltt-reverse/SemisimplicialReverse.agda",
+    "HoTT/formal/claude-cg001/sst-2ltt-correspondence/SemisimplicialCorrespondence.agda",
+    "HoTT/formal/claude-cg001/sst-2ltt-fibrant/SemisimplicialTwoLevel.agda",
+    "HoTT/formal/claude-cg001/strict-semisimplicial/StrictSemisimplicial.agda",
+    "HoTT/formal/claude-cg001/two-fates-2ltt/TwoFatesOneTheory.agda",
+    "HoTT/formal/claude-cg001/exposure-criterion/ExposureCriterion.agda",
+    "HoTT/formal/claude-cg001/completion-cost/CompletionCost.agda",
+    "HoTT/formal/claude-cg001/a-univalence-b/AUnivalenceB.agda",
+    "HoTT/formal/claude-cg001/questioning-delay/QuestioningDelay.agda",
+    "HoTT/formal/claude-cg001/pedometer-semantics/PedometerSemantics.agda",
+    "HoTT/formal/claude-cg001/pedometer-semantics/DelayMonad.agda",
+    "HoTT/formal/claude-cg001/universe-questioning/UniverseHasNoLevel.agda",
+    "HoTT/formal/claude-cg001/truncation-questioning/TruncationQuestioning.agda",
+    "HoTT/formal/claude-cg001/product-questioning/ProductQuestioning.agda"
+  ],
+  "external_dependencies": [
+    "agda-release-asset",
+    "agda-binary",
+    "cubical-release-asset",
+    "cubical-library-file",
+    "cubical-extracted-tree"
+  ],
+  "index": "GOAL_LOCAL_INDEX_ONLY",
+  "goal_index_row_sha256": {
+    "MP-CG001-SST-2LTT-IDENTIFICATION-001": "2406c7f9070a6d121a2588f7f6888841c37c0dd7b4c8994e6717723a64451476",
+    "20261023-CG001-SST-2LTT-IDENTIFICATION-01": "866d2307944dea2524fcd1c61f189a4bcaaea1afd66b3a7028c9795f3fa06dd4",
+    "CG001-C-454": "f04d6d017160f86c082111d1791e9a45da6747e0d344978393a3d5c0149f4cf1"
+  },
+  "shared_matrix_index": "NOT_INDEXED_RELAY_DRAFT_ONLY",
+  "replay": "EXACT_EXIT_STDOUT_STDERR_MATCH",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED"
+}
