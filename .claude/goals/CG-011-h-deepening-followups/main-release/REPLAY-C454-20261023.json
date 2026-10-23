@@ -1,0 +1,44 @@
+{
+ "root": "/private/tmp/claude-501/-Volumes-D-HoTT-AI-HANDOFF-20260911--claude-worktrees-festive-turing-63229f/a15f4b3b-2441-458d-b911-556a515294e3/scratchpad/trial-c454",
+ "counts": {
+  "PASS": 3
+ },
+ "runs": [
+  {
+   "run_id": "20261023-CG001-SST-2LTT-IDENTIFICATION-01",
+   "kind": "agda",
+   "recorded_status": "KERNEL_ACCEPTED_WITH_SCOPE",
+   "recorded_exit": 0,
+   "expected": "accepted",
+   "actual_exit": 0,
+   "same_outcome_class": true,
+   "same_normalized_stdout": true,
+   "seconds": 100.9,
+   "result": "PASS"
+  },
+  {
+   "run_id": "20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-01",
+   "kind": "agda",
+   "recorded_status": "KERNEL_REJECTED",
+   "recorded_exit": 42,
+   "expected": "rejected",
+   "actual_exit": 42,
+   "same_outcome_class": true,
+   "same_normalized_stdout": true,
+   "seconds": 100.8,
+   "result": "PASS"
+  },
+  {
+   "run_id": "20261023-CG001-SST-2LTT-IDENTIFICATION-NEG-02",
+   "kind": "agda",
+   "recorded_status": "KERNEL_REJECTED",
+   "recorded_exit": 42,
+   "expected": "rejected",
+   "actual_exit": 42,
+   "same_outcome_class": true,
+   "same_normalized_stdout": true,
+   "seconds": 101.2,
+   "result": "PASS"
+  }
+ ]
+}
