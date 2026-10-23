@@ -1,0 +1,3 @@
+## lean GodelQ/Real/RealDepth.lean
+## lean GodelQ/Real/QualificationRealDepth.lean
+'GodelQ.RealDepth.qual_C447' depends on axioms: [propext, Classical.choice, Quot.sound]

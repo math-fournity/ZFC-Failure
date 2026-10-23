@@ -1,0 +1,91 @@
+{
+  "agda_error_tag": null,
+  "audit_notes": [
+    "Re-derives C-83 (d) noDecoding through (3); imports C-430 (AUnivalenceB), C-77/C-79 (QuestioningDelay), C-55/C-59 (PedometerSemantics), C-75 (UniverseHasNoLevel) and C-83 (TruncationQuestioning). Written in Claude Code session 91beaf35 (012-Opus), 2026-10-21; the capture tool's fixed audit_session string names its original session."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-436"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning",
+    "HoTT/formal/claude-cg001/completion-cost/CompletionCost.agda"
+  ],
+  "completed_at_utc": "2026-10-21T07:03:05.034514+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 85.957533,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 0,
+  "expected_outcome": "ACCEPT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": null,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Does not prove that the equality of ZFC is flat or that mathematicians assumed H; reading extensional set theory as flat sameness is a standard reading, not a theorem of this run.",
+    "Not original mathematics: that a type is of h-level n iff the unit of its n-truncation is an equivalence, and that retracts keep h-levels, are standard HoTT (HoTT Book ch. 7); the contribution is their placement against C-430 and the H analysis of 2026-10-17.",
+    "Covers completions that land in a type of finite h-level and keep the object by a decoding; it says nothing about every conceivable notion of completion.",
+    "Does not formalize the limit-side claim that naming a limit is a conservative (definitional) extension; that is a separate candidate."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-COMPLETION-COST-001",
+  "rejection_stage": null,
+  "run_id": "20261021-CG001-COMPLETION-COST-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Cubical Agda, --safe, nothing assumed. C-436, the cost of declaring completion: (1) a type has a completion at level n (a map into a type of h-level n) that keeps it (has a decoding back) iff the type is itself of h-level n; (2) the canonical completion |_|h : A -> || A || n is an equivalence iff A is of h-level n (an equivalence of propositions), and it has a decoding iff A is of h-level n; (3) for every collection that is univalent and hands over every height at once (the two causes of C-430), the questioning never stops and no completion at any finite level keeps the codes; (4) flat codes: completion at level 2 is free and the questioning stops at the first question; the numbered collection (every height in its members, codes N) completes its codes for free; the gathering of the (1+n)-types completes for free at level 2+n and halts; (5) the universe: never, no finite completion keeps it, and C-83 (d) noDecoding is re-derived as the set-truncation instance; (6) kernel runs: decoding the level-2 completion of 3 on N gives 3; transport along Bool's swap gives false.",
+  "source_manifest": {
+    "bytes": 2510,
+    "path": "source-manifest.json",
+    "sha256": "81592ea80c06986fd5e51b8a508b617845cc80cc87c11bb0a0bb39b390d24354"
+  },
+  "started_at_utc": "2026-10-21T07:01:39.076981+00:00",
+  "status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 29818,
+    "path": "stdout.txt",
+    "sha256": "8346830f68644dc234598b55cb1a181534f2ce52259c928ca3b4887ea14b8556"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}

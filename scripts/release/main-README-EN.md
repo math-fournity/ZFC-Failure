@@ -234,6 +234,19 @@ The same question, the same program; change only what "the same" means and wheth
 
 The table matches the two cases point by point; it does not claim they are mathematically the same.
 
+Beneath the correspondence there is something that can be said more precisely. The initiator endorsed a condensed formulation (2026-10-17, original words):
+
+> 你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。
+
+> **Translation.** "You put that very well: 'one side only needs to ask about the end, the other side is forced to ask about the process.'"
+
+On 2026-10-21 each half of that sentence got a computer-checked counterpart:
+
+- **One side only needs to ask about the end.** In ZFC, once something has been proved to exist, giving it a name adds no new theorem; once it has also been proved unique, the name picks out exactly that one thing in every model. Declaring a process "finished" costs nothing there.
+- **The other side is forced to ask about the process.** In HoTT, declaring an object "finished" at some level leaves the object unchanged exactly when the object already settles at that level. For a whole that hands over all its heights at once, such as the universe, declaring it finished at any level changes the object; if the object is kept, the questioning never stops.
+
+Both sides perform the same act: treating a result that takes infinitely many steps to reach as if it were already there (Section 6 shows that this is what the initiator calls A). "The same act" is our reading, offered for the reader's scrutiny. These proofs were completed on 2026-10-21 and, together with the follow-up work, are included in this branch: the claims are in section 5 of [CLAIMS-EN.md](CLAIMS-EN.md), the receipts under `HoTT/verification/runs/`; the analysis and comparison are on the `dev` branch ([H deepening]({{REPO}}/blob/dev/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md), in Chinese).
+
 ### The textbook's answer, and why it does not make the problem go away
 
 For Zeno, the textbook says: use limits, 1/2 + 1/4 + … equals exactly 1. Here, the textbook would say: ask the "set truncation" instead. This is a standard construction that squeezes "in which ways they are the same" into a one-word "same or not"; there the program stops at question 1.
@@ -450,7 +463,7 @@ python3 tools/replay.py --agda /path/to/agda --cubical-lib /path/to/cubical/cubi
 
 Without `--foundation-root`, the runs that use Mathlib or Foundation are reported as SKIPPED; the others are replayed as usual.
 
-It rebuilds the command of each run receipt, runs it, and compares the result with the receipt: the outcome (accepted or rejected) must agree, and the output is compared line by line after the repository path and the library paths are replaced by placeholders. A negative control passes only if it is rejected again; if its output also agrees, it was rejected for the recorded reason. To replay a single receipt: `--only <run id>`; to list them all: `--list`. Replaying everything one after another takes about two and a half hours. Run receipts contain absolute paths from the machine that captured them, so they cannot be copied unchanged to another machine. For ordinary replay, use `tools/replay.py` on this branch. Readers who need a byte-for-byte comparison with the original scripts can optionally use the [research-line replay script]({{REPO}}/blob/dev/.claude/goals/CG-001-targeted-overview/tools/verify_cg001_run.py) and the [audit-line replay script]({{REPO}}/blob/dev/Cloud-Opus%E5%AE%A1%E8%AE%A1%E5%B9%B6%E8%A1%A5%E5%AE%8CGLM/tools/verify_copus_run.py), preserved on `dev`. These are technical tools for deeper review, not a prerequisite for ordinary reading.
+It rebuilds the command of each run receipt, runs it, and compares the result with the receipt: the outcome (accepted or rejected) must agree, and the output is compared line by line after the repository path and the library paths are replaced by placeholders. A negative control passes only if it is rejected again; if its output also agrees, it was rejected for the recorded reason. To replay a single receipt: `--only <run id>`; to list them all: `--list`. Replaying everything one after another takes about three hours; with `--jobs 4` (four at a time) the full replay took about 50 minutes on the research Mac on 2026-10-22. Run receipts contain absolute paths from the machine that captured them, so they cannot be copied unchanged to another machine. For ordinary replay, use `tools/replay.py` on this branch. Readers who need a byte-for-byte comparison with the original scripts can optionally use the [research-line replay script]({{REPO}}/blob/dev/.claude/goals/CG-001-targeted-overview/tools/verify_cg001_run.py) and the [audit-line replay script]({{REPO}}/blob/dev/Cloud-Opus%E5%AE%A1%E8%AE%A1%E5%B9%B6%E8%A1%A5%E5%AE%8CGLM/tools/verify_copus_run.py), preserved on `dev`. These are technical tools for deeper review, not a prerequisite for ordinary reading.
 
 The toolchain records cited by the receipts are in `HoTT/formal/dedekind-omega-missile/` (Agda on macOS), `HoTT/formal/claude-cg001/pedometer-ablation-lean/` (Lean on macOS) and `HoTT/formal/cloud-opus-glm-audit/` (Linux); the first two directories keep their location on `dev` and hold only these records on this branch. Packages that use Mathlib or Foundation also have, in their own directories, `LEAN_TOOLCHAIN.json` and `MATHLIB_CLOSURE.json`, which record the Lean files used at the time and the hash of every dependency module. [`RELEASE-MANIFEST.json`](RELEASE-MANIFEST.json) records the SHA-256 of each of the {{FILE_TOTAL}} files on this branch and the `dev` commit they come from.
 

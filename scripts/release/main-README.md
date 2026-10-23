@@ -232,6 +232,17 @@ ASK 是研究发起人起的名字，意思是：回答一个问题之前，先�
 
 这张表是两件事的对位，不是数学上的等同。
 
+对位之下，有一件可以说得更精确的事。研究发起人认可过一句浓缩的说法（2026-10-17，原话）：
+
+> 你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。
+
+2026-10-21，这句话的两半各有了计算机检查过的对应：
+
+- **一侧问终局就够。**在 ZFC 里，只要先证明了某个东西存在，给它起个名字就不会多出任何新定理；再证明它唯一，名字在每个模型里就只指那一样东西。在那里把一个过程宣布为“已经完成”，不付任何代价。
+- **一侧被迫问过程。**在 HoTT 里，在某一层宣布“已经完成”而对象不变，当且仅当这个对象本来就在那一层落定。像宇宙这样“所有高度一次交出”的整体，在任何一层宣布完成都会换掉对象；不换对象，追问就永远不停。
+
+两边做的是同一个动作：把一个要无穷多步才到得了的结果，当作已经摆在那里（第 6 节会看到，这就是研究发起人说的 A）。“同一个动作”是我们的读法，交给读者审。这两组证明完成于 2026-10-21，连同其后的续作已收进本分支：命题见 [CLAIMS.md](CLAIMS.md) 第 5 节，收据在 `HoTT/verification/runs/` 下；分析与对照在 `dev` 分支上（[H 深化]({{REPO}}/blob/dev/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md)）。
+
 ### 教科书的回答，以及它为什么消不掉
 
 对芝诺，教科书说：用极限，1/2 + 1/4 + … 恰好等于 1。对这里，教科书会说：去问"集合截断"。这是一种标准的做法，它把"以哪些方式相同"压成"相同或不相同"一句话；在那里，程序第 1 问就停。
@@ -439,7 +450,7 @@ python3 tools/replay.py --agda /path/to/agda --cubical-lib /path/to/cubical/cubi
 
 不给 `--foundation-root`，用到 Mathlib 或 Foundation 的运行会标成 SKIPPED，其余照常重放。
 
-它按每一份运行记录重建命令，逐个运行，再和记录比较：结局（接受或拒绝）必须一致；输出在把仓库路径和库路径换成占位符之后逐行比较。负控制只有再次被拒才算通过；输出也一致，就说明它是因为记录下来的那个理由被拒。只看一个：`--only <运行编号>`；列出全部：`--list`。全部串行跑完约需两个半小时。运行记录里的命令保存的是当时那台机器的绝对路径，不能原样拿到另一台机器执行。一般重放请使用本分支的 `tools/replay.py`；需要把结果与原始脚本逐字节比较的读者，可选用保留在 `dev` 的[研究线原始重放脚本]({{REPO}}/blob/dev/.claude/goals/CG-001-targeted-overview/tools/verify_cg001_run.py)和[审计线原始重放脚本]({{REPO}}/blob/dev/Cloud-Opus%E5%AE%A1%E8%AE%A1%E5%B9%B6%E8%A1%A5%E5%AE%8CGLM/tools/verify_copus_run.py)。这是深入复核用的技术工具，不是普通阅读的前置。
+它按每一份运行记录重建命令，逐个运行，再和记录比较：结局（接受或拒绝）必须一致；输出在把仓库路径和库路径换成占位符之后逐行比较。负控制只有再次被拒才算通过；输出也一致，就说明它是因为记录下来的那个理由被拒。只看一个：`--only <运行编号>`；列出全部：`--list`。逐个跑完约需三小时；用 `--jobs 4` 四个一起跑，2026-10-22 在研究用的 Mac 上约 50 分钟跑完。运行记录里的命令保存的是当时那台机器的绝对路径，不能原样拿到另一台机器执行。一般重放请使用本分支的 `tools/replay.py`；需要把结果与原始脚本逐字节比较的读者，可选用保留在 `dev` 的[研究线原始重放脚本]({{REPO}}/blob/dev/.claude/goals/CG-001-targeted-overview/tools/verify_cg001_run.py)和[审计线原始重放脚本]({{REPO}}/blob/dev/Cloud-Opus%E5%AE%A1%E8%AE%A1%E5%B9%B6%E8%A1%A5%E5%AE%8CGLM/tools/verify_copus_run.py)。这是深入复核用的技术工具，不是普通阅读的前置。
 
 运行记录引用的工具链记录在 `HoTT/formal/dedekind-omega-missile/`（macOS 上的 Agda）、`HoTT/formal/claude-cg001/pedometer-ablation-lean/`（macOS 上的 Lean）与 `HoTT/formal/cloud-opus-glm-audit/`（Linux）；前两个目录沿用 `dev` 上的位置，在本分支里只放这些记录文件。用到 Mathlib 或 Foundation 的包，各自的目录里另有 `LEAN_TOOLCHAIN.json` 与 `MATHLIB_CLOSURE.json`，记着当时的 Lean 文件和每个依赖模块的哈希。[`RELEASE-MANIFEST.json`](RELEASE-MANIFEST.json) 记着本分支 {{FILE_TOTAL}} 个文件各自的 SHA-256，以及它们取自 `dev` 的哪个提交。
 

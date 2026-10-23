@@ -1,0 +1,35 @@
+{
+  "status": "NEGATIVE_CONTROL_REJECTED_AS_EXPECTED",
+  "verifier": "CG-001 goal-local (reuses canonical verify_formal_proof_run.py checks; index check replaced)",
+  "canonical_verifier_sha256": "e0fc47aa2d3d9d8bfa370a02c5fa3abbec4a77ddc78f74e283b2b30ad359e5a3",
+  "run_id": "20261021-CG001-CONE-NON-FUNCTORIAL-NEG-01",
+  "proof_id": "MP-CG001-CONE-NON-FUNCTORIAL-NEG-001",
+  "claim_ids": [
+    "CG001-C-440"
+  ],
+  "kernel_status": "KERNEL_REJECTED",
+  "exit_code": 42,
+  "source_paths": [
+    "HoTT/formal/claude-cg001/cone-non-functorial/WrongConeUnique.agda",
+    "HoTT/formal/dedekind-omega-missile/TOOLCHAIN.json",
+    "HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "HoTT/formal/claude-cg001/cone-non-functorial/CLAIM.md",
+    "HoTT/formal/claude-cg001/cone-non-functorial/ConeNonFunctorial.agda"
+  ],
+  "external_dependencies": [
+    "agda-release-asset",
+    "agda-binary",
+    "cubical-release-asset",
+    "cubical-library-file",
+    "cubical-extracted-tree"
+  ],
+  "index": "GOAL_LOCAL_INDEX_ONLY",
+  "goal_index_row_sha256": {
+    "MP-CG001-CONE-NON-FUNCTORIAL-NEG-001": "181c1a2d10e5b35604a2938d6c9c9a3a0fa71a45223060b814c715ecdb52c881",
+    "20261021-CG001-CONE-NON-FUNCTORIAL-NEG-01": "17c0f71982eaa210ee0434d60d3df0ec94828047dffbb41675a5a6ebd79a49b1",
+    "CG001-C-440": "59c53439e9c8715e51247ce9191585aac8800c89dcc8c2743f0ef16c9d3fd2fd"
+  },
+  "shared_matrix_index": "NOT_INDEXED_RELAY_DRAFT_ONLY",
+  "replay": "EXACT_EXIT_STDOUT_STDERR_MATCH",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED"
+}

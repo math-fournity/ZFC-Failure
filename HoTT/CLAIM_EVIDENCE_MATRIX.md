@@ -2528,3 +2528,241 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | （不占编号） | 对 `s n = 1 - (1/2)^n`：`1 ∉ Set.range s` ∧ `sSup (Set.range s) = 1`——终点不是任何有限阶段的值，同时是值域的确切上确界 | `KERNEL_ACCEPTED_WITH_SCOPE / DECLARED_CLASSICAL_AXIOMS` | run `20261020-MP-ZENO-SEP-ENDPOINT-NOT-MEMBER-001-01` | 不宣称 SEP、Huggett、Standard Solution 或任何作者有错；不证明物理运动不能到达或芝诺不可解；不形式化 Standard Solution 的闭连续时间模型；不给芝诺—HoTT 同一 Q 映射；不主张数学内容原创 |
+
+## Claude（012-Opus）：宣布完成的代价，对象不变的完成当且仅当对象本来就在有限层封顶（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。承接研究发起人 2026-10-19 目标的第 2 问与 2026-10-17 的 H（“数学家认为，引入H不会发生问题”）；把 `docs/H深化-…-20261017.md` §2、§3 与第 1 问一手层综合 §2 (a)(b) 的〔我们的分析〕写成定理，推广 H 深化 §6 (b)、§8.1 的候选 C-436。**身份**：两条核心引理是 HoTT 标准事实（HoTT Book 第 7 章），不主张原创；增量是放到 C-430 与 H 的分析上，以及 (3) 对任意落到有限层对象的完成映射的推广。“ZFC 的相等平坦”是标准读法，不是本包的定理。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-COMPLETION-COST-001` | `CG001-C-436` | `formal/claude-cg001/completion-cost/CompletionCost.agda`（`keptIsFinite`、`finiteIsKept`、`freeIsFlat`、`completeDecodesLevel`、`levelCompleteDecodes`、`BothCauses.twoFates`、`BothCauses.noKeepingCompletion`、`BothCauses.completionChangesCodes`、`flatCompletionFree`、`numberedCompletionFree`、`gatheringCompletionFree`、`universeNoKeeping`、`universeCompletionChanges`、`noDecodingAgain`、`flatRoundTrip`、`swapActs`、`qual-C436`；导入 `a-univalence-b`、`questioning-delay`、`pedometer-semantics`、`universe-questioning`、`truncation-questioning`、`product-questioning`） | `verification/runs/20261021-CG001-COMPLETION-COST-01/`（macOS 工具链记录 `formal/dedekind-omega-missile/TOOLCHAIN.json`）；exit 0，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-COMPLETION-COST-NEG-001` | `CG001-C-436`（负控制） | 同目录 `WrongFlatLoses.agda` | `verification/runs/20261021-CG001-COMPLETION-COST-NEG-01/`；exit 42，`3 != 4` | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-COMPLETION-COST-NEG-002` | `CG001-C-436`（负控制） | 同目录 `WrongFlatChanges.agda` | `verification/runs/20261021-CG001-COMPLETION-COST-NEG-02/`；exit 42，恒等等价不是单价性要的映射 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-436 | (1) 类型 A 有一个落到 h-层 n 的对象、又能解码回去的映射，当且仅当 A 在 h-层 n；(2) 规范的完成 `∣_∣ₕ : A → ∥ A ∥ n` 是等价 ≃ A 在 h-层 n（两个命题等价），有解码 ⟺ A 在 h-层 n；(3) 对任意单价且所有高度一次交出的收集：追问对每个判定器 `≡ never`，且对一切 n、一切 h-层 n 的 B、一切 `f : Code → B`，f 没有解码，`∣_∣ₕ` 在任何层都不是等价；(4) 编码成集合时第 2 层的完成是等价、第 1 问停；编号收集（成员同宇宙、所有高度都在、编码 ℕ）编码的完成免费；1+n 层落定者的汇集在 2+n 层免费完成并停机；(5) 宇宙永不停、任何有限层的完成都留不住它，C-83 (d) `noDecoding` 作为集合截断特例重得；(6) 内核实跑：ℕ 上 3 在第 2 层完成再解码得 3，Bool 的对调把 true 送到 false | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-COMPLETION-COST-01`；负控制 `-NEG-01`、`-NEG-02` | 只管“落到有限层的对象、靠解码保住对象”这一类完成，不对一切可设想的完成下断言；不证 ZFC 的相等平坦（标准读法），不证数学家当年假定了 H；不形式化极限侧“命名是保守扩张”（另一候选）；“终局读法与过程读法”仍是 C-112 (d)，本包不承接；标准 HoTT 事实不主张原创；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：给“已经完成的东西”起名，在一阶集合论里一分钱不花（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Lean 4 + Mathlib + Foundation 的真实 𝗭𝗙𝗖，内核公理只有三条标准公理）。研究发起人 2026-10-21 要求把 C-436 报告点名的下一步做完；承接 `docs/H深化-…-20261017.md` §6 (a) 的候选 C-437（极限侧“命名是保守扩张”）与第 1 问一手层综合 §2 (a)“一条定义就够”，与 C-436 合成第 2 问的两侧：C-436 是 HoTT 一侧，本包是 ZFC 一侧。**身份**：“给可证存在（且唯一）的对象添常元是保守的定义性扩张”是一阶逻辑教科书事实，不主张原创；增量是在 Foundation 的 𝗭𝗙𝗖 上机器核对并接到 H、A 上。“起名就是宣布完成”“ω 的存在前提是 A 的一个实例”是读法。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-NAMING-CONSERVATIVE-001` | `CG001-C-437` | `formal/claude-cg001/naming-conservative/GodelQ/Naming/NamingConservative.lean`（`naming_conservative`、`naming_unique_expansion`、`unitStr_eq`、`expand_keeps_object`、`expand_models_named`、`zfc_exists_omega`、`zfc_atMostOne_omega`、`omega_naming_conservative`、`omega_unique_expansion`、`omega_expansion_iff`、`universe_omega_unique`、`named_never_proves_bot`、`zfc_unprovable_bot`、`never_not_conservative`、`any_naming_conservative`、`any_not_unique`、`universe_any_not_unique`）、`QualificationNaming.lean`（`qual_C437`） | `verification/runs/20261021-CG001-NAMING-CONSERVATIVE-01/`；exit 0，13.8 秒，stderr 0 B，19 条公理报告都在三条标准公理之内；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-NAMING-CONSERVATIVE-NEG-001` | `CG001-C-437`（负控制） | 同包 `GodelQ/Negative/WrongNamingWithoutExistence.lean` | `verification/runs/20261021-CG001-NAMING-CONSERVATIVE-NEG-01/`；exit 1，ω 的存在顶替不了“x ≠ x”的存在 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-NAMING-CONSERVATIVE-NEG-002` | `CG001-C-437`（负控制） | 同包 `GodelQ/Negative/WrongNamingWithoutUniqueness.lean` | `verification/runs/20261021-CG001-NAMING-CONSERVATIVE-NEG-02/`；exit 1，ω 的唯一性顶替不了“x = x”的唯一性 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-437 | (1) 对任意含等词公理的集合论 T 与一元 ℒₛₑₜ 公式 φ：T ⊢ ∃x φ(x) 时，ℒₛₑₜ 加新常元 ⋆、理论取等词公理 ∪ T ∪ {φ(⋆)}，则每个 ℒₛₑₜ 句子 σ 的像可证当且仅当 T ⊢ σ；(2) T 还证明满足 φ 的至多一个时，T 的每个模型（等号为真相等）恰有一个 a 使“⋆ 指 a”的扩张是命名理论的模型；只含 ⋆ 的语言上的每个结构都是“⋆ 指某个元素”；扩张去掉 ⋆ 就是原结构；(3) 𝗭𝗙𝗖 证明 `isω` 的存在与至多一个，给 ω 起名保守，每个 𝗭𝗙𝗖 模型里命名理论的扩张恰是“⋆ 指 ω”，Lean 元层 `Universe` 模型里也恰有一个；(4) 给“x ≠ x”起名的理论证出 ⊥，𝗭𝗙𝗖 不证 ⊥（`zfc_consistent`），故不保守；(5) 给“x = x”起名仍保守，但 𝗭𝗙𝗖 的每个模型（含 `Universe`）里扩张都不唯一（∅ 与 ω 都行） | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-NAMING-CONSERVATIVE-01`；负控制 `-NEG-01`、`-NEG-02` | 不推出 ZFC ⊢ ⊥（(4) 的一致性来自 Lean 元层模型）；只管添常元，不管添函数、谓词的定义性扩张；“相等平坦”体现在模型取法（`SetStructure`），不是本包证明的；“起名 = 宣布完成”“存在前提是 A 的实例”“ZFC 内部看不出 H”是读法；教科书事实不主张原创；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：元层判据，一个理论什么时候暴露 A（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。研究发起人 2026-10-21 的新方向【原话】“我们能不能把它形式化的元层特征找出来？”的第一步；方案 `dev-docs/元层特征方案-20261021.md`。**身份**：(1)(2) 大部分是 C-77、C-430、C-436 的重组；新的是判据对任意类型的等价式、满足形态的任一收集“每个有限阶段都停、整体永不停”、ZF 的累积层级 `V`（cubical 库，HoTT Book §10.5）与有限层类型全体两个实例及其并列。“理论写成类型”“`V` 是 ZFC 的宇宙”“`hSet` 是结构集合论”“一次收齐所有有限阶段是 A”是读法。只覆盖“高度”一条轴。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-EXPOSURE-CRITERION-001` | `CG001-C-438` | `formal/claude-cg001/exposure-criterion/ExposureCriterion.agda`（`neverIsExposed`、`exposedIsNever`、`noKeepingIsExposed`、`exposedIsNoKeeping`、`haltsIsHidden`、`hiddenIsHalts`、`hiddenCompletesFree`、`shapeExposes`、`stage`、`stageUnivalent`、`metaExposure`、`metaHiding`、`zfcStopsAtOne`、`zfcCompletionFree`、`omegaStopsAtOne`、`omegaCompletionFree`、`everyStageInOmega`、`structuralHidden`、`structuralHalts`、`stagesUnivalent`、`stagesAllHeights`、`stagesExposed`、`stagesNever`、`stagesNoKeeping`、`memberInSomeStage`、`eachStageHalts`、`stagesKernel1000`、`sameATwoFates`、`stagesMeta`、`qual-C438`；导入 `completion-cost`、`a-univalence-b`、`questioning-delay`、`pedometer-semantics`、`universe-questioning`、`truncation-questioning`、`product-questioning`） | `verification/runs/20261021-CG001-EXPOSURE-CRITERION-01/`（macOS 工具链记录 `formal/dedekind-omega-missile/TOOLCHAIN.json`；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，88 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-EXPOSURE-CRITERION-NEG-001` | `CG001-C-438`（负控制） | 同目录 `WrongWholeHalts.agda` | `verification/runs/20261021-CG001-EXPOSURE-CRITERION-NEG-01/`；exit 42，`nothing != just 1` | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-EXPOSURE-CRITERION-NEG-002` | `CG001-C-438`（负控制） | 同目录 `WrongOmegaSilent.agda` | `verification/runs/20261021-CG001-EXPOSURE-CRITERION-NEG-02/`；exit 42，`just 1 != nothing` | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-438 | (1) 对任意类型 X 与任意判定器：追问 `question X judge ≡ never` ⟺ X 在任何有限层都不落定 ⟺ 对每个 n 都没有在 n 层保住 X 的完成；追问停 ⟺ X 在某一层落定，且该层的规范完成是等价并保住 X；(2) 对任意单价且所有高度一次交出的收集 C：每个有限阶段（所指成员在 1+n 层落定者）单价且追问停，整体追问永不停、任何有限层的完成都保不住；编码相同是事实的收集第 1 问就停、第 2 层完成免费；(3) 累积层级 `V` 是集合，`V` 与 ω 的成员第 1 问就停、第 2 层完成免费，ω 收齐每个 `# n`；(4) `hSet` 在第 3 层落定，追问停；(5) 有限层类型的全体单价、所有高度都在、暴露、永不停（内核 1000 步得 `nothing`）、任何有限层的完成都保不住，而每个成员有限、是各有限阶段之并、每个有限阶段都停；(6) 两种命运并列：同一个“把所有有限阶段一次收齐”在 `V` 里得 ω 免费，在 HoTT 里永不停 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-EXPOSURE-CRITERION-01`；负控制 `-NEG-01`、`-NEG-02` | 只覆盖“高度”轴（深度轴：实数相等要无穷步核对；大小轴：罗素，都不承接）；呈现是否忠实要逐个论证；`V` 是 HoTT 里 ZF 的模型（无选择公理），不是一阶 ZFC（一阶一侧见 C-437）；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；大部分是已证结果的重组，h-层事实是 HoTT 标准事实；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：锥不函子化，就是宣布完成的代价（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe`，什么都不假定，只用 cubical 库）。研究发起人 2026-10-21“在其他理论里也找出来”的第一个主流数学实例：C-438 的判据预言“相同有结构处，在有限层宣布完成会丢东西”，三角范畴里锥不函子化（TR3 只给存在）正是这个形状。**身份**：锥不函子化是常识，本包给最小内核形式并接到 C-436/C-438；“三角范畴里交换是命题”“忘掉交换方式就是 H”是读法；只到有限层（H），A 的全高度版本没做。编号跳过 C-439（“读法分离”候选占用）。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-CONE-NON-FUNCTORIAL-001` | `CG001-C-440` | `formal/claude-cg001/cone-non-functorial/ConeNonFunctorial.agda`（`coneMap`、`coneMap•`、`collapse`、`cycle`、`windingOf`、`winding₀`、`winding₁`、`coneMapsDiffer`、`notFunctorial`、`commutesNotProp`、`commutesIsSet`、`qual-C440`） | `verification/runs/20261021-CG001-CONE-NON-FUNCTORIAL-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md`）；exit 0，34 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-CONE-NON-FUNCTORIAL-NEG-001` | `CG001-C-440`（负控制） | 同目录 `WrongConeUnique.agda` | `verification/runs/20261021-CG001-CONE-NON-FUNCTORIAL-NEG-01/`；exit 42，`base != H₁ b i` | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-CONE-NON-FUNCTORIAL-NEG-002` | `CG001-C-440`（负控制） | 同目录 `WrongWindingZero.agda` | `verification/runs/20261021-CG001-CONE-NON-FUNCTORIAL-NEG-02/`；exit 42，`1 != 0` | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-440 | 方块 A = Bool、B = S¹、f 常值 base、两边恒等：(1) 交换方式 H（一族回路）决定锥（余纤维）上的带点映射 `coneMap• H`；(2) H₀ = 处处 refl、H₁ = 在 true 处 `loop`：两个诱导映射在锥的回路上绕数分别为 0 与 1（`refl`），故不相等；(3) 不存在 `F : ∥ Commutes ∥₁ → PointedSelfMap` 对每个 H 满足 `F ∣ H ∣₁ ≡ coneMap• H`；(4) 交换方式的类型是集合、不是命题 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-CONE-NON-FUNCTORIAL-01`；负控制 `-NEG-01`、`-NEG-02` | 一个具体方块，不是三角范畴的一般定理；带点映射；只到有限层（H），A∞、Massey 积那一层没做；“三角范畴里交换是命题”“忘掉方式是 H”“数学家在同调代数里看见了代价”是读法或待考假说；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：深度轴，已完成的无穷对象“是不是同一个”也问不完（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。方案 `dev-docs/元层特征方案-20261021.md` §5 的“深度”轴：一层的“是不是同一个”要无穷多步才答完。与 C-438 的“高度”轴并列，并证明两条轴跑同一个程序（C-112 的 `askQ`）。**身份**：流的相等是 Π⁰₁、相等可判定 ⟺ WLPO、排中律 ⟹ WLPO 是常识；增量是放进与 B 同一个程序。“ZFC 用 A 把两条轴一次答完”是读法。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SAMENESS-NEVER-CONFIRMED-001` | `CG001-C-441` | `formal/claude-cg001/sameness-never-confirmed/SamenessNeverConfirmed.agda`（`differ`、`sameToNever`、`neverToSame`、`differenceConfirmed`、`selfNeverAnswers`、`flipAt`、`noFiniteConfirmation`、`decEqToWLPO`、`wlpoToDecEq`、`lemGivesWLPO`、`heightNever`、`depthNever`、`qual-C441`；导入 `same-q-univalent`、`a-univalence-b` 及其依赖） | `verification/runs/20261021-CG001-SAMENESS-NEVER-CONFIRMED-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，86 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SAMENESS-NEVER-CONFIRMED-NEG-001` | `CG001-C-441`（负控制） | 同目录 `WrongConfirmAtStage.agda` | `verification/runs/20261021-CG001-SAMENESS-NEVER-CONFIRMED-NEG-01/`；exit 42，`nothing != just 0` | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SAMENESS-NEVER-CONFIRMED-NEG-002` | `CG001-C-441`（负控制） | 同目录 `WrongFlipSame.agda` | `verification/runs/20261021-CG001-SAMENESS-NEVER-CONFIRMED-NEG-02/`；exit 42，翻转后的流不是原流 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-441 | 对流 `ℕ → Bool`：(1) α ≡ β ⟺ `askQ (differ α β) 0 ≡ never`；(2) 第 k 位不同则 k 步燃料内有答案；(3) `runFor n (askQ (differ α α) 0) ≡ nothing` 对每个 n，且对每个 n 有 β 前 n+1 问都答 false 而 α ≢ β；(4) 流的相等可判定 ⟺ WLPO，LEM ⟹ WLPO；(5) `askQ (FromJudge.answers (Type ℓ-zero) judge) 1 ≡ never`（HoTT 宇宙的逐层追问）与 `askQ (differ α α) 0 ≡ never` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-SAMENESS-NEVER-CONFIRMED-01`；负控制 `-NEG-01`、`-NEG-02` | 只证流，不证实数；常识部分不主张原创；“深度轴”“ZFC 用 A 一次答完”是读法；“是不是同一个永远确认不完”是《最高指示-Claude版》的概括，不是研究发起人原话；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：同一个理论里的两种命运，两层类型论（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`。读法：机器证明（Cubical Agda，`--safe --cubical --two-level`，什么都不假定）。方案 `dev-docs/元层特征方案-20261021.md` §6 的归因检验：同一个理论里两种相同，同一个 A 的代价只出现在有结构的那一层。**身份**：外层 UIP、内层数据不能消去到外层是 2LTT 的设计；增量是两种命运的并列与归因读法。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-TWO-FATES-2LTT-001` | `CG001-C-442` | `formal/claude-cg001/two-fates-2ltt/TwoFatesOneTheory.agda`（`_≡ˢ_`、`ℕˢ`、`uipˢ`、`everyOuterTypeIsSet`、`outerUniverseIsSet`、`outerStagesFlat`、`innerUniverseNever`、`EMStages`、`emUnivalent`、`emAllHeights`、`emExposed`、`emNever`、`stageFinite`、`innerOf`、`innerOfIsStage`、`toℕSuc`、`TwoFates`、`qual-C442`；导入 `exposure-criterion`、`a-univalence-b` 及其依赖） | `verification/runs/20261021-CG001-TWO-FATES-2LTT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与九个被导入的包源文件）；exit 0，90 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-TWO-FATES-2LTT-NEG-001` | `CG001-C-442`（负控制） | 同目录 `WrongInnerFlat.agda` | `verification/runs/20261021-CG001-TWO-FATES-2LTT-NEG-01/`；exit 42，外层 UIP 搬不到内层路径 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-TWO-FATES-2LTT-NEG-002` | `CG001-C-442`（负控制） | 同目录 `WrongInnerToOuter.agda` | `verification/runs/20261021-CG001-TWO-FATES-2LTT-NEG-02/`；exit 42，`SortOfSplitVarError` | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-442 | 两层类型论（`--two-level`）：(1) 外层严格相等满足 UIP，每个外层类型、外层宇宙 `SSet ℓ-zero`、外层自然数 `ℕˢ` 的相同都是事实；(2) 内层宇宙 `question (Type ℓ-zero) judge ≡ never`；(3) EM 阶段的内层汇集 `Σ X, ∥ Σ n, X ≡ K n ∥` 单价、所有高度都在、暴露、追问永不停，每个 K n 在 3+n 层落定，外层编号 n 给出内层成员 K (toℕ n) | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-TWO-FATES-2LTT-01`；负控制 `-NEG-01`、`-NEG-02` | 外层 UIP 与“内层不能消去到外层”是 2LTT 的设计；归因读法只削弱“代价来自理论或呈现”的竞争归因，不证 A 是唯一原因；半单纯类型与外层不单价没做；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：命名与截断是同一个完成算子（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G3。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。H 深化 §6 (c) 的统一陈述（研究发起人 2026-10-21 认可 H 深化后）：起名是第 0 层的完成，截断是同一个算子在更高的层；“起名要付多少”就是见证类型落定的层。**身份**：可缩即第 0 层、外延性、单价性、二元集合类型是连通的 1-型都是标准事实；增量是这张代价表与它接到 §6 (c)。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-NAMING-IS-COMPLETION-001` | `CG001-C-443` | `formal/claude-cg001/naming-is-completion/NamingIsCompletion.agda`（`completionKeeps`、`Witnesses`、`namingFreeIffUnique`、`emptySetUnique`、`emptySetNamingFree`、`emptyTypeUnique`、`emptyTypeNamingFree`、`TwoSets`、`twoMerelyUnique`、`swapLoop`、`swapIsNotRefl`、`twoNotContr`、`twoNotProp`、`twoNotSet`、`twoGroupoid`、`twoCost`、`universeCost`、`qual-C443`） | `verification/runs/20261021-CG001-NAMING-IS-COMPLETION-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，88 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-NAMING-IS-COMPLETION-NEG-001` | `CG001-C-443`（负控制） | 同目录 `WrongTwoUnique.agda` | `verification/runs/20261021-CG001-NAMING-IS-COMPLETION-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-NAMING-IS-COMPLETION-NEG-002` | `CG001-C-443`（负控制） | 同目录 `WrongSwapTrivial.agda` | `verification/runs/20261021-CG001-NAMING-IS-COMPLETION-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-443 | (1) 对任意 W、n：在 n 层保住 W 的完成 ⟺ W 在 n 层；起名保住见证类型 Σ x, φ x ⟺ 它可缩；(2) `V` 里“没有成员的集合”的见证类型可缩；(3) “空类型”的见证类型可缩；(4) 二元集合 Σ (X : hSet), ∥ X ≃ Bool ∥ 仅仅唯一，对调不是 refl，不可缩、不是命题、不是集合、是 1-型，第 0/1/2 层的完成保不住、第 3 层保得住；(5) 宇宙任何有限层的完成都保不住 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-NAMING-IS-COMPLETION-01`；负控制 `-NEG-01`、`-NEG-02` | 只管落到有限层、靠解码保住的完成；“落定的层就是 H-完成算子的不变量”是读法；`V` 不是一阶 ZFC；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（012-Opus）：逐层记账不等于暴露（2026-10-21）
+
+> 本机会话 91beaf35（012-Opus），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G4。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。H 深化 §7 的对抗检验：同一个内核、同一个逐层追问程序，只换被收齐的整体；集合的全体与群的全体逐层记账而停，宇宙永不停；§7 第二段的载体句收紧为 C-438 的判据。**身份**：大部分是 C-430、C-436、C-441 与 cubical 库的重组；新写的是群的不是集合与判定器、两个整体的价格、深度轴的阶段形式。`CLAIM.md` 两处引文的更正在包内 `REVISIONS.md`。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-PER-LAYER-ACCOUNTING-001` | `CG001-C-444` | `formal/claude-cg001/per-layer-accounting/PerLayerAccounting.agda`（`setsKernel`、`setsStopAtTwo`、`setsStructured`、`setsPriceVisible`、`setsPricePaid`、`negGroupEquiv`、`groupsStructured`、`groupsBounded`、`groupsNotBelow`、`groupsStopAtTwo`、`groupsJudge`、`groupsKernel`、`groupsPriceVisible`、`groupsPricePaid`、`universeKernel`、`universeNeverStops`、`universePriceUnpayable`、`AgreeUpTo`、`decAgreeUpTo`、`stagesKernel`、`sameToStages`、`stagesToSame`、`noStageSuffices`、`qual-C444`） | `verification/runs/20261021-CG001-PER-LAYER-ACCOUNTING-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十个被导入的包源文件）；exit 0，88 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-PER-LAYER-ACCOUNTING-NEG-001` | `CG001-C-444`（负控制） | 同目录 `WrongSetsSilent.agda` | `verification/runs/20261021-CG001-PER-LAYER-ACCOUNTING-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-PER-LAYER-ACCOUNTING-NEG-002` | `CG001-C-444`（负控制） | 同目录 `WrongStageSuffices.agda` | `verification/runs/20261021-CG001-PER-LAYER-ACCOUNTING-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-444 | (1) 集合的全体 `Gathering 1`：`runFor 1 (question (Gathering 1) (gatheringJudge 1)) ≡ just 2`（refl），任何判定器都 `≡ just 2`；不是集合；`¬ KeepingCompletionAt 2`、`KeepingCompletionAt 3`；(2) 群的全体 `Group ℓ-zero`：同上（判定器 `groupsJudge` 实跑 refl），不是集合（取负 ≠ 恒等，经 `GroupPath`），是 1-型；(3) 宇宙：`runFor 1000 (question (Type ℓ-zero) judgeViaB) ≡ nothing`（refl），任何判定器 `≡ never`，任何 n `¬ KeepingCompletionAt n`；(4) `AgreeUpTo α β n` 每个 n 可判定（全 0 流 1000 个阶段实跑 refl），相同 ⟺ 每个阶段都一样，每个 n 都有流前 n 位一样却不同，`runFor n (askQ (differ α α) 0) ≡ nothing` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-PER-LAYER-ACCOUNTING-01`；负控制 `-NEG-01`、`-NEG-02` | “三处受同一个典范性义务约束”是元层事实；“价格看得见 / 付不清”“集合与群是另一个框架”是读法；不是“另一个演算”意义上的第三框架；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：粘回两端是一个宣布的构造（2026-10-21）
+
+> 本机会话 a15f4b3b，应研究发起人要求接手会话 91beaf35（015-Opus），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G5。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。圆环悖论的 HoTT 一面，补 H 深化 §1 修正记录的缺口：线段可缩、两端本来就相同；粘回两端是一条宣布的认同，造出圆的洞，线段造不出；代价从 0 变成 3。逐步合回的一面是 C-424（Lean + Mathlib）。**身份**：数学是标准事实（区间可缩、两端相粘得圆、绕数、连通性、群胚性）；新写的是“宣布的认同 vs 线段自己的路”与“代价 0 → 3”两张对照；(6) 与 `loopNontrivial` 是 C-22 的同一事实经同构搬来。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-CIRCLE-GLUING-001` | `CG001-C-445` | `formal/claude-cg001/circle-gluing/CircleGluing.agda`（`segmentContr`、`endsAlreadySame`、`segmentLoopsTrivial`、`mapsKillLoops`、`Glued`、`own`、`gluedLoop`、`toS¹`、`fromS¹`、`gluedIsCircle`、`gluedIsCirclePath`、`imageOfGluedLoop`、`gluedLoopWinding`、`gluedLoopNontrivial`、`declaredIsNotOwn`、`noLoopFromSegment`、`collapse`、`ownClosingKillsLoop`、`gluedGroupoid`、`segmentFree`、`circleCost`、`puncturedGluedEmpty`、`qual-C445`） | `verification/runs/20261021-CG001-CIRCLE-GLUING-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，86 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-CIRCLE-GLUING-NEG-001` | `CG001-C-445`（负控制） | 同目录 `WrongDeclaredIsOwn.agda` | `verification/runs/20261021-CG001-CIRCLE-GLUING-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-CIRCLE-GLUING-NEG-002` | `CG001-C-445`（负控制） | 同目录 `WrongLoopFromSegment.agda` | `verification/runs/20261021-CG001-CIRCLE-GLUING-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-445 | (1) `N = Interval`：`isContr N`；`seg : end₀ ≡ end₁`；N 的每个回路 `≡ refl`，任何 `f : N → X` 都把它们送到 `refl`；(2) `Glued`（`pt : N → Glued`，构造子 `declared : pt end₀ ≡ pt end₁`）：`Glued ≃ S¹`、`Glued ≡ S¹`；(3) `¬ (declared ≡ cong pt seg)`；`gluedLoop = declared ∙ sym own` 不是 refl，`cong toS¹ gluedLoop ≡ loop`，`winding (cong toS¹ gluedLoop) ≡ pos 1`（refl）；(4) 没有 `p : end₀ ≡ end₀` 使 `cong pt p ≡ gluedLoop`；`collapse`（`declared ↦ seg`）下 `cong collapse gluedLoop ≡ refl`；(5) `KeepingCompletionAt 0 N`；`Glued` 不可缩、不是命题、不是集合、是群胚，`¬ KeepingCompletionAt 0/1/2`、`KeepingCompletionAt 3`；(6) `¬ (Σ y, ¬ (pt end₀ ≡ y))` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-CIRCLE-GLUING-01`；负控制 `-NEG-01`、`-NEG-02` | 数学是标准事实，不主张原创；“粘回两端就是宣布完成”“原文 ① 的两处表现”“只是价格看得见”是读法；极限一侧是 C-424、C-437，本包不重证；不证“抽象必然导致矛盾”；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：没有一个有限层够用（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G6。读法：机器证明（Cubical Agda，`--safe`，什么都不假定）。同调代数的全高度版本（元层特征方案 §7 第 5 条）：K(ℤ, n) 第 n+1 层与单点分不开、第 n+2 层分开，价格恰是 n+2；没有一个有限层够用。C-440 是它的第 1 层。**身份**：EM 空间的连通性、截断性与环路空间来自 cubical 库；新写的是不在第 n+1 层、不是单点、价格恰是 n+2 与“没有一个有限层够用”的两个形式。史学假说的原文未取得，仍是假说。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-FULL-HEIGHT-001` | `CG001-C-446` | `formal/claude-cg001/full-height/FullHeight.agda`（`K`、`unitTruncContr`、`pointAt`、`sameAsPointAt`、`pointAtLevel`、`ℤnotContr`、`kNotPoint`、`kNotBelow`、`differAt`、`kPrice`、`unboundedPrice`、`noFiniteLevelDetectsPoints`、`noFiniteLevelSeparates`、`qual-C446`） | `verification/runs/20261021-CG001-FULL-HEIGHT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，86 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-FULL-HEIGHT-NEG-001` | `CG001-C-446`（负控制） | 同目录 `WrongPointOneLevelUp.agda` | `verification/runs/20261021-CG001-FULL-HEIGHT-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-FULL-HEIGHT-NEG-002` | `CG001-C-446`（负控制） | 同目录 `WrongKIsPoint.agda` | `verification/runs/20261021-CG001-FULL-HEIGHT-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-446 | `K n = EM ℤAbGroup n`：(1) `∥ K n ∥ (suc n) ≃ ∥ Unit ∥ (suc n)`，`isContr (∥ K n ∥ n)`；(2) `¬ (∥ K n ∥ (2 + n) ≃ ∥ Unit ∥ (2 + n))`；`KeepingCompletionAt (2 + n) (K n)`、`¬ KeepingCompletionAt (suc n) (K n)`（`¬ isOfHLevel (suc n) (K n)`）；对每个 m 有 A 使 `¬ KeepingCompletionAt m A`；(3) `¬ isContr (K n)`；(4) `¬ Σ m, ∀ A, isContr (∥ A ∥ m) → isContr A`；`¬ Σ m, ∀ A B, ∥ A ∥ m ≃ ∥ B ∥ m → A ≃ B` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-FULL-HEIGHT-01`；负控制 `-NEG-01`、`-NEG-02` | 数学是标准事实，不主张原创；“同调代数的高阶运算”“全高度就是 A”是读法；Massey 积、三角范畴、增强没有形式化；史学假说原文未取得；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：实数的深度轴（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G7。读法：机器证明（Lean 4 + Mathlib，经典，三条标准公理）。C-441 的深度轴经桥接引理落到实数：数字流表示的实数是 0 ⟺ 流处处为 0；有限阶段确认不了；一次判定 ⟺ WLPO 的流形式；一般相等不是数字流相等。**身份**：非负级数与几何级数来自 Mathlib；新写的是桥与它的三个推论。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-REAL-DEPTH-001` | `CG001-C-447` | `formal/claude-cg001/real-depth/GodelQ/Real/RealDepth.lean`（`digit`、`val`、`summable_digit`、`val_eq_zero_iff`、`onlyAt`、`noFiniteStageConfirms`、`noStageSuffices`、`WLPO`、`zeroTest_iff_WLPO`、`tailOnes`、`val_onlyAt_zero`、`val_tailOnes`、`notInjective`）、`QualificationRealDepth.lean`（`qual_C447`） | `verification/runs/20261021-CG001-REAL-DEPTH-01/`（Lean v4.34.0 + Mathlib `5ed29652`；固定记录与 1681 个模块的导入闭包）；exit 0，12 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-REAL-DEPTH-NEG-001` | `CG001-C-447`（负控制） | 同目录 `GodelQ/Negative/WrongFirstDigit.lean` | `verification/runs/20261021-CG001-REAL-DEPTH-NEG-01/`；exit 1 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-REAL-DEPTH-NEG-002` | `CG001-C-447`（负控制） | 同目录 `GodelQ/Negative/WrongStreamEquality.lean` | `verification/runs/20261021-CG001-REAL-DEPTH-NEG-02/`；exit 1 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-447 | `val s = ∑' n, digit s n`（`digit s n = if s n then (1/2)^(n+1) else 0`）：(1) `val s = 0 ↔ ∀ n, s n = false`；(2) `∀ n, ∃ s, (∀ k < n, s k = false) ∧ ∑_{k<n} digit s k = 0 ∧ val s ≠ 0`，`¬ ∃ N, ∀ s, (∀ k < N, s k = false) → val s = 0`；(3) `(∀ s, val s = 0 ∨ val s ≠ 0) ↔ WLPO`（流形式）；(4) `∃ s t, s ≠ t ∧ val s = val t`（`val (onlyAt 0) = 1/2 = val tailOnes`） | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-REAL-DEPTH-01`；负控制 `-NEG-01`、`-NEG-02` | Mathlib 的 ℝ 是经典的，(3) 是等价不是可构造；构造性一面是 C-441；`val` 只覆盖 [0, 1]；“深度轴落到实数”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：两层里的无穷相干（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G8。读法：机器证明（Cubical Agda，`--safe --two-level`）。外层编号按层给出内层类型的严格半单纯结构，相干的相干是事实；内层同样的相干是数据。**阻塞**：可纤的一版（每个 n 的截断半单纯类型全体作为内层类型）要 Reedy 可纤性机制，本包没建。（2026-10-21 同日更新：可纤的一版已由 C-450 换一条路做成，见本文件“两层里的可纤半单纯类型”一节。）
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-STRICT-SEMISIMPLICIAL-001` | `CG001-C-448` | `formal/claude-cg001/strict-semisimplicial/StrictSemisimplicial.agda`（`_≡ᵉ_`、`uipᵉ`、`Th`、`idᵗ`、`_∘ᵗ_`、`∘ᵗ-idˡ`、`∘ᵗ-idʳ`、`∘ᵗ-assoc`、`SSTˢ`、`Tuple`、`select`、`vertices`、`faceKernel`、`simplicialIdentities`、`coherenceFlat`、`thinningLawsFlat`、`innerCoherenceStructured`、`qual-C448`） | `verification/runs/20261021-CG001-STRICT-SEMISIMPLICIAL-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十个被导入的包源文件）；exit 0，88 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-STRICT-SEMISIMPLICIAL-NEG-001` | `CG001-C-448`（负控制） | 同目录 `WrongInnerCoherenceFlat.agda` | `verification/runs/20261021-CG001-STRICT-SEMISIMPLICIAL-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-STRICT-SEMISIMPLICIAL-NEG-002` | `CG001-C-448`（负控制） | 同目录 `WrongFaceIdentity.agda` | `verification/runs/20261021-CG001-STRICT-SEMISIMPLICIAL-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-448 | (1) `Th` 在 `_≡ˢ_` 下严格成范畴（左右单位、结合）；(2) `SSTˢ`：`X : ℕˢ → Type`，`act : Th m n → X n → X m`，`actId`、`actComp` 为 `_≡ᵉ_`；(3) `vertices A`（`Tuple A`、`select`）是 `SSTˢ`；`select δᵢ (a , b , c , tt)` 按 `reflᵉ` 删去第 i 个分量；δ₁∘ε₀ = δ₀∘ε₀、δ₂∘ε₀ = δ₀∘ε₁、δ₂∘ε₁ = δ₁∘ε₁ 按 `reflˢ`；(4) 任意两条 `actComp` 证明 `≡ˢ`；(5) `¬ (Path ((x : S¹) → x ≡ x) (λ _ → refl) rotLoop)` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-STRICT-SEMISIMPLICIAL-01`；负控制 `-NEG-01`、`-NEG-02` | `SSTˢ` 是外层类型，不是 HoTT 里的类型；可纤一版阻塞；不要求 Reedy 纤维性；“无穷相干是 A 的一种形态”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：单价范畴的全体会停（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，目标包 CG-011 完成门 G10 的“单价 1-范畴”一半。读法：机器证明（Cubical Agda，`--safe`）。单价范畴的全体落在第 4 层（库的 `is2GroupoidUnivalentCategory`），C-77 的追问程序最迟第 3 问停，第 4 层付得清。（2026-10-22 更新：恰在第 3 问停已由 C-451 证出，见本文件“单价范畴的全体恰在第 3 问停”一节。）Rzk 一半这一轮不做，理由见 `.claude/goals/CG-011-h-deepening-followups/G10-结论.md`。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-UNIVALENT-CATEGORIES-001` | `CG001-C-449` | `formal/claude-cg001/univalent-categories/UnivalentCategoriesStop.agda`（`UnivCat`、`setsMember`、`groupsMember`、`univCatBounded`、`univCatHalts`、`univCatAnswerSound`、`univCatPricePaid`、`universeContrast`、`qual-C449`） | `verification/runs/20261021-CG001-UNIVALENT-CATEGORIES-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与八个被导入的包源文件）；exit 0，97 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-UNIVALENT-CATEGORIES-NEG-001` | `CG001-C-449`（负控制） | 同目录 `WrongUnivCatNever.agda` | `verification/runs/20261021-CG001-UNIVALENT-CATEGORIES-NEG-01/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-UNIVALENT-CATEGORIES-NEG-002` | `CG001-C-449`（负控制） | 同目录 `WrongUnivCatUnpayable.agda` | `verification/runs/20261021-CG001-UNIVALENT-CATEGORIES-NEG-02/`；exit 42 | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-449 | `UnivCat = Σ (Category (ℓ-suc ℓ-zero) ℓ-zero) isUnivalent`（成员 `SET ℓ-zero`、`GroupCategory`）：(1) `isOfHLevel 4 UnivCat`；(2) 任何 `judge` 有 j 使 `runFor 2 (question UnivCat judge) ≡ just j`，且 `isOfHLevel (suc j) UnivCat`；(3) `KeepingCompletionAt 4 UnivCat`；(4) 宇宙 `question ≡ never`、任何 n `¬ KeepingCompletionAt n` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-UNIVALENT-CATEGORIES-01`；负控制 `-NEG-01`、`-NEG-02` | 只证最迟第 3 问停；负控制的直接拒因是宇宙层级；“有上限则藏”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：两层里的可纤半单纯类型（2026-10-21）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，CG-011 完成门 G8 的后续，做上节 C-448 阻塞的那一半。读法：机器证明（Cubical Agda，`--safe --two-level`；(7) 的桥是模块参数，不是公设）。对每个外层 n，前 n 层的半单纯类型全体是内层类型；全部层的塔只在外层，给一座从内层自然数到外层自然数的桥才是内层类型，桥写不出见 C-442 的 NEG-002。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-FIBRANT-001` | `CG001-C-450` | `formal/claude-cg001/sst-2ltt-fibrant/SemisimplicialTwoLevel.agda`（`ΠTh`、`SST`、`Sh`、`res`、`resComp`、`resId`、`points`、`edgeShell`、`edgeEnds`、`triangleShell`、`pointsAndEdges`、`pointsEdgesTriangles`、`resCompFlat`、`freeComp₂`、`freeComp₃`、`freeId₃`、`freeComp₄`、`SSTω`、`codiscreteω`、`Bridge.towerInner`、`Bridge.fromω`、`qual-C450`） | `verification/runs/20261021-CG001-SST-2LTT-FIBRANT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十一个被导入的包源文件）；exit 0，89 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-FIBRANT-NEG-001` | `CG001-C-450`（负控制） | 同目录 `WrongTowerInner.agda` | `verification/runs/20261021-CG001-SST-2LTT-FIBRANT-NEG-01/`；exit 42（`UnequalSorts`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-FIBRANT-NEG-002` | `CG001-C-450`（负控制） | 同目录 `WrongEdgeEnd.agda` | `verification/runs/20261021-CG001-SST-2LTT-FIBRANT-NEG-02/`；exit 42（`MismatchedProjectionsError`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-450 | (1) `SST : ℕˢ → Type₁`（`SST 0 = Unit*`，`SST (n+1) = Σ (X : SST n) (Sh n X (n+1) → Type)`），`Sh n X k : Type`；(2) `res : Th j k → Sh n X k → Sh n X j`；(3) 对一切 n，`resId : res n X (idᵗ k) s ≡ᵉ s`，`resComp : res n X (T ∘ᵗ S) s ≡ᵉ res n X S (res n X T s)`；(4) `points`、`edgeShell`、`edgeEnds`、`triangleShell` 按 `reflᵉ`，`pointsAndEdges : SST 2`，`pointsEdgesTriangles : SST 3`；(5) 任意两条 `resComp` 证明 `≡ˢ`；n = 2、3、4 的四个具体实例上 `resComp …`、`resId … ≡ˢ reflᵉ`；(6) `SSTω`（`stage`、`agrees`）是外层记录，`codiscreteω P : SSTω`；(7) 对任何 `toOuter : ℕ → ℕˢ` 与 `toOuter (suc n) ≡ˢ sucˢ (toOuter n)`，`towerInner : Type₁`，`fromω : SSTω → towerInner` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261021-CG001-SST-2LTT-FIBRANT-01`；负控制 `-NEG-01`、`-NEG-02`；桥写不出：`20261021-CG001-TWO-FATES-2LTT-NEG-02` | 不能说“HoTT 里定义出了半单纯类型”（统一的定义用了外层）；NEG-001 只否定直接写法；(7) 不断言桥存在；“相干就是 refl”只有四个实例；与 C-448 一版的对应、全空间的取面未做；“桥是 A 的位置”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：单价范畴的全体恰在第 3 问停（2026-10-22）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，CG-011 完成门 G10 的后续，补 C-449 写明的缺口。读法：机器证明（Cubical Agda，`--safe`）。群胚的路径范畴是单价范畴；宇宙里圆到自身的认同不构成集合，且是圆的路径范畴自身认同的收缩；所以单价范畴的全体不是群胚，C-77 的追问恰在第 3 问停。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-UNIVALENT-CATEGORIES-EXACT-001` | `CG001-C-451` | `formal/claude-cg001/univalent-categories-exact/UnivalentCategoriesExact.agda`（`PathCat`、`isUnivalentPathCat`、`D`、`circleMember`、`notSetEquivS¹`、`notSetPathsS¹`、`liftPathBack`、`liftPathBackCong`、`toUC`、`fromUC`、`retractUC`、`notGroupoid`、`notSet`、`exactlyThird`、`qual-C451`） | `verification/runs/20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与九个被导入的包源文件）；exit 0，101 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-001` | `CG001-C-451`（负控制） | 同目录 `WrongTotalityGroupoid.agda` | `verification/runs/20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-002` | `CG001-C-451`（负控制） | 同目录 `WrongSecondQuestion.agda` | `verification/runs/20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-451 | (1) 对任何 `X : hGroupoid ℓ-zero`，`isUnivalent (PathCat X)`（对象 `Lift (fst X)`，态射 `lower a ≡ lower b`），`circleMember = D S¹G : UnivCat`；(2) `¬ isSet (S¹ ≡ S¹)`；(3) `fromUC (toUC q) ≡ q`，`¬ isGroupoid UnivCat`，`¬ isSet UnivCat`；(4) 对任何 `judge`，`runFor 1 (question UnivCat judge) ≡ nothing` 且 `runFor 2 (question UnivCat judge) ≡ just 3` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01`；负控制 `-NEG-01`、`-NEG-02` | 只证 C-449 的那个全体（对象 `Type₁`、态射 `Type₀`）；自然自同构是读法，没写出；“结构多一层，停点挪一问”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：两层里两版半单纯类型的对应（2026-10-22）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，C-450 的两条续作（CG-011 完成门 G8 的后续）。读法：机器证明（Cubical Agda，`--safe --two-level`）。每个按层的半单纯类型给出一个严格的半单纯类型（全空间与余骨架）；顺带更正 C-450 “全空间的取面没写出”一条（其实已在，见 `formal/claude-cg001/sst-2ltt-fibrant/REVISIONS.md`）。反方向没做。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-CORRESPONDENCE-001` | `CG001-C-452` | `formal/claude-cg001/sst-2ltt-correspondence/SemisimplicialCorrespondence.agda`（`toStrict`、`edgesTotal`、`edgeToEnd`、`coskeletonTriangles`、`qual-C452`） | `verification/runs/20261022-CG001-SST-2LTT-CORRESPONDENCE-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十二个被导入的包源文件）；exit 0，90 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-CORRESPONDENCE-NEG-001` | `CG001-C-452`（负控制） | 同目录 `WrongCoskeletonFiller.agda` | `verification/runs/20261022-CG001-SST-2LTT-CORRESPONDENCE-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-CORRESPONDENCE-NEG-002` | `CG001-C-452`（负控制） | 同目录 `WrongNaiveInverse.agda` | `verification/runs/20261022-CG001-SST-2LTT-CORRESPONDENCE-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-452 | (1) `toStrict : (n : ℕˢ) → SST n → SSTˢ`，`X = Sh n Y`，`act = res n Y`，`actId = resId n Y`，`actComp = resComp n Y`；(2) `edgesTotal`：`X (toStrict 2 (pointsAndEdges P E)) 2` 按 `reflᵉ` 是边连同两端；`edgeToEnd`：沿 ε₀ 取面按 `reflᵉ` 得端点；(3) `coskeletonTriangles`：第 3 层按 `reflᵉ` 是三角形的壳 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-SST-2LTT-CORRESPONDENCE-01`；负控制 `-NEG-01`、`-NEG-02` | 只一个方向，不说两版等价；反方向（经纤维）未做（同日由 C-453 做成，见下节）；实例只在两层的例子上；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：严格的一版经纤维回到按层的一版（2026-10-22）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，C-452 没做的反方向（CG-011 完成门 G8 的后续）。读法：机器证明（Cubical Agda，`--safe --two-level`）。每个严格的半单纯类型经纤维给出按层的一版，边界映射与取面严格可换；交回去第 n+1 层原样取回（内层等价）。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-REVERSE-001` | `CG001-C-453` | `formal/claude-cg001/sst-2ltt-reverse/SemisimplicialReverse.agda`（`substFiber`、`fiberExt`、`Reverse.Lv`、`Reverse.bd`、`Reverse.bdNat`、`Reverse.fibresTotal`、`isContrΠThNone`、`ΠThId`、`substEquivᵉ`、`RoundTrip.roundTrip`、`qual-C453`） | `verification/runs/20261022-CG001-SST-2LTT-REVERSE-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十三个被导入的包源文件）；exit 0，92 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-REVERSE-NEG-001` | `CG001-C-453`（负控制） | 同目录 `WrongNaturalityDefinitional.agda` | `verification/runs/20261022-CG001-SST-2LTT-REVERSE-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-REVERSE-NEG-002` | `CG001-C-453`（负控制） | 同目录 `WrongAugmentationBack.agda` | `verification/runs/20261022-CG001-SST-2LTT-REVERSE-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-453 | 对任何 `S : SSTˢ`：(1) `Lv : (n : ℕˢ) → SST n`，`Lv (n+1) = (Lv n , fiber (bd n))`，`bd n : X S k → Sh n (Lv n) k`；(2) `bdNat n T x : bd n (act S T x) ≡ᵉ res n (Lv n) T (bd n x)`，对一切 n；(3) `fibresTotal n : Σ (Sh n (Lv n) (n+1)) (fiber (bd n)) ≃ X S (n+1)`，`roundTrip n : X (toStrict (n+1) (Lv (n+1))) (n+1) ≃ X S (n+1)` | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261022-CG001-SST-2LTT-REVERSE-01`；负控制 `-NEG-01`、`-NEG-02` | 不说两版作为类型等价；`roundTrip` 是内层等价；第 0 层不取回；“差别只剩那座桥”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

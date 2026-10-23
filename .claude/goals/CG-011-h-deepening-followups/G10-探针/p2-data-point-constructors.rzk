@@ -1,0 +1,10 @@
+#lang rzk-1
+
+-- G10 probe 2 (session a15f4b3b, 2026-10-21): #data accepts ordinary point constructors.
+-- Expected: accepted (the natural numbers can be declared by hand, as directed-native does).
+
+#data ℕ := zero | succ (n : ℕ)
+
+#define two
+  : ℕ
+  := succ (succ zero)
