@@ -2782,3 +2782,19 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-454 | (1) `famPathP p P Q e : PathP (λ i → p i → Type) P Q`，只要 `e : (a : A) → P a ≃ Q (transport p a)`；(2) `fiberAfterEquiv f c : fiber (λ z → f (fst z)) c ≃ B (invEq f c)`；(3) 对任意 `P : Unit → Type`，`Reverse.Lv (toStrict 1 (tt* , P)) 1 ≡ (tt* , P)`；(4) 对任意 P 与 `E : Sh 1 (tt* , P) 2 → Type`，`Reverse.Lv (toStrict 2 ((tt* , P) , E)) 2 ≡ ((tt* , P) , E)`；`pointsAndEdges P E` 是特例 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261023-CG001-SST-2LTT-IDENTIFICATION-01`；负控制 `-NEG-01`、`-NEG-02` | 只证 n = 1、2；认同是内层路径，不按定义成立；严格的一版那一侧只到内层等价；n ≥ 3 的障碍是分析；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+> 2026-10-23 更新：一般的 n 由下一节 C-455 证出；本节“n ≥ 3 的障碍”的分析不成立，更正写在包内 `REVISIONS.md`。
+
+## Claude（接手 015-Opus）：对一切 n，两版在类型族这一层回到原物（2026-10-23）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，C-454 没做的一般的 n（CG-011 完成门 G8 的后续）。读法：机器证明（Cubical Agda，`--safe --two-level`；单价性与 Glue 是原语与定理）。对一切外层 N，按层的一版交到严格的一版再经纤维取回就是原物；比较路径的自然性写成区间每一点上的外层相等，由外层 UIP 收住，推翻 C-454 的障碍分析。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-SST-2LTT-IDENTIFICATION-ALL-001` | `CG001-C-455` | `formal/claude-cg001/sst-2ltt-identification-all/SemisimplicialIdentificationAll.agda`（`lamThP`、`appThP`、`fixEnds`、`fixEndsAt`、`General.Cmp`、`General.Step`（`fibEq`、`q`、`Ψ`、`topNat`、`Q`、`P'`、`nat'`）、`General.cmp`、`identification`、`boundaryIsIdentity`、`qual-C455`） | `verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-01/`（macOS 工具链记录；源清单另哈希 `CLAIM.md` 与十四个被导入的包源文件）；exit 0，94 秒，stderr 0 B；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-001` | `CG001-C-455`（负控制） | 同目录 `WrongFibreEnd.agda` | `verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-01/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-002` | `CG001-C-455`（负控制） | 同目录 `WrongOuterIdentification.agda` | `verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-NEG-02/`；exit 42（`UnequalTerms`） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-455 | 对任何 `S : SSTˢ`，`General.cmp S n Z ρ ρNat ρEq : Cmp n Z ρ`（`path : Lv n ≡ Z`，`P : PathP (λ i → X S k → Sh n (path i) k) (bd n) ρ`，`nat T x i : res n (path i) T (P i x) ≡ᵉ P i (act S T x)`），只要 ρ 严格自然、在不超过 n 个顶点的单纯形上是等价；`identification N Y : Reverse.Lv (toStrict N Y) N ≡ Y`，对一切外层 N 与 `Y : SST N`；`boundaryIsIdentity N Y`：沿它边界映射就是恒等 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-01`；负控制 `-NEG-01`、`-NEG-02` | 认同是内层路径；严格的一版那一侧没有认同；全部层的塔仍要桥；“A 只落在桥上”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |

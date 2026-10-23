@@ -25,6 +25,7 @@
 | CG001-C-452（两版的对应，正方向） | 每个按层的半单纯类型给出一个严格的半单纯类型：k 个顶点的单纯形取作前 n 层数据，取面是 `res`；k ≤ n 时是全空间（边连同两端，从边取面得端点），k > n 时是余骨架（三角形就是三角形的壳） | ✅ 2026-10-22（Cubical Agda `--safe --two-level`；主运行与两个负控制精确重放）。C-450 的两条续作；反方向当时没做，同日由 C-453 做成（下一行）；顺带更正 C-450 “全空间的取面没写出” | `HoTT/formal/claude-cg001/sst-2ltt-correspondence/`；run `20261022-CG001-SST-2LTT-CORRESPONDENCE-01`、`-NEG-01`、`-NEG-02`；`HoTT/formal/claude-cg001/sst-2ltt-fibrant/REVISIONS.md` |
 | CG001-C-453（两版的对应，反方向） | 每个严格的半单纯类型经纤维给出按层的一版（第 m+1 层取边界恰为给定壳的单纯形），边界映射与取面严格可换，对一切 n；交回严格的一版，第 n+1 层与原来的内层等价，对一切 n；用在 `toStrict Y` 上即另一个来回 | ✅ 2026-10-22（Cubical Agda `--safe --two-level`；主运行与两个负控制精确重放）。C-452 的反方向；类型族这一层的认同（要单价性）、第 0 层不取回，照实写明 | `HoTT/formal/claude-cg001/sst-2ltt-reverse/`；run `20261022-CG001-SST-2LTT-REVERSE-01`、`-NEG-01`、`-NEG-02` |
 | CG001-C-454（两版在类型族这一层回到原物） | 按层的一版交到严格的一版再经纤维取回，在 n = 1、2 就是原物（`SST n` 里的内层路径，对一切点族与边族）；单价性：一族类型沿路径相等只要逐点等价；边界映射按定义是投到壳再逐点换成纤维元素 | ✅ 2026-10-23（Cubical Agda `--safe --two-level`；主运行与两个负控制精确重放）。C-453 没做的一条；一般的 n 没做（从 n = 3 起要一条与取面相容的同伦，外层 UIP 管不到）；严格一侧只到内层等价 | `HoTT/formal/claude-cg001/sst-2ltt-identification/`；run `20261023-CG001-SST-2LTT-IDENTIFICATION-01`、`-NEG-01`、`-NEG-02` |
+| CG001-C-455（对一切 n，两版在类型族这一层回到原物） | 对一切外层 N 与 `Y : SST N`，按层的一版交到严格的一版再经纤维取回就是 Y 本身（内层路径），沿它边界映射就是恒等；比较路径的自然性逐点写成外层相等，第 n+1 层的类型族路径是一个 Glue（时刻 i 取比较映射的纤维，终点粘上目标族） | ✅ 2026-10-23（Cubical Agda `--safe --two-level`；主运行与两个负控制精确重放）。C-454 没做的一般的 n；推翻 C-454 的障碍分析（“外层 UIP 管不到”）；严格一侧不在内 | `HoTT/formal/claude-cg001/sst-2ltt-identification-all/`；run `20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-01`、`-NEG-01`、`-NEG-02` |
 | CG001-C-449（单价范畴的全体） | 单价范畴的全体（集合的范畴、群的范畴是成员）落在第 4 层；同一个逐层追问程序最迟第 3 问停，答案是对的；第 4 层的完成保得住它；宇宙永不停 | ✅ 2026-10-21（Cubical Agda `--safe`；主运行与两个负控制精确重放）。CG-011 G10 的一半；恰在第 3 问当时未证，2026-10-22 由 C-451 证出（下一行）；Rzk 一半这一轮不做，理由见 G10 结论 | `HoTT/formal/claude-cg001/univalent-categories/`；run `20261021-CG001-UNIVALENT-CATEGORIES-01`、`-NEG-01`、`-NEG-02`；`.claude/goals/CG-011-h-deepening-followups/G10-结论.md` |
 | CG001-C-451（恰在第 3 问停） | 群胚的路径范畴是单价范畴，圆的那一个是单价范畴全体的成员；宇宙里圆到自身的认同不构成集合（每点绕一圈不是不动），且是这个成员自身认同的收缩；所以单价范畴的全体不是群胚、不是集合；同一个追问对任何判定器走一步没有答案、走两步答出 3 | ✅ 2026-10-22（Cubical Agda `--safe`；主运行与两个负控制精确重放）。G10 的后续，补 C-449 的缺口；方案“第 3 问停”的预测从“最迟”变成“恰好” | `HoTT/formal/claude-cg001/univalent-categories-exact/`；run `20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01`、`-NEG-01`、`-NEG-02` |
 | CG001-C-442（两层类型论） | 同一个理论里两种相同：外层（严格相等）每个类型、外层宇宙、外层编号都满足 UIP；内层宇宙与同样 EM 阶段的单价汇集追问永不停；外层编号给出内层阶段，反之不行 | ✅ 2026-10-21（Cubical Agda `--safe --two-level`；主运行与两个负控制精确重放）。方案 §6 的归因检验 | `HoTT/formal/claude-cg001/two-fates-2ltt/`；run `20261021-CG001-TWO-FATES-2LTT-01`、`-NEG-01`、`-NEG-02` |
@@ -243,7 +244,7 @@ C-448 没做到的那一半：对每个外层 n，把“只有前 n 层的半单
 1. **G9 main README §4 的升级候选**：✅ 候选就绪（五个发布模板，提交 `39170cac2`，试生成 `BUILT`）。研究发起人 2026-10-22 授权后已发布：本章 17 个包并入 `dev`（`8a41e1f8b`），`main` `9e21cd9ad` 带上 README 新段落与 CLAIMS 第 5 节；独立重建逐字节一致，全量重放 215/215（`.claude/goals/CG-011-h-deepening-followups/main-release/`）。同日补发 C-454：`main` `5a8d02c0f`。
 2. **Rzk 一半**（G10 决定这一轮不做）：研究发起人要第二个内核确认时，在单价性公设下重跑 C-77 与 C-430。
 3. **G6 的史学考古**：✅ 2026-10-22 做完。两份 PDF 经研究发起人授权下载，MinerU 解析后对用到的页做视觉审计（Verdier 7 页，Bondal–Kapranov 全部 15 页），三份原文都已核：代价与补救有一手印证，因果只到同向。记录 `.claude/goals/CG-011-h-deepening-followups/G6-史学考古.md`，可重跑 `scripts/audit/check_g6_archaeology.py --pdf-dir <PDF 目录>`。
-4. **两版对应在类型族这一层的认同**：C-452 做了正方向、C-453 做了反方向，两个来回在单纯形这一层都回到原处。2026-10-23：C-454 在 n = 1、2 把它们认同为原物（`SST n` 的元素相等，用单价性）。一般的 n 没做。原写“要内层单价性”只说了一半：从 n = 3 起，壳里的边依赖两端，比较搬运与逐点替换的同伦要与取面相容（2-胞腔），外层 UIP 管不到，往上一层又要一层相干；严格一侧要认同得是外层相等，单价性给不出。这是研究级的一步，CG-011 不再往下推，等研究发起人决定。
+4. **两版对应在类型族这一层的认同**：✅ 2026-10-23 做完。C-452 做了正方向、C-453 做了反方向；C-454 在 n = 1、2 把来回认同为原物；C-455 对一切外层 n 证出（`SST n` 的元素相等，用单价性加逐点的外层自然性）。C-454 当时写的“从 n = 3 起外层 UIP 管不到”不成立，三层更正写在它的 `REVISIONS.md`。严格一侧要认同得是外层相等，单价性给不出，这一条不变。
 5. **不在 CG-011 内**：
    - 检测义务模型（L2）：仍要先设计签名；
    - “另一个演算”意义上的第三框架：卡在 forcing-ticks 构建。
@@ -279,4 +280,5 @@ C-448 没做到的那一半：对每个外层 n，把“只有前 n 层的半单
 - C-452 主运行：运行目录换成 `HoTT/verification/runs/20261022-CG001-SST-2LTT-CORRESPONDENCE-01`。
 - C-453 主运行：运行目录换成 `HoTT/verification/runs/20261022-CG001-SST-2LTT-REVERSE-01`。
 - C-454 主运行：运行目录换成 `HoTT/verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-01`。
-- CG-011 各文档的引文（含 C-445 的圆环原文、C-446 的元层特征原话、C-447 的 KC-000065、C-448 与 C-449 的方案原文、G9 的认可原话、C-450 至 C-454 引的前包缺口句）：`python3 -B scripts/audit/check_cg011_quotes.py`（49/49）。
+- C-455 主运行：运行目录换成 `HoTT/verification/runs/20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-01`。
+- CG-011 各文档的引文（含 C-445 的圆环原文、C-446 的元层特征原话、C-447 的 KC-000065、C-448 与 C-449 的方案原文、G9 的认可原话、C-450 至 C-455 引的前包缺口句）：`python3 -B scripts/audit/check_cg011_quotes.py`（50/50）。
