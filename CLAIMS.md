@@ -2,7 +2,7 @@
 
 **中文** · [Русский](CLAIMS-RU.md) · [Deutsch](CLAIMS-DE.md) · [Français](CLAIMS-FR.md) · [English](CLAIMS-EN.md)
 
-> 本文件由 `dev` 上的 `scripts/release/build_main_release.py` 从提交 `5ca3a26b` 生成，不在本分支修改。第 1、2 节逐字取自 `dev` 上共享证据矩阵 `HoTT/CLAIM_EVIDENCE_MATRIX.md` 的两节（不含原标题行）；第 3 节逐字取自 `dev` 上的目标内索引草稿与 Claude 总索引；第 4 节（ZFC 一侧）逐字取自共享证据矩阵中各包的行与 Claude 总索引；第 5 节由各运行的收据生成。文中 `formal/…`、`verification/runs/…` 指本分支 `HoTT/` 下的同名路径；其余过程文件的路径在 `dev` 上（`RELEASE-MANIFEST.json` 的 `paths_mentioned_but_on_dev` 列出了正文提到的那些）。另有俄、德、法、英文译本（AI 翻译，以本中文版为准）；`CLAIMS.md` 与 `CLAIMS-ZH.md` 相同。
+> 本文件由 `dev` 上的 `scripts/release/build_main_release.py` 从提交 `8a41e1f8` 生成，不在本分支修改。第 1、2 节逐字取自 `dev` 上共享证据矩阵 `HoTT/CLAIM_EVIDENCE_MATRIX.md` 的两节（不含原标题行）；第 3 节逐字取自 `dev` 上的目标内索引草稿与 Claude 总索引；第 4 节（ZFC 一侧）逐字取自共享证据矩阵中各包的行与 Claude 总索引；第 5 节（H 深化）逐字取自 CG-001 证据索引中各命题的一句话行；第 6 节由各运行的收据生成。文中 `formal/…`、`verification/runs/…` 指本分支 `HoTT/` 下的同名路径；其余过程文件的路径在 `dev` 上（`RELEASE-MANIFEST.json` 的 `paths_mentioned_but_on_dev` 列出了正文提到的那些）。另有俄、德、法、英文译本（AI 翻译，以本中文版为准）；`CLAIMS.md` 与 `CLAIMS-ZH.md` 相同。
 
 ## 1. 罗素线与 UR：追问程序、邻近对照与截断对照
 
@@ -364,7 +364,31 @@
 | `CG001-C-430` | B 的两个成因（合并 `main` 第 4 节已有的消融）：对任意收集，单价且所有高度一次交出 ⟹ 追问 ≡ never；高度有上限 ⟹ 停；编码的相同是事实 ⟹ 第 1 问停；四个见证 | a-univalence-b |
 | `CG001-C-431` | 终止检查是这道门：不设门的定义原则 `∀ α, (α → α) → α` 推出 `False` 与一切命题；良基递归的定义方程有解；不依赖任何公理 | termination-gate |
 
-## 5. 运行清单
+## 5. H 深化：宣布完成的代价、元层判据、两层类型论与无穷相干
+
+> 研究发起人 2026-10-17 提出 H，2026-10-21 认可 H 深化的内容并要求把后续全部做完；分析与对照见 `dev` 上的 `docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md`。下表逐字取自 `dev` 上 `.claude/goals/CG-001-targeted-overview/证据索引.md` 中各命题所在节的“一句话”行（含它的禁止外推）。命题全文与禁止外推以各包的 `CLAIM.md` 为准。
+
+| ID | 一句话 | proof / run | 候选 | 禁止外推 |
+|---|---|---|---|---|
+| `CG001-C-436` | 把对象映到某个在 n 层封顶的对象上（宣布完成），还能原样取回（有解码），当且仅当对象本身就在 n 层；规范的完成 `∣_∣ₕ : A → ∥ A ∥ n` 是等价、有解码、A 在 n 层，三者互推（“免费”与“平坦”是同一个命题）。单价且所有高度一次交出的收集（C-430 的两个成因）：追问永不停，而且在任何有限层宣布完成都换掉编码，没有一个完成能把它原样取回——保住对象就永不完结，宣布完成对象就已换。编码的相同是事实时，第 2 层的完成是免费的、第 1 问就停；编号收集的成员与宇宙相同、所有高度都在，编码的完成却免费；1+n 层落定者的汇集在 2+n 层免费完成并停机。宇宙：永不停，任何有限层的完成都留不住它，C-83 (d) 的 `noDecoding` 作为集合截断的特例重新得出。内核实跑：ℕ 上 3 完成后解码得 3；Bool 的对调把 true 送到 false | MP-CG001-COMPLETION-COST-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | H 深化 §6 (b)、§8.1 的 C-436；第 2 问的形式化一半 | 只管“落到有限层的对象、靠解码保住对象”这一种完成，不管一切可设想的完成；不证 ZFC 的相等平坦（标准读法）；不形式化极限侧“命名是保守扩张”（另一个候选）；标准 HoTT 事实不主张原创；只在 macOS 捕获与重放 |
+| `CG001-C-437` | 一阶集合论里起名是保守扩张：对任意含等词公理的集合论 T 与一元公式 φ，T ⊢ ∃x φ(x) 时，加新常元 ⋆ 与“⋆ 满足 φ”之后，旧语言句子 σ 可证当且仅当 T ⊢ σ；T 还证明至多一个时，T 的每个模型恰有一种方式解释 ⋆（解释 ⋆ 就是挑一个元素），去掉名字模型原样还在。𝗭𝗙𝗖 给 ω 起名两条都成立，每个模型里名字只能指 ω（Lean 元层 `Universe` 模型里也是）。两个前提都承重：给“x ≠ x”起名证出 ⊥ 而 𝗭𝗙𝗖 不证 ⊥；给“x = x”起名仍保守，但 𝗭𝗙𝗖 的每个模型里名字都不止一个意思（∅ 与 ω） | MP-CG001-NAMING-CONSERVATIVE-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | H 深化 §6 (a) 的 C-437；第 1 问综合 §2 (a)；与 C-436 合成第 2 问的两侧 | 不推出 ZFC ⊢ ⊥；只管添常元；“相等平坦”体现在模型取法（`SetStructure`），不是本包证明的；“起名 = 宣布完成”“存在前提是 A 的实例”是读法；教科书事实不主张原创；只在 macOS 捕获与重放 |
+| `CG001-C-438` | 对任意类型 X：逐层追问“是不是同一个”永不停 ⟺ X 在任何有限层都不落定 ⟺ 在任何有限层宣布完成都保不住 X；X 在第 m 层落定 ⟺ 追问停，且第 m 层的完成免费。对任意单价且所有高度一次交出的收集：每个有限阶段都停，整体永不停、任何有限层的完成都保不住；编码相同是事实的收集第 1 问就停、第 2 层完成免费。ZF 的累积层级 `V` 是集合：`V` 与 ω 的成员第 1 问就停、完成免费，ω 收齐了每个有限阶段；`hSet` 在第 3 层落定。有限层类型的全体：单价、所有高度都在、永不停（内核 1000 步无答案）、任何有限层的完成都保不住，而每个成员、每个有限阶段都有限且停。同一个“把所有有限阶段一次收齐”：在 `V` 里得 ω，免费；在 HoTT 里永远问不完 | MP-CG001-EXPOSURE-CRITERION-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | 研究发起人 10-21 的“元层特征”；方案第一步 | 只覆盖“高度”轴，不覆盖“深度”（实数相等要无穷步核对）与“大小”（罗素）；呈现是否忠实要逐个论证；`V` 是 HoTT 里 ZF 的模型（无选择公理），不是一阶 ZFC（见 C-437）；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；大部分是已证结果的重组；只在 macOS 捕获与重放 |
+| `CG001-C-440` | 方块 A = Bool、B = S¹、f 取常值 base、两边恒等：交换的方式是一族回路 H；锥（余纤维）上诱导的带点映射依赖于 H；处处 refl 的方式与在 true 处绕一圈的方式，诱导的映射在锥的回路上绕数分别是 0 与 1（内核实跑），所以不同；于是不存在从“方块交换了”（命题截断）到锥映射、并与构造一致的函数。交换方式的类型是集合而不是命题：在第 2 层完成免费，在第 1 层宣布完成丢掉了锥 | MP-CG001-CONE-NON-FUNCTORIAL-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-438 判据在三角范畴里的症状（TR3 只给存在） | 一个具体方块，不是三角范畴的一般定理；带点映射；只到有限层（H），A 的全高度版本（A∞、Massey 积）没做；“交换是命题”“忘掉方式是 H”是读法；只在 macOS 捕获与重放 |
+| `CG001-C-441` | 对流 `ℕ → Bool`：两个流相同 ⟺ 逐位找差别的 `askQ` 永不停；差别在 k 步内可确认；相同在任何有限阶段都确认不了（和自己比跑多少步都无答案；对每个 n 有一个前 n+1 位相同却不同的流）；相等可判定 ⟺ WLPO，排中律给出 WLPO；HoTT 宇宙的逐层追问（C-112：就是 `askQ answers 1`）与找差别跑同一个程序，都永不停 | MP-CG001-SAMENESS-NEVER-CONFIRMED-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | 方案 §5 深度轴、§7 第 4 步 | 只证流，不证实数（二进制展开的相等不是实数的相等）；Π⁰₁ 相等、WLPO 等价、LEM ⟹ WLPO 是常识；“深度轴”“ZFC 用 A 一次答完”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-442` | 两层类型论里：外层严格相等满足 UIP，每个外层类型、外层宇宙 `SSet`、外层自然数的相同都是事实；内层宇宙的追问永不停（C-430）；同样的 EM 阶段 K n，在外层按外层自然数收齐，编码相同是事实，在内层收齐成单价汇集，所有高度都在、追问永不停（C-438）；外层编号 n 给出内层成员 K (toℕ n)。同一个理论、同一个 A，代价只出现在有结构的那一层 | MP-CG001-TWO-FATES-2LTT-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | 方案 §4 的 2LTT、§6 归因 | 外层 UIP 与“内层不能消去到外层”是 2LTT 的设计；归因读法只削弱竞争归因，不证 A 是唯一原因；半单纯类型与外层不单价没做；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-443` | 在第 n 层完成保住对象 ⟺ 对象在第 n 层落定；起名是第 0 层：起名保住见证类型 ⟺ 见证类型可缩（唯一存在）。`V` 里空集唯一（外延性），起名免费；HoTT 里空类型唯一（单价性），起名免费；二元集合仅仅唯一、连通，见证类型却不可缩、不是命题、不是集合（对调不是 refl），是 1-型：第 0、1、2 层的完成保不住，第 3 层保得住；宇宙任何有限层都保不住 | MP-CG001-NAMING-IS-COMPLETION-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | H 深化 §6 (c)；CG-011 G3 | 只管落到有限层、靠解码保住的完成；“落定的层就是 H-完成算子的不变量”“代价来自相同的结构”是读法；`V` 不是一阶 ZFC；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-444` | 同一个逐层追问程序。集合的全体与群的全体相同有结构（对调、取负），判定器逐层作答，内核实跑第 2 问答完，任何判定器都如此；第 2 层的完成留不住它们，第 3 层留得住。宇宙用同一个程序 1000 步无答案，任何判定器都永不停，任何有限层都留不住。两个流前 n 位一样不一样，每个 n 可判定（内核实跑 1000 个阶段）；相同 ⟺ 每个阶段都一样；没有一个有限阶段够用；拿流和自己比，找差别任何有限步都无答案 | MP-CG001-PER-LAYER-ACCOUNTING-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | H 深化 §7 第二段；第 1 问综合 §2 (c)；CG-011 G4 | “三处受同一个典范性义务约束”是元层事实；“价格看得见 / 付不清”“集合与群是另一个框架”是读法；不是“另一个演算”意义上的第三框架；`stagesKernel` 只实跑了全 0 流；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-445` | 线段 N（区间）可缩，两端本来就由它自己的路相同，N 的回路都是 refl，任何映射都把它们送到 refl。N 再加一条宣布的认同（构造子）就是圆 S¹（同构；经单价性相等）。宣布的认同不是 N 自己的路，二者之差是非平凡回路，映成 `loop`，绕数 1（内核实跑）。没有 N 的回路映成它；用 N 自己的路去粘，洞就没了。代价：N 第 0 层保得住；圆不可缩、不是命题、不是集合，是群胚，第 0、1、2 层的完成保不住，第 3 层保得住。从粘出的圆上拿走一点，什么都不剩 | MP-CG001-CIRCLE-GLUING-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | H 深化 §1 修正记录（圆环悖论维度）；CG-011 G5 | 数学是标准事实，不主张原创；“粘回两端就是宣布完成”“极限一侧免费、HoTT 一侧有代价”“只是价格看得见”是读法，极限一侧的机器对应是 C-424 与 C-437，本包不重证；不证“抽象必然导致矛盾”；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-446` | 对每个 n，K(ℤ, n) 在第 n+1 层的完成里与单点一模一样（`∥ K n ∥ (n+1) ≃ ∥ Unit ∥ (n+1)`），第 n 层同样；到第 n+2 层与单点不同；第 n+2 层的完成保得住它，第 n+1 层保不住（K n 不在第 n+1 层），价格恰是 n+2，没有上界；K n 本身不是单点。不存在 m 使“第 m 层完成后可缩 ⟹ 本身可缩”对一切类型成立，也不存在 m 使“第 m 层完成后等价 ⟹ 本身等价”对一切类型成立 | MP-CG001-FULL-HEIGHT-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | 元层特征方案 §7 第 5 条；CG-011 G6 | 数学是标准事实，不主张原创；“同调代数的高阶运算”“全高度就是 A”是读法；Massey 积、三角范畴、增强都没有形式化；史学假说（Verdier、Bondal–Kapranov、Lurie）原文未取得，仍是假说（2026-10-22 更新：三份原文已核，(a) 代价与 (b) 补救有一手印证，(c) 因果只到同向，见 CG-011 `G6-史学考古.md`）；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-447` | 数字流 s 表示的实数 `val s = ∑ s(n)·2^-(n+1)`：`val s = 0 ⟺ s 处处为 0`；对每个 n 有流前 n 位都是 0、部分和为 0、`val` 却不是 0，没有一个有限阶段够用；`(∀ s, val s = 0 ∨ val s ≠ 0) ⟺ WLPO 的流形式`；0.1000… 与 0.0111… 是不同的流、同一个实数 1/2 | MP-CG001-REAL-DEPTH-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | CG-011 G7；元层特征方案 §7 第 4 条 | Mathlib 的 ℝ 是经典的，(3) 两边在 Lean 里都成立，定理是二者等价；构造性一面是 C-441；`val` 只覆盖 [0, 1] 的二进制展开；“深度轴落到实数”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-448` | 外层子序列嵌入严格成范畴；严格半单纯类型 `SSTˢ`：外层编号按层给出内层类型，面作用与两条相干是外层严格相等，所有层一次给出；任何内层类型的顶点元组是实例，取面删分量、三条单纯恒等式按定义成立；相干的相干唯一（外层 UIP）；内层圆上从恒等到恒等的同伦 refl 与 rotLoop 不同 | MP-CG001-STRICT-SEMISIMPLICIAL-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | CG-011 G8；元层特征方案 §7 第 1 条 | `SSTˢ` 是外层类型，不是 HoTT 里的类型；可纤的一版阻塞（Reedy 可纤性机制未建）；“无穷相干是 A 的一种形态”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-449` | 单价范畴的全体（对象在 `Type₁`、态射在 `Type₀`；集合的范畴、群的范畴是成员）落在第 4 层；同一个逐层追问程序，任何判定器两步之内答出（第 1、2、3 问之一），答案是对的；第 4 层的完成保得住它；宇宙永不停、任何有限层保不住 | MP-CG001-UNIVALENT-CATEGORIES-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | CG-011 G10；元层特征方案 §4、§7 第 2 条 | 只证“最迟第 3 问停”，恰在第 3 问没证；负控制的直接拒因是宇宙层级；“有上限则藏”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-450` | 对每个外层 n，前 n 层的半单纯类型全体是内层类型 `SST n`（第 m+1 层是建在边界壳上的类型族）；壳与取面按外层归纳给出，单位律与复合律是外层严格相等，对一切 n 证出；边、三角形的壳与面按定义成立；具体的面上相干的证明就是 refl；全部层的塔是外层记录，直接写成内层类型被拒；给一座与后继相容的从内层自然数到外层自然数的桥（模块参数），塔就是内层类型 | MP-CG001-SST-2LTT-FIBRANT-001 / `-01`；负控制 `-NEG-01`、`-NEG-02`；桥写不出见 C-442 `-NEG-02` | CG-011 G8 的后续；元层特征方案 §7 第 1 条 | 不能说“HoTT 里定义出了半单纯类型”（统一的定义用了外层）；(7) 不断言桥存在；“相干就是 refl”只有四个实例；“桥是 A 的位置”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-451` | 群胚的路径范畴是单价范畴，圆的那一个是 `UnivCat` 的成员；宇宙里圆到自身的认同不构成集合（rotLoop ≠ refl），且是这个成员自身认同的收缩；所以单价范畴的全体不是群胚、不是集合；C-77 的追问对任何判定器走一步没有答案、走两步答出 3，恰在第 3 问停 | MP-CG001-UNIVALENT-CATEGORIES-EXACT-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | CG-011 G10 的后续；元层特征方案 §4、§7 第 2 条 | 只证 C-449 的那个全体（对象 `Type₁`、态射 `Type₀`）；自然自同构是读法，没写出；“结构多一层，停点挪一问”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-452` | 每个按层的半单纯类型给出一个严格的半单纯类型（k 个顶点的单纯形取作 `Sh n Y k`，取面 `res`，相干 `resId`、`resComp`）；k ≤ n 时是全空间（两层例子里边连同两端，从边取面得端点），k > n 时是余骨架（三角形就是三角形的壳） | MP-CG001-SST-2LTT-CORRESPONDENCE-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-450 的续作；CG-011 G8 | 只一个方向，不说两版等价；实例只在两层的例子上；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+| `CG001-C-453` | 每个严格的半单纯类型经纤维给出按层的一版（第 m+1 层取边界恰为给定壳的单纯形），边界映射与取面严格可换（对一切 n）；交回严格的一版，第 n+1 层与原来的第 n+1 层内层等价（对一切 n）；用在 `toStrict Y` 上即另一个来回 | MP-CG001-SST-2LTT-REVERSE-001 / `-01`；负控制 `-NEG-01`、`-NEG-02` | C-452 的续作；CG-011 G8 | 不说两版作为类型等价（类型族这一层没认同）；`roundTrip` 是内层等价；第 0 层不取回；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## 6. 运行清单
 
 | 运行 | 证明 | 命题 | 证明器 | 记录的结局 | 单元 |
 |---|---|---|---|---|---|
@@ -532,3 +556,54 @@
 | `20261015-CG001-Z0-OMEGA-QUESTION-NEG-STAGES-01` | `MP-CG001-Z0-OMEGA-QUESTION-NEG-001` | CG001-C-427 | Lean 4 | 被拒（预期），exit 1，`KERNEL_REJECTED` | ZFC1 |
 | `20261015-CG001-ZENO-ZFC-CLASSICAL-01` | `MP-CG001-ZENO-ZFC-CLASSICAL-001` | CG001-C-423 | Lean 4 | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | ZFC1 |
 | `20261015-CG001-ZENO-ZFC-CLASSICAL-NEG-FINITE-01` | `MP-CG001-ZENO-ZFC-CLASSICAL-NEG-001` | CG001-C-423 | Lean 4 | 被拒（预期），exit 1，`KERNEL_REJECTED` | ZFC1 |
+| `20261021-CG001-CIRCLE-GLUING-01` | `MP-CG001-CIRCLE-GLUING-001` | CG001-C-445 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-CIRCLE-GLUING-NEG-01` | `MP-CG001-CIRCLE-GLUING-NEG-001` | CG001-C-445 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-CIRCLE-GLUING-NEG-02` | `MP-CG001-CIRCLE-GLUING-NEG-002` | CG001-C-445 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-COMPLETION-COST-01` | `MP-CG001-COMPLETION-COST-001` | CG001-C-436 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-COMPLETION-COST-NEG-01` | `MP-CG001-COMPLETION-COST-NEG-001` | CG001-C-436 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-COMPLETION-COST-NEG-02` | `MP-CG001-COMPLETION-COST-NEG-002` | CG001-C-436 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-CONE-NON-FUNCTORIAL-01` | `MP-CG001-CONE-NON-FUNCTORIAL-001` | CG001-C-440 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-CONE-NON-FUNCTORIAL-NEG-01` | `MP-CG001-CONE-NON-FUNCTORIAL-NEG-001` | CG001-C-440 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-CONE-NON-FUNCTORIAL-NEG-02` | `MP-CG001-CONE-NON-FUNCTORIAL-NEG-002` | CG001-C-440 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-EXPOSURE-CRITERION-01` | `MP-CG001-EXPOSURE-CRITERION-001` | CG001-C-438 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-EXPOSURE-CRITERION-NEG-01` | `MP-CG001-EXPOSURE-CRITERION-NEG-001` | CG001-C-438 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-EXPOSURE-CRITERION-NEG-02` | `MP-CG001-EXPOSURE-CRITERION-NEG-002` | CG001-C-438 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-FULL-HEIGHT-01` | `MP-CG001-FULL-HEIGHT-001` | CG001-C-446 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-FULL-HEIGHT-NEG-01` | `MP-CG001-FULL-HEIGHT-NEG-001` | CG001-C-446 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-FULL-HEIGHT-NEG-02` | `MP-CG001-FULL-HEIGHT-NEG-002` | CG001-C-446 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-NAMING-CONSERVATIVE-01` | `MP-CG001-NAMING-CONSERVATIVE-001` | CG001-C-437 | Lean 4 | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-NAMING-CONSERVATIVE-NEG-01` | `MP-CG001-NAMING-CONSERVATIVE-NEG-001` | CG001-C-437 | Lean 4 | 被拒（预期），exit 1，`KERNEL_REJECTED` | H |
+| `20261021-CG001-NAMING-CONSERVATIVE-NEG-02` | `MP-CG001-NAMING-CONSERVATIVE-NEG-002` | CG001-C-437 | Lean 4 | 被拒（预期），exit 1，`KERNEL_REJECTED` | H |
+| `20261021-CG001-NAMING-IS-COMPLETION-01` | `MP-CG001-NAMING-IS-COMPLETION-001` | CG001-C-443 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-NAMING-IS-COMPLETION-NEG-01` | `MP-CG001-NAMING-IS-COMPLETION-NEG-001` | CG001-C-443 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-NAMING-IS-COMPLETION-NEG-02` | `MP-CG001-NAMING-IS-COMPLETION-NEG-002` | CG001-C-443 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-PER-LAYER-ACCOUNTING-01` | `MP-CG001-PER-LAYER-ACCOUNTING-001` | CG001-C-444 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-PER-LAYER-ACCOUNTING-NEG-01` | `MP-CG001-PER-LAYER-ACCOUNTING-NEG-001` | CG001-C-444 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-PER-LAYER-ACCOUNTING-NEG-02` | `MP-CG001-PER-LAYER-ACCOUNTING-NEG-002` | CG001-C-444 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-REAL-DEPTH-01` | `MP-CG001-REAL-DEPTH-001` | CG001-C-447 | Lean 4 | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-REAL-DEPTH-NEG-01` | `MP-CG001-REAL-DEPTH-NEG-001` | CG001-C-447 | Lean 4 | 被拒（预期），exit 1，`KERNEL_REJECTED` | H |
+| `20261021-CG001-REAL-DEPTH-NEG-02` | `MP-CG001-REAL-DEPTH-NEG-002` | CG001-C-447 | Lean 4 | 被拒（预期），exit 1，`KERNEL_REJECTED` | H |
+| `20261021-CG001-SAMENESS-NEVER-CONFIRMED-01` | `MP-CG001-SAMENESS-NEVER-CONFIRMED-001` | CG001-C-441 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-SAMENESS-NEVER-CONFIRMED-NEG-01` | `MP-CG001-SAMENESS-NEVER-CONFIRMED-NEG-001` | CG001-C-441 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-SAMENESS-NEVER-CONFIRMED-NEG-02` | `MP-CG001-SAMENESS-NEVER-CONFIRMED-NEG-002` | CG001-C-441 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-SST-2LTT-FIBRANT-01` | `MP-CG001-SST-2LTT-FIBRANT-001` | CG001-C-450 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-SST-2LTT-FIBRANT-NEG-01` | `MP-CG001-SST-2LTT-FIBRANT-NEG-001` | CG001-C-450 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-SST-2LTT-FIBRANT-NEG-02` | `MP-CG001-SST-2LTT-FIBRANT-NEG-002` | CG001-C-450 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-STRICT-SEMISIMPLICIAL-01` | `MP-CG001-STRICT-SEMISIMPLICIAL-001` | CG001-C-448 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-STRICT-SEMISIMPLICIAL-NEG-01` | `MP-CG001-STRICT-SEMISIMPLICIAL-NEG-001` | CG001-C-448 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-STRICT-SEMISIMPLICIAL-NEG-02` | `MP-CG001-STRICT-SEMISIMPLICIAL-NEG-002` | CG001-C-448 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-TWO-FATES-2LTT-01` | `MP-CG001-TWO-FATES-2LTT-001` | CG001-C-442 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-TWO-FATES-2LTT-NEG-01` | `MP-CG001-TWO-FATES-2LTT-NEG-001` | CG001-C-442 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-TWO-FATES-2LTT-NEG-02` | `MP-CG001-TWO-FATES-2LTT-NEG-002` | CG001-C-442 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-UNIVALENT-CATEGORIES-01` | `MP-CG001-UNIVALENT-CATEGORIES-001` | CG001-C-449 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261021-CG001-UNIVALENT-CATEGORIES-NEG-01` | `MP-CG001-UNIVALENT-CATEGORIES-NEG-001` | CG001-C-449 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261021-CG001-UNIVALENT-CATEGORIES-NEG-02` | `MP-CG001-UNIVALENT-CATEGORIES-NEG-002` | CG001-C-449 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261022-CG001-SST-2LTT-CORRESPONDENCE-01` | `MP-CG001-SST-2LTT-CORRESPONDENCE-001` | CG001-C-452 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261022-CG001-SST-2LTT-CORRESPONDENCE-NEG-01` | `MP-CG001-SST-2LTT-CORRESPONDENCE-NEG-001` | CG001-C-452 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261022-CG001-SST-2LTT-CORRESPONDENCE-NEG-02` | `MP-CG001-SST-2LTT-CORRESPONDENCE-NEG-002` | CG001-C-452 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261022-CG001-SST-2LTT-REVERSE-01` | `MP-CG001-SST-2LTT-REVERSE-001` | CG001-C-453 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261022-CG001-SST-2LTT-REVERSE-NEG-01` | `MP-CG001-SST-2LTT-REVERSE-NEG-001` | CG001-C-453 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261022-CG001-SST-2LTT-REVERSE-NEG-02` | `MP-CG001-SST-2LTT-REVERSE-NEG-002` | CG001-C-453 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261022-CG001-UNIVALENT-CATEGORIES-EXACT-01` | `MP-CG001-UNIVALENT-CATEGORIES-EXACT-001` | CG001-C-451 | Cubical Agda | 接受，exit 0，`KERNEL_ACCEPTED_WITH_SCOPE` | H |
+| `20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-01` | `MP-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-001` | CG001-C-451 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |
+| `20261022-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-02` | `MP-CG001-UNIVALENT-CATEGORIES-EXACT-NEG-002` | CG001-C-451 | Cubical Agda | 被拒（预期），exit 42，`KERNEL_REJECTED` | H |

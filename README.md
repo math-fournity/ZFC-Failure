@@ -232,6 +232,17 @@ ASK 是研究发起人起的名字，意思是：回答一个问题之前，先�
 
 这张表是两件事的对位，不是数学上的等同。
 
+对位之下，有一件可以说得更精确的事。研究发起人认可过一句浓缩的说法（2026-10-17，原话）：
+
+> 你这个话说得非常好：“一侧问终局就够、一侧被迫问过程”。
+
+2026-10-21，这句话的两半各有了计算机检查过的对应：
+
+- **一侧问终局就够。**在 ZFC 里，只要先证明了某个东西存在，给它起个名字就不会多出任何新定理；再证明它唯一，名字在每个模型里就只指那一样东西。在那里把一个过程宣布为“已经完成”，不付任何代价。
+- **一侧被迫问过程。**在 HoTT 里，在某一层宣布“已经完成”而对象不变，当且仅当这个对象本来就在那一层落定。像宇宙这样“所有高度一次交出”的整体，在任何一层宣布完成都会换掉对象；不换对象，追问就永远不停。
+
+两边做的是同一个动作：把一个要无穷多步才到得了的结果，当作已经摆在那里（第 6 节会看到，这就是研究发起人说的 A）。“同一个动作”是我们的读法，交给读者审。这两组证明完成于 2026-10-21，连同其后的续作已收进本分支：命题见 [CLAIMS.md](CLAIMS.md) 第 5 节，收据在 `HoTT/verification/runs/` 下；分析与对照在 `dev` 分支上（[H 深化](https://github.com/math-fournity/HoTT-Paradoxy/blob/dev/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md)）。
+
 ### 教科书的回答，以及它为什么消不掉
 
 对芝诺，教科书说：用极限，1/2 + 1/4 + … 恰好等于 1。对这里，教科书会说：去问"集合截断"。这是一种标准的做法，它把"以哪些方式相同"压成"相同或不相同"一句话；在那里，程序第 1 问就停。
@@ -419,7 +430,7 @@ ZFC 自己就证得出芝诺的两句话（计算机检查过）：在极限的�
 
 我们希望你不必相信我们，而是自己去查。可以从三个层面来审：
 
-1. **数学对不对。**每个正向的命题都由证明检查程序逐步检查过：Cubical Agda 2.8.0 与 cubical 库 v0.9；Lean 4.34.0，第 2 节与第 6 节的不少命题还用到 Lean 的标准数学库 Mathlib，以及在 Lean 里把 ZFC 写下来的 Foundation 库（两者都固定在确定的版本）。关键命题还配了"负控制"：故意写错的证明，检查程序必须拒绝，用来确认检查是真的在检查。全部命题、证据和不许外推的范围，在 [`CLAIMS.md`](CLAIMS.md)；证明源码在 `HoTT/formal/`，每个证明包里的 `CLAIM.md` 写着命题全文；运行记录在 `HoTT/verification/runs/`，共 164 个，其中 69 个被接受，95 个是按预期被拒的负控制。
+1. **数学对不对。**每个正向的命题都由证明检查程序逐步检查过：Cubical Agda 2.8.0 与 cubical 库 v0.9；Lean 4.34.0，第 2 节与第 6 节的不少命题还用到 Lean 的标准数学库 Mathlib，以及在 Lean 里把 ZFC 写下来的 Foundation 库（两者都固定在确定的版本）。关键命题还配了"负控制"：故意写错的证明，检查程序必须拒绝，用来确认检查是真的在检查。全部命题、证据和不许外推的范围，在 [`CLAIMS.md`](CLAIMS.md)；证明源码在 `HoTT/formal/`，每个证明包里的 `CLAIM.md` 写着命题全文；运行记录在 `HoTT/verification/runs/`，共 215 个，其中 86 个被接受，129 个是按预期被拒的负控制。
 2. **说的是不是那件事。**形式命题说的，是不是正文说的那件事？比如，"逐层追问"是不是对"确认是不是同一个"的公平落实？这一层请读社区审计稿：[03《HoTT 的芝诺》](docs/社区审计提交/03-HoTT的芝诺.md)（最短，末尾有五个审计问题）、[02《罗素悖论的幽灵》](docs/社区审计提交/02-罗素悖论的幽灵.md)、[01（无穷相干这条线）](docs/社区审计提交/01-芝诺悖论的幽灵.md)，以及[第一阶段收尾报告](docs/HoTT悖论查找阶段收尾报告-20260930.md)。第 6 节的 ZFC-1，请读[《ZFC-1 的问题：原话逐句对照与机器证明》](docs/ZFC-1的问题-原话逐句对照与机器证明-20261015.md)（中文）：研究发起人的原话，逐句对着写成的数学和计算机证明了什么，并标明哪些句子本来就不是定理。
 3. **读法站不站得住。**那件事"本来很简单"吗？被改掉的条件，是不是"相同可以无限细分"？截断这样的标准回答，能不能消掉它？被告真的是 A 吗？"先问停不停得下来"这道门，该不该装在"存在"这一层？这些是数学哲学的问题，欢迎反驳。
 
@@ -439,9 +450,9 @@ python3 tools/replay.py --agda /path/to/agda --cubical-lib /path/to/cubical/cubi
 
 不给 `--foundation-root`，用到 Mathlib 或 Foundation 的运行会标成 SKIPPED，其余照常重放。
 
-它按每一份运行记录重建命令，逐个运行，再和记录比较：结局（接受或拒绝）必须一致；输出在把仓库路径和库路径换成占位符之后逐行比较。负控制只有再次被拒才算通过；输出也一致，就说明它是因为记录下来的那个理由被拒。只看一个：`--only <运行编号>`；列出全部：`--list`。全部串行跑完约需两个半小时。运行记录里的命令保存的是当时那台机器的绝对路径，不能原样拿到另一台机器执行。一般重放请使用本分支的 `tools/replay.py`；需要把结果与原始脚本逐字节比较的读者，可选用保留在 `dev` 的[研究线原始重放脚本](https://github.com/math-fournity/HoTT-Paradoxy/blob/dev/.claude/goals/CG-001-targeted-overview/tools/verify_cg001_run.py)和[审计线原始重放脚本](https://github.com/math-fournity/HoTT-Paradoxy/blob/dev/Cloud-Opus%E5%AE%A1%E8%AE%A1%E5%B9%B6%E8%A1%A5%E5%AE%8CGLM/tools/verify_copus_run.py)。这是深入复核用的技术工具，不是普通阅读的前置。
+它按每一份运行记录重建命令，逐个运行，再和记录比较：结局（接受或拒绝）必须一致；输出在把仓库路径和库路径换成占位符之后逐行比较。负控制只有再次被拒才算通过；输出也一致，就说明它是因为记录下来的那个理由被拒。只看一个：`--only <运行编号>`；列出全部：`--list`。逐个跑完约需三小时；用 `--jobs 4` 四个一起跑，2026-10-22 在研究用的 Mac 上约 50 分钟跑完。运行记录里的命令保存的是当时那台机器的绝对路径，不能原样拿到另一台机器执行。一般重放请使用本分支的 `tools/replay.py`；需要把结果与原始脚本逐字节比较的读者，可选用保留在 `dev` 的[研究线原始重放脚本](https://github.com/math-fournity/HoTT-Paradoxy/blob/dev/.claude/goals/CG-001-targeted-overview/tools/verify_cg001_run.py)和[审计线原始重放脚本](https://github.com/math-fournity/HoTT-Paradoxy/blob/dev/Cloud-Opus%E5%AE%A1%E8%AE%A1%E5%B9%B6%E8%A1%A5%E5%AE%8CGLM/tools/verify_copus_run.py)。这是深入复核用的技术工具，不是普通阅读的前置。
 
-运行记录引用的工具链记录在 `HoTT/formal/dedekind-omega-missile/`（macOS 上的 Agda）、`HoTT/formal/claude-cg001/pedometer-ablation-lean/`（macOS 上的 Lean）与 `HoTT/formal/cloud-opus-glm-audit/`（Linux）；前两个目录沿用 `dev` 上的位置，在本分支里只放这些记录文件。用到 Mathlib 或 Foundation 的包，各自的目录里另有 `LEAN_TOOLCHAIN.json` 与 `MATHLIB_CLOSURE.json`，记着当时的 Lean 文件和每个依赖模块的哈希。[`RELEASE-MANIFEST.json`](RELEASE-MANIFEST.json) 记着本分支 1334 个文件各自的 SHA-256，以及它们取自 `dev` 的哪个提交。
+运行记录引用的工具链记录在 `HoTT/formal/dedekind-omega-missile/`（macOS 上的 Agda）、`HoTT/formal/claude-cg001/pedometer-ablation-lean/`（macOS 上的 Lean）与 `HoTT/formal/cloud-opus-glm-audit/`（Linux）；前两个目录沿用 `dev` 上的位置，在本分支里只放这些记录文件。用到 Mathlib 或 Foundation 的包，各自的目录里另有 `LEAN_TOOLCHAIN.json` 与 `MATHLIB_CLOSURE.json`，记着当时的 Lean 文件和每个依赖模块的哈希。[`RELEASE-MANIFEST.json`](RELEASE-MANIFEST.json) 记着本分支 1697 个文件各自的 SHA-256，以及它们取自 `dev` 的哪个提交。
 
 ## 9. 这项研究是怎样做出来的
 
@@ -471,7 +482,7 @@ python3 tools/replay.py --agda /path/to/agda --cubical-lib /path/to/cubical/cubi
 
 ## 10. 关于本分支
 
-- `main`（本分支）只放支撑结论的内容：结论文档、精确命题、证明源码、运行记录与重放方法。它由 `dev` 的提交 [`5ca3a26b`](https://github.com/math-fournity/HoTT-Paradoxy/commit/5ca3a26b2c837468e8277587a434328d16ee225f) 按清单生成（`dev` 上的 `scripts/release/build_main_release.py` 与 `scripts/release/main-release-spec.json`），不在本分支上直接修改。要更新，就在 `dev` 上改清单或结论文档，再重新生成。
+- `main`（本分支）只放支撑结论的内容：结论文档、精确命题、证明源码、运行记录与重放方法。它由 `dev` 的提交 [`8a41e1f8`](https://github.com/math-fournity/HoTT-Paradoxy/commit/8a41e1f8b587d1dcb437bbf17b6cbdc3c444c2e5) 按清单生成（`dev` 上的 `scripts/release/build_main_release.py` 与 `scripts/release/main-release-spec.json`），不在本分支上直接修改。要更新，就在 `dev` 上改清单或结论文档，再重新生成。
 - `dev`：全部研究过程，所有工作都在那里进行。
 - 本说明另有俄、德、法、英文版本；译本由 AI 翻译，以中文为准（2026-10-16 的增补暂见于中文版，其他语言待同步）。社区审计稿与 `CLAIMS.md` 也有这四种语言的译本。《ZFC-1 的问题：原话逐句对照与机器证明》只有中文版。
 

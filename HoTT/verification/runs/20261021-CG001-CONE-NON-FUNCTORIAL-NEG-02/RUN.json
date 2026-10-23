@@ -1,0 +1,70 @@
+{
+  "agda_error_tag": "UnequalTerms",
+  "audit_notes": [
+    "Captured by Claude Code desktop session 91beaf35 (012-Opus), worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-21; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-440"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/cone-non-functorial",
+    "HoTT/formal/claude-cg001/cone-non-functorial/WrongWindingZero.agda"
+  ],
+  "completed_at_utc": "2026-10-21T12:34:34.755086+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 33.767247,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 42,
+  "expected_outcome": "REJECT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/cone-non-functorial/WrongWindingZero.agda:19.15-19: error: [UnequalTerms]\n1 != 0 of type Agda.Builtin.Nat.Nat\nwhen checking that the expression refl has type\nwindingOf (coneMap• H₁) ≡ pos 0",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/cone-non-functorial"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows the kernel refuses this run; winding 1 is winding1 in the main package."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-CONE-NON-FUNCTORIAL-NEG-002",
+  "rejection_stage": "TYPE_CHECKING",
+  "run_id": "20261021-CG001-CONE-NON-FUNCTORIAL-NEG-02",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-440 (2): the claim that the cone map induced by the loop way H1 has winding 0, by refl; expected rejection (the kernel computes 1).",
+  "source_manifest": {
+    "bytes": 2920,
+    "path": "source-manifest.json",
+    "sha256": "920278c8088b61cdf8ec48101a36febd41b85637f57fb6e47b89541ef7be5f3e"
+  },
+  "started_at_utc": "2026-10-21T12:34:00.987839+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 17951,
+    "path": "stdout.txt",
+    "sha256": "c66655194cb1b2a4a9861a4178ef391201193cd47c84be6c195e6e5068a12995"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}
