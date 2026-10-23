@@ -1,0 +1,31 @@
+{
+  "status": "NEGATIVE_CONTROL_REJECTED_AS_EXPECTED",
+  "verifier": "CG-001 goal-local (reuses canonical verify_formal_proof_run.py checks; index check replaced)",
+  "canonical_verifier_sha256": "e0fc47aa2d3d9d8bfa370a02c5fa3abbec4a77ddc78f74e283b2b30ad359e5a3",
+  "run_id": "20261023-CG001-TWO-CAUSES-RZK-NEG-04",
+  "proof_id": "MP-CG001-TWO-CAUSES-RZK-NEG-004",
+  "claim_ids": [
+    "CG001-C-456"
+  ],
+  "kernel_status": "KERNEL_REJECTED",
+  "exit_code": 1,
+  "source_paths": [
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/two-causes-rzk/WrongUniverseAnswersEarly.rzk",
+    "HoTT/formal/claude-cg001/two-causes-rzk/CLAIM.md",
+    "HoTT/formal/claude-cg001/directed-native/RZK_TOOLCHAIN.json"
+  ],
+  "external_dependencies": [
+    "rzk-release-asset",
+    "rzk-binary"
+  ],
+  "index": "GOAL_LOCAL_INDEX_ONLY",
+  "goal_index_row_sha256": {
+    "MP-CG001-TWO-CAUSES-RZK-NEG-004": "f4fce46b5cea887e5d467ae485f81ff8aea33855d17d1c1a651c6f9db6dd14c4",
+    "20261023-CG001-TWO-CAUSES-RZK-NEG-04": "1fe2eb8720bdd8ed1bb0f015042a13fae7cc869f53180ce5820c27c3c435107d",
+    "CG001-C-456": "35c62ef75fd2fd0e7921edc0840c6f06aa7f7b273c02a5703c9c2d4ada39288b"
+  },
+  "shared_matrix_index": "NOT_INDEXED_RELAY_DRAFT_ONLY",
+  "replay": "EXACT_EXIT_STDOUT_STDERR_MATCH",
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED"
+}

@@ -1,0 +1,9 @@
+#lang rzk-1
+
+-- Probe (not a receipt) for CG001-C-456, checked on its own.
+-- Why A's witnesses are an argument: the 2-sphere needs a path constructor between paths, and the
+-- Eilenberg-MacLane spaces of the Agda proof need such constructors too.
+-- Observed with Rzk 0.11.3 (2026-10-23): rejected with "constructor surf declares a path between
+-- paths; higher path constructors are not supported yet".
+
+#data S2 := base | surf : refl_{base} =_{base =_{S2} base} refl_{base}

@@ -1,0 +1,9 @@
+#lang rzk-1
+
+-- Probe (not a receipt) for CG001-C-456, checked on its own.
+-- What the second kernel does and does not confirm: Rzk's universe contains itself.
+-- Observed with Rzk 0.11.3 (2026-10-23): accepted.
+
+#define universe-in-universe
+  : U
+  := U

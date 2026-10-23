@@ -1,0 +1,12 @@
+#lang rzk-1
+
+-- Negative control MP-CG001-TWO-CAUSES-RZK-NEG-001 (CG001-C-456), checked after
+-- TwoCausesUnderUnivalence.rzk in the same run.
+--
+-- Claim to be refused: drop univalence by making the sameness of codes a fact (codes ℕ, a set),
+-- and the first question still gives no answer.  With the concrete judge the kernel runs the
+-- program itself.  Expected: rejected, because the run computes to just 1 (clause (3), C-79 (a)).
+
+#define wrong-fact-never
+  : run ℕ judge-naturals zero (succ zero) = nothing ℕ
+  := refl

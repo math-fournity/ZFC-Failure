@@ -1,0 +1,18 @@
+#lang rzk-1
+
+-- Negative control MP-CG001-TWO-CAUSES-RZK-NEG-003 (CG001-C-456), checked after
+-- TwoCausesUnderUnivalence.rzk in the same run.
+--
+-- Claim to be refused: the theorem "univalence and A give no finite level" applies to the
+-- numbered collection, whose code sameness is a fact, if one hands it the identity equivalence of
+-- the path type in place of the collection's univalence.  Then ℕ would be at no finite h-level.
+-- Expected: rejected at type checking; the identity is an equivalence of a = b with itself, not
+-- the map from a = b to the equivalences of the members that the collection's univalence needs
+-- (clause (1); the same control as the Agda file of C-430).
+
+#define wrong-naturals-have-no-level
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( m : ℕ)
+  : neg (hlevel m ℕ)
+  := no-finite-level univ (numbered K) (\ a b → is-equiv-identity (a = b)) (numbered-all-heights K) m

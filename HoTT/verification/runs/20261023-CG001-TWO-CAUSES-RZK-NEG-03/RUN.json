@@ -1,0 +1,49 @@
+{
+  "claim_ids": [
+    "CG001-C-456"
+  ],
+  "command_argv": [
+    "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+    "typecheck",
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/two-causes-rzk/WrongBWithoutUnivalence.rzk"
+  ],
+  "completed_at_utc": "2026-10-23T17:05:48.942876+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 1.654142,
+  "environment": {
+    "bytes": 480,
+    "path": "environment.txt",
+    "sha256": "07e9df7474f7e76bc4f1119fa20fcb2cc3cf6e1c32f43f20f15657844c44305b"
+  },
+  "exit_code": 1,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows that the theorem needs the collection's univalence; it does not show that the numbered collection is not univalent (the main file proves that from K)."
+  ],
+  "proof_assistant": "Rzk",
+  "proof_assistant_version": "0.11.3",
+  "proof_id": "MP-CG001-TWO-CAUSES-RZK-NEG-003",
+  "run_id": "20261023-CG001-TWO-CAUSES-RZK-NEG-03",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-456 clause (1), checked after the main file: hand the identity equivalence of the path type to the theorem in place of the numbered collection's univalence, and conclude that N is at no finite h-level; expected rejection at type checking (the identity is an equivalence of a = b with itself, not the map to the equivalences of the members).",
+  "source_manifest": {
+    "bytes": 1692,
+    "path": "source-manifest.json",
+    "sha256": "c6db012a737c7cc8eb6ff945568de508706a14d42f639478ed812518cdb49337"
+  },
+  "started_at_utc": "2026-10-23T17:05:47.288482+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 11058,
+    "path": "stderr.txt",
+    "sha256": "9d71f39d11a47ac4ab1dc545fbedac194fac14ac7fa977ec2bc1c6589ca45145"
+  },
+  "stdout": {
+    "bytes": 27345,
+    "path": "stdout.txt",
+    "sha256": "24e735c8c792f1d473e34672aa6ac12934892846ab726a54257ec5fe9c0e53e8"
+  },
+  "theory_variant": "sHoTT (Riehl-Shulman simplicial type theory) as implemented by Rzk"
+}

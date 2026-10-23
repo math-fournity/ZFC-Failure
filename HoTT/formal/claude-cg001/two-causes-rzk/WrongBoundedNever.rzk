@@ -1,0 +1,15 @@
+#lang rzk-1
+
+-- Negative control MP-CG001-TWO-CAUSES-RZK-NEG-002 (CG001-C-456), checked after
+-- TwoCausesUnderUnivalence.rzk in the same run.
+--
+-- Claim to be refused: drop A by bounding the heights (the gathering of sets: univalent, every
+-- member a set), and the questioning still has no answer at fuel 1.  With the concrete judge the
+-- kernel runs the program itself.  Expected: rejected, because the run computes to just 2: stage 1
+-- says no (the gathering of sets is not a set, by the swap of Bool), stage 2 says yes
+-- (clause (2), C-79 (b)).
+
+#define wrong-bounded-never
+  ( univ : Univalence)
+  : run (Gathering (succ zero)) (judge-sets univ) (succ zero) (succ zero) = nothing ℕ
+  := refl

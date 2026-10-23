@@ -1,0 +1,17 @@
+#lang rzk-1
+
+-- Probe (not a receipt) for CG001-C-456, checked after ../TwoCausesUnderUnivalence.rzk.
+-- Why fuel 150 and not 1000: the same kernel run as universe-kernel-run, with fuel 200.
+-- Observed with Rzk 0.11.3 (2026-10-23): rejected with "maximum depth reached"; fuel 150 is
+-- accepted (universe-kernel-run in the main file).  The limit is in the normalizer, not in the
+-- statement: the run with fuel 200 is nothing by clause (1) all the same.
+
+#define fuel-200
+  : ℕ
+  := add fuel-150 (mul ten (succ (succ (succ (succ (succ zero))))))
+
+#define universe-kernel-run-200
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  : run U (judge-via-B univ K) fuel-200 (succ zero) = nothing ℕ
+  := refl

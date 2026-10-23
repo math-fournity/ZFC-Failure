@@ -1,0 +1,1896 @@
+#lang rzk-1
+
+-- The questioning program of C-77 and the two causes of C-430, checked again by a second kernel
+-- (Claude Code desktop session a15f4b3b, 2026-10-23; goal package CG-011, gate G10, its "when worth
+-- doing" clause; worktree claude/012-opus-w8).
+--
+-- proof id : MP-CG001-TWO-CAUSES-RZK-001
+-- claims   : CG001-C-456 (full statement in CLAIM.md)
+--
+-- What this file is.  C-77 (Cubical Agda) wrote the questioning process as a program with a judge;
+-- C-430 (Cubical Agda) proved that the questioning never stops exactly when two causes are both
+-- present: univalence, and A (every height handed over at once).  The G10 conclusion (2026-10-21)
+-- said Rzk does not build univalence in, so the re-run has to bring it in from outside, and its
+-- status is "under univalence".  This file does that.
+--
+-- How univalence enters.  Not as a declared axiom: every theorem that needs it takes it as an
+-- explicit argument  univ : Univalence  (the map from paths of types to equivalences is an
+-- equivalence).  So each such theorem reads "univalence implies ...", and the receipt stays free of
+-- axioms.  Function extensionality is not assumed either; it is derived from univ below
+-- (Voevodsky's argument), and so is the fact that an equivalence has contractible fibres.
+--
+-- How A enters for the universe.  In the Agda proof the universe holds every height because the
+-- Eilenberg-MacLane spaces exist (higher inductive types with higher path constructors).  Rzk
+-- 0.11.3 rejects higher path constructors ("higher path constructors are not supported yet"), so
+-- these witnesses cannot be declared here.  The clauses that need them take the witnesses as an
+-- explicit argument  K : EveryHeight.  The general theorems do not.
+--
+-- What differs from the Agda files, and why.
+--   * Rzk has no coinductive types, so the program is given by its run with fuel, and "the
+--     questioning is never" is stated as "every run returns nothing" (in C-77 these are equivalent).
+--   * Rzk has U : U (probes/UniverseInUniverse.rzk is accepted).  This file uses that only where
+--     the Agda files use a higher universe level (the collection of all types, families of types
+--     defined by recursion).  The kernel cannot certify that no paradox is used; the run confirms
+--     that the derivation steps check in a second, independently implemented kernel, not that a
+--     second foundation is consistent.
+--   * The kernel run of the universe uses fuel 150, not 1000: Rzk 0.11.3 stops this run with
+--     "maximum depth reached" at fuel 200.
+--   * h-levels are defined uniformly (level n+1 means: every path type has level n); level 1 is
+--     then "path types contractible", equivalent to, but not by definition, "any two elements are
+--     equal".
+--
+-- Bridge labels (cause, A, height, questioning, judge) prove no historical or philosophical fact;
+-- which ingredient is non-real is the research sponsor's ruling, not a theorem.
+
+-- ==================================================================================================
+-- 0. Data
+
+#data Empty
+#data One := star
+#data Bool := false | true
+#data ℕ := zero | succ (n : ℕ)
+#data Maybe (A : U) := nothing | just (a : A)
+#data Dec (A : U) := yes (a : A) | no (na : A → Empty)
+
+#define neg
+  ( A : U)
+  : U
+  := A → Empty
+
+#define ex-falso
+  ( C : U)
+  ( e : Empty)
+  : C
+  := rec-Empty C e
+
+-- ==================================================================================================
+-- 1. Paths
+
+#define ap
+  ( A B : U)
+  ( f : A → B)
+  ( x y : A)
+  ( p : x = y)
+  : f x = f y
+  := idJ (A , x , \ y' _ → f x = f y' , refl , y , p)
+
+#define rev
+  ( A : U)
+  ( x y : A)
+  ( p : x = y)
+  : y = x
+  := idJ (A , x , \ y' _ → y' = x , refl , y , p)
+
+#define concat
+  ( A : U)
+  ( x y z : A)
+  ( p : x = y)
+  ( q : y = z)
+  : x = z
+  := idJ (A , y , \ z' _ → x = z' , p , z , q)
+
+#define left-unit
+  ( A : U)
+  ( x y : A)
+  ( q : x = y)
+  : concat A x x y refl q = q
+  := idJ (A , x , \ y' q' → concat A x x y' refl q' = q' , refl , y , q)
+
+#define rev-left
+  ( A : U)
+  ( x y : A)
+  ( p : x = y)
+  : concat A y x y (rev A x y p) p = refl
+  := idJ (A , x , \ y' p' → concat A y' x y' (rev A x y' p') p' = refl , refl , y , p)
+
+#define ap-id
+  ( A : U)
+  ( x y : A)
+  ( p : x = y)
+  : ap A A (\ z → z) x y p = p
+  := idJ (A , x , \ y' p' → ap A A (\ z → z) x y' p' = p' , refl , y , p)
+
+#define transport
+  ( A : U)
+  ( B : A → U)
+  ( x y : A)
+  ( p : x = y)
+  ( u : B x)
+  : B y
+  := idJ (A , x , \ y' _ → B y' , u , y , p)
+
+#define htpy
+  ( A : U)
+  ( B : A → U)
+  ( f g : (x : A) → B x)
+  : U
+  := (x : A) → f x = g x
+
+#define happly
+  ( A : U)
+  ( B : A → U)
+  ( f g : (x : A) → B x)
+  ( p : f = g)
+  : htpy A B f g
+  := \ x → ap ((x' : A) → B x') (B x) (\ h → h x) f g p
+
+-- paths in a Σ-type
+
+#define pair-eq
+  ( A : U)
+  ( B : A → U)
+  ( a a' : A)
+  ( p : a = a')
+  ( b : B a)
+  ( b' : B a')
+  ( q : transport A B a a' p b = b')
+  : (a , b) =_{Σ (x : A) , B x} (a' , b')
+  := idJ (A , a ,
+          \ a'' p'' → (b'' : B a'') → (transport A B a a'' p'' b = b'')
+                        → (a , b) =_{Σ (x : A) , B x} (a'' , b'') ,
+          \ b'' q'' → idJ (B a , b , \ b''' _ → (a , b) =_{Σ (x : A) , B x} (a , b''') , refl , b'' , q'') ,
+          a' , p) b' q
+
+#define split-eq
+  ( A : U)
+  ( B : A → U)
+  ( u v : Σ (x : A) , B x)
+  ( r : u = v)
+  : Σ (p : first u = first v) , (transport A B (first u) (first v) p (second u) = second v)
+  := idJ (Σ (x : A) , B x , u ,
+          \ v' r' → Σ (p : first u = first v') , (transport A B (first u) (first v') p (second u) = second v') ,
+          (refl , refl) , v , r)
+
+#define pair-eq-split
+  ( A : U)
+  ( B : A → U)
+  ( u v : Σ (x : A) , B x)
+  ( r : u = v)
+  : pair-eq A B (first u) (first v) (first (split-eq A B u v r)) (second u) (second v)
+      (second (split-eq A B u v r)) = r
+  := idJ (Σ (x : A) , B x , u ,
+          \ v' r' → pair-eq A B (first u) (first v') (first (split-eq A B u v' r')) (second u) (second v')
+                      (second (split-eq A B u v' r')) = r' ,
+          refl , v , r)
+
+#define ap-first-pair-eq
+  ( A : U)
+  ( B : A → U)
+  ( a a' : A)
+  ( p : a = a')
+  ( b : B a)
+  ( b' : B a')
+  ( q : transport A B a a' p b = b')
+  : ap (Σ (x : A) , B x) A (\ w → first w) (a , b) (a' , b') (pair-eq A B a a' p b b' q) = p
+  := idJ (A , a ,
+          \ a'' p'' → (b'' : B a'') → (q'' : transport A B a a'' p'' b = b'')
+                        → ap (Σ (x : A) , B x) A (\ w → first w) (a , b) (a'' , b'')
+                             (pair-eq A B a a'' p'' b b'' q'') = p'' ,
+          \ b'' q'' → idJ (B a , b ,
+                           \ b''' q''' → ap (Σ (x : A) , B x) A (\ w → first w) (a , b) (a , b''')
+                                           (pair-eq A B a a refl b b''' q''') = refl ,
+                           refl , b'' , q'') ,
+          a' , p) b' q
+
+-- ==================================================================================================
+-- 2. Contractible types, propositions, h-levels
+
+#define is-contr
+  ( A : U)
+  : U
+  := Σ (c : A) , ((x : A) → c = x)
+
+#define is-prop
+  ( A : U)
+  : U
+  := (x y : A) → x = y
+
+-- level 0: contractible; level n+1: every path type has level n
+#define hlevel
+  : ℕ → U → U
+  := ind-ℕ (\ _ → U → U) (\ A → is-contr A) (\ _ ih A → (x : A) → (y : A) → ih (x = y))
+
+#define contr-is-prop
+  ( A : U)
+  ( c : is-contr A)
+  : is-prop A
+  := \ x y → concat A x (first c) y (rev A (first c) x (second c x)) (second c y)
+
+#define prop-path-contr
+  ( A : U)
+  ( f : is-prop A)
+  ( x y : A)
+  : is-contr (x = y)
+  := ( concat A x x y (rev A x x (f x x)) (f x y) ,
+       \ p → idJ (A , x , \ y' p' → concat A x x y' (rev A x x (f x x)) (f x y') = p' ,
+                  rev-left A x x (f x x) , y , p))
+
+#define contr-path-contr
+  ( A : U)
+  ( c : is-contr A)
+  ( x y : A)
+  : is-contr (x = y)
+  := prop-path-contr A (contr-is-prop A c) x y
+
+#define prop-if-inhabited-contr
+  ( A : U)
+  ( f : A → is-contr A)
+  : is-prop A
+  := \ x y → contr-is-prop A (f x) x y
+
+#define hlevel-succ
+  : (n : ℕ) → (A : U) → hlevel n A → hlevel (succ n) A
+  := ind-ℕ (\ n → (A : U) → hlevel n A → hlevel (succ n) A)
+       (\ A c → contr-path-contr A c)
+       (\ n ih A h → \ x y → ih (x = y) (h x y))
+
+#define add
+  : ℕ → ℕ → ℕ
+  := ind-ℕ (\ _ → ℕ → ℕ) (\ k → k) (\ _ ih k → succ (ih k))
+
+#define add-zero
+  : (n : ℕ) → add n zero = n
+  := ind-ℕ (\ n → add n zero = n) refl (\ n ih → ap ℕ ℕ (\ m → succ m) (add n zero) n ih)
+
+#define add-succ
+  : (n k : ℕ) → add n (succ k) = succ (add n k)
+  := ind-ℕ (\ n → (k : ℕ) → add n (succ k) = succ (add n k))
+       (\ k → refl)
+       (\ n ih k → ap ℕ ℕ (\ m → succ m) (add n (succ k)) (succ (add n k)) (ih k))
+
+#define add-one
+  ( n : ℕ)
+  : add n (succ zero) = succ n
+  := concat ℕ (add n (succ zero)) (succ (add n zero)) (succ n) (add-succ n zero)
+       (ap ℕ ℕ (\ m → succ m) (add n zero) n (add-zero n))
+
+#define hlevel-plus
+  : (k m : ℕ) → (A : U) → hlevel m A → hlevel (add k m) A
+  := ind-ℕ (\ k → (m : ℕ) → (A : U) → hlevel m A → hlevel (add k m) A)
+       (\ m A h → h)
+       (\ k ih m A h → hlevel-succ (add k m) A (ih m A h))
+
+#define hlevel-two-up
+  ( A : U)
+  ( h : hlevel (succ (succ zero)) A)
+  : (k : ℕ) → hlevel (succ (succ k)) A
+  := ind-ℕ (\ k → hlevel (succ (succ k)) A) h (\ k ih → hlevel-succ (succ (succ k)) A ih)
+
+#define prop-hlevel-succ
+  ( A : U)
+  ( hp : is-prop A)
+  ( k : ℕ)
+  : hlevel (succ k) A
+  := transport ℕ (\ l → hlevel l A) (add k (succ zero)) (succ k) (add-one k)
+       (hlevel-plus k (succ zero) A (prop-path-contr A hp))
+
+#define retract-contr
+  ( A B : U)
+  ( s : A → B)
+  ( r : B → A)
+  ( h : (a : A) → r (s a) = a)
+  ( c : is-contr B)
+  : is-contr A
+  := ( r (first c) ,
+       \ a → concat A (r (first c)) (r (s a)) a (ap B A r (first c) (s a) (second c (s a))) (h a))
+
+#define retract-ap-path
+  ( A B : U)
+  ( s : A → B)
+  ( r : B → A)
+  ( h : (a : A) → r (s a) = a)
+  ( a a' : A)
+  ( p : a = a')
+  : concat A a (r (s a)) a' (rev A (r (s a)) a (h a))
+      (concat A (r (s a)) (r (s a')) a' (ap B A r (s a) (s a') (ap A B s a a' p)) (h a')) = p
+  := idJ (A , a ,
+          \ a'' p'' → concat A a (r (s a)) a'' (rev A (r (s a)) a (h a))
+                        (concat A (r (s a)) (r (s a'')) a'' (ap B A r (s a) (s a'') (ap A B s a a'' p'')) (h a''))
+                        = p'' ,
+          concat (a = a)
+            (concat A a (r (s a)) a (rev A (r (s a)) a (h a)) (concat A (r (s a)) (r (s a)) a refl (h a)))
+            (concat A a (r (s a)) a (rev A (r (s a)) a (h a)) (h a))
+            refl
+            (ap (r (s a) = a) (a = a) (\ q → concat A a (r (s a)) a (rev A (r (s a)) a (h a)) q)
+                (concat A (r (s a)) (r (s a)) a refl (h a)) (h a) (left-unit A (r (s a)) a (h a)))
+            (rev-left A (r (s a)) a (h a)) ,
+          a' , p)
+
+#define retract-hlevel
+  : (n : ℕ) → (A B : U) → (s : A → B) → (r : B → A) → ((a : A) → r (s a) = a) → hlevel n B → hlevel n A
+  := ind-ℕ (\ n → (A B : U) → (s : A → B) → (r : B → A) → ((a : A) → r (s a) = a) → hlevel n B → hlevel n A)
+       (\ A B s r h c → retract-contr A B s r h c)
+       (\ n ih A B s r h hB → \ a a' →
+          ih (a = a') (s a = s a')
+             (ap A B s a a')
+             (\ q → concat A a (r (s a)) a' (rev A (r (s a)) a (h a))
+                      (concat A (r (s a)) (r (s a')) a' (ap B A r (s a) (s a') q) (h a')))
+             (\ p → retract-ap-path A B s r h a a' p)
+             (hB (s a) (s a')))
+
+#define retract-prop
+  ( A B : U)
+  ( s : A → B)
+  ( r : B → A)
+  ( h : (a : A) → r (s a) = a)
+  ( hp : is-prop B)
+  : is-prop A
+  := \ a a' → concat A a (r (s a)) a' (rev A (r (s a)) a (h a))
+                (concat A (r (s a)) (r (s a')) a' (ap B A r (s a) (s a') (hp (s a) (s a'))) (h a'))
+
+#define sigma-contr
+  ( A : U)
+  ( B : A → U)
+  ( cA : is-contr A)
+  ( cB : (x : A) → is-contr (B x))
+  : is-contr (Σ (x : A) , B x)
+  := ( (first cA , first (cB (first cA))) ,
+       \ w → pair-eq A B (first cA) (first w) (second cA (first w)) (first (cB (first cA))) (second w)
+               (contr-is-prop (B (first w)) (cB (first w))
+                  (transport A B (first cA) (first w) (second cA (first w)) (first (cB (first cA))))
+                  (second w)))
+
+#define hlevel-sigma
+  : (n : ℕ) → (A : U) → (B : A → U) → hlevel n A → ((x : A) → hlevel n (B x)) → hlevel n (Σ (x : A) , B x)
+  := ind-ℕ (\ n → (A : U) → (B : A → U) → hlevel n A → ((x : A) → hlevel n (B x))
+                    → hlevel n (Σ (x : A) , B x))
+       (\ A B cA cB → sigma-contr A B cA cB)
+       (\ n ih A B hA hB → \ u v →
+          retract-hlevel n (u = v)
+            (Σ (p : first u = first v) , (transport A B (first u) (first v) p (second u) = second v))
+            (split-eq A B u v)
+            (\ w → pair-eq A B (first u) (first v) (first w) (second u) (second v) (second w))
+            (pair-eq-split A B u v)
+            (ih (first u = first v) (\ p → transport A B (first u) (first v) p (second u) = second v)
+                (hA (first u) (first v))
+                (\ p → hB (first v) (transport A B (first u) (first v) p (second u)) (second v))))
+
+#define one-is-prop
+  : is-prop One
+  := ind-One (\ u → (v : One) → u = v) (ind-One (\ v → star = v) refl)
+
+#define empty-is-prop
+  : is-prop Empty
+  := \ u v → ex-falso (u = v) u
+
+-- ==================================================================================================
+-- 3. Equivalences (bi-invertible maps) and univalence
+
+#define comp
+  ( A B C : U)
+  ( g : B → C)
+  ( f : A → B)
+  : A → C
+  := \ x → g (f x)
+
+#define identity
+  ( A : U)
+  : A → A
+  := \ x → x
+
+#define has-section
+  ( A B : U)
+  ( f : A → B)
+  : U
+  := Σ (s : B → A) , htpy B (\ _ → B) (comp B A B f s) (identity B)
+
+#define has-retraction
+  ( A B : U)
+  ( f : A → B)
+  : U
+  := Σ (r : B → A) , htpy A (\ _ → A) (comp A B A r f) (identity A)
+
+#define is-equiv
+  ( A B : U)
+  ( f : A → B)
+  : U
+  := Σ (_ : has-section A B f) , has-retraction A B f
+
+#define Equiv
+  ( A B : U)
+  : U
+  := Σ (f : A → B) , is-equiv A B f
+
+#define is-equiv-identity
+  ( A : U)
+  : is-equiv A A (identity A)
+  := ((identity A , \ x → refl) , (identity A , \ x → refl))
+
+#define id-equiv
+  ( A : U)
+  : Equiv A A
+  := (identity A , is-equiv-identity A)
+
+#define is-equiv-comp
+  ( A B C : U)
+  ( f : A → B)
+  ( ef : is-equiv A B f)
+  ( g : B → C)
+  ( eg : is-equiv B C g)
+  : is-equiv A C (comp A B C g f)
+  := ( ( comp C B A (first (first ef)) (first (first eg)) ,
+         \ z → concat C (g (f (first (first ef) (first (first eg) z)))) (g (first (first eg) z)) z
+                 (ap B C g (f (first (first ef) (first (first eg) z))) (first (first eg) z)
+                    (second (first ef) (first (first eg) z)))
+                 (second (first eg) z)) ,
+       ( comp C B A (first (second ef)) (first (second eg)) ,
+         \ x → concat A (first (second ef) (first (second eg) (g (f x)))) (first (second ef) (f x)) x
+                 (ap B A (first (second ef)) (first (second eg) (g (f x))) (f x) (second (second eg) (f x)))
+                 (second (second ef) x)))
+
+#define is-equiv-htpy
+  ( A B : U)
+  ( f g : A → B)
+  ( H : htpy A (\ _ → B) f g)
+  ( ef : is-equiv A B f)
+  : is-equiv A B g
+  := ( ( first (first ef) ,
+         \ y → concat B (g (first (first ef) y)) (f (first (first ef) y)) y
+                 (rev B (f (first (first ef) y)) (g (first (first ef) y)) (H (first (first ef) y)))
+                 (second (first ef) y)) ,
+       ( first (second ef) ,
+         \ x → concat A (first (second ef) (g x)) (first (second ef) (f x)) x
+                 (ap B A (first (second ef)) (g x) (f x) (rev B (f x) (g x) (H x)))
+                 (second (second ef) x)))
+
+#define transport-fn
+  ( A B : U)
+  ( p : A = B)
+  : A → B
+  := \ x → transport U (\ X → X) A B p x
+
+#define is-equiv-transport-fn
+  ( A B : U)
+  ( p : A = B)
+  : is-equiv A B (transport-fn A B p)
+  := idJ (U , A , \ B' p' → is-equiv A B' (transport-fn A B' p') , is-equiv-identity A , B , p)
+
+#define idtoeqv
+  ( A B : U)
+  ( p : A = B)
+  : Equiv A B
+  := (transport-fn A B p , is-equiv-transport-fn A B p)
+
+-- Univalence: the map from paths of types to equivalences is an equivalence.  It is never declared;
+-- the theorems below take it as an argument.
+#define Univalence
+  : U
+  := (A B : U) → is-equiv (A = B) (Equiv A B) (idtoeqv A B)
+
+#define ua
+  ( univ : Univalence)
+  ( A B : U)
+  ( e : Equiv A B)
+  : A = B
+  := first (first (univ A B)) e
+
+#define idtoeqv-ua
+  ( univ : Univalence)
+  ( A B : U)
+  ( e : Equiv A B)
+  : idtoeqv A B (ua univ A B e) = e
+  := second (first (univ A B)) e
+
+#define ua-fn
+  ( univ : Univalence)
+  ( A B : U)
+  ( e : Equiv A B)
+  : transport-fn A B (ua univ A B e) =_{A → B} first e
+  := ap (Equiv A B) (A → B) (\ e' → first e') (idtoeqv A B (ua univ A B e)) e (idtoeqv-ua univ A B e)
+
+-- equivalence induction: what holds for the identity holds for every equivalence
+#define equiv-ind
+  ( univ : Univalence)
+  ( P : (A B : U) → (A → B) → U)
+  ( base : (A : U) → P A A (identity A))
+  ( A B : U)
+  ( e : Equiv A B)
+  : P A B (first e)
+  := transport (A → B) (P A B) (transport-fn A B (ua univ A B e)) (first e) (ua-fn univ A B e)
+       (idJ (U , A , \ B' p' → P A B' (transport-fn A B' p') , base A , B , ua univ A B e))
+
+#define fib
+  ( A B : U)
+  ( f : A → B)
+  ( y : B)
+  : U
+  := Σ (x : A) , f x = y
+
+#define is-contr-map
+  ( A B : U)
+  ( f : A → B)
+  : U
+  := (y : B) → is-contr (fib A B f y)
+
+#define is-contr-based-paths
+  ( A : U)
+  ( y : A)
+  : is-contr (Σ (x : A) , x = y)
+  := ( (y , refl) ,
+       \ w → idJ (A , first w , \ y' p' → (y' , refl) =_{Σ (x : A) , x = y'} (first w , p') ,
+                  refl , y , second w))
+
+#define is-contr-based-paths-from
+  ( A : U)
+  ( x : A)
+  : is-contr (Σ (y : A) , x = y)
+  := ( (x , refl) ,
+       \ w → idJ (A , x , \ y' p' → (x , refl) =_{Σ (y : A) , x = y} (y' , p') , refl , first w , second w))
+
+#define is-contr-map-identity
+  ( A : U)
+  : is-contr-map A A (identity A)
+  := \ y → is-contr-based-paths A y
+
+-- under univalence an equivalence has contractible fibres
+#define is-contr-map-equiv
+  ( univ : Univalence)
+  ( A B : U)
+  ( e : Equiv A B)
+  : is-contr-map A B (first e)
+  := equiv-ind univ (\ A' B' f → is-contr-map A' B' f) is-contr-map-identity A B e
+
+#define pr1-equiv
+  ( A : U)
+  ( P : A → U)
+  ( c : (x : A) → is-contr (P x))
+  : Equiv (Σ (x : A) , P x) A
+  := ( \ w → first w ,
+       ( ( \ x → (x , first (c x)) , \ x → refl) ,
+         ( \ x → (x , first (c x)) ,
+           \ w → pair-eq A P (first w) (first w) refl (first (c (first w))) (second w)
+                   (second (c (first w)) (second w)))))
+
+#define postcomp
+  ( X A B : U)
+  ( f : A → B)
+  : (X → A) → (X → B)
+  := \ g x → f (g x)
+
+#define is-equiv-postcomp
+  ( univ : Univalence)
+  ( X A B : U)
+  ( e : Equiv A B)
+  : is-equiv (X → A) (X → B) (postcomp X A B (first e))
+  := equiv-ind univ (\ A' B' f → is-equiv (X → A') (X → B') (postcomp X A' B' f))
+       (\ A' → is-equiv-identity (X → A')) A B e
+
+#define precomp
+  ( A B X : U)
+  ( f : A → B)
+  : (B → X) → (A → X)
+  := \ g x → g (f x)
+
+#define is-equiv-precomp
+  ( univ : Univalence)
+  ( A B X : U)
+  ( e : Equiv A B)
+  : is-equiv (B → X) (A → X) (precomp A B X (first e))
+  := equiv-ind univ (\ A' B' f → is-equiv (B' → X) (A' → X) (precomp A' B' X f))
+       (\ A' → is-equiv-identity (A' → X)) A B e
+
+-- ==================================================================================================
+-- 4. Function extensionality from univalence (Voevodsky)
+
+#define weak-funext
+  ( univ : Univalence)
+  ( A : U)
+  ( P : A → U)
+  ( c : (x : A) → is-contr (P x))
+  : is-contr ((x : A) → P x)
+  := retract-contr ((x : A) → P x)
+       (fib (A → Σ (x : A) , P x) (A → A) (postcomp A (Σ (x : A) , P x) A (\ w → first w)) (identity A))
+       (\ φ → (\ x → (x , φ x) , refl))
+       (\ w x → transport A P (first (first w x)) x
+                  (happly A (\ _ → A) (postcomp A (Σ (x' : A) , P x') A (\ w' → first w') (first w))
+                     (identity A) (second w) x)
+                  (second (first w x)))
+       (\ φ → refl)
+       (is-contr-map-equiv univ (A → Σ (x : A) , P x) (A → A)
+          (postcomp A (Σ (x : A) , P x) A (\ w → first w) ,
+           is-equiv-postcomp univ A (Σ (x : A) , P x) A (pr1-equiv A P c))
+          (identity A))
+
+#define is-contr-total-htpy
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( f : (x : A) → B x)
+  : is-contr (Σ (g : (x : A) → B x) , htpy A B f g)
+  := retract-contr (Σ (g : (x : A) → B x) , htpy A B f g) ((x : A) → Σ (y : B x) , f x = y)
+       (\ w x → (first w x , second w x))
+       (\ φ → (\ x → first (φ x) , \ x → second (φ x)))
+       (\ w → refl)
+       (weak-funext univ A (\ x → Σ (y : B x) , f x = y) (\ x → is-contr-based-paths-from (B x) (f x)))
+
+#define funext-path
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( f g : (x : A) → B x)
+  ( h : htpy A B f g)
+  : (f , \ x → refl) =_{Σ (g' : (x : A) → B x) , htpy A B f g'} (g , h)
+  := contr-is-prop (Σ (g' : (x : A) → B x) , htpy A B f g') (is-contr-total-htpy univ A B f)
+       (f , \ x → refl) (g , h)
+
+#define funext
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( f g : (x : A) → B x)
+  ( h : htpy A B f g)
+  : f = g
+  := ap (Σ (g' : (x : A) → B x) , htpy A B f g') ((x : A) → B x) (\ w → first w)
+       (f , \ x → refl) (g , h) (funext-path univ A B f g h)
+
+#define funext-refl
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( f : (x : A) → B x)
+  : funext univ A B f f (\ x → refl) = refl
+  := ap ((f , \ x → refl) =_{Σ (g' : (x : A) → B x) , htpy A B f g'} (f , \ x → refl)) (f = f)
+       (ap (Σ (g' : (x : A) → B x) , htpy A B f g') ((x : A) → B x) (\ w → first w)
+          (f , \ x → refl) (f , \ x → refl))
+       (funext-path univ A B f f (\ x → refl)) refl
+       (rev-left (Σ (g' : (x : A) → B x) , htpy A B f g') (first (is-contr-total-htpy univ A B f))
+          (f , \ x → refl) (second (is-contr-total-htpy univ A B f) (f , \ x → refl)))
+
+#define funext-happly
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( f g : (x : A) → B x)
+  ( p : f = g)
+  : funext univ A B f g (happly A B f g p) = p
+  := idJ ((x : A) → B x , f , \ g' p' → funext univ A B f g' (happly A B f g' p') = p' ,
+          funext-refl univ A B f , g , p)
+
+#define happly-funext
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( f g : (x : A) → B x)
+  ( h : htpy A B f g)
+  : happly A B f g (funext univ A B f g h) = h
+  := transport (Σ (g' : (x : A) → B x) , htpy A B f g')
+       (\ w → happly A B f (first w) (funext univ A B f (first w) (second w)) = second w)
+       (f , \ x → refl) (g , h) (funext-path univ A B f g h)
+       (ap (f = f) (htpy A B f f) (happly A B f f) (funext univ A B f f (\ x → refl)) refl
+          (funext-refl univ A B f))
+
+#define is-equiv-happly
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( f g : (x : A) → B x)
+  : is-equiv (f = g) (htpy A B f g) (happly A B f g)
+  := ( (funext univ A B f g , happly-funext univ A B f g) ,
+       (funext univ A B f g , funext-happly univ A B f g))
+
+#define hlevel-pi
+  ( univ : Univalence)
+  : (n : ℕ) → (A : U) → (B : A → U) → ((x : A) → hlevel n (B x)) → hlevel n ((x : A) → B x)
+  := ind-ℕ (\ n → (A : U) → (B : A → U) → ((x : A) → hlevel n (B x)) → hlevel n ((x : A) → B x))
+       (\ A B c → weak-funext univ A B c)
+       (\ n ih A B h → \ f g →
+          retract-hlevel n (f = g) (htpy A B f g) (happly A B f g) (funext univ A B f g)
+            (funext-happly univ A B f g)
+            (ih A (\ x → f x = g x) (\ x → h x (f x) (g x))))
+
+#define pi-prop
+  ( univ : Univalence)
+  ( A : U)
+  ( B : A → U)
+  ( h : (x : A) → is-prop (B x))
+  : is-prop ((x : A) → B x)
+  := \ f g → funext univ A B f g (\ x → h x (f x) (g x))
+
+-- ==================================================================================================
+-- 5. Being contractible, being of an h-level and being an equivalence are propositions
+
+#define is-contr-is-contr
+  ( univ : Univalence)
+  ( A : U)
+  ( c : is-contr A)
+  : is-contr (is-contr A)
+  := sigma-contr A (\ a → (x : A) → a = x) c
+       (\ a → weak-funext univ A (\ x → a = x) (\ x → contr-path-contr A c a x))
+
+#define is-prop-is-contr
+  ( univ : Univalence)
+  ( A : U)
+  : is-prop (is-contr A)
+  := prop-if-inhabited-contr (is-contr A) (is-contr-is-contr univ A)
+
+#define is-prop-hlevel
+  ( univ : Univalence)
+  : (n : ℕ) → (A : U) → is-prop (hlevel n A)
+  := ind-ℕ (\ n → (A : U) → is-prop (hlevel n A))
+       (\ A → is-prop-is-contr univ A)
+       (\ n ih A → pi-prop univ A (\ x → (y : A) → hlevel n (x = y))
+                     (\ x → pi-prop univ A (\ y → hlevel n (x = y)) (\ y → ih (x = y))))
+
+#define is-contr-has-section
+  ( univ : Univalence)
+  ( A B : U)
+  ( f : A → B)
+  ( e : is-equiv A B f)
+  : is-contr (has-section A B f)
+  := retract-contr (has-section A B f)
+       (fib (B → A) (B → B) (postcomp B A B f) (identity B))
+       (\ w → (first w , funext univ B (\ _ → B) (comp B A B f (first w)) (identity B) (second w)))
+       (\ w → (first w , happly B (\ _ → B) (postcomp B A B f (first w)) (identity B) (second w)))
+       (\ w → pair-eq (B → A) (\ s → htpy B (\ _ → B) (comp B A B f s) (identity B))
+                (first w) (first w) refl
+                (happly B (\ _ → B) (comp B A B f (first w)) (identity B)
+                   (funext univ B (\ _ → B) (comp B A B f (first w)) (identity B) (second w)))
+                (second w)
+                (happly-funext univ B (\ _ → B) (comp B A B f (first w)) (identity B) (second w)))
+       (is-contr-map-equiv univ (B → A) (B → B)
+          (postcomp B A B f , is-equiv-postcomp univ B A B (f , e)) (identity B))
+
+#define is-contr-has-retraction
+  ( univ : Univalence)
+  ( A B : U)
+  ( f : A → B)
+  ( e : is-equiv A B f)
+  : is-contr (has-retraction A B f)
+  := retract-contr (has-retraction A B f)
+       (fib (B → A) (A → A) (precomp A B A f) (identity A))
+       (\ w → (first w , funext univ A (\ _ → A) (comp A B A (first w) f) (identity A) (second w)))
+       (\ w → (first w , happly A (\ _ → A) (precomp A B A f (first w)) (identity A) (second w)))
+       (\ w → pair-eq (B → A) (\ r → htpy A (\ _ → A) (comp A B A r f) (identity A))
+                (first w) (first w) refl
+                (happly A (\ _ → A) (comp A B A (first w) f) (identity A)
+                   (funext univ A (\ _ → A) (comp A B A (first w) f) (identity A) (second w)))
+                (second w)
+                (happly-funext univ A (\ _ → A) (comp A B A (first w) f) (identity A) (second w)))
+       (is-contr-map-equiv univ (B → A) (A → A)
+          (precomp A B A f , is-equiv-precomp univ A B A (f , e)) (identity A))
+
+#define is-prop-is-equiv
+  ( univ : Univalence)
+  ( A B : U)
+  ( f : A → B)
+  : is-prop (is-equiv A B f)
+  := prop-if-inhabited-contr (is-equiv A B f)
+       (\ e → sigma-contr (has-section A B f) (\ _ → has-retraction A B f)
+                (is-contr-has-section univ A B f e) (\ _ → is-contr-has-retraction univ A B f e))
+
+-- any map between contractible types is an equivalence
+#define contr-map-is-equiv
+  ( A B : U)
+  ( cA : is-contr A)
+  ( cB : is-contr B)
+  ( f : A → B)
+  : is-equiv A B f
+  := ( ( \ _ → first cA , \ y → contr-is-prop B cB (f (first cA)) y) ,
+       ( \ _ → first cA , \ x → contr-is-prop A cA (first cA) x))
+
+#define hlevel-equiv
+  ( univ : Univalence)
+  ( k : ℕ)
+  ( A B : U)
+  ( hA : hlevel k A)
+  ( hB : hlevel k B)
+  : hlevel k (Equiv A B)
+  := ind-ℕ (\ k' → hlevel k' A → hlevel k' B → hlevel k' (Equiv A B))
+       (\ cA cB → sigma-contr (A → B) (\ f → is-equiv A B f)
+                    (weak-funext univ A (\ _ → B) (\ _ → cB))
+                    (\ f → ( contr-map-is-equiv A B cA cB f ,
+                             \ e → is-prop-is-equiv univ A B f (contr-map-is-equiv A B cA cB f) e)))
+       (\ k' _ hA' hB' → hlevel-sigma (succ k') (A → B) (\ f → is-equiv A B f)
+                           (hlevel-pi univ (succ k') A (\ _ → B) (\ _ → hB'))
+                           (\ f → prop-hlevel-succ (is-equiv A B f) (is-prop-is-equiv univ A B f) k'))
+       k hA hB
+
+-- in a family of propositions, a path of first components is a path of pairs, and back
+#define subtype-eq
+  ( A : U)
+  ( B : A → U)
+  ( hprop : (x : A) → is-prop (B x))
+  ( u v : Σ (x : A) , B x)
+  ( p : first u = first v)
+  : u = v
+  := pair-eq A B (first u) (first v) p (second u) (second v)
+       (hprop (first v) (transport A B (first u) (first v) p (second u)) (second v))
+
+#define subtype-eq-ap-first
+  ( A : U)
+  ( B : A → U)
+  ( hprop : (x : A) → is-prop (B x))
+  ( u v : Σ (x : A) , B x)
+  ( r : u = v)
+  : subtype-eq A B hprop u v (ap (Σ (x : A) , B x) A (\ w → first w) u v r) = r
+  := idJ (Σ (x : A) , B x , u ,
+          \ v' r' → subtype-eq A B hprop u v' (ap (Σ (x : A) , B x) A (\ w → first w) u v' r') = r' ,
+          ap (second u = second u) (u = u)
+             (\ q → pair-eq A B (first u) (first u) refl (second u) (second u) q)
+             (hprop (first u) (second u) (second u)) refl
+             (contr-is-prop (second u = second u)
+                (prop-path-contr (B (first u)) (hprop (first u)) (second u) (second u))
+                (hprop (first u) (second u) (second u)) refl) ,
+          v , r)
+
+#define is-equiv-ap-first-subtype
+  ( A : U)
+  ( B : A → U)
+  ( hprop : (x : A) → is-prop (B x))
+  ( u v : Σ (x : A) , B x)
+  : is-equiv (u = v) (first u = first v) (ap (Σ (x : A) , B x) A (\ w → first w) u v)
+  := ( ( subtype-eq A B hprop u v ,
+         \ p → ap-first-pair-eq A B (first u) (first v) p (second u) (second v)
+                 (hprop (first v) (transport A B (first u) (first v) p (second u)) (second v))) ,
+       ( subtype-eq A B hprop u v , subtype-eq-ap-first A B hprop u v))
+
+-- ==================================================================================================
+-- 6. Pointed types and iterated loop spaces
+
+#define Ptd
+  : U
+  := Σ (A : U) , A
+
+#define loops
+  ( P : Ptd)
+  : Ptd
+  := (second P =_{first P} second P , refl)
+
+-- loops-iter (n+1) P = loops-iter n (loops P)
+#define loops-iter
+  : ℕ → Ptd → Ptd
+  := ind-ℕ (\ _ → Ptd → Ptd) (\ P → P) (\ _ ih P → ih (loops P))
+
+#define hlevel-loops-iter
+  : (n : ℕ) → (P : Ptd) → hlevel n (first P) → is-contr (first (loops-iter n P))
+  := ind-ℕ (\ n → (P : Ptd) → hlevel n (first P) → is-contr (first (loops-iter n P)))
+       (\ P c → c)
+       (\ n ih P h → ih (loops P) (h (second P) (second P)))
+
+-- under univalence a pointed equivalence is a path of pointed types
+#define ptd-path
+  ( univ : Univalence)
+  ( P Q : Ptd)
+  ( e : Equiv (first P) (first Q))
+  ( e0 : first e (second P) = second Q)
+  : P = Q
+  := pair-eq U (\ X → X) (first P) (first Q) (ua univ (first P) (first Q) e) (second P) (second Q)
+       (concat (first Q)
+          (transport U (\ X → X) (first P) (first Q) (ua univ (first P) (first Q) e) (second P))
+          (first e (second P)) (second Q)
+          (happly (first P) (\ _ → first Q) (transport-fn (first P) (first Q) (ua univ (first P) (first Q) e))
+             (first e) (ua-fn univ (first P) (first Q) e) (second P))
+          e0)
+
+#define pi-pt
+  ( X : U)
+  ( B : X → Ptd)
+  : Ptd
+  := ((x : X) → first (B x) , \ x → second (B x))
+
+#define loops-pi
+  ( univ : Univalence)
+  ( X : U)
+  ( B : X → Ptd)
+  : loops (pi-pt X B) = pi-pt X (\ x → loops (B x))
+  := ptd-path univ (loops (pi-pt X B)) (pi-pt X (\ x → loops (B x)))
+       ( happly X (\ x → first (B x)) (\ x → second (B x)) (\ x → second (B x)) ,
+         is-equiv-happly univ X (\ x → first (B x)) (\ x → second (B x)) (\ x → second (B x)))
+       refl
+
+#define loops-iter-pi
+  ( univ : Univalence)
+  : (n : ℕ) → (X : U) → (B : X → Ptd) → loops-iter n (pi-pt X B) = pi-pt X (\ x → loops-iter n (B x))
+  := ind-ℕ (\ n → (X : U) → (B : X → Ptd) → loops-iter n (pi-pt X B) = pi-pt X (\ x → loops-iter n (B x)))
+       (\ X B → refl)
+       (\ n ih X B → concat Ptd (loops-iter n (loops (pi-pt X B))) (loops-iter n (pi-pt X (\ x → loops (B x))))
+                       (pi-pt X (\ x → loops-iter n (loops (B x))))
+                       (ap Ptd Ptd (loops-iter n) (loops (pi-pt X B)) (pi-pt X (\ x → loops (B x)))
+                          (loops-pi univ X B))
+                       (ih X (\ x → loops (B x))))
+
+#define loops-equiv-fun
+  ( univ : Univalence)
+  ( X : U)
+  : loops (Equiv X X , id-equiv X) = loops (X → X , identity X)
+  := ptd-path univ (loops (Equiv X X , id-equiv X)) (loops (X → X , identity X))
+       ( ap (Equiv X X) (X → X) (\ e → first e) (id-equiv X) (id-equiv X) ,
+         is-equiv-ap-first-subtype (X → X) (\ f → is-equiv X X f) (\ f → is-prop-is-equiv univ X X f)
+           (id-equiv X) (id-equiv X))
+       refl
+
+-- ==================================================================================================
+-- 7. The questioning program (C-77)
+--
+-- Start at stage 1 (is C a set?); at stage k ask the judge whether C is settled at h-level k+1; on
+-- yes stop and return k; on no take one step and go to stage k+1.  Rzk has no coinductive types, so
+-- the program is given by its run with fuel: run C judge n k is the program started at stage k and
+-- run with fuel n (the Agda files: runFor n (askFrom k)).
+
+-- A judge answers, at every stage k, whether C is settled at h-level k+1, with a proof either way.
+#define Judge
+  ( C : U)
+  : U
+  := (k : ℕ) → Dec (hlevel (succ k) C)
+
+#define answer
+  ( C : U)
+  ( k : ℕ)
+  ( d : Dec (hlevel (succ k) C))
+  ( cont : Maybe ℕ)
+  : Maybe ℕ
+  := ind-Dec (hlevel (succ k) C) (\ _ → Maybe ℕ) (\ _ → just ℕ k) (\ _ → cont) d
+
+#define run
+  ( C : U)
+  ( judge : Judge C)
+  : ℕ → ℕ → Maybe ℕ
+  := ind-ℕ (\ _ → ℕ → Maybe ℕ)
+       (\ k → answer C k (judge k) (nothing ℕ))
+       (\ _ ih k → answer C k (judge k) (ih (succ k)))
+
+-- (a) the fuel equations of the run
+
+#define answer-yes
+  ( C : U)
+  ( k : ℕ)
+  ( h : hlevel (succ k) C)
+  ( cont : Maybe ℕ)
+  : answer C k (yes (hlevel (succ k) C) h) cont = just ℕ k
+  := refl
+
+#define answer-no
+  ( C : U)
+  ( k : ℕ)
+  ( nh : neg (hlevel (succ k) C))
+  ( cont : Maybe ℕ)
+  : answer C k (no (hlevel (succ k) C) nh) cont = cont
+  := refl
+
+#define run-zero
+  ( C : U)
+  ( judge : Judge C)
+  ( k : ℕ)
+  : run C judge zero k = answer C k (judge k) (nothing ℕ)
+  := refl
+
+#define run-succ
+  ( C : U)
+  ( judge : Judge C)
+  ( n k : ℕ)
+  : run C judge (succ n) k = answer C k (judge k) (run C judge n (succ k))
+  := refl
+
+-- the same equations with the fact in place of the judge's answer: they depend only on whether C
+-- is settled at that h-level, not on the judge
+
+#define answer-settled
+  ( C : U)
+  ( k : ℕ)
+  ( h : hlevel (succ k) C)
+  ( d : Dec (hlevel (succ k) C))
+  ( cont : Maybe ℕ)
+  : answer C k d cont = just ℕ k
+  := ind-Dec (hlevel (succ k) C) (\ d' → answer C k d' cont = just ℕ k)
+       (\ _ → refl)
+       (\ nh → ex-falso (answer C k (no (hlevel (succ k) C) nh) cont = just ℕ k) (nh h))
+       d
+
+#define answer-unsettled
+  ( C : U)
+  ( k : ℕ)
+  ( nh : neg (hlevel (succ k) C))
+  ( d : Dec (hlevel (succ k) C))
+  ( cont : Maybe ℕ)
+  : answer C k d cont = cont
+  := ind-Dec (hlevel (succ k) C) (\ d' → answer C k d' cont = cont)
+       (\ h → ex-falso (answer C k (yes (hlevel (succ k) C) h) cont = cont) (nh h))
+       (\ _ → refl)
+       d
+
+#define settled-at
+  ( C : U)
+  ( judge : Judge C)
+  ( n k : ℕ)
+  ( h : hlevel (succ k) C)
+  : run C judge n k = just ℕ k
+  := ind-ℕ (\ n' → run C judge n' k = just ℕ k)
+       (answer-settled C k h (judge k) (nothing ℕ))
+       (\ n' _ → answer-settled C k h (judge k) (run C judge n' (succ k)))
+       n
+
+#define unsettled-at-zero
+  ( C : U)
+  ( judge : Judge C)
+  ( k : ℕ)
+  ( nh : neg (hlevel (succ k) C))
+  : run C judge zero k = nothing ℕ
+  := answer-unsettled C k nh (judge k) (nothing ℕ)
+
+#define unsettled-at
+  ( C : U)
+  ( judge : Judge C)
+  ( n k : ℕ)
+  ( nh : neg (hlevel (succ k) C))
+  : run C judge (succ n) k = run C judge n (succ k)
+  := answer-unsettled C k nh (judge k) (run C judge n (succ k))
+
+#define from-just
+  ( A : U)
+  ( a : A)
+  : Maybe A → A
+  := ind-Maybe A (\ _ → A) a (\ b → b)
+
+#define just-inj
+  ( A : U)
+  ( a b : A)
+  ( p : just A a = just A b)
+  : a = b
+  := ap (Maybe A) A (from-just A a) (just A a) (just A b) p
+
+#define is-just
+  ( A : U)
+  : Maybe A → U
+  := ind-Maybe A (\ _ → U) Empty (\ _ → One)
+
+#define nothing-not-just
+  ( A : U)
+  ( a : A)
+  ( p : nothing A = just A a)
+  : Empty
+  := transport (Maybe A) (is-just A) (just A a) (nothing A) (rev (Maybe A) (nothing A) (just A a) p) star
+
+-- (b) a returned value is sound: if a run returns j, then C is settled at h-level j+1
+
+#define sound-answer
+  ( C : U)
+  ( k j : ℕ)
+  ( d : Dec (hlevel (succ k) C))
+  ( cont : Maybe ℕ)
+  ( hcont : (cont = just ℕ j) → hlevel (succ j) C)
+  : (answer C k d cont = just ℕ j) → hlevel (succ j) C
+  := ind-Dec (hlevel (succ k) C) (\ d' → (answer C k d' cont = just ℕ j) → hlevel (succ j) C)
+       (\ h p → transport ℕ (\ m → hlevel (succ m) C) k j (just-inj ℕ k j p) h)
+       (\ _ p → hcont p)
+       d
+
+#define sound
+  ( C : U)
+  ( judge : Judge C)
+  : (n k j : ℕ) → (run C judge n k = just ℕ j) → hlevel (succ j) C
+  := ind-ℕ (\ n → (k j : ℕ) → (run C judge n k = just ℕ j) → hlevel (succ j) C)
+       (\ k j → sound-answer C k j (judge k) (nothing ℕ)
+                  (\ p → ex-falso (hlevel (succ j) C) (nothing-not-just ℕ j p)))
+       (\ n ih k j → sound-answer C k j (judge k) (run C judge n (succ k)) (ih (succ k) j))
+
+-- (c) the program halts exactly when C is settled at some finite h-level, and every run returns
+-- nothing exactly when C is settled at none
+
+#define Halts
+  ( C : U)
+  ( judge : Judge C)
+  : U
+  := Σ (n : ℕ) , Σ (j : ℕ) , run C judge n (succ zero) = just ℕ j
+
+#define HasLevel
+  ( C : U)
+  : U
+  := Σ (m : ℕ) , hlevel m C
+
+#define Never
+  ( C : U)
+  ( judge : Judge C)
+  : U
+  := (n : ℕ) → run C judge n (succ zero) = nothing ℕ
+
+#define halts-answer
+  ( C : U)
+  ( k : ℕ)
+  ( d : Dec (hlevel (succ k) C))
+  ( cont : Maybe ℕ)
+  ( w : Σ (j : ℕ) , cont = just ℕ j)
+  : Σ (j : ℕ) , answer C k d cont = just ℕ j
+  := ind-Dec (hlevel (succ k) C) (\ d' → Σ (j : ℕ) , answer C k d' cont = just ℕ j)
+       (\ _ → (k , refl))
+       (\ _ → w)
+       d
+
+#define halts-within
+  ( C : U)
+  ( judge : Judge C)
+  : (n k : ℕ) → hlevel (succ (add n k)) C → Σ (j : ℕ) , run C judge n k = just ℕ j
+  := ind-ℕ (\ n → (k : ℕ) → hlevel (succ (add n k)) C → Σ (j : ℕ) , run C judge n k = just ℕ j)
+       (\ k h → (k , settled-at C judge zero k h))
+       (\ n ih k h → halts-answer C k (judge k) (run C judge n (succ k))
+                       (ih (succ k)
+                          (transport ℕ (\ m → hlevel (succ m) C) (succ (add n k)) (add n (succ k))
+                             (rev ℕ (add n (succ k)) (succ (add n k)) (add-succ n k)) h)))
+
+#define halts-to-level
+  ( C : U)
+  ( judge : Judge C)
+  ( w : Halts C judge)
+  : HasLevel C
+  := (succ (first (second w)) , sound C judge (first w) (succ zero) (first (second w)) (second (second w)))
+
+#define level-to-halts
+  ( C : U)
+  ( judge : Judge C)
+  ( w : HasLevel C)
+  : Halts C judge
+  := ( first w ,
+       halts-within C judge (first w) (succ zero)
+         (transport ℕ (\ l → hlevel l C) (succ (succ (first w))) (succ (add (first w) (succ zero)))
+            (ap ℕ ℕ (\ l → succ l) (succ (first w)) (add (first w) (succ zero))
+               (rev ℕ (add (first w) (succ zero)) (succ (first w)) (add-one (first w))))
+            (hlevel-plus (succ (succ zero)) (first w) C (second w))))
+
+#define no-level-runs-nothing
+  ( C : U)
+  ( judge : Judge C)
+  ( nl : (m : ℕ) → neg (hlevel m C))
+  : (n k : ℕ) → run C judge n k = nothing ℕ
+  := ind-ℕ (\ n → (k : ℕ) → run C judge n k = nothing ℕ)
+       (\ k → answer-unsettled C k (nl (succ k)) (judge k) (nothing ℕ))
+       (\ n ih k → concat (Maybe ℕ) (run C judge (succ n) k) (run C judge n (succ k)) (nothing ℕ)
+                     (answer-unsettled C k (nl (succ k)) (judge k) (run C judge n (succ k)))
+                     (ih (succ k)))
+
+#define no-level-to-never
+  ( C : U)
+  ( judge : Judge C)
+  ( nl : (m : ℕ) → neg (hlevel m C))
+  : Never C judge
+  := \ n → no-level-runs-nothing C judge nl n (succ zero)
+
+#define never-no-answer
+  ( C : U)
+  ( judge : Judge C)
+  ( nv : Never C judge)
+  ( w : Halts C judge)
+  : Empty
+  := nothing-not-just ℕ (first (second w))
+       (concat (Maybe ℕ) (nothing ℕ) (run C judge (first w) (succ zero)) (just ℕ (first (second w)))
+          (rev (Maybe ℕ) (run C judge (first w) (succ zero)) (nothing ℕ) (nv (first w)))
+          (second (second w)))
+
+#define never-to-no-level
+  ( C : U)
+  ( judge : Judge C)
+  ( nv : Never C judge)
+  ( m : ℕ)
+  ( h : hlevel m C)
+  : Empty
+  := never-no-answer C judge nv (level-to-halts C judge (m , h))
+
+-- (d) exact halting time
+
+#define le
+  ( m n : ℕ)
+  : U
+  := Σ (d : ℕ) , add d m = n
+
+#define lt
+  ( m n : ℕ)
+  : U
+  := le (succ m) n
+
+#define le-zero
+  ( n : ℕ)
+  : le zero n
+  := (n , add-zero n)
+
+#define le-refl
+  ( n : ℕ)
+  : le n n
+  := (zero , refl)
+
+#define le-succ-succ
+  ( m n : ℕ)
+  ( w : le m n)
+  : le (succ m) (succ n)
+  := ( first w ,
+       concat ℕ (add (first w) (succ m)) (succ (add (first w) m)) (succ n)
+         (add-succ (first w) m) (ap ℕ ℕ (\ l → succ l) (add (first w) m) n (second w)))
+
+#define lt-zero-succ
+  ( n : ℕ)
+  : lt zero (succ n)
+  := (n , add-one n)
+
+#define shift-level
+  ( C : U)
+  ( k : ℕ)
+  ( hk : hlevel (succ k) C)
+  : hlevel (succ (add k zero)) C
+  := transport ℕ (\ m → hlevel (succ m) C) k (add k zero) (rev ℕ (add k zero) k (add-zero k)) hk
+
+#define exact-halt
+  ( C : U)
+  ( judge : Judge C)
+  : (n k : ℕ) → ((i : ℕ) → lt i n → neg (hlevel (succ (add k i)) C)) → hlevel (succ (add k n)) C
+      → run C judge n k = just ℕ (add k n)
+  := ind-ℕ (\ n → (k : ℕ) → ((i : ℕ) → lt i n → neg (hlevel (succ (add k i)) C)) → hlevel (succ (add k n)) C
+                    → run C judge n k = just ℕ (add k n))
+       (\ k below h →
+          concat (Maybe ℕ) (run C judge zero k) (just ℕ k) (just ℕ (add k zero))
+            (settled-at C judge zero k (transport ℕ (\ m → hlevel (succ m) C) (add k zero) k (add-zero k) h))
+            (ap ℕ (Maybe ℕ) (\ m → just ℕ m) k (add k zero) (rev ℕ (add k zero) k (add-zero k))))
+       (\ n ih k below h →
+          concat (Maybe ℕ) (run C judge (succ n) k) (run C judge n (succ k)) (just ℕ (add k (succ n)))
+            (unsettled-at C judge n k (\ hk → below zero (lt-zero-succ n) (shift-level C k hk)))
+            (concat (Maybe ℕ) (run C judge n (succ k)) (just ℕ (add (succ k) n)) (just ℕ (add k (succ n)))
+               (ih (succ k)
+                  (\ i ilt hi → below (succ i) (le-succ-succ (succ i) n ilt)
+                                  (transport ℕ (\ m → hlevel (succ m) C) (succ (add k i)) (add k (succ i))
+                                     (rev ℕ (add k (succ i)) (succ (add k i)) (add-succ k i)) hi))
+                  (transport ℕ (\ m → hlevel (succ m) C) (add k (succ n)) (succ (add k n)) (add-succ k n) h))
+               (ap ℕ (Maybe ℕ) (\ m → just ℕ m) (succ (add k n)) (add k (succ n))
+                  (rev ℕ (add k (succ n)) (succ (add k n)) (add-succ k n)))))
+
+#define silent-up-to
+  ( C : U)
+  ( judge : Judge C)
+  : (n k : ℕ) → ((i : ℕ) → le i n → neg (hlevel (succ (add k i)) C)) → run C judge n k = nothing ℕ
+  := ind-ℕ (\ n → (k : ℕ) → ((i : ℕ) → le i n → neg (hlevel (succ (add k i)) C)) → run C judge n k = nothing ℕ)
+       (\ k below → unsettled-at-zero C judge k (\ hk → below zero (le-refl zero) (shift-level C k hk)))
+       (\ n ih k below →
+          concat (Maybe ℕ) (run C judge (succ n) k) (run C judge n (succ k)) (nothing ℕ)
+            (unsettled-at C judge n k (\ hk → below zero (le-zero (succ n)) (shift-level C k hk)))
+            (ih (succ k)
+               (\ i ile hi → below (succ i) (le-succ-succ i n ile)
+                               (transport ℕ (\ m → hlevel (succ m) C) (succ (add k i)) (add k (succ i))
+                                  (rev ℕ (add k (succ i)) (succ (add k i)) (add-succ k i)) hi))))
+
+-- (e) the program is the unbounded search for the first stage k >= 1 at which C is settled at
+-- h-level k+1 (C-55's search, here written once more because Rzk has no delay monad)
+
+#define search
+  ( P : ℕ → U)
+  ( dec : (k : ℕ) → Dec (P k))
+  : ℕ → ℕ → Maybe ℕ
+  := ind-ℕ (\ _ → ℕ → Maybe ℕ)
+       (\ k → ind-Dec (P k) (\ _ → Maybe ℕ) (\ _ → just ℕ k) (\ _ → nothing ℕ) (dec k))
+       (\ _ ih k → ind-Dec (P k) (\ _ → Maybe ℕ) (\ _ → just ℕ k) (\ _ → ih (succ k)) (dec k))
+
+#define question-is-search
+  ( C : U)
+  ( judge : Judge C)
+  : run C judge =_{ℕ → ℕ → Maybe ℕ} search (\ k → hlevel (succ k) C) judge
+  := refl
+
+-- ==================================================================================================
+-- 8. Collections and the two causes of C-430
+
+-- A collection is a type of codes with the member each code names.
+#define Collection
+  : U
+  := Σ (Cd : U) , (Cd → U)
+
+#define Code
+  ( C : Collection)
+  : U
+  := first C
+
+#define El
+  ( C : Collection)
+  : Code C → U
+  := second C
+
+#define code-to-equiv
+  ( C : Collection)
+  ( a b : Code C)
+  ( p : a = b)
+  : Equiv (El C a) (El C b)
+  := idtoeqv (El C a) (El C b) (ap (Code C) U (El C) a b p)
+
+-- sameness is structure: two codes are the same in exactly the ways their members are equivalent
+#define Univalent
+  ( C : Collection)
+  : U
+  := (a b : Code C) → is-equiv (a = b) (Equiv (El C a) (El C b)) (code-to-equiv C a b)
+
+-- sameness of codes is a fact: the codes form a set
+#define SamenessIsFact
+  ( C : Collection)
+  : U
+  := hlevel (succ (succ zero)) (Code C)
+
+#define trivial-loops
+  ( X : U)
+  ( n : ℕ)
+  ( x : X)
+  : first (loops-iter (succ n) (X , x))
+  := second (loops-iter (succ n) (X , x))
+
+-- A: every height handed over at once; for every n the collection already holds a member whose
+-- (1+n)-fold sameness is nontrivial, coherently at every point
+#define AllHeights
+  ( C : Collection)
+  : U
+  := (n : ℕ) → Σ (a : Code C) ,
+       Σ (s : (x : El C a) → first (loops-iter (succ n) (El C a , x))) ,
+         neg (s =_{(x : El C a) → first (loops-iter (succ n) (El C a , x))} (\ x → trivial-loops (El C a) n x))
+
+#define HeightsBoundedBy
+  ( k : ℕ)
+  ( C : Collection)
+  : U
+  := (a : Code C) → hlevel k (El C a)
+
+-- univalence lifts the sameness inside a member one level up, into the sameness of the collection
+#define local-global
+  ( univ : Univalence)
+  ( C : Collection)
+  ( uC : Univalent C)
+  ( n : ℕ)
+  ( a : Code C)
+  : loops-iter (succ (succ n)) (Code C , a) = pi-pt (El C a) (\ x → loops-iter (succ n) (El C a , x))
+  := concat Ptd
+       (loops-iter (succ n) (loops (Code C , a)))
+       (loops-iter (succ n) (Equiv (El C a) (El C a) , id-equiv (El C a)))
+       (pi-pt (El C a) (\ x → loops-iter (succ n) (El C a , x)))
+       (ap Ptd Ptd (loops-iter (succ n)) (loops (Code C , a)) (Equiv (El C a) (El C a) , id-equiv (El C a))
+          (ptd-path univ (loops (Code C , a)) (Equiv (El C a) (El C a) , id-equiv (El C a))
+             (code-to-equiv C a a , uC a a) refl))
+       (concat Ptd
+          (loops-iter n (loops (Equiv (El C a) (El C a) , id-equiv (El C a))))
+          (loops-iter n (loops (El C a → El C a , identity (El C a))))
+          (pi-pt (El C a) (\ x → loops-iter (succ n) (El C a , x)))
+          (ap Ptd Ptd (loops-iter n) (loops (Equiv (El C a) (El C a) , id-equiv (El C a)))
+             (loops (El C a → El C a , identity (El C a))) (loops-equiv-fun univ (El C a)))
+          (concat Ptd
+             (loops-iter n (loops (El C a → El C a , identity (El C a))))
+             (loops-iter n (pi-pt (El C a) (\ x → loops (El C a , x))))
+             (pi-pt (El C a) (\ x → loops-iter (succ n) (El C a , x)))
+             (ap Ptd Ptd (loops-iter n) (loops (El C a → El C a , identity (El C a)))
+                (pi-pt (El C a) (\ x → loops (El C a , x))) (loops-pi univ (El C a) (\ x → (El C a , x))))
+             (loops-iter-pi univ n (El C a) (\ x → loops (El C a , x)))))
+
+-- (1) both causes: univalence and A give no finite h-level, so every run returns nothing
+#define no-finite-level
+  ( univ : Univalence)
+  ( C : Collection)
+  ( uC : Univalent C)
+  ( ah : AllHeights C)
+  ( m : ℕ)
+  ( h : hlevel m (Code C))
+  : Empty
+  := second (second (ah m))
+       (contr-is-prop ((x : El C (first (ah m))) → first (loops-iter (succ m) (El C (first (ah m)) , x)))
+          (transport Ptd (\ P → is-contr (first P))
+             (loops-iter (succ (succ m)) (Code C , first (ah m)))
+             (pi-pt (El C (first (ah m))) (\ x → loops-iter (succ m) (El C (first (ah m)) , x)))
+             (local-global univ C uC m (first (ah m)))
+             (hlevel-loops-iter (succ (succ m)) (Code C , first (ah m))
+                (hlevel-succ (succ m) (Code C) (hlevel-succ m (Code C) h))))
+          (first (second (ah m)))
+          (\ x → trivial-loops (El C (first (ah m))) m x))
+
+#define never-with-both
+  ( univ : Univalence)
+  ( C : Collection)
+  ( uC : Univalent C)
+  ( ah : AllHeights C)
+  ( judge : Judge (Code C))
+  : Never (Code C) judge
+  := no-level-to-never (Code C) judge (no-finite-level univ C uC ah)
+
+-- (2) univalence without A: bounded heights settle one level above the bound, so the program halts
+#define bounded-settles
+  ( univ : Univalence)
+  ( C : Collection)
+  ( uC : Univalent C)
+  ( k : ℕ)
+  ( hb : HeightsBoundedBy k C)
+  : hlevel (succ k) (Code C)
+  := \ a b → transport U (\ X → hlevel k X) (Equiv (El C a) (El C b)) (a = b)
+               (rev U (a = b) (Equiv (El C a) (El C b))
+                  (ua univ (a = b) (Equiv (El C a) (El C b)) (code-to-equiv C a b , uC a b)))
+               (hlevel-equiv univ k (El C a) (El C b) (hb a) (hb b))
+
+#define halts-with-bound
+  ( univ : Univalence)
+  ( C : Collection)
+  ( uC : Univalent C)
+  ( k : ℕ)
+  ( hb : HeightsBoundedBy k C)
+  ( judge : Judge (Code C))
+  : Halts (Code C) judge
+  := level-to-halts (Code C) judge (succ k , bounded-settles univ C uC k hb)
+
+-- (3) A without univalence: if the sameness of codes is a fact, the first question already stops,
+-- whatever the members are (no univalence needed)
+#define fact-stops-at-one
+  ( C : Collection)
+  ( fact : SamenessIsFact C)
+  ( judge : Judge (Code C))
+  : run (Code C) judge zero (succ zero) = just ℕ (succ zero)
+  := settled-at (Code C) judge zero (succ zero) fact
+
+-- (4) read backwards: a never-answering run on a univalent collection has unbounded heights, and a
+-- never-answering run has no fact sameness (the second needs no univalence)
+#define never-needs-unbounded
+  ( univ : Univalence)
+  ( C : Collection)
+  ( uC : Univalent C)
+  ( judge : Judge (Code C))
+  ( nv : Never (Code C) judge)
+  ( k : ℕ)
+  ( hb : HeightsBoundedBy k C)
+  : Empty
+  := never-to-no-level (Code C) judge nv (succ k) (bounded-settles univ C uC k hb)
+
+#define never-needs-structure
+  ( C : Collection)
+  ( judge : Judge (Code C))
+  ( nv : Never (Code C) judge)
+  ( fact : SamenessIsFact C)
+  : Empty
+  := never-to-no-level (Code C) judge nv (succ (succ zero)) fact
+
+-- ==================================================================================================
+-- 9. Two sets: Bool and ℕ (encode-decode), and the swap of Bool
+
+#define bool-code
+  : Bool → Bool → U
+  := ind-Bool (\ _ → Bool → U)
+       (ind-Bool (\ _ → U) One Empty)
+       (ind-Bool (\ _ → U) Empty One)
+
+#define bool-code-refl
+  : (x : Bool) → bool-code x x
+  := ind-Bool (\ x → bool-code x x) star star
+
+#define bool-encode
+  ( x y : Bool)
+  ( p : x = y)
+  : bool-code x y
+  := transport Bool (bool-code x) x y p (bool-code-refl x)
+
+#define bool-decode
+  : (x y : Bool) → bool-code x y → (x = y)
+  := ind-Bool (\ x → (y : Bool) → bool-code x y → (x = y))
+       (ind-Bool (\ y → bool-code false y → (false = y)) (\ _ → refl) (\ e → ex-falso (false = true) e))
+       (ind-Bool (\ y → bool-code true y → (true = y)) (\ e → ex-falso (true = false) e) (\ _ → refl))
+
+#define bool-decode-encode
+  ( x y : Bool)
+  ( p : x = y)
+  : bool-decode x y (bool-encode x y p) = p
+  := idJ (Bool , x , \ y' p' → bool-decode x y' (bool-encode x y' p') = p' ,
+          ind-Bool (\ x' → bool-decode x' x' (bool-encode x' x' refl) = refl) refl refl x ,
+          y , p)
+
+#define bool-code-prop
+  : (x y : Bool) → is-prop (bool-code x y)
+  := ind-Bool (\ x → (y : Bool) → is-prop (bool-code x y))
+       (ind-Bool (\ y → is-prop (bool-code false y)) one-is-prop empty-is-prop)
+       (ind-Bool (\ y → is-prop (bool-code true y)) empty-is-prop one-is-prop)
+
+#define bool-is-set
+  : hlevel (succ (succ zero)) Bool
+  := \ x y → prop-path-contr (x = y)
+               (retract-prop (x = y) (bool-code x y) (bool-encode x y) (bool-decode x y)
+                  (bool-decode-encode x y) (bool-code-prop x y))
+
+#define true-not-false
+  ( p : true = false)
+  : Empty
+  := bool-encode true false p
+
+#define nat-code
+  : ℕ → ℕ → U
+  := ind-ℕ (\ _ → ℕ → U)
+       (ind-ℕ (\ _ → U) One (\ _ _ → Empty))
+       (\ m ih → ind-ℕ (\ _ → U) Empty (\ n _ → ih n))
+
+#define nat-code-refl
+  : (n : ℕ) → nat-code n n
+  := ind-ℕ (\ n → nat-code n n) star (\ n ih → ih)
+
+#define nat-encode
+  ( m n : ℕ)
+  ( p : m = n)
+  : nat-code m n
+  := transport ℕ (nat-code m) m n p (nat-code-refl m)
+
+#define nat-decode
+  : (m n : ℕ) → nat-code m n → (m = n)
+  := ind-ℕ (\ m → (n : ℕ) → nat-code m n → (m = n))
+       (ind-ℕ (\ n → nat-code zero n → (zero = n)) (\ _ → refl) (\ n _ e → ex-falso (zero = succ n) e))
+       (\ m ih → ind-ℕ (\ n → nat-code (succ m) n → (succ m = n))
+                   (\ e → ex-falso (succ m = zero) e)
+                   (\ n _ c → ap ℕ ℕ (\ l → succ l) m n (ih n c)))
+
+#define nat-decode-refl
+  : (m : ℕ) → nat-decode m m (nat-code-refl m) = refl
+  := ind-ℕ (\ m → nat-decode m m (nat-code-refl m) = refl)
+       refl
+       (\ m ih → ap (m = m) (succ m = succ m) (\ q → ap ℕ ℕ (\ l → succ l) m m q)
+                   (nat-decode m m (nat-code-refl m)) refl ih)
+
+#define nat-decode-encode
+  ( m n : ℕ)
+  ( p : m = n)
+  : nat-decode m n (nat-encode m n p) = p
+  := idJ (ℕ , m , \ n' p' → nat-decode m n' (nat-encode m n' p') = p' , nat-decode-refl m , n , p)
+
+#define nat-code-prop
+  : (m n : ℕ) → is-prop (nat-code m n)
+  := ind-ℕ (\ m → (n : ℕ) → is-prop (nat-code m n))
+       (ind-ℕ (\ n → is-prop (nat-code zero n)) one-is-prop (\ n _ → empty-is-prop))
+       (\ m ih → ind-ℕ (\ n → is-prop (nat-code (succ m) n)) empty-is-prop (\ n _ → ih n))
+
+#define nat-is-set
+  : hlevel (succ (succ zero)) ℕ
+  := \ m n → prop-path-contr (m = n)
+               (retract-prop (m = n) (nat-code m n) (nat-encode m n) (nat-decode m n)
+                  (nat-decode-encode m n) (nat-code-prop m n))
+
+#define zero-not-one
+  ( p : zero = succ zero)
+  : Empty
+  := nat-encode zero (succ zero) p
+
+#define swap
+  : Bool → Bool
+  := ind-Bool (\ _ → Bool) true false
+
+#define swap-swap
+  : (x : Bool) → swap (swap x) = x
+  := ind-Bool (\ x → swap (swap x) = x) refl refl
+
+#define swap-equiv
+  : Equiv Bool Bool
+  := (swap , ((swap , swap-swap) , (swap , swap-swap)))
+
+#define hlevel-three-up
+  ( A : U)
+  ( h : hlevel (succ (succ (succ zero))) A)
+  : (k : ℕ) → hlevel (succ (succ (succ k))) A
+  := ind-ℕ (\ k → hlevel (succ (succ (succ k))) A) h (\ k ih → hlevel-succ (succ (succ (succ k))) A ih)
+
+-- C-79 (a): the naturals and the booleans stop at stage 1, for every judge
+#define naturals-stop-at-one
+  ( judge : Judge ℕ)
+  : run ℕ judge zero (succ zero) = just ℕ (succ zero)
+  := settled-at ℕ judge zero (succ zero) nat-is-set
+
+#define bools-stop-at-one
+  ( judge : Judge Bool)
+  : run Bool judge zero (succ zero) = just ℕ (succ zero)
+  := settled-at Bool judge zero (succ zero) bool-is-set
+
+#define judge-naturals
+  : Judge ℕ
+  := ind-ℕ (\ k → Dec (hlevel (succ k) ℕ))
+       (no (hlevel (succ zero) ℕ) (\ h → zero-not-one (first (h zero (succ zero)))))
+       (\ k _ → yes (hlevel (succ (succ k)) ℕ) (hlevel-two-up ℕ nat-is-set k))
+
+-- the kernel runs it
+#define naturals-kernel-run
+  : run ℕ judge-naturals zero (succ zero) = just ℕ (succ zero)
+  := refl
+
+-- ==================================================================================================
+-- 10. The universe: both causes
+
+#define universe
+  : Collection
+  := (U , \ X → X)
+
+#define universe-univalent
+  ( univ : Univalence)
+  : Univalent universe
+  := \ A B → is-equiv-htpy (A = B) (Equiv A B) (idtoeqv A B) (code-to-equiv universe A B)
+               (\ p → ap (A = B) (Equiv A B) (idtoeqv A B) p (ap U U (\ X → X) A B p)
+                        (rev (A = B) (ap U U (\ X → X) A B p) p (ap-id U A B p)))
+               (univ A B)
+
+-- A for the universe.  In the Agda proof these witnesses are the Eilenberg-MacLane spaces, which
+-- Rzk 0.11.3 cannot declare; here they are an argument.
+#define EveryHeight
+  : U
+  := (n : ℕ) → Σ (X : U) ,
+       Σ (s : (x : X) → first (loops-iter (succ n) (X , x))) ,
+         neg (s =_{(x : X) → first (loops-iter (succ n) (X , x))} (\ x → trivial-loops X n x))
+
+#define universe-all-heights
+  ( K : EveryHeight)
+  : AllHeights universe
+  := K
+
+#define universe-no-level
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( m : ℕ)
+  : neg (hlevel m U)
+  := no-finite-level univ universe (\ A B → universe-univalent univ A B) (universe-all-heights K) m
+
+#define universe-never
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( judge : Judge U)
+  : Never U judge
+  := never-with-both univ universe (\ A B → universe-univalent univ A B) (universe-all-heights K) judge
+
+#define judge-via-B
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  : Judge U
+  := \ k → no (hlevel (succ k) U) (universe-no-level univ K (succ k))
+
+#define ten
+  : ℕ
+  := succ (succ (succ (succ (succ (succ (succ (succ (succ (succ zero)))))))))
+
+#define mul
+  : ℕ → ℕ → ℕ
+  := ind-ℕ (\ _ → ℕ → ℕ) (\ _ → zero) (\ _ ih k → add k (ih k))
+
+-- 150; Rzk 0.11.3 stops this run with "maximum depth reached" at fuel 200
+#define fuel-150
+  : ℕ
+  := add (mul ten ten) (mul ten (succ (succ (succ (succ (succ zero))))))
+
+-- the kernel runs it with fuel 150 and gets nothing
+#define universe-kernel-run
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  : run U (judge-via-B univ K) fuel-150 (succ zero) = nothing ℕ
+  := refl
+
+-- ==================================================================================================
+-- 11. The gathering of the (1+n)-types: univalence without A
+
+#define Gathering
+  ( n : ℕ)
+  : U
+  := Σ (A : U) , hlevel (succ n) A
+
+#define gathering
+  ( n : ℕ)
+  : Collection
+  := (Gathering n , \ w → first w)
+
+#define gathering-univalent
+  ( univ : Univalence)
+  ( n : ℕ)
+  : Univalent (gathering n)
+  := \ u v → is-equiv-comp (u = v) (first u = first v) (Equiv (first u) (first v))
+               (ap (Gathering n) U (\ w → first w) u v)
+               (is-equiv-ap-first-subtype U (\ A → hlevel (succ n) A) (\ A → is-prop-hlevel univ (succ n) A) u v)
+               (idtoeqv (first u) (first v))
+               (univ (first u) (first v))
+
+#define gathering-bounded
+  ( n : ℕ)
+  : HeightsBoundedBy (succ n) (gathering n)
+  := \ w → second w
+
+#define gathering-halts
+  ( univ : Univalence)
+  ( n : ℕ)
+  ( judge : Judge (Gathering n))
+  : Halts (Gathering n) judge
+  := halts-with-bound univ (gathering n) (gathering-univalent univ n) (succ n) (gathering-bounded n) judge
+
+#define props-stop-at-one
+  ( univ : Univalence)
+  ( judge : Judge (Gathering zero))
+  : run (Gathering zero) judge zero (succ zero) = just ℕ (succ zero)
+  := settled-at (Gathering zero) judge zero (succ zero)
+       (bounded-settles univ (gathering zero) (gathering-univalent univ zero) (succ zero) (gathering-bounded zero))
+
+-- the swap of Bool is a loop of the gathering of sets that is not refl
+#define swap-loop
+  ( univ : Univalence)
+  : (Bool , bool-is-set) =_{Gathering (succ zero)} (Bool , bool-is-set)
+  := subtype-eq U (\ A → hlevel (succ (succ zero)) A) (\ A → is-prop-hlevel univ (succ (succ zero)) A)
+       (Bool , bool-is-set) (Bool , bool-is-set) (ua univ Bool Bool swap-equiv)
+
+#define ua-swap-not-refl
+  ( univ : Univalence)
+  ( p : ua univ Bool Bool swap-equiv = refl)
+  : Empty
+  := bool-encode false true
+       (concat Bool false (transport-fn Bool Bool (ua univ Bool Bool swap-equiv) true) true
+          (rev Bool (transport-fn Bool Bool (ua univ Bool Bool swap-equiv) true) false
+             (happly Bool (\ _ → Bool) (transport-fn Bool Bool (ua univ Bool Bool swap-equiv)) swap
+                (ua-fn univ Bool Bool swap-equiv) true))
+          (ap (Bool = Bool) Bool (\ q → transport-fn Bool Bool q true) (ua univ Bool Bool swap-equiv) refl p))
+
+#define hset-not-set
+  ( univ : Univalence)
+  ( h : hlevel (succ (succ zero)) (Gathering (succ zero)))
+  : Empty
+  := ua-swap-not-refl univ
+       (concat (Bool = Bool) (ua univ Bool Bool swap-equiv)
+          (ap (Gathering (succ zero)) U (\ w → first w) (Bool , bool-is-set) (Bool , bool-is-set) (swap-loop univ))
+          refl
+          (rev (Bool = Bool)
+             (ap (Gathering (succ zero)) U (\ w → first w) (Bool , bool-is-set) (Bool , bool-is-set) (swap-loop univ))
+             (ua univ Bool Bool swap-equiv)
+             (ap-first-pair-eq U (\ A → hlevel (succ (succ zero)) A) Bool Bool (ua univ Bool Bool swap-equiv)
+                bool-is-set bool-is-set
+                (is-prop-hlevel univ (succ (succ zero)) Bool
+                   (transport U (\ A → hlevel (succ (succ zero)) A) Bool Bool (ua univ Bool Bool swap-equiv)
+                      bool-is-set)
+                   bool-is-set)))
+          (ap ((Bool , bool-is-set) =_{Gathering (succ zero)} (Bool , bool-is-set)) (Bool = Bool)
+             (ap (Gathering (succ zero)) U (\ w → first w) (Bool , bool-is-set) (Bool , bool-is-set))
+             (swap-loop univ) refl
+             (first (h (Bool , bool-is-set) (Bool , bool-is-set) (swap-loop univ) refl))))
+
+-- C-79 (b) for sets: for every judge, stage 1 does not answer and stage 2 does
+#define sets-stop-at-two
+  ( univ : Univalence)
+  ( judge : Judge (Gathering (succ zero)))
+  : Σ (_ : run (Gathering (succ zero)) judge zero (succ zero) = nothing ℕ) ,
+      (run (Gathering (succ zero)) judge (succ zero) (succ zero) = just ℕ (succ (succ zero)))
+  := ( unsettled-at-zero (Gathering (succ zero)) judge (succ zero) (hset-not-set univ) ,
+       concat (Maybe ℕ) (run (Gathering (succ zero)) judge (succ zero) (succ zero))
+          (run (Gathering (succ zero)) judge zero (succ (succ zero))) (just ℕ (succ (succ zero)))
+          (unsettled-at (Gathering (succ zero)) judge zero (succ zero) (hset-not-set univ))
+          (settled-at (Gathering (succ zero)) judge zero (succ (succ zero))
+             (bounded-settles univ (gathering (succ zero)) (gathering-univalent univ (succ zero)) (succ (succ zero))
+                (gathering-bounded (succ zero)))))
+
+#define judge-sets
+  ( univ : Univalence)
+  : Judge (Gathering (succ zero))
+  := ind-ℕ (\ k → Dec (hlevel (succ k) (Gathering (succ zero))))
+       (no (hlevel (succ zero) (Gathering (succ zero)))
+          (\ h → hset-not-set univ (hlevel-succ (succ zero) (Gathering (succ zero)) h)))
+       (\ k _ → ind-ℕ (\ k' → Dec (hlevel (succ (succ k')) (Gathering (succ zero))))
+                  (no (hlevel (succ (succ zero)) (Gathering (succ zero))) (hset-not-set univ))
+                  (\ k' _ → yes (hlevel (succ (succ (succ k'))) (Gathering (succ zero)))
+                               (hlevel-three-up (Gathering (succ zero))
+                                  (bounded-settles univ (gathering (succ zero)) (gathering-univalent univ (succ zero))
+                                     (succ (succ zero)) (gathering-bounded (succ zero)))
+                                  k'))
+                  k)
+
+-- the kernel runs it: fuel 1 returns 2
+#define sets-kernel-run
+  ( univ : Univalence)
+  : run (Gathering (succ zero)) (judge-sets univ) (succ zero) (succ zero) = just ℕ (succ (succ zero))
+  := refl
+
+-- ==================================================================================================
+-- 12. The numbered collection: A without univalence (A's witnesses as an argument)
+
+#define numbered
+  ( K : EveryHeight)
+  : Collection
+  := (ℕ , \ n → first (K n))
+
+#define numbered-all-heights
+  ( K : EveryHeight)
+  : AllHeights (numbered K)
+  := \ n → (n , second (K n))
+
+#define numbered-fact
+  ( K : EveryHeight)
+  : SamenessIsFact (numbered K)
+  := nat-is-set
+
+#define numbered-stops-at-one
+  ( K : EveryHeight)
+  ( judge : Judge ℕ)
+  : run ℕ judge zero (succ zero) = just ℕ (succ zero)
+  := fact-stops-at-one (numbered K) (numbered-fact K) judge
+
+-- through (1): the numbered collection holds every height and stops, so it is not univalent
+#define numbered-not-univalent
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( uC : Univalent (numbered K))
+  : Empty
+  := no-finite-level univ (numbered K) uC (numbered-all-heights K) (succ (succ zero)) nat-is-set
+
+-- ==================================================================================================
+-- 13. Not univalent is not enough: the paired collection (codes U × Bool, members the first part)
+
+#define paired
+  : Collection
+  := ((Σ (_ : U) , Bool) , \ w → first w)
+
+#define paired-all-heights
+  ( K : EveryHeight)
+  : AllHeights paired
+  := \ n → ((first (K n) , true) , second (K n))
+
+#define paired-not-univalent
+  ( uC : Univalent paired)
+  : Empty
+  := true-not-false
+       (ap (Σ (_ : U) , Bool) Bool (\ w → second w) (One , true) (One , false)
+          (first (first (uC (One , true) (One , false))) (id-equiv One)))
+
+#define paired-no-level
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( m : ℕ)
+  ( h : hlevel m (Σ (_ : U) , Bool))
+  : Empty
+  := universe-no-level univ K m
+       (retract-hlevel m U (Σ (_ : U) , Bool) (\ X → (X , true)) (\ w → first w) (\ X → refl) h)
+
+#define paired-never
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  ( judge : Judge (Σ (_ : U) , Bool))
+  : Never (Σ (_ : U) , Bool) judge
+  := no-level-to-never (Σ (_ : U) , Bool) judge (paired-no-level univ K)
+
+-- ==================================================================================================
+-- 14. The claim in two types
+
+-- the two causes, for every collection, under univalence
+#define TwoCauses
+  : U
+  := (univ : Univalence) →
+     Σ ( _ : (C : Collection) → Univalent C → AllHeights C →
+               Σ (_ : (m : ℕ) → neg (hlevel m (Code C))) , ((judge : Judge (Code C)) → Never (Code C) judge)) ,
+     Σ ( _ : (C : Collection) → (k : ℕ) → Univalent C → HeightsBoundedBy k C →
+               Σ (_ : hlevel (succ k) (Code C)) , ((judge : Judge (Code C)) → Halts (Code C) judge)) ,
+     Σ ( _ : (C : Collection) → SamenessIsFact C → (judge : Judge (Code C)) →
+               (run (Code C) judge zero (succ zero) = just ℕ (succ zero))) ,
+       ((C : Collection) → Univalent C → (judge : Judge (Code C)) → Never (Code C) judge →
+          Σ (_ : (k : ℕ) → neg (HeightsBoundedBy k C)) , neg (SamenessIsFact C))
+
+#define two-causes
+  : TwoCauses
+  := \ univ →
+     ( \ C uC ah → (no-finite-level univ C uC ah , never-with-both univ C uC ah) ,
+       ( \ C k uC hb → (bounded-settles univ C uC k hb , halts-with-bound univ C uC k hb) ,
+         ( \ C fact judge → fact-stops-at-one C fact judge ,
+           \ C uC judge nv → ( \ k hb → never-needs-unbounded univ C uC judge nv k hb ,
+                               \ fact → never-needs-structure C judge nv fact))))
+
+-- the witnesses: under univalence, and with A's witnesses as an argument where A is needed
+#define Witnesses
+  : U
+  := (univ : Univalence) → (K : EveryHeight) →
+     Σ ( _ : Σ (_ : Univalent universe) , Σ (_ : AllHeights universe) , ((judge : Judge U) → Never U judge)) ,
+     Σ ( _ : (n : ℕ) → Σ (_ : Univalent (gathering n)) , Σ (_ : HeightsBoundedBy (succ n) (gathering n)) ,
+               ((judge : Judge (Gathering n)) → Halts (Gathering n) judge)) ,
+     Σ ( _ : (judge : Judge (Gathering (succ zero))) →
+               Σ (_ : run (Gathering (succ zero)) judge zero (succ zero) = nothing ℕ) ,
+                 (run (Gathering (succ zero)) judge (succ zero) (succ zero) = just ℕ (succ (succ zero)))) ,
+     Σ ( _ : Σ (_ : AllHeights (numbered K)) , Σ (_ : SamenessIsFact (numbered K)) ,
+               Σ (_ : (judge : Judge ℕ) → (run ℕ judge zero (succ zero) = just ℕ (succ zero))) ,
+                 neg (Univalent (numbered K))) ,
+       (Σ (_ : AllHeights paired) , Σ (_ : neg (Univalent paired)) ,
+          ((judge : Judge (Σ (_ : U) , Bool)) → Never (Σ (_ : U) , Bool) judge))
+
+#define witnesses
+  : Witnesses
+  := \ univ K →
+     ( ((\ A B → universe-univalent univ A B) , (universe-all-heights K , universe-never univ K)) ,
+       ( \ n → (gathering-univalent univ n , (gathering-bounded n , gathering-halts univ n)) ,
+         ( sets-stop-at-two univ ,
+           ( (numbered-all-heights K , (numbered-fact K , (numbered-stops-at-one K , numbered-not-univalent univ K))) ,
+             (paired-all-heights K , (paired-not-univalent , paired-never univ K))))))

@@ -1,0 +1,49 @@
+{
+  "claim_ids": [
+    "CG001-C-456"
+  ],
+  "command_argv": [
+    "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+    "typecheck",
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/two-causes-rzk/WrongFactNever.rzk"
+  ],
+  "completed_at_utc": "2026-10-23T17:05:45.067802+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 1.713962,
+  "environment": {
+    "bytes": 480,
+    "path": "environment.txt",
+    "sha256": "07e9df7474f7e76bc4f1119fa20fcb2cc3cf6e1c32f43f20f15657844c44305b"
+  },
+  "exit_code": 1,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows that the kernel computes the stop at the first question; the main file proves it for every judge."
+  ],
+  "proof_assistant": "Rzk",
+  "proof_assistant_version": "0.11.3",
+  "proof_id": "MP-CG001-TWO-CAUSES-RZK-NEG-001",
+  "run_id": "20261023-CG001-TWO-CAUSES-RZK-NEG-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-456 clause (3) and C-79 (a), checked after the main file: on codes N (a set) with the concrete judge, the first question gives no answer, by refl; expected rejection (the kernel computes the run to just 1).",
+  "source_manifest": {
+    "bytes": 1683,
+    "path": "source-manifest.json",
+    "sha256": "7f876c8ae016f74c6e0333989a98b80fbf094b31a91b5b4d4d90f744671d02d2"
+  },
+  "started_at_utc": "2026-10-23T17:05:43.353599+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 11028,
+    "path": "stderr.txt",
+    "sha256": "03a465b05e9b7177553520ffcd119deca974a6ecd01c5f3c015b577fed96cc69"
+  },
+  "stdout": {
+    "bytes": 24637,
+    "path": "stdout.txt",
+    "sha256": "db269a06336e925d5d97c37444ad2aed9cec9baf3460e8c64a2af2658612dca6"
+  },
+  "theory_variant": "sHoTT (Riehl-Shulman simplicial type theory) as implemented by Rzk"
+}

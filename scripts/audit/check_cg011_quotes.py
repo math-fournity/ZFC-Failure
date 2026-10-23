@@ -14,7 +14,8 @@ KC-000055/56/65, H-deepening §1 and its correction record, and the sponsor's 20
 From the G8 follow-up (C-450) on, also the sentence of C-448's CLAIM.md (AI-written) that records the half left undone;
 from the G10 follow-up (C-451) on, likewise the sentence of C-449's CLAIM.md that records its gap; from C-452 on, the
 two not-done items of C-450's CLAIM.md; from C-454 on, the not-done item of C-453's CLAIM.md that C-454 takes up; from C-455 on, the sentence of C-454's
-CLAIM.md whose analysis C-455 overturns.
+CLAIM.md whose analysis C-455 overturns; from C-456 on, the sentence of the G10 conclusion that C-456 carries out and the
+sponsor's 2026-10-23 authorization (transcript of session a15f4b3b).
 Written 2026-10-21, Claude Code session 91beaf35 (012-Opus); G5 additions by session a15f4b3b.  Exit 0 iff every quote
 whose source is present is found.
 """
@@ -61,6 +62,7 @@ SOURCES = {
     "C-452声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-correspondence/CLAIM.md",
     "C-453声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-reverse/CLAIM.md",
     "C-454声明": ROOT / "HoTT/formal/claude-cg001/sst-2ltt-identification/CLAIM.md",
+    "G10结论": ROOT / ".claude/goals/CG-011-h-deepening-followups/G10-结论.md",
 }
 QUOTES = [
     ("`/Volumes/D/HoTT-worktrees/012-opus-w8/docs/H深化-同一动作在极限与HoTT中的两处表现-20261017.md`的内容可以，继续推进后续工作，直至全部完成。", "转录"),
@@ -126,6 +128,9 @@ QUOTES = [
     ("壳是内层类型，不一定是集合，所以外层 UIP 管不到它；往上一层又要它自己的相干。", "C-454声明"),
     # from C-454 on: the not-done item of C-453's CLAIM.md (AI-written) that C-454 takes up
     ("**类型族这一层的认同**：两个来回在单纯形这一层都回到原处；在“类型族”这一层把 `Lv` 认同为原来的按层一版（作为 `SST n` 的元素相等），要用内层单价性把每层的等价变成路径，再沿它搬运壳。本包没做。", "C-453声明"),
+    # from C-456 on: the G10 conclusion's sentence that C-456 carries out, and the sponsor's authorization
+    ("研究发起人想要“第二个内核独立确认高度轴的结果”时：用公设引入单价性，把 C-77 的程序与 C-430 的两个成因移到 Rzk 里重跑。结论的身份要写成“在单价性公设下”。", "G10结论"),
+    ("我授权了，你全部做完。", "接手转录"),
 ]
 
 

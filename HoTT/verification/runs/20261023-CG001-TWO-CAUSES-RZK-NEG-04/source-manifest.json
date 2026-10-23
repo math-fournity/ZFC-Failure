@@ -1,0 +1,43 @@
+{
+  "external_dependencies": [
+    {
+      "bytes": 20440575,
+      "label": "rzk-release-asset",
+      "local_path": "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk-v0.11.3-macOS-ARM64.tar.gz",
+      "publisher_digest": "5e0efb3781efac7ff353198c0d66d0854045fe1246e883e41e9670ad4ac99471",
+      "sha256": "5e0efb3781efac7ff353198c0d66d0854045fe1246e883e41e9670ad4ac99471",
+      "url": "https://github.com/rzk-lang/rzk/releases/download/v0.11.3/rzk-v0.11.3-macOS-ARM64.tar.gz"
+    },
+    {
+      "bytes": 106580400,
+      "label": "rzk-binary",
+      "local_path": "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+      "sha256": "97202c72dd04e4ecc80bf59483403414eb5b40f54fb1dfc784ee8e16e5509a73"
+    }
+  ],
+  "files": [
+    {
+      "bytes": 70507,
+      "path": "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+      "sha256": "a6bc8d5ae79e8f00d1d08ed5bdaee2c80d4e86d4127feb83497c6f8cad8205b2"
+    },
+    {
+      "bytes": 644,
+      "path": "HoTT/formal/claude-cg001/two-causes-rzk/WrongUniverseAnswersEarly.rzk",
+      "sha256": "454718104b5354fa8815facaa93efd1d94d3f687f95e06c24a085e4ad1a079ac"
+    },
+    {
+      "bytes": 12325,
+      "path": "HoTT/formal/claude-cg001/two-causes-rzk/CLAIM.md",
+      "sha256": "8d5e61b0be165171f5432a2147b7a8bc2e9d858f9c3be60b8629ac39890b227b"
+    },
+    {
+      "bytes": 1340,
+      "path": "HoTT/formal/claude-cg001/directed-native/RZK_TOOLCHAIN.json",
+      "sha256": "1a203040ca7ef4a74eb16ae4e39f28d0f594233aba25c779330ca2c0267ea444"
+    }
+  ],
+  "proof_id": "MP-CG001-TWO-CAUSES-RZK-NEG-004",
+  "run_id": "20261023-CG001-TWO-CAUSES-RZK-NEG-04",
+  "schema_version": "formal-proof-source-manifest/v1"
+}

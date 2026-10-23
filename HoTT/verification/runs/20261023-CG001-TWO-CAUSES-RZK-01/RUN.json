@@ -1,0 +1,50 @@
+{
+  "claim_ids": [
+    "CG001-C-456"
+  ],
+  "command_argv": [
+    "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+    "typecheck",
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk"
+  ],
+  "completed_at_utc": "2026-10-23T17:05:43.000807+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 1.67554,
+  "environment": {
+    "bytes": 480,
+    "path": "environment.txt",
+    "sha256": "07e9df7474f7e76bc4f1119fa20fcb2cc3cf6e1c32f43f20f15657844c44305b"
+  },
+  "exit_code": 0,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Status: under univalence. Univalence is an explicit argument (univ : Univalence), not built in and not declared as an axiom; A's witnesses for the universe (the Eilenberg-MacLane spaces in the Agda proof) are an explicit argument K : EveryHeight, because Rzk 0.11.3 rejects higher path constructors.",
+    "Rzk has U : U; the file uses it only where the Agda files use a higher universe level (the universe as a collection, families defined by recursion, univalence quantified over all types), but the kernel cannot certify that no paradox is used: the run confirms the derivation in a second, independently implemented kernel, not the consistency of a second foundation.",
+    "The universe kernel run uses fuel 150 (Rzk 0.11.3 stops it with 'maximum depth reached' at fuel 200); C-79 (b)'s exact stop is re-derived only for n = 0 and n = 1; C-78 (b) and (d) are not included; nothing here yields ZFC |- falsum or ZFC-1 => B; not indexed in HoTT/CLAIM_EVIDENCE_MATRIX.md by this receipt (goal-local index only)."
+  ],
+  "proof_assistant": "Rzk",
+  "proof_assistant_version": "0.11.3",
+  "proof_id": "MP-CG001-TWO-CAUSES-RZK-001",
+  "run_id": "20261023-CG001-TWO-CAUSES-RZK-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Rzk 0.11.3 (sHoTT), no declared axioms, no assumptions, no holes; univalence is an explicit argument of every theorem that needs it (univ : Univalence: idtoeqv is bi-invertible), and function extensionality and the contractible fibres of equivalences are derived from it. CG001-C-456 exactly as in CLAIM.md. C-77's questioning program, given by its run with fuel (Rzk has no coinductive types): (a) fuel equations, also with the fact in place of the judge; (b) a returned value is sound; (c) the program halts iff the catalogue is settled at some finite h-level, and every run returns nothing iff it is settled at none; (d) exact halting time; (e) the program is the unbounded search for the first settled stage. C-430's two causes for every collection: (1) univalent and A (every height handed over at once) give no finite h-level, so every run returns nothing, through the local-global lemma; (2) univalent with heights bounded by k settles at k+1 and halts; (3) fact sameness stops at the first question, with no univalence argument; (4) read backwards. Witnesses: the universe (univalent from univ, A from K), the gathering of the (1+n)-types (univalent, bounded, halts; propositions stop at 1; the gathering of sets is not a set, by the swap of Bool, and stops exactly at 2), the numbered and the paired collections (with K); C-79 (a); kernel runs: the universe with fuel 150 gives nothing, the gathering of sets with fuel 1 gives 2, the naturals with fuel 0 give 1.",
+  "source_manifest": {
+    "bytes": 1483,
+    "path": "source-manifest.json",
+    "sha256": "b6039e616f127f13e667dfb593eedf95dfcf19416d66a5977fc0d153ff7e7999"
+  },
+  "started_at_utc": "2026-10-23T17:05:41.324990+00:00",
+  "status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "stderr": {
+    "bytes": 10827,
+    "path": "stderr.txt",
+    "sha256": "9e91f9d22f545c6a74ed61c27f6fbdd1d48c2ec45c79b7a97da85db00a629c34"
+  },
+  "stdout": {
+    "bytes": 18,
+    "path": "stdout.txt",
+    "sha256": "a8556b63c8a266fd32519f6532b6139fb3537c45dc5de8f6e60c786426346002"
+  },
+  "theory_variant": "sHoTT (Riehl-Shulman simplicial type theory) as implemented by Rzk"
+}

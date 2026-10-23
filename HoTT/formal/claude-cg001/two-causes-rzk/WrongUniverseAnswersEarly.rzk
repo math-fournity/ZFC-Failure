@@ -1,0 +1,15 @@
+#lang rzk-1
+
+-- Negative control MP-CG001-TWO-CAUSES-RZK-NEG-004 (CG001-C-456), checked after
+-- TwoCausesUnderUnivalence.rzk in the same run.
+--
+-- Claim to be refused: with both causes present, univalence and A's witnesses as arguments, the
+-- universe answers already at fuel 1, with stage 1.  The judge's every answer is "no", each no
+-- carrying the proof of clause (1).  Expected: rejected, because the kernel computes the run to
+-- nothing (clause (5a); C-77, C-78).
+
+#define wrong-universe-answers-early
+  ( univ : Univalence)
+  ( K : EveryHeight)
+  : run U (judge-via-B univ K) (succ zero) (succ zero) = just ℕ (succ zero)
+  := refl

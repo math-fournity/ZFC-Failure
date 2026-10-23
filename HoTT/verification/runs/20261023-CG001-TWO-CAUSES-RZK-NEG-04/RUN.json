@@ -1,0 +1,49 @@
+{
+  "claim_ids": [
+    "CG001-C-456"
+  ],
+  "command_argv": [
+    "/Volumes/D/HoTT-toolchain-cache/rzk-v0.11.3-macos-arm64/rzk",
+    "typecheck",
+    "HoTT/formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk",
+    "HoTT/formal/claude-cg001/two-causes-rzk/WrongUniverseAnswersEarly.rzk"
+  ],
+  "completed_at_utc": "2026-10-23T17:05:50.898722+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 1.655051,
+  "environment": {
+    "bytes": 480,
+    "path": "environment.txt",
+    "sha256": "07e9df7474f7e76bc4f1119fa20fcb2cc3cf6e1c32f43f20f15657844c44305b"
+  },
+  "exit_code": 1,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Only shows that the kernel computes the silence at fuel 1; the main file proves silence at every fuel and runs fuel 150."
+  ],
+  "proof_assistant": "Rzk",
+  "proof_assistant_version": "0.11.3",
+  "proof_id": "MP-CG001-TWO-CAUSES-RZK-NEG-004",
+  "run_id": "20261023-CG001-TWO-CAUSES-RZK-NEG-04",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Negative control for C-456 clause (5a), C-77 and C-78, checked after the main file: the universe with both causes present (univ and K as arguments) answers at fuel 1 with stage 1, by refl; expected rejection (the kernel computes the run to nothing).",
+  "source_manifest": {
+    "bytes": 1694,
+    "path": "source-manifest.json",
+    "sha256": "ccb2d28131f8b705987202f4327bf67858e4f438b6131d54f7e6b853a92bfa66"
+  },
+  "started_at_utc": "2026-10-23T17:05:49.243311+00:00",
+  "status": "KERNEL_REJECTED",
+  "stderr": {
+    "bytes": 11062,
+    "path": "stderr.txt",
+    "sha256": "c1ca4053e146acf9571e2d86eca5cbb0366719d0ee93005a4af54d3f688e2b25"
+  },
+  "stdout": {
+    "bytes": 25138,
+    "path": "stdout.txt",
+    "sha256": "6f30ad9a953e2d117fd28666021c353d7aafeb52bc5e5a634856dd15cbb38639"
+  },
+  "theory_variant": "sHoTT (Riehl-Shulman simplicial type theory) as implemented by Rzk"
+}

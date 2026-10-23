@@ -2798,3 +2798,19 @@ Claim 表：
 | Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
 |---|---|---|---|---|
 | CG001-C-455 | 对任何 `S : SSTˢ`，`General.cmp S n Z ρ ρNat ρEq : Cmp n Z ρ`（`path : Lv n ≡ Z`，`P : PathP (λ i → X S k → Sh n (path i) k) (bd n) ρ`，`nat T x i : res n (path i) T (P i x) ≡ᵉ P i (act S T x)`），只要 ρ 严格自然、在不超过 n 个顶点的单纯形上是等价；`identification N Y : Reverse.Lv (toStrict N Y) N ≡ Y`，对一切外层 N 与 `Y : SST N`；`boundaryIsIdentity N Y`：沿它边界映射就是恒等 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261023-CG001-SST-2LTT-IDENTIFICATION-ALL-01`；负控制 `-NEG-01`、`-NEG-02` | 认同是内层路径；严格的一版那一侧没有认同；全部层的塔仍要桥；“A 只落在桥上”是读法；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放 |
+
+## Claude（接手 015-Opus）：C-77 的追问程序与 C-430 的两个成因在第二个内核 Rzk 里重跑（2026-10-23）
+
+> 本机会话 a15f4b3b（接手 91beaf35），独立 worktree `claude/012-opus-w8`，CG-011 完成门 G10 结论 §2.3 的“什么时候值得再做”。读法：机器证明（Rzk 0.11.3，没有声明的公理），**在单价性公设下**：单价性是每条用到它的定理的显式参数，函数外延性由它推出；宇宙、编号收集、成对收集三处另以 A 的见证为参数（EM 空间在 Rzk 0.11.3 里声明不出）。Rzk 有 `U : U`，确认的是推导在第二个独立实现的内核里检查通过，不是第二个基础相容。不进 main。
+
+| Package ID | Claim IDs | 源码 | 证据 | 判词 |
+|---|---|---|---|---|
+| `MP-CG001-TWO-CAUSES-RZK-001` | `CG001-C-456` | `formal/claude-cg001/two-causes-rzk/TwoCausesUnderUnivalence.rzk`（`Univalence`、`ua`、`equiv-ind`、`is-contr-map-equiv`、`weak-funext`、`funext`、`is-equiv-happly`、`hlevel-pi`、`hlevel-sigma`、`hlevel-equiv`、`is-prop-hlevel`、`is-prop-is-equiv`、`local-global`、`run`、`settled-at`、`sound`、`level-to-halts`、`no-level-to-never`、`never-to-no-level`、`exact-halt`、`silent-up-to`、`question-is-search`、`no-finite-level`、`bounded-settles`、`fact-stops-at-one`、`never-needs-unbounded`、`never-needs-structure`、`two-causes`、`EveryHeight`、`universe-kernel-run`、`hset-not-set`、`sets-stop-at-two`、`sets-kernel-run`、`numbered-not-univalent`、`paired-never`、`naturals-kernel-run`、`witnesses`） | `verification/runs/20261023-CG001-TWO-CAUSES-RZK-01/`（Rzk 0.11.3，发布包按发布方摘要钉住；源清单另哈希 `CLAIM.md`）；exit 0，1.7 秒；`--rerun` `PASS_WITH_SCOPE` / `EXACT_EXIT_STDOUT_STDERR_MATCH` | `KERNEL_ACCEPTED_WITH_SCOPE` |
+| `MP-CG001-TWO-CAUSES-RZK-NEG-001` | `CG001-C-456`（负控制） | 同目录 `WrongFactNever.rzk`，接在主文件之后检查 | `verification/runs/20261023-CG001-TWO-CAUSES-RZK-NEG-01/`；exit 1（`cannot unify`：内核算出 `just 1`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-TWO-CAUSES-RZK-NEG-002` | `CG001-C-456`（负控制） | 同目录 `WrongBoundedNever.rzk`，同上 | `verification/runs/20261023-CG001-TWO-CAUSES-RZK-NEG-02/`；exit 1（`cannot unify`：内核算出 `just 2`） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-TWO-CAUSES-RZK-NEG-003` | `CG001-C-456`（负控制） | 同目录 `WrongBWithoutUnivalence.rzk`，同上 | `verification/runs/20261023-CG001-TWO-CAUSES-RZK-NEG-03/`；exit 1（`cannot unify`：要成员之间的等价） | `NEGATIVE_CONTROL_REJECTED` |
+| `MP-CG001-TWO-CAUSES-RZK-NEG-004` | `CG001-C-456`（负控制） | 同目录 `WrongUniverseAnswersEarly.rzk`，同上 | `verification/runs/20261023-CG001-TWO-CAUSES-RZK-NEG-04/`；exit 1（`cannot unify`：内核算出 nothing） | `NEGATIVE_CONTROL_REJECTED` |
+
+| Claim ID | 精确主张 | 状态 | 证据 | 禁止外推 |
+|---|---|---|---|---|
+| CG001-C-456 | 以 `univ : Univalence`（`idtoeqv` 双侧可逆）为前提：`two-causes : TwoCauses`，即对任意收集 C，(1) `Univalent C → AllHeights C →` 编码没有有限层且对任意判定器 `Never`；(2) `Univalent C → HeightsBoundedBy k C →` 编码在 k+1 层落定且对任意判定器 `Halts`；(3) `SamenessIsFact C →` 对任意判定器燃料 0 交出 1（此条不带 `univ`）；(4) `Never` 推出高度无上限（单价时）与相同不是事实（此半不带 `univ`）；C-77 的程序事实 (a)–(e) 不带 `univ`；以 `univ` 与 `K : EveryHeight` 为前提：`witnesses : Witnesses`（宇宙、汇集、集合的汇集恰第 2 问停、编号收集、成对收集）；内核实跑：宇宙燃料 150 得 nothing，集合的汇集燃料 1 得 2，自然数燃料 0 得 1 | `FORMAL_CHECKED_WITH_SCOPE / GOAL_LOCAL_INDEXED` | run `20261023-CG001-TWO-CAUSES-RZK-01`；负控制 `-NEG-01` 至 `-NEG-04` | 身份是“在单价性公设下”；宇宙一条还要 A 的见证；Rzk 有 `U : U`，不说第二个基础相容；燃料 150 不是 1000；C-79 (b) 一般的 n 的下界与 C-78 (b)(d) 没做；不推出 ZFC ⊢ ⊥ 或 ZFC-1 ⟹ B；只在 macOS 捕获与重放，不进 main |

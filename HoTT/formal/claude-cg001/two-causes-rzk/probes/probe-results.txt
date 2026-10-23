@@ -1,0 +1,13 @@
+rzk version: 0.11.3
+== FuelDepthLimit.rzk (after TwoCausesUnderUnivalence.rzk)
+    #define universe-kernel-run-200
+[ 2 out of 2 ] Checking #define universe-kernel-run-200
+maximum depth reached
+exit=1
+== HigherPathConstructor.rzk
+  Error occurred when checking
+constructor surf declares a path between paths; higher path constructors are not supported yet
+exit=1
+== UniverseInUniverse.rzk
+Everything is ok!
+exit=0
