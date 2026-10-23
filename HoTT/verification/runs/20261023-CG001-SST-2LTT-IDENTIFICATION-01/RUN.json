@@ -1,0 +1,110 @@
+{
+  "agda_error_tag": null,
+  "audit_notes": [
+    "Captured by Claude Code desktop session a15f4b3b, which took over session 91beaf35 (015-Opus) at the research sponsor's request, worktree /Volumes/D/HoTT-worktrees/012-opus-w8, branch claude/012-opus-w8, 2026-10-23, the type-family identification left open by C-453 (goal CG-011 gate G8) under the sponsor's goal to complete all follow-ups; the audit_session string is this capture tool's fixed default. The manifest also hashes CLAIM.md and the fourteen imported package sources."
+  ],
+  "audit_session": "Claude CG001 line, Claude Code local session eadb3381 (macOS), branch main, 2026-09-30",
+  "claim_ids": [
+    "CG001-C-454"
+  ],
+  "command_argv": [
+    "/usr/bin/env",
+    "XDG_DATA_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-data",
+    "XDG_CONFIG_HOME=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/xdg-config",
+    "TMPDIR=/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/tmp",
+    "/Volumes/D/HoTT-toolchain-cache/agda-v2.8.0-macos-arm64/agda",
+    "--ignore-interfaces",
+    "--library-file=/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/dedekind-omega-missile/AGDA_LIBRARIES",
+    "-l",
+    "cubical-0.9",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-identification",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-reverse",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-correspondence",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-fibrant",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/strict-semisimplicial",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/two-fates-2ltt",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/exposure-criterion",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "-i",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning",
+    "HoTT/formal/claude-cg001/sst-2ltt-identification/SemisimplicialIdentification.agda"
+  ],
+  "completed_at_utc": "2026-10-23T12:25:50.465720+00:00",
+  "cwd": "/Volumes/D/HoTT-worktrees/012-opus-w8",
+  "duration_seconds": 92.551251,
+  "environment": {
+    "bytes": 1071,
+    "path": "environment.txt",
+    "sha256": "a4da1d96858a4e476b6420bd7f00ff7009669516c8d828e8a41ad2f036b2b8f2"
+  },
+  "exit_code": 0,
+  "expected_outcome": "ACCEPT",
+  "extra_agda_flags": [],
+  "first_error_excerpt": null,
+  "git_status": "LOCAL_UNCOMMITTED_NOT_VERSION_CLOSED",
+  "include_roots": [
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-identification",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-reverse",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-correspondence",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/sst-2ltt-fibrant",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/strict-semisimplicial",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/two-fates-2ltt",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/exposure-criterion",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/completion-cost",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/a-univalence-b",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/questioning-delay",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/pedometer-semantics",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/universe-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/truncation-questioning",
+    "/Volumes/D/HoTT-worktrees/012-opus-w8/HoTT/formal/claude-cg001/product-questioning"
+  ],
+  "index_status": "PENDING_CLAIM_EVIDENCE_MATRIX_UPDATE",
+  "non_goals": [
+    "Not done: general n. From n = 3 on the shells contain edges that depend on their endpoints, and assembling the level-n path over the level n-1 path needs a homotopy between transport and the comparison map that is compatible with faces (a 2-cell), which outer UIP does not provide because shells are inner types; this is an analysis, not an impossibility proof. The strict side is not identified as an outer equality (inner univalence gives inner paths only).",
+    "Reading this as: at the finite stages n <= 2 the two versions are the same object, not only equivalent, so the only remaining difference is the bridge for the whole tower (C-450); this is an interpretation, and nothing here yields ZFC |- falsum or ZFC-1 => B."
+  ],
+  "outcome_matches_expectation": true,
+  "proof_assistant": "Cubical Agda",
+  "proof_assistant_version": "Agda version 2.8.0-3d04bac\nBuilt with flags (cabal -f)\n - optimise-heavily: extra optimisations\n - use-xdg-data-home: install and locate data files under $XDG_DATA_HOME/agda/$AGDA_VERSION by default instead of the location defined by Cabal",
+  "proof_id": "MP-CG001-SST-2LTT-IDENTIFICATION-001",
+  "rejection_stage": null,
+  "run_id": "20261023-CG001-SST-2LTT-IDENTIFICATION-01",
+  "schema_version": "formal-proof-run/v1",
+  "scope": "Cubical Agda with --two-level, --safe, nothing assumed (univalence is a theorem). C-454, the type-family identification left open by C-453: (1) a family of types along a path is equal to another once they are equivalent pointwise (famPathP, J and ua); (2) the fibre of an equivalence after a projection is the family at the inverse image; (3) n = 1: for every P, sending (tt*, P) to the strict version (C-452's toStrict) and back through fibres (C-453's Lv) gives (tt*, P) itself, an inner path in SST 1; (4) n = 2: for every P and every family E over pairs of points, the same round trip gives ((tt*, P), E) itself, an inner path in SST 2; the boundary map is by definition the projection to the shell followed by replacing each vertex with its fibre element, and transport of shells along the level-1 path computes vertexwise to uaβ; the two-level example pointsAndEdges of C-450/C-452 is a special case.",
+  "source_manifest": {
+    "bytes": 5576,
+    "path": "source-manifest.json",
+    "sha256": "604ff11c802c6f1a71f6bbf15ed984a8ffaebde4e10961c4a5d3206f4609d3db"
+  },
+  "started_at_utc": "2026-10-23T12:24:17.914469+00:00",
+  "status": "KERNEL_ACCEPTED_WITH_SCOPE",
+  "stderr": {
+    "bytes": 0,
+    "path": "stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 31503,
+    "path": "stdout.txt",
+    "sha256": "3314b88daa3431c79479fdaa20ca1eaa8016e60a81c49a227eb16169953845a9"
+  },
+  "theory_variant": "Cubical Agda with native Path and higher inductive types"
+}
